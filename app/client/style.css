@@ -3,53 +3,72 @@
 
 /* Create some Bowfolio CSS variables. */
 :root {
-  --bowfolio-navbar-bg: #376551;
-  --bowfolio-navbar-bg-rgb: 55, 101, 81;
-  --bowfolio-navbar-text: white;
-  --bowfolio-navbar-highlight-text: var(--bs-gray-500);
+  --cfm-navbar-bg: #256546;
+  --cfm-navbar-bg-rgb: 37, 101, 70;
+  --cfm-navbar-text: white;
+  --cfm-navbar-highlight-text: var(--bs-gray-500);
 }
 /* Change bootstrap variable values.
  See https://getbootstrap.com/docs/5.2/customize/css-variables/
  */
 body {
-  --bs-dark: var(--bowfolio-navbar-bg);
-  --bs-dark-rgb: var(--bowfolio-navbar-bg-rgb);
+  --bs-dark: var(--cfm-navbar-bg);
+  --bs-dark-rgb: var(--cfm-navbar-bg-rgb);
 }
 
 /* Color the light Brand and links with dark color */
 .bg-light span, .bg-light a {
-  color:  var(--bowfolio-navbar-bg);
+  color:  var(--cfm-navbar-bg);
 }
 
 /* When logged in we switch the NavBar to bg-dark so we need to override the styles to give light text. */
 .bg-dark span, .bg-dark a {
-  color: var(--bowfolio-navbar-text);
+  color: var(--cfm-navbar-text);
 }
 
 /* When logged in we highlight the selected route. */
 .bg-dark a.nav-link.active {
-  color: var(--bowfolio-navbar-highlight-text);
+  color: var(--cfm-navbar-highlight-text);
 }
 
 /* Override the color on the dropdown when logged in. */
 .bg-dark a.dropdown-item {
-  color: var(--bowfolio-navbar-bg);
+  color: var(--cfm-navbar-bg);
 }
 
 /* Landing page color blocking */
 .landing-green-background {
-  background-color: var(--bowfolio-navbar-bg);
-  color: var(--bowfolio-navbar-text);
+  background-color: var(--cfm-navbar-bg);
+  color: var(--cfm-navbar-text);
   padding-top: 20px;
 }
 
 .landing-white-background {
-  background-color: var(--bowfolio-navbar-text);
-  color: var(--bowfolio-navbar-bg);
+  background-color: var(--cfm-navbar-text);
+  color: var(--cfm-navbar-bg);
   padding-top: 20px;
 }
 
 .reset-margins {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+body .btn-primary {
+  --bs-btn-bg: #2d8259;
+  --bs-btn-hover-bg: #489a70;
+  --bs-btn-active-bg: #1f6b46;
+  --bs-btn-border-color: #25734f;
+  --bs-btn-hover-border-color: #388a60;
+  --bs-btn-active-border-color: #175739;
+  border-width: 2px;
+}
+
+.landingText {
+  color: #2d8259;
+}
+
+#landingTop {
+  background: url("images/landing-top.png") no-repeat;
+  background-size: 100%;
 }

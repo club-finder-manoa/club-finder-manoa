@@ -5,16 +5,12 @@ import { Col, Container } from 'react-bootstrap';
 const Footer = () => (
   <footer className="footer mt-auto py-3 bg-dark">
     <Container>
-      <Col className="text-center" style={{ color: 'white' }}>
-        The Bowfolios Project
-        {' '}
+      <Col className="text-center small" style={{ color: 'white' }}>
+        Club Finder Mānoa
         <br />
         University of Hawaii
         <br />
-        Honolulu, HI 96822
-        {' '}
-        <br />
-        <a style={{ color: 'white' }} href="https://bowfolios.github.io">https://bowfolios.github.io</a>
+        <a style={{ color: 'white' }} href="https://club-finder-manoa.github.io">https://club-finder-manoa.github.io</a>
       </Col>
     </Container>
   </footer>

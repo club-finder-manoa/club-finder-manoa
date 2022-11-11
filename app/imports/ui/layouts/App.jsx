@@ -12,8 +12,7 @@ import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import Profiles from '../pages/Profiles';
 import Projects from '../pages/Projects';
-import Interests from '../pages/Interests';
-import Home from '../pages/Home';
+import Profile from '../pages/Profile';
 import Filter from '../pages/Filter';
 import AddProject from '../pages/AddProject';
 
@@ -27,10 +26,9 @@ const App = () => (
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signout" element={<SignOut />} />
-        <Route path="/interests" element={<Interests />} />
-        <Route path="/profiles" element={<Profiles />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/profiles" element={<ProtectedRoute><Profiles /></ProtectedRoute>} />
+        <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/filter" element={<ProtectedRoute><Filter /></ProtectedRoute>} />
         <Route path="/addproject" element={<ProtectedRoute><AddProject /></ProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
@@ -57,7 +55,7 @@ ProtectedRoute.propTypes = {
 };
 
 ProtectedRoute.defaultProps = {
-  children: <Home />,
+  children: <Profile />,
 };
 
 export default App;

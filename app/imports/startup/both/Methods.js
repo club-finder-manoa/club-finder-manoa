@@ -32,7 +32,7 @@ import { ProjectsInterests } from '../../api/projects/ProjectsInterests';
 const updateProfileMethod = 'Profiles.update';
 
 /**
- * The server-side Profiles.update Meteor Method is called by the client-side Home page after pushing the update button.
+ * The server-side Profiles.update Meteor Method is called by the client-side Profile page after pushing the update button.
  * Its purpose is to update the Profiles, ProfilesInterests, and ProfilesProjects collections to reflect the
  * updated situation specified by the user.
  */
