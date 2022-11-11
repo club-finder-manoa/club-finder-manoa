@@ -9,6 +9,7 @@ export const ComponentIDs = {
   addProjectFormSubmit: 'addProjectFormSubmit',
   basicNavbarNav: 'basicNavbarNav',
   currentUserDropdown: 'currentUserDropdown',
+  currentUserDropdownProfile: 'currentUserDropdownProfile',
   currentUserDropdownSignOut: 'currentUserDropdownSignOut',
   filterFormInterests: 'filterFormInterests',
   filterFormSubmit: 'filterFormSubmit',

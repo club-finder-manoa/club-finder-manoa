@@ -30,7 +30,7 @@ const App = () => (
         <Route path="/interests" element={<Interests />} />
         <Route path="/profiles" element={<Profiles />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/filter" element={<ProtectedRoute><Filter /></ProtectedRoute>} />
         <Route path="/addproject" element={<ProtectedRoute><AddProject /></ProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
