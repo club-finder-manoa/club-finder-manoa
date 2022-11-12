@@ -27,42 +27,41 @@ const Landing = () => {
           </Col>
         </Row>
       ) : ''}
-      <Container className="mt-5">
-        <Row className="px-0 m-0">
-          <Col className="d-flex justify-content-center">
-            <h4><b className="landingText">Browse Club Directory</b></h4>
-          </Col>
-          <Col className="d-flex justify-content-center">
-            <h4><b className="landingText">Find More Information</b></h4>
-          </Col>
-          <Col className="d-flex justify-content-center">
-            <h4><b className="landingText">Join and Connect</b></h4>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="mx-3 text-center">
-            Sort and search for clubs based on your interests
-          </Col>
-          <Col className="mx-3 text-center">
-            Club descriptions, meeting times, contact information, and upcoming events
-          </Col>
-          <Col className="mx-3 text-center">
-            Join a club that interests you and connect with other students
-          </Col>
-        </Row>
-        <Row className="align-bottom" style={{ zIndex: 1 }}>
-          <Col className="d-flex justify-content-center pt-4">
-            <Image src="/images/landing-thinking.jpeg" style={{ width: '27%' }} />
+      <Row className="px-0 m-0 mt-5">
+        <Col className="d-flex justify-content-center ms-5">
+          <h4><b className="landingText">Browse Club Directory</b></h4>
+        </Col>
+        <Col className="d-flex justify-content-center">
+          <h4><b className="landingText">Find More Information</b></h4>
+        </Col>
+        <Col className="d-flex justify-content-center me-5">
+          <h4><b className="landingText">Join and Connect</b></h4>
+        </Col>
+      </Row>
+      <Row className="m-0">
+        <Col className="mx-3 text-center ms-5">
+          Sort and search for clubs based on your interests
+        </Col>
+        <Col className="mx-3 text-center">
+          Club descriptions, meeting times, contact information, and upcoming events
+        </Col>
+        <Col className="mx-3 text-center me-5">
+          Join a club that interests you and connect with other students
+        </Col>
+      </Row>
+      <Row id="landingBottom" className="align-bottom m-0">
+        <Row className="mb-5 m-0">
+          <Col className="d-flex justify-content-center pt-4 ms-5">
+            <Image src="/images/landing-think.png" style={{ width: '27%' }} />
           </Col>
           <Col className="d-flex justify-content-center pt-3">
-            <Image src="/images/landing-talking.jpeg" style={{ width: '75%' }} />
+            <Image src="/images/landing-talk.png" style={{ width: '75%' }} />
           </Col>
-          <Col className="d-flex justify-content-center">
-            <Image src="/images/landing-greeting.jpeg" style={{ width: '85%' }} />
+          <Col className="d-flex justify-content-center me-5">
+            <Image src="/images/landing-wave.png" style={{ width: '85%' }} />
           </Col>
         </Row>
-      </Container>
-      <Image src="/images/landing-bottom.png" style={{ width: '100%' }} />
+      </Row>
     </div>
   );
 };
