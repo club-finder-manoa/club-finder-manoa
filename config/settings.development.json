@@ -66,6 +66,71 @@
       "email": "ronja36@hawaii.edu",
       "contactName": "Ronja Steinbach",
       "contactEmail": "ronja36@hawaii.edu"
+    },
+    {
+      "clubName": "American Indian Science and Engineering Society at University of Hawai'i",
+      "description": "The American Indian Science and Engineering Society (AISES) is a national nonprofit organization focused on substantially increasing the representation of Indigenous peoples of North America and the Pacific Islands in science, technology, engineering, and math (STEM) studies and careers.",
+      "clubType": "Academic/Professional",
+      "interests": [
+        "Science",
+        "American Indian"
+      ],
+      "projects":[
+        "RadGrad",
+        "Open Power Quality"
+      ],
+      "picture": "https://github.com/philipmjohnson.png",
+      "email": "kmmw@hawaii.edu",
+      "contactName": "Kahiamaikalani Walker",
+      "contactEmail": "kmmw@hawaii.edu"
+    },
+    {
+      "clubName": "American Institute of Architecture Students Hawaii Chapter",
+      "description": "The American Institute of Architecture Students (AIAS) is an independent, nonprofit, student-run organization dedicated to providing unmatched progressive programs, information, and resources on issues critical to architecture and the experience of education. The AIAS aims to promote excellence in architectural education, training, and practice; to foster an appreciation of architecture and related disciplines; to enrich communities in a spirit of collaboration; and to organize students and combine their efforts to advance the art and science of architecture.",
+      "clubType": "Academic/Professional",
+      "interests": [
+        "Architecture"
+      ],
+      "projects":[
+        "RadGrad",
+        "Open Power Quality"
+      ],
+      "picture": "https://github.com/philipmjohnson.png",
+      "email": "beaus@hawaii.edu",
+      "contactName": "Beau Nakamori",
+      "contactEmail": "beaus@hawaii.edu"
+    },
+    {
+      "clubName": "American Library Association Student Chapter",
+      "description": "The American Library Association Student Chapter at the University of Hawai‘i at Mānoa Library and Information Science Program is committed to celebrating and promoting the library and information science profession. Our members plan events and activities that encourage professional development, service to the library community, fundraising, socializing, and networking. We are always looking for new members and new perspectives, and we invite all interested to bring your skills, energy and enthusiasm to our chapter!",
+      "clubType": "Academic/Professional",
+      "interests": [
+        "Library"
+      ],
+      "projects":[
+        "RadGrad",
+        "Open Power Quality"
+      ],
+      "picture": "https://github.com/philipmjohnson.png",
+      "email": "kjmunro@hawaii.edu",
+      "contactName": "Kylee Munro",
+      "contactEmail": "kjmunro@hawaii.edu"
+    },
+    {
+      "clubName": "American Marketing Association",
+      "description": "We are a marketing club that strives to push our members to grow socially, philanthropically, and professionally. ",
+      "clubType": "Academic/Professional",
+      "interests": [
+        "Marketing"
+      ],
+      "projects":[
+        "RadGrad",
+        "Open Power Quality"
+      ],
+      "picture": "https://github.com/philipmjohnson.png",
+      "email": "aarong2@hawaii.edu",
+      "contactName": "Aaron Goo",
+      "contactEmail": "aarong2@hawaii.edu"
     }
   ],
   "defaultProjects": [
