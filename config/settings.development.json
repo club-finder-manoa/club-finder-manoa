@@ -1,4 +1,9 @@
 {
+  "monti": {
+    "appId": "M9ZSMoPc8qvFLo8Tw",
+    "appSecret": "dc331a4b-a48b-46b2-9c25-e44143084aba"
+  },
+
   "defaultProfiles": [
     {
       "clubName": "Accounting Club",
