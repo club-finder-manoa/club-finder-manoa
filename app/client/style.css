@@ -72,3 +72,8 @@ body .btn-primary {
   background: url("images/landing-top.png") no-repeat;
   background-size: 100%;
 }
+
+#landingBottom {
+  background: url("images/landing-bottom.png") no-repeat bottom;
+  background-size: 100%;
+}

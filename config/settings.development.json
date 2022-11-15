@@ -1,93 +1,71 @@
 {
   "defaultProfiles": [
     {
-      "firstName": "Philip",
-      "lastName": "Johnson",
-      "bio": "I am a Professor and like to paddle outrigger canoes.",
-      "title": "Professor",
+      "clubName": "Accounting Club",
+      "description": "In cooperation with the School of Accountancy, we provide additional perspectives and supplemental information concerning public, private, and governmental accounting. Our main goal is to promote the professional and personal development of our members through socials, community service, professional interactions, workshops, and office tours. We continue to rank high among the largest student organizations within the Shidler College of Business and welcome students from all academic disciplines.",
+      "clubType": "Academic/Professional",
       "interests": [
-        "Software Engineering",
-        "Climate Change"
+        "Math",
+        "Accounting"
       ],
       "projects":[
         "RadGrad",
         "Open Power Quality"
       ],
       "picture": "https://github.com/philipmjohnson.png",
-      "email": "johnson@hawaii.edu"
+      "email": "mejesrs@hawaii.edu",
+      "contactName": "Rana Mejes",
+      "contactEmail": "mejesrs@hawaii.edu"
     },
     {
-      "firstName": "Henri",
-      "lastName": "Casanova",
-      "bio": "In my spare time, I like to scuba dive.",
-      "title": "Professor",
+      "clubName": "AIKIDO at UHM",
+      "description": "We practice Aikido.",
+      "clubType": "Sports/Leisure",
       "interests": [
-        "HPC",
-        "Distributed Computing"
+        "Sports",
+        "Fitness"
       ],
       "projects":[
-        "WRENCH"
-      ],
-      "picture": "http://www.ics.hawaii.edu/wp-content/uploads/2013/08/Henri_Casanova1.jpg",
-      "email": "henric@hawaii.edu"
-    },
-    {
-      "firstName": "Carleton",
-      "lastName": "Moore",
-      "bio": "Every summer, I enjoy visiting Portland, Oregon.",
-      "title": "Assistant Professor",
-      "interests": [
-        "Software Engineering",
-        "Renewable Energy"
-      ],
-      "projects":[
-        "RadGrad"
-      ],
-      "picture": "https://github.com/cammoore.png",
-      "email": "cmoore@hawaii.edu"
-    },
-    {
-      "firstName": "Anthony",
-      "lastName": "Christe",
-      "bio": "I enjoy competitive bicycle racing.",
-      "title": "Ph.D. (2020))",
-      "interests": [
-        "AI",
-        "Distributed Computing"
-      ],
-      "projects":[
+        "RadGrad",
         "Open Power Quality"
       ],
-      "picture": "https://anthonyjchriste.github.io/images/me.png",
-      "email": "achriste@hawaii.edu"
+      "picture": "https://github.com/philipmjohnson.png",
+      "email": "halliday@hawaii.edu",
+      "contactName": "Timothy Halliday",
+      "contactEmail": "halliday@hawaii.edu"
     },
     {
-      "firstName": "Jason",
-      "lastName": "Leigh",
-      "bio": "I escaped from Chicago and moved to Hawaii in 2014.",
-      "title": "Professor",
+      "clubName": "Alpha Gamma Delta Delta Sigma",
+      "description": "Alpha Gamma Delta is an international women's fraternity that promotes academic excellence, philanthropic giving, ongoing leadership and personal development and above all, a spirit of loving sisterhood.",
+      "clubType": "Fraternity/Sorority",
       "interests": [
-        "Visualization"
+        "Fraternity",
+        "Sorority"
       ],
       "projects":[
-        "Cyber Canoe"
-      ],
-      "picture": "http://www.ics.hawaii.edu/wp-content/uploads/2013/08/Jason_Leigh-2014.jpg",
-      "email": "leighj@hawaii.edu"
-    },
-    {
-      "firstName": "Serge",
-      "lastName": "Negrashov",
-      "bio": "Most weekends, you can find me on my 8 foot dinghy.",
-      "title": "Ph.D. (2020)",
-      "interests": [
-        "Scalable IP Networks"
-      ],
-      "projects":[
+        "RadGrad",
         "Open Power Quality"
       ],
-      "picture": "https://sergey-negrashov.github.io/images/serge.jpg",
-      "email": "sin8@hawaii.edu"
+      "picture": "https://github.com/philipmjohnson.png",
+      "email": "amterrel@hawaii.edu",
+      "contactName": "Ashley Terrell",
+      "contactEmail": "amterrel@hawaii.edu"
+    },
+    {
+      "clubName": "American Association of University Women at UH Manoa",
+      "description": "The mission of our RIO is to promote the values of AAUW on the UHM campus and in the community; we are working towards equality in society by providing the tools necessary for women to gain economic security, to pursue their education, and advocate for women's rights.",
+      "clubType": "Political",
+      "interests": [
+        "Politics"
+      ],
+      "projects":[
+        "RadGrad",
+        "Open Power Quality"
+      ],
+      "picture": "https://github.com/philipmjohnson.png",
+      "email": "ronja36@hawaii.edu",
+      "contactName": "Ronja Steinbach",
+      "contactEmail": "ronja36@hawaii.edu"
     }
   ],
   "defaultProjects": [

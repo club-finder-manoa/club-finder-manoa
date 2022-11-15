@@ -28,18 +28,22 @@ const MakeCard = ({ profile }) => (
     <Card className="h-100">
       <Card.Header>
         <Image src={profile.picture} width={50} />
-        <Card.Title>{profile.firstName} {profile.lastName}</Card.Title>
-        <Card.Subtitle><span className="date">{profile.title}</span></Card.Subtitle>
+        <Card.Title>{profile.clubName}</Card.Title>
+        <Card.Subtitle><span className="date">{profile.clubType}</span></Card.Subtitle>
       </Card.Header>
       <Card.Body>
         <Card.Text>
-          {profile.bio}
+          {profile.description}
         </Card.Text>
         <Card.Text>
           {profile.interests.map((interest, index) => <Badge key={index} bg="info">{interest}</Badge>)}
         </Card.Text>
-        <h5>Projects</h5>
-        {profile.projects.map((project, index) => <Image key={index} src={project} width={50} />)}
+        <h6>Contact Info</h6>
+        <Card.Text>
+          {/* {profile.projects.map((project, index) => <Image key={index} src={project} width={50} />)} */}
+          {profile.contactName}<br />
+          {profile.contactEmail}
+        </Card.Text>
       </Card.Body>
     </Card>
   </Col>
@@ -47,11 +51,12 @@ const MakeCard = ({ profile }) => (
 
 MakeCard.propTypes = {
   profile: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    bio: PropTypes.string,
     picture: PropTypes.string,
-    title: PropTypes.string,
+    clubName: PropTypes.string,
+    clubType: PropTypes.string,
+    description: PropTypes.string,
+    contactName: PropTypes.string,
+    contactEmail: PropTypes.string,
     interests: PropTypes.arrayOf(PropTypes.string),
     projects: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
