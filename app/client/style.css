@@ -61,6 +61,8 @@ body .btn-primary {
   --bs-btn-border-color: #25734f;
   --bs-btn-hover-border-color: #388a60;
   --bs-btn-active-border-color: #175739;
+  --bs-btn-disabled-bg: #489a70;
+  --bs-btn-disabled-border-color: #388a60;
   border-width: 2px;
 }
 
@@ -76,4 +78,10 @@ body .btn-primary {
 #landingBottom {
   background: url("images/landing-bottom.png") no-repeat bottom;
   background-size: 100%;
+}
+
+#signUpPage {
+  background: url("images/landing-bottom.png") no-repeat bottom;
+  background-size: 100%;
+  height: calc(100vh - 160px);
 }

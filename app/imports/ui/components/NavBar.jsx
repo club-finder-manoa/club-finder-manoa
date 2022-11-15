@@ -39,7 +39,7 @@ const NavBar = () => {
                   <PersonFill className="me-2 mb-1" />Sign in
                 </NavDropdown.Item>
                 <NavDropdown.Item id={ComponentIDs.loginDropdownSignUp} as={NavLink} to="/signup">
-                  <PersonPlusFill className="me- mb-1" />Sign up
+                  <PersonPlusFill className="me-2 mb-1" />Sign up
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (

@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, Col, Image, Row, Container } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
+import { NavLink } from 'react-router-dom';
+import { PageIDs } from '../utilities/ids';
 
 const Landing = () => {
   const { currentUser } = useTracker(() => ({
@@ -9,7 +11,7 @@ const Landing = () => {
   }), []);
 
   return (
-    <div id="landingTop" className="p-0 m-0 g-0">
+    <div id={PageIDs.landingPage} className="p-0 m-0 g-0">
       <Row className="px-0 m-0">
         <Col className="d-flex justify-content-center mt-4">
           <Image src="/images/landing-discover-clubs.png" className="px-0" style={{ width: '30%' }} /><br />
@@ -23,7 +25,9 @@ const Landing = () => {
       {!currentUser ? (
         <Row className="px-0 m-0 my-4">
           <Col className="d-flex justify-content-center">
-            <Button className="mt-4 py-2 px-5"><span style={{ fontSize: '22px', fontWeight: '600' }}>Sign Up</span></Button>
+            <Button className="mt-4 py-2 px-5" as={NavLink} to="/signup">
+              <span style={{ fontSize: '22px', fontWeight: '600' }}>Sign Up</span>
+            </Button>
           </Col>
         </Row>
       ) : ''}
