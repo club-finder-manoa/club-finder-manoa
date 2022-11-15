@@ -70,7 +70,7 @@ body .btn-primary {
   color: #2d8259;
 }
 
-#landingTop {
+#landingPage {
   background: url("images/landing-top.png") no-repeat;
   background-size: 100%;
 }
@@ -78,6 +78,7 @@ body .btn-primary {
 #landingBottom {
   background: url("images/landing-bottom.png") no-repeat bottom;
   background-size: 100%;
+  height: 50vh;
 }
 
 #signUpPage {
