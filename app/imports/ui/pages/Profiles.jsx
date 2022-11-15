@@ -11,6 +11,7 @@ import { Projects } from '../../api/projects/Projects';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
+import TempClubPage from './TempClubPage';
 
 /* Returns the Profile and associated Projects and Interests associated with the passed user email. */
 function getProfileData(email) {
@@ -43,6 +44,9 @@ const MakeCard = ({ profile }) => (
           {/* {profile.projects.map((project, index) => <Image key={index} src={project} width={50} />)} */}
           {profile.contactName}<br />
           {profile.contactEmail}
+        </Card.Text>
+        <Card.Text>
+          <a style={{ color: 'black' }} href="/TempClubPage">Click Here For More Information</a>
         </Card.Text>
       </Card.Body>
     </Card>
