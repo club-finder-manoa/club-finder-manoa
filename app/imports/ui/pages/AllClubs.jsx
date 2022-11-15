@@ -63,7 +63,7 @@ MakeCard.propTypes = {
 };
 
 /* Renders the Profile Collection as a set of Cards. */
-const ProfilesPage = () => {
+const AllClubs= () => {
 
   const { ready } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
@@ -88,4 +88,4 @@ const ProfilesPage = () => {
   ) : <LoadingSpinner />;
 };
 
-export default ProfilesPage;
+export default AllClubs;

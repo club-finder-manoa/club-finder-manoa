@@ -10,7 +10,7 @@ import SignOut from '../pages/SignOut';
 import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
-import Profiles from '../pages/Profiles';
+import AllClubs from '../pages/AllClubs';
 import Projects from '../pages/Projects';
 import Profile from '../pages/Profile';
 import Filter from '../pages/Filter';
@@ -26,8 +26,8 @@ const App = () => (
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signout" element={<SignOut />} />
-        <Route path="/profiles" element={<ProtectedRoute><Profiles /></ProtectedRoute>} />
-        <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
+        <Route path="/all-clubs" element={<ProtectedRoute><AllClubs /></ProtectedRoute>} />
+        <Route path="/my-clubs" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/filter" element={<ProtectedRoute><Filter /></ProtectedRoute>} />
         <Route path="/addproject" element={<ProtectedRoute><AddProject /></ProtectedRoute>} />

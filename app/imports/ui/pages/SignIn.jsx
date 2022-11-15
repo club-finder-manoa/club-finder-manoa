@@ -39,7 +39,7 @@ const SignIn = () => {
   // if correct authentication, redirect to page instead of login screen
   if (redirect) {
     // Change this to "MyClubs" link when page is finished.
-    return (<Navigate to="/profiles" />);
+    return (<Navigate to="/all-clubs" />); // TODO change to 'my clubs' when page is made
   }
   // Otherwise return the Login form.
   return (
