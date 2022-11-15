@@ -38,7 +38,8 @@ const SignIn = () => {
   // console.log('render', error, redirect);
   // if correct authentication, redirect to page instead of login screen
   if (redirect) {
-    return (<Navigate to="/projects" />);
+    // Change this to "MyClubs" link when page is finished.
+    return (<Navigate to="/profiles" />);
   }
   // Otherwise return the Login form.
   return (
