@@ -30,6 +30,7 @@ export const ComponentIDs = {
   signInFormSubmit: 'signInFormSubmit',
   signUpFormEmail: 'signUpFormEmail',
   signUpFormPassword: 'signUpFormPassword',
+  signUpFormMajor: 'signUpFormMajor',
   signUpFormSubmit: 'signUpFormSubmit',
 };
 

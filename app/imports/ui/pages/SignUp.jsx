@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
-import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
+import { Alert, Card, Col, Container, Row, Image } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
+import { MortarboardFill, KeyFill, EnvelopeFill } from 'react-bootstrap-icons';
 
 /*
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -13,10 +14,13 @@ import { ComponentIDs, PageIDs } from '../utilities/ids';
 const SignUp = () => {
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToRef] = useState(false);
+  const majors = ['Accounting', 'Art', 'Business', 'Chemistry', 'Computer Science', 'Computer Engineering', 'Economics', 'Engineering', 'Finance',
+    'Marketing', 'Mathematics', 'Music', 'Nursing', 'Philosophy', 'Physics', 'Political Science', 'Psychology', 'Social Work', 'Other']; // TODO add more later?
 
   const schema = new SimpleSchema({
     email: String,
     password: String,
+    major: { type: String, optional: true, allowedValues: majors },
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
@@ -39,25 +43,50 @@ const SignUp = () => {
   }
   return (
     <Container id={PageIDs.signUpPage}>
-      <Row className="justify-content-center">
-        <Col xs={9}>
-          <Col className="text-center">
-            <h2>Register your account</h2>
-          </Col>
+      <Row className="justify-content-center mb-3">
+        <Col xs={5}>
+
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
-            <Card>
+            <Card className="mt-5" style={{ backgroundColor: '#256546', color: 'white' }}>
               <Card.Body>
-                <TextField id={ComponentIDs.signUpFormEmail} name="email" placeholder="E-mail address" />
-                <TextField id={ComponentIDs.signUpFormPassword} name="password" placeholder="Password" type="password" />
+                <Col className="text-center mb-3">
+                  <h3><b>Sign Up</b></h3>
+                  <p className="small">A valid UH email is required to create an account.</p>
+                </Col>
+                <Row className="mt-4">
+                  <Col className="col-1 mt-1">
+                    <EnvelopeFill style={{ fontSize: '25px', color: 'lightskyblue' }} />
+                  </Col>
+                  <Col>
+                    <TextField id={ComponentIDs.signUpFormEmail} name="email" placeholder="UH Email" label="" />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="col-1 mt-1">
+                    <KeyFill style={{ fontSize: '25px', color: 'gold' }} />
+                  </Col>
+                  <Col>
+                    <TextField id={ComponentIDs.signUpFormPassword} name="password" placeholder="Password" type="password" label="" />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="col-1 mt-1">
+                    <MortarboardFill style={{ fontSize: '25px', color: 'limegreen' }} />
+                  </Col>
+                  <Col>
+                    <SelectField id={ComponentIDs.signUpFormMajor} name="major" placeholder="Major (Optional)" label="" />
+                  </Col>
+                </Row>
                 <ErrorsField />
-                <SubmitField id={ComponentIDs.signUpFormSubmit} />
+                <Col className="d-flex justify-content-center">
+                  <SubmitField id={ComponentIDs.signUpFormSubmit} className="mt-2" value="Sign Up" />
+                </Col>
               </Card.Body>
             </Card>
           </AutoForm>
           <Alert variant="secondary">
-            Already have an account? Login
-            {' '}
-            <Link to="/signin">here</Link>
+            Already have an account? Log in&nbsp;
+            <Link to="/signin">here</Link>.
           </Alert>
           {error === '' ? (
             ''
