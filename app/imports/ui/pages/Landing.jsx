@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Col, Image, Row, Container } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
+import { NavLink } from 'react-router-dom';
 import { PageIDs } from '../utilities/ids';
 
 const Landing = () => {
@@ -21,7 +22,9 @@ const Landing = () => {
       {!currentUser ? (
         <Row className="px-0 m-0 mt-3">
           <Col className="d-flex justify-content-center">
-            <Button className="mt-4 py-2 px-5"><span style={{ fontSize: '22px', fontWeight: '600' }}>Sign Up</span></Button>
+            <Button className="mt-4 py-2 px-5" as={NavLink} to="/signup">
+              <span style={{ fontSize: '22px', fontWeight: '600' }}>Sign Up</span>
+            </Button>
           </Col>
         </Row>
       ) : ''}
