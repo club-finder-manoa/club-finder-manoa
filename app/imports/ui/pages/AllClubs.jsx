@@ -44,6 +44,9 @@ const MakeCard = ({ profile }) => (
           {profile.contactName}<br />
           {profile.contactEmail}
         </Card.Text>
+        <Card.Text>
+          <a style={{ color: 'black' }} href="/TempClubPage">Click Here For More Information</a>
+        </Card.Text>
       </Card.Body>
     </Card>
   </Col>
@@ -63,7 +66,7 @@ MakeCard.propTypes = {
 };
 
 /* Renders the Profile Collection as a set of Cards. */
-const ProfilesPage = () => {
+const AllClubs= () => {
 
   const { ready } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
@@ -88,4 +91,4 @@ const ProfilesPage = () => {
   ) : <LoadingSpinner />;
 };
 
-export default ProfilesPage;
+export default AllClubs;
