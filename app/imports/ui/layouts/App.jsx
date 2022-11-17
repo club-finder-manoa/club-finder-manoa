@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
@@ -16,6 +17,7 @@ import Profile from '../pages/Profile';
 import Filter from '../pages/Filter';
 import AddProject from '../pages/AddProject';
 import TempClubPage from '../pages/TempClubPage';
+import ClubListAdmin from '../pages/ClubListAdmin';
 
 /* Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -32,6 +34,7 @@ const App = () => (
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/filter" element={<ProtectedRoute><Filter /></ProtectedRoute>} />
         <Route path="/addproject" element={<ProtectedRoute><AddProject /></ProtectedRoute>} />
+        <Route path="/admin" element={<ProtectedRoute><ClubListAdmin /></ProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="/tempclubpage" element={<TempClubPage />} />
         <Route path="*" element={<NotFound />} />
@@ -51,6 +54,15 @@ const ProtectedRoute = ({ children }) => {
   return isLogged ? children : <Navigate to="/signin" />;
 };
 
+const AdminProtectedRoute = ({ children }) => {
+  const isLogged = Meteor.userId() !== null;
+  if (!isLogged) {
+    return <Navigate to="/signin" />;
+  }
+  const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
+  return (isLogged && isAdmin) ? children : <Navigate to="/notauthorized" />;
+};
+
 // Require a component and location to be passed to each ProtectedRoute.
 ProtectedRoute.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
@@ -58,6 +70,15 @@ ProtectedRoute.propTypes = {
 
 ProtectedRoute.defaultProps = {
   children: <Profile />,
+};
+
+// Require a component and location to be passed to each AdminProtectedRoute.
+AdminProtectedRoute.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+};
+
+AdminProtectedRoute.defaultProps = {
+  children: <Landing />,
 };
 
 export default App;

@@ -32,6 +32,7 @@ export const ComponentIDs = {
   signUpFormPassword: 'signUpFormPassword',
   signUpFormMajor: 'signUpFormMajor',
   signUpFormSubmit: 'signUpFormSubmit',
+  adminEditor: 'adminEditor',
 };
 
 export const PageIDs = {
@@ -47,4 +48,5 @@ export const PageIDs = {
   signInPage: 'signInPage',
   signOutPage: 'signOutPage',
   signUpPage: 'signUpPage',
+  adminPage: 'adminPage',
 };
