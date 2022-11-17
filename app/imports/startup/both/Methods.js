@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Projects } from '../../api/projects/Projects';
-import { Profiles } from '../../api/profiles/Profiles';
-import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
+import { Clubs } from '../../api/clubs/Clubs';
+import { ProfilesInterests } from '../../api/clubs/ProfilesInterests';
+import { ProfilesProjects } from '../../api/clubs/ProfilesProjects';
 import { ProjectsInterests } from '../../api/projects/ProjectsInterests';
 
 /**
@@ -32,13 +32,13 @@ import { ProjectsInterests } from '../../api/projects/ProjectsInterests';
 const updateProfileMethod = 'Profiles.update';
 
 /**
- * The server-side Profiles.update Meteor Method is called by the client-side Profile page after pushing the update button.
- * Its purpose is to update the Profiles, ProfilesInterests, and ProfilesProjects collections to reflect the
+ * The server-side Clubs.update Meteor Method is called by the client-side Profile page after pushing the update button.
+ * Its purpose is to update the Clubs, ProfilesInterests, and ProfilesProjects collections to reflect the
  * updated situation specified by the user.
  */
 Meteor.methods({
   'Profiles.update'({ email, firstName, lastName, bio, title, picture, interests, projects }) {
-    Profiles.collection.update({ email }, { $set: { email, firstName, lastName, bio, title, picture } });
+    Clubs.collection.update({ email }, { $set: { email, firstName, lastName, bio, title, picture } });
     ProfilesInterests.collection.remove({ profile: email });
     ProfilesProjects.collection.remove({ profile: email });
     interests.map((interest) => ProfilesInterests.collection.insert({ profile: email, interest }));

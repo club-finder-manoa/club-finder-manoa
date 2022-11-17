@@ -3,11 +3,10 @@ import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { Projects } from '../../api/projects/Projects';
 import { ProjectsInterests } from '../../api/projects/ProjectsInterests';
-import { Profiles } from '../../api/profiles/Profiles';
-import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
-import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { Interests } from '../../api/interests/Interests';
-import { adminStuff } from '../../api/admin/adminStuff';
+import { Clubs } from '../../api/clubs/Clubs';
+import { ProfilesProjects } from '../../api/clubs/ProfilesProjects';
+import { ProfilesInterests } from '../../api/clubs/ProfilesInterests';
+import { Users } from '../../api/users/Users';
 import { Stuffs } from '../../api/stuff/Stuff';
 
 /* eslint-disable no-console */
@@ -23,7 +22,7 @@ function createUser(email, role) {
 
 /** Define an interest.  Has no effect if interest already exists. */
 function addInterest(interest) {
-  Interests.collection.update({ name: interest }, { $set: { name: interest } }, { upsert: true });
+  Users.collection.update({ name: interest }, { $set: { name: interest } }, { upsert: true });
 }
 
 /** Defines a new user and associated profile. Error if user already exists. */
@@ -32,11 +31,11 @@ function addProfile({ picture, clubName, clubType, description, contactName, con
   // Define the user in the Meteor accounts package.
   createUser(email, role);
   // Create the profile.
-  Profiles.collection.insert({ picture, clubName, clubType, description, contactName, contactEmail, email });
+  Clubs.collection.insert({ picture, clubName, clubType, description, contactName, contactEmail, email });
   // Add interests and projects.
   interests.map(interest => ProfilesInterests.collection.insert({ profile: email, interest }));
   projects.map(project => ProfilesProjects.collection.insert({ profile: email, project }));
-  // Make sure interests are defined in the Interests collection if they weren't already.
+  // Make sure interests are defined in the Users collection if they weren't already.
   interests.map(interest => addInterest(interest));
 }
 
@@ -45,7 +44,7 @@ function addProject({ name, homepage, description, interests, picture }) {
   console.log(`Defining project ${name}`);
   Projects.collection.insert({ name, homepage, description, picture });
   interests.map(interest => ProjectsInterests.collection.insert({ project: name, interest }));
-  // Make sure interests are defined in the Interests collection if they weren't already.
+  // Make sure interests are defined in the Users collection if they weren't already.
   interests.map(interest => addInterest(interest));
 }
 

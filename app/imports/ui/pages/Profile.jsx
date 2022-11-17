@@ -7,10 +7,10 @@ import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Interests } from '../../api/interests/Interests';
-import { Profiles } from '../../api/profiles/Profiles';
-import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
+import { Users } from '../../api/users/Users';
+import { Clubs } from '../../api/clubs/Clubs';
+import { ProfilesInterests } from '../../api/clubs/ProfilesInterests';
+import { ProfilesProjects } from '../../api/clubs/ProfilesProjects';
 import { Projects } from '../../api/projects/Projects';
 import { updateProfileMethod } from '../../startup/both/Methods';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -47,8 +47,8 @@ const Profile = () => {
 
   const { ready, email } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
-    const sub1 = Meteor.subscribe(Interests.userPublicationName);
-    const sub2 = Meteor.subscribe(Profiles.userPublicationName);
+    const sub1 = Meteor.subscribe(Users.userPublicationName);
+    const sub2 = Meteor.subscribe(Clubs.userPublicationName);
     const sub3 = Meteor.subscribe(ProfilesInterests.userPublicationName);
     const sub4 = Meteor.subscribe(ProfilesProjects.userPublicationName);
     const sub5 = Meteor.subscribe(Projects.userPublicationName);
@@ -58,14 +58,14 @@ const Profile = () => {
     };
   }, []);
   // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
-  const allInterests = _.pluck(Interests.collection.find().fetch(), 'name');
+  const allInterests = _.pluck(Users.collection.find().fetch(), 'name');
   const allProjects = _.pluck(Projects.collection.find().fetch(), 'name');
   const formSchema = makeSchema(allInterests, allProjects);
   const bridge = new SimpleSchema2Bridge(formSchema);
   // Now create the model with all the user information.
   const projects = _.pluck(ProfilesProjects.collection.find({ profile: email }).fetch(), 'project');
   const interests = _.pluck(ProfilesInterests.collection.find({ profile: email }).fetch(), 'interest');
-  const profile = Profiles.collection.findOne({ email });
+  const profile = Clubs.collection.findOne({ email });
   const model = _.extend({}, profile, { interests, projects });
   return ready ? (
     <Container id={PageIDs.homePage} className="justify-content-center" style={pageStyle}>

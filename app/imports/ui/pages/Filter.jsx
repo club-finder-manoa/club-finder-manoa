@@ -7,10 +7,10 @@ import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { AutoForm, SelectField, SubmitField } from 'uniforms-bootstrap5';
-import { Interests } from '../../api/interests/Interests';
-import { Profiles } from '../../api/profiles/Profiles';
-import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
+import { Users } from '../../api/users/Users';
+import { Clubs } from '../../api/clubs/Clubs';
+import { ProfilesInterests } from '../../api/clubs/ProfilesInterests';
+import { ProfilesProjects } from '../../api/clubs/ProfilesProjects';
 import { Projects } from '../../api/projects/Projects';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useStickyState } from '../utilities/StickyState';
@@ -24,7 +24,7 @@ const makeSchema = (allInterests) => new SimpleSchema({
 });
 
 function getProfileData(email) {
-  const data = Profiles.collection.findOne({ email });
+  const data = Clubs.collection.findOne({ email });
   const interests = _.pluck(ProfilesInterests.collection.find({ profile: email }).fetch(), 'interest');
   const projects = _.pluck(ProfilesProjects.collection.find({ profile: email }).fetch(), 'project');
   const projectPictures = projects.map(project => Projects.collection.findOne({ name: project }).picture);
@@ -71,14 +71,14 @@ const Filter = () => {
 
   const { ready, interestDocs, profileInterests } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
-    const sub1 = Meteor.subscribe(Profiles.userPublicationName);
+    const sub1 = Meteor.subscribe(Clubs.userPublicationName);
     const sub2 = Meteor.subscribe(ProfilesInterests.userPublicationName);
     const sub3 = Meteor.subscribe(ProfilesProjects.userPublicationName);
     const sub4 = Meteor.subscribe(Projects.userPublicationName);
-    const sub5 = Meteor.subscribe(Interests.userPublicationName);
+    const sub5 = Meteor.subscribe(Users.userPublicationName);
     return {
       ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready(),
-      interestDocs: Interests.collection.find().fetch(),
+      interestDocs: Users.collection.find().fetch(),
       profileInterests: ProfilesInterests.collection.find().fetch(),
     };
   }, []);
@@ -100,7 +100,7 @@ const Filter = () => {
       <AutoForm schema={bridge} onSubmit={data => submit(data)} model={{ interests }}>
         <Card>
           <Card.Body id={ComponentIDs.filterFormInterests}>
-            <SelectField name="interests" multiple placeholder="Interests" checkboxes transform={transform} />
+            <SelectField name="interests" multiple placeholder="Users" checkboxes transform={transform} />
             <SubmitField id={ComponentIDs.filterFormSubmit} value="Submit" />
           </Card.Body>
         </Card>

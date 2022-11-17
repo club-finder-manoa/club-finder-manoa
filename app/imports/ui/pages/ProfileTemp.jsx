@@ -20,7 +20,7 @@ const ProfileTemp = () => (
           {/* Bio */}
           <p>I am a Professor and like to paddle outrigger canoes.</p>
           <hr />
-          {/* Interests */}
+          {/* Users */}
           <p>Interests: Software Engineering, Climate Change</p>
           <hr />
           {/* Major */}

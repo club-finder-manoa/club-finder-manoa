@@ -8,10 +8,10 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
 import { addProjectMethod } from '../../startup/both/Methods';
-import { Interests } from '../../api/interests/Interests';
-import { Profiles } from '../../api/profiles/Profiles';
-import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
+import { Users } from '../../api/users/Users';
+import { Clubs } from '../../api/clubs/Clubs';
+import { ProfilesInterests } from '../../api/clubs/ProfilesInterests';
+import { ProfilesProjects } from '../../api/clubs/ProfilesProjects';
 import { Projects } from '../../api/projects/Projects';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
@@ -45,15 +45,15 @@ const AddProject = () => {
 
   const { ready, interests, profiles } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
-    const sub1 = Meteor.subscribe(Interests.userPublicationName);
-    const sub2 = Meteor.subscribe(Profiles.userPublicationName);
+    const sub1 = Meteor.subscribe(Users.userPublicationName);
+    const sub2 = Meteor.subscribe(Clubs.userPublicationName);
     const sub3 = Meteor.subscribe(ProfilesInterests.userPublicationName);
     const sub4 = Meteor.subscribe(ProfilesProjects.userPublicationName);
     const sub5 = Meteor.subscribe(Projects.userPublicationName);
     return {
       ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready(),
-      interests: Interests.collection.find().fetch(),
-      profiles: Profiles.collection.find().fetch(),
+      interests: Users.collection.find().fetch(),
+      profiles: Clubs.collection.find().fetch(),
     };
   }, []);
 
@@ -80,7 +80,7 @@ const AddProject = () => {
                 <LongTextField id={ComponentIDs.addProjectFormDescription} name="description" placeholder="Describe the project here" />
                 <Row>
                   <Col xs={6} id={ComponentIDs.addProjectFormInterests}>
-                    <SelectField name="interests" showInlineError placeholder="Interests" multiple checkboxes transform={transform} />
+                    <SelectField name="interests" showInlineError placeholder="Users" multiple checkboxes transform={transform} />
                   </Col>
                   <Col xs={6} id={ComponentIDs.addProjectFormParticipants}>
                     <SelectField name="participants" showInlineError placeholder="Participants" multiple checkboxes transform={transform} />
