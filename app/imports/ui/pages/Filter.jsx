@@ -2,16 +2,13 @@ import React from 'react';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import { Container, Card, Image, Badge, Row, Col } from 'react-bootstrap';
+import { Container, Card, Image, Badge, Col } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { AutoForm, SelectField, SubmitField } from 'uniforms-bootstrap5';
 import { Users } from '../../api/users/Users';
 import { Clubs } from '../../api/clubs/Clubs';
-import { ProfilesInterests } from '../../api/clubs/ProfilesInterests';
-import { ProfilesProjects } from '../../api/clubs/ProfilesProjects';
-import { Projects } from '../../api/projects/Projects';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useStickyState } from '../utilities/StickyState';
 import { pageStyle } from './pageStyles';
@@ -22,14 +19,6 @@ const makeSchema = (allInterests) => new SimpleSchema({
   interests: { type: Array, label: 'Interests', optional: true },
   'interests.$': { type: String, allowedValues: allInterests },
 });
-
-function getProfileData(email) {
-  const data = Clubs.collection.findOne({ email });
-  const interests = _.pluck(ProfilesInterests.collection.find({ profile: email }).fetch(), 'interest');
-  const projects = _.pluck(ProfilesProjects.collection.find({ profile: email }).fetch(), 'project');
-  const projectPictures = projects.map(project => Projects.collection.findOne({ name: project }).picture);
-  return _.extend({}, data, { interests, projects: projectPictures });
-}
 
 /* Component for layout out a Profile Card. */
 const MakeCard = ({ profile }) => (
@@ -69,17 +58,13 @@ MakeCard.propTypes = {
 const Filter = () => {
   const [interests, setInterests] = useStickyState('interests', []);
 
-  const { ready, interestDocs, profileInterests } = useTracker(() => {
+  const { ready, interestDocs } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(Clubs.userPublicationName);
-    const sub2 = Meteor.subscribe(ProfilesInterests.userPublicationName);
-    const sub3 = Meteor.subscribe(ProfilesProjects.userPublicationName);
-    const sub4 = Meteor.subscribe(Projects.userPublicationName);
-    const sub5 = Meteor.subscribe(Users.userPublicationName);
+    const sub2 = Meteor.subscribe(Users.userPublicationName);
     return {
-      ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready(),
+      ready: sub1.ready() && sub2.ready(),
       interestDocs: Users.collection.find().fetch(),
-      profileInterests: ProfilesInterests.collection.find().fetch(),
     };
   }, []);
 
@@ -90,9 +75,6 @@ const Filter = () => {
   const allInterests = _.pluck(interestDocs, 'name');
   const formSchema = makeSchema(allInterests);
   const bridge = new SimpleSchema2Bridge(formSchema);
-  const profileWithInterest = profileInterests.filter(pI => interests.includes(pI.interest));
-  const emails = _.pluck(profileWithInterest, 'profile');
-  const profileData = _.uniq(emails).map(email => getProfileData(email));
   const transform = (label) => ` ${label}`;
 
   return ready ? (
@@ -105,9 +87,6 @@ const Filter = () => {
           </Card.Body>
         </Card>
       </AutoForm>
-      <Row xs={1} md={2} lg={4} className="g-2" style={{ paddingTop: '10px' }}>
-        {profileData.map((profile, index) => <MakeCard key={index} profile={profile} />)}
-      </Row>
     </Container>
   ) : <LoadingSpinner />;
 };

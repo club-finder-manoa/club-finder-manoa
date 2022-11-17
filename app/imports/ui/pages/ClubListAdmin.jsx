@@ -2,24 +2,24 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Stuffs } from '../../api/stuff/Stuff';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ClubStuffAdmin from '../components/ClubStuffAdmin';
+import { Users } from '../../api/users/Users';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const ClubListAdmin = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, stuffs } = useTracker(() => {
+  const { ready, users } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
-    const subscription = Meteor.subscribe(Stuffs.userPublicationName);
+    const subscription = Meteor.subscribe(Users.userPublicationName);
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents
-    const stuffItems = Stuffs.collection.find({}).fetch();
+    const user = Users.collection.find({}).fetch();
     return {
-      stuffs: stuffItems,
+      users: user,
       ready: rdy,
     };
   }, []);
@@ -42,7 +42,7 @@ const ClubListAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {stuffs.map((stuff) => <ClubStuffAdmin key={stuff._id} stuff={stuff} />)}
+              {users.map((user) => <ClubStuffAdmin key={user._id} stuff={user} />)}
             </tbody>
           </Table>
         </Col>
