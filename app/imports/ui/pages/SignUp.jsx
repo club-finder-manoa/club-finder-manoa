@@ -46,7 +46,6 @@ const SignUp = () => {
       <Container>
         <Row className="justify-content-center mb-3">
           <Col xs={5}>
-
             <AutoForm schema={bridge} onSubmit={data => submit(data)}>
               <Card className="mt-4" style={{ backgroundColor: '#256546', color: 'white' }}>
                 <Card.Body>

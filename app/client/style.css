@@ -86,6 +86,13 @@ body .btn-primary {
   background-size: 100%;
   height: calc(100vh - 160px);
 }
+
+#signInPage {
+  background: url("images/landing-bottom.png") no-repeat bottom;
+  background-size: 100%;
+  height: calc(100vh - 160px);
+}
+
 /* Profile Template Page */
 
 #imgProfile{
