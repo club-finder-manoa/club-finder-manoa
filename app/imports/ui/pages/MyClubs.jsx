@@ -38,8 +38,8 @@ MakeCard.propTypes = {
   }).isRequired,
 };
 
-/* Renders the Profile Collection as a set of Cards. */
-const AllClubs = () => {
+/* Renders the Clubs Collection as a set of Cards. */
+const MyClubs = () => {
 
   const { ready, clubs } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
@@ -57,7 +57,7 @@ const AllClubs = () => {
       <Row className="align-middle text-center">
         <Col className="d-flex flex-column justify-content-center">
           <h1>
-            <b>All Clubs</b>
+            <b>My Clubs</b>
           </h1>
         </Col>
       </Row>
@@ -69,4 +69,4 @@ const AllClubs = () => {
   ) : <LoadingSpinner />;
 };
 
-export default AllClubs;
+export default MyClubs;
