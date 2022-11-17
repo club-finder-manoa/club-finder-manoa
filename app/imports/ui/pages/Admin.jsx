@@ -28,21 +28,20 @@ const Admin = () => {
       <Row className="justify-content-center">
         <Col md={7}>
           <Col className="text-center">
-            <h2>Club Admin List</h2>
+            <h2>User List</h2>
           </Col>
           <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Owner</th>
-                <th>Admin Status</th>
+                <th>Club Admin</th>
                 <th>Change Password</th>
                 <th>Delete Account</th>
                 <th>Change Admin Status</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => <UserListItem key={user._id} stuff={user} />)}
+              {users.map((user) => <UserListItem key={user._id} user={user} />)}
             </tbody>
           </Table>
         </Col>
