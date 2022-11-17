@@ -6,7 +6,7 @@ const TempClubPage = () => (
   <Container id="landing-page" fluid className="py-3">
     <Row className="align-middle text-center">
       <Col xs={4}>
-        <Image roundedCircle src="https://manoa.hawaii.edu/undergrad/civic-engage/wp-content/uploads/2021/10/AAUW-at-UHM-logo-1-1024x538.png" width="150px" />
+        <Image roundedCircle src="https://images.squarespace-cdn.com/content/v1/5f2371858296275165c4fed8/1598171416577-93L1YDJ9YHL3W7F5AMCA/New-AC-Logo-1024x1024.png?format=1500w" width="150px" />
       </Col>
 
       <Col xs={8} className="d-flex flex-column justify-content-center">
