@@ -18,7 +18,7 @@ import Filter from '../pages/Filter';
 import AddProject from '../pages/AddProject';
 import ProfileTemp from '../pages/ProfileTemp';
 import TempClubPage from '../pages/TempClubPage';
-import ClubListAdmin from '../pages/ClubListAdmin';
+import Admin from '../pages/Admin';
 
 /* Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -36,7 +36,7 @@ const App = () => (
         <Route path="/account" element={<ProtectedRoute><ProfileTemp /></ProtectedRoute>} />
         <Route path="/filter" element={<ProtectedRoute><Filter /></ProtectedRoute>} />
         <Route path="/addproject" element={<ProtectedRoute><AddProject /></ProtectedRoute>} />
-        <Route path="/admin" element={<ProtectedRoute><ClubListAdmin /></ProtectedRoute>} />
+        <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="/tempclubpage" element={<TempClubPage />} />
         <Route path="*" element={<NotFound />} />

@@ -3,11 +3,11 @@ import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
-import ClubStuffAdmin from '../components/ClubStuffAdmin';
+import UserListItem from '../components/UserListItem';
 import { Users } from '../../api/users/Users';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-const ClubListAdmin = () => {
+const Admin = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, users } = useTracker(() => {
     // Note that this subscription will get cleaned up
@@ -42,7 +42,7 @@ const ClubListAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => <ClubStuffAdmin key={user._id} stuff={user} />)}
+              {users.map((user) => <UserListItem key={user._id} stuff={user} />)}
             </tbody>
           </Table>
         </Col>
@@ -51,4 +51,4 @@ const ClubListAdmin = () => {
   ) : <LoadingSpinner />);
 };
 
-export default ClubListAdmin;
+export default Admin;
