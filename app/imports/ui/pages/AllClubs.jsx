@@ -66,7 +66,7 @@ MakeCard.propTypes = {
 };
 
 /* Renders the Profile Collection as a set of Cards. */
-const AllClubs= () => {
+const AllClubs = () => {
 
   const { ready } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
@@ -84,6 +84,13 @@ const AllClubs= () => {
   const profileData = emails.map(email => getProfileData(email));
   return ready ? (
     <Container id={PageIDs.profilesPage} style={pageStyle}>
+      <Row className="align-middle text-center">
+        <Col className="d-flex flex-column justify-content-center">
+          <h1>
+            All Clubs
+          </h1>
+        </Col>
+      </Row>
       <Row xs={1} md={2} lg={4} className="g-2">
         {profileData.map((profile, index) => <MakeCard key={index} profile={profile} />)}
       </Row>
