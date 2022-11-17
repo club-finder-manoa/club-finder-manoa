@@ -6,7 +6,7 @@ const TempClubPage = () => (
   <Container id="landing-page" fluid className="py-3">
     <Row className="align-middle text-center">
       <Col xs={4}>
-        <Image roundedCircle src="https://github.com/philipmjohnson.png" width="150px" />
+        <Image roundedCircle src="https://manoa.hawaii.edu/undergrad/civic-engage/wp-content/uploads/2021/10/AAUW-at-UHM-logo-1-1024x538.png" width="150px" />
       </Col>
 
       <Col xs={8} className="d-flex flex-column justify-content-center">
@@ -19,48 +19,48 @@ const TempClubPage = () => (
     <h3>Meeting Times and Location</h3>
     <Table striped bordered hover size="sm">
       <thead>
-      <tr>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Location</th>
-        <th>Meeting Description</th>
-      </tr>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Location</th>
+          <th>Meeting Description</th>
+        </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>Monday, November 21, 2022</td>
-        <td>6:00 PM to 7:00 PM</td>
-        <td>HL 003F</td>
-        <td>General Meeting</td>
-      </tr>
-      <tr>
-        <td>Monday, November 28, 2022</td>
-        <td>6:00 PM to 7:00 PM</td>
-        <td>HL 003F</td>
-        <td>General meeting</td>
-      </tr>
-      <tr>
-        <td>Monday, December 5, 2022</td>
-        <td>6:00 PM to 7:00 PM</td>
-        <td>HL 003F</td>
-        <td>General meeting</td>
-      </tr>
+        <tr>
+          <td>Monday, November 21, 2022</td>
+          <td>6:00 PM to 7:00 PM</td>
+          <td>HL 003F</td>
+          <td>General Meeting</td>
+        </tr>
+        <tr>
+          <td>Monday, November 28, 2022</td>
+          <td>6:00 PM to 7:00 PM</td>
+          <td>HL 003F</td>
+          <td>General meeting</td>
+        </tr>
+        <tr>
+          <td>Monday, December 5, 2022</td>
+          <td>6:00 PM to 7:00 PM</td>
+          <td>HL 003F</td>
+          <td>General meeting</td>
+        </tr>
       </tbody>
     </Table>
 
     <h3>Contact Us!</h3>
     <Table striped bordered hover size="sm">
       <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-      </tr>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>Rana Mejes</td>
-        <td>mejesrs@hawaii.edu</td>
-      </tr>
+        <tr>
+          <td>Rana Mejes</td>
+          <td>mejesrs@hawaii.edu</td>
+        </tr>
       </tbody>
     </Table>
 
