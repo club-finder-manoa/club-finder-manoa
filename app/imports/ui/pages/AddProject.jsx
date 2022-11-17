@@ -7,12 +7,8 @@ import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
-import { addProjectMethod } from '../../startup/both/Methods';
 import { Users } from '../../api/users/Users';
 import { Clubs } from '../../api/clubs/Clubs';
-import { ProfilesInterests } from '../../api/clubs/ProfilesInterests';
-import { ProfilesProjects } from '../../api/clubs/ProfilesProjects';
-import { Projects } from '../../api/projects/Projects';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
@@ -34,6 +30,7 @@ const AddProject = () => {
 
   /* On submit, insert the data. */
   const submit = (data, formRef) => {
+    /*
     Meteor.call(addProjectMethod, data, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
@@ -41,17 +38,16 @@ const AddProject = () => {
         swal('Success', 'Project added successfully', 'success').then(() => formRef.reset());
       }
     });
+
+     */
   };
 
   const { ready, interests, profiles } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(Users.userPublicationName);
     const sub2 = Meteor.subscribe(Clubs.userPublicationName);
-    const sub3 = Meteor.subscribe(ProfilesInterests.userPublicationName);
-    const sub4 = Meteor.subscribe(ProfilesProjects.userPublicationName);
-    const sub5 = Meteor.subscribe(Projects.userPublicationName);
     return {
-      ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready(),
+      ready: sub1.ready() && sub2.ready(),
       interests: Users.collection.find().fetch(),
       profiles: Clubs.collection.find().fetch(),
     };

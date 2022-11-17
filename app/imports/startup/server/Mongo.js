@@ -32,7 +32,6 @@ function addUserToCollection({ email, savedClubs, interests, major, adminForClub
 if (Meteor.users.find().count() === 0) {
   if (Meteor.settings.defaultUserData) {
     console.log('Loading user data');
-    Meteor.settings.defaultAccounts.map(profile => createUser(profile));
     Meteor.settings.defaultUserData.map(profile => addUserToCollection(profile));
   } else {
     console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');

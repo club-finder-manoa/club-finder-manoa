@@ -15,19 +15,19 @@
 
   "defaultUserData": [
     {
-      "email": "admin@hawaii.edu",
+      "email": "admina@hawaii.edu",
       "savedClubs": ["American Marketing Association", "AIKIDO at UHM"],
       "interests": ["Administrating Websites", "Crying"],
       "major": "Computer Science"
     },
     {
-      "email": "john@hawaii.edu",
+      "email": "johna@hawaii.edu",
       "savedClubs": ["American Association of University Women at UH Manoa", "American Institute of Architecture Students Hawaii Chapter"],
       "interests": ["Architecture"],
       "major": "Architecture"
     },
     {
-      "email": "accountingadmin@hawaii.edu",
+      "email": "accountingadmina@hawaii.edu",
       "savedClubs": ["Accounting Club"],
       "interests": ["Accounting", "Business"],
       "major": "Accounting",

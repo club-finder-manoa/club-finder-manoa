@@ -9,10 +9,6 @@ import { _ } from 'meteor/underscore';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Users } from '../../api/users/Users';
 import { Clubs } from '../../api/clubs/Clubs';
-import { ProfilesInterests } from '../../api/clubs/ProfilesInterests';
-import { ProfilesProjects } from '../../api/clubs/ProfilesProjects';
-import { Projects } from '../../api/projects/Projects';
-import { updateProfileMethod } from '../../startup/both/Methods';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
@@ -36,6 +32,7 @@ const Profile = () => {
 
   /* On submit, insert the data. */
   const submit = (data) => {
+    /*
     Meteor.call(updateProfileMethod, data, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
@@ -43,28 +40,27 @@ const Profile = () => {
         swal('Success', 'Profile updated successfully', 'success');
       }
     });
+
+     */
   };
 
   const { ready, email } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(Users.userPublicationName);
     const sub2 = Meteor.subscribe(Clubs.userPublicationName);
-    const sub3 = Meteor.subscribe(ProfilesInterests.userPublicationName);
-    const sub4 = Meteor.subscribe(ProfilesProjects.userPublicationName);
-    const sub5 = Meteor.subscribe(Projects.userPublicationName);
     return {
-      ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready(),
+      ready: sub1.ready() && sub2.ready(),
       email: Meteor.user()?.username,
     };
   }, []);
   // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
   const allInterests = _.pluck(Users.collection.find().fetch(), 'name');
-  const allProjects = _.pluck(Projects.collection.find().fetch(), 'name');
+  const allProjects = '';
   const formSchema = makeSchema(allInterests, allProjects);
   const bridge = new SimpleSchema2Bridge(formSchema);
   // Now create the model with all the user information.
-  const projects = _.pluck(ProfilesProjects.collection.find({ profile: email }).fetch(), 'project');
-  const interests = _.pluck(ProfilesInterests.collection.find({ profile: email }).fetch(), 'interest');
+  const projects = '';
+  const interests = '';
   const profile = Clubs.collection.findOne({ email });
   const model = _.extend({}, profile, { interests, projects });
   return ready ? (
