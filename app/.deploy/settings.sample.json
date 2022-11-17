@@ -1,4 +1,17 @@
 {
+  "defaultAccounts": [
+    {
+      "name": "Ducksu Quack",
+      "owner": "ducksu@hotmail.com",
+      "admin": "Yes"
+    },
+    {
+      "name": "John Foo",
+      "owner": "john@foo.com",
+      "admin": "No"
+    }
+  ],
+
   "defaultProfiles": [
     {
       "firstName": "Philip",

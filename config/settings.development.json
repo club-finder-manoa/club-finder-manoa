@@ -3,6 +3,33 @@
     "appId": "M9ZSMoPc8qvFLo8Tw",
     "appSecret": "dc331a4b-a48b-46b2-9c25-e44143084aba"
   },
+  "defaultAccounts": [
+    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
+    { "email": "john@foo.com", "password": "changeme" }
+  ],
+
+  "defaultData": [
+    {
+      "name": "Ducksu Quack",
+      "owner": "ducksu@hotmail.com",
+      "adminStatus": "Yes"
+    },
+      {
+        "name": "Ducksu Quack",
+        "owner": "ducksu@hotmail.com",
+        "adminStatus": "No"
+      },
+      {
+        "name": "Ducksu Quack",
+        "owner": "ducksu@hotmail.com",
+        "adminStatus": "No"
+      },
+    {
+      "name": "John Foo",
+      "owner": "john@foo.com",
+      "adminStatus": "No"
+    }
+],
 
   "defaultProfiles": [
     {
@@ -179,4 +206,5 @@
     }
   ],
   "loadAssetsFile":  false
+
 }

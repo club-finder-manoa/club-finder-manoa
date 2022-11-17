@@ -7,6 +7,8 @@ import { Profiles } from '../../api/profiles/Profiles';
 import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
 import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
 import { Interests } from '../../api/interests/Interests';
+import { adminStuff } from '../../api/admin/adminStuff';
+import { Stuffs } from '../../api/stuff/Stuff';
 
 /* eslint-disable no-console */
 
@@ -47,6 +49,11 @@ function addProject({ name, homepage, description, interests, picture }) {
   interests.map(interest => addInterest(interest));
 }
 
+const addData = (data) => {
+  console.log(`  Adding: ${data.name} (${data.owner})`);
+  Stuffs.collection.insert(data);
+};
+
 /** Initialize DB if it appears to be empty (i.e. no users defined.) */
 if (Meteor.users.find().count() === 0) {
   if (Meteor.settings.defaultProjects && Meteor.settings.defaultProfiles) {
@@ -56,6 +63,14 @@ if (Meteor.users.find().count() === 0) {
     Meteor.settings.defaultProjects.map(project => addProject(project));
   } else {
     console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
+  }
+}
+
+// Initialize the StuffsCollection if empty.
+if (Stuffs.collection.find().count() === 0) {
+  if (Meteor.settings.defaultData) {
+    console.log('Creating default data.');
+    Meteor.settings.defaultData.forEach(data => addData(data));
   }
 }
 
