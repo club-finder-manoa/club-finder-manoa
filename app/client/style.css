@@ -86,3 +86,35 @@ body .btn-primary {
   background-size: 100%;
   height: calc(100vh - 160px);
 }
+
+#signInPage {
+  background: url("images/landing-bottom.png") no-repeat bottom;
+  background-size: 100%;
+  height: calc(100vh - 160px);
+}
+
+/* Profile Template Page */
+
+#imgProfile{
+  position: relative;
+  top: 80px;
+  z-index: 1;
+}
+#profileName{
+  color: #2d8259;
+}
+
+#cardProfile{
+  padding-top: 150px;
+  height: 440px;
+  width: 600px;
+  margin-top: -70px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#profileTempBg{
+  background: url("images/landing-top.png") no-repeat;
+  background-size: 100%;
+}
+

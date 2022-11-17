@@ -15,6 +15,7 @@ import Projects from '../pages/Projects';
 import Profile from '../pages/Profile';
 import Filter from '../pages/Filter';
 import AddProject from '../pages/AddProject';
+import ProfileTemp from '../pages/ProfileTemp';
 import TempClubPage from '../pages/TempClubPage';
 
 /* Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -30,6 +31,7 @@ const App = () => (
         <Route path="/all-clubs" element={<ProtectedRoute><AllClubs /></ProtectedRoute>} />
         <Route path="/my-clubs" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/account" element={<ProtectedRoute><ProfileTemp /></ProtectedRoute>} />
         <Route path="/filter" element={<ProtectedRoute><Filter /></ProtectedRoute>} />
         <Route path="/addproject" element={<ProtectedRoute><AddProject /></ProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />

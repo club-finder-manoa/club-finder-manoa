@@ -5,6 +5,7 @@ import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { EnvelopeFill, KeyFill } from 'react-bootstrap-icons';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
 
 /*
@@ -38,41 +39,59 @@ const SignIn = () => {
   // console.log('render', error, redirect);
   // if correct authentication, redirect to page instead of login screen
   if (redirect) {
-    // Change this to "MyClubs" link when page is finished.
-    return (<Navigate to="/all-clubs" />); // TODO change to 'my clubs' when page is made
+    return (<Navigate to="/my-clubs" />);
   }
   // Otherwise return the Login form.
   return (
-    <Container id={PageIDs.signInPage}>
-      <Row className="justify-content-center">
-        <Col xs={9}>
-          <Col className="text-center">
-            <h2>Login to your account</h2>
-          </Col>
-          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
-            <Card>
-              <Card.Body>
-                <TextField id={ComponentIDs.signInFormEmail} name="email" placeholder="E-mail address" />
-                <TextField id={ComponentIDs.signInFormPassword} name="password" placeholder="Password" type="password" />
-                <ErrorsField />
-                <SubmitField id={ComponentIDs.signInFormSubmit} />
-              </Card.Body>
-            </Card>
-          </AutoForm>
-          <Alert variant="secondary">
-            <Link to="/signup">Click here to Register</Link>
-          </Alert>
-          {error === '' ? (
-            ''
-          ) : (
-            <Alert variant="danger">
-              <Alert.Heading>Login was not successful</Alert.Heading>
-              {error}
+    <div id={PageIDs.signInPage}>
+      <Container>
+        <Row className="justify-content-center mb-3">
+          <Col xs={5}>
+            <AutoForm schema={bridge} onSubmit={data => submit(data)}>
+              <Card className="mt-4" style={{ backgroundColor: '#256546', color: 'white' }}>
+                <Card.Body>
+                  <Col className="text-center">
+                    <h3><b>Login To Your Account</b></h3>
+                  </Col>
+                  <Row className="mt-4">
+                    <Col className="col-1 mt-1 ms-1">
+                      <EnvelopeFill style={{ fontSize: '25px', color: 'lightskyblue' }} />
+                    </Col>
+                    <Col className="mx-2">
+                      <TextField id={ComponentIDs.signInFormEmail} name="email" placeholder="UH Email" label="" />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col className="col-1 mt-1 ms-1">
+                      <KeyFill style={{ fontSize: '25px', color: 'gold' }} />
+                    </Col>
+                    <Col className="mx-2">
+                      <TextField id={ComponentIDs.signInFormPassword} name="password" placeholder="Password" type="password" label="" />
+                    </Col>
+                  </Row>
+                  <ErrorsField />
+                  <Col className="d-flex justify-content-center">
+                    <SubmitField id={ComponentIDs.signUpFormSubmit} className="my-2" value="Sign Up" />
+                  </Col>
+                </Card.Body>
+              </Card>
+            </AutoForm>
+            <Alert variant="secondary">
+              Not a member?&nbsp;
+              <Link to="/signup">Click here to Register</Link>
             </Alert>
-          )}
-        </Col>
-      </Row>
-    </Container>
+            {error === '' ? (
+              ''
+            ) : (
+              <Alert variant="danger">
+                <Alert.Heading>Login was not successful</Alert.Heading>
+                {error}
+              </Alert>
+            )}
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 
