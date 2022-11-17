@@ -15,7 +15,7 @@ class UsersCollection {
       savedClubs: { type: [String], optional: true },
       interests: { type: [String], optional: true },
       major: { type: String, optional: true },
-      adminStatus: { type: [String], optional: true }, // list of clubs that the user is an admin for
+      adminForClubs: { type: [String], optional: true }, // list of clubs that the user is an admin for
     }, { tracker: Tracker });
     // Ensure collection documents obey schema.
     this.collection.attachSchema(this.schema);
