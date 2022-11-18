@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { Trash } from 'react-bootstrap-icons';
+import { Users } from '../../api/users/Users';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-const UserListItem = ({ user, collection }) => {
+const UserListItem = ({ user }) => {
   const removeItem = (docID) => {
     console.log(`The item to remove is ${docID}`);
-    collection.remove(docID);
+    Users.collection.remove(docID);
   };
   return (
     <tr>
@@ -18,7 +19,7 @@ const UserListItem = ({ user, collection }) => {
         <Link to={`/edit/${user._id}`}>Edit</Link>
       </td>
       <td>
-        <td><Button variant="danger" onClick={() => removeItem(user._id)}><Trash /></Button></td>
+        <Button variant="danger" onClick={() => removeItem(user._id)}><Trash /></Button>
       </td>
       <td>
         <Link to={`/edit/${user._id}`}>Edit</Link>
@@ -34,8 +35,6 @@ UserListItem.propTypes = {
     adminForClubs: PropTypes.arrayOf(String),
     _id: PropTypes.string,
   }).isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  collection: PropTypes.object.isRequired,
 };
 
 export default UserListItem;

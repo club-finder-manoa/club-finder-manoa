@@ -1,6 +1,6 @@
 {
 
-  "TODO": "WHENEVER CHANGING THIS FILE, COPY AND PASTE CHANGES TO .deploy/settings.sample.json WHEN COMPLETE",
+  "TODO": "WHENEVER CHANGING THIS FILE, COPY AND PASTE CHANGES TO .deploy/settings.sample.json TOO, SO DEPLOYMENT DATA AND LOCAL DATA ARE THE SAME",
 
   "monti": {
     "appId": "M9ZSMoPc8qvFLo8Tw",
@@ -35,84 +35,6 @@
     }
   ],
 
-  "clubs": [
-    {
-      "clubName": "Accounting Club",
-      "clubType": "Academic/Professional",
-      "mainPhoto": "https://images.squarespace-cdn.com/content/v1/5f2371858296275165c4fed8/1598171416577-93L1YDJ9YHL3W7F5AMCA/New-AC-Logo-1024x1024.png?format=1500w",
-      "description": "In cooperation with the School of Accountancy, we provide additional perspectives and supplemental information concerning public, private, and governmental accounting. Our main goal is to promote the professional and personal development of our members through socials, community service, professional interactions, workshops, and office tours. We continue to rank high among the largest student organizations within the Shidler College of Business and welcome students from all academic disciplines.",
-      "tags": ["Math", "Accounting", "Business"],
-      "relevantMajors": ["Accounting", "Finance", "Business"],
-      "contactName": "Rana Mejes",
-      "contactEmail": "mejesrs@hawaii.edu"
-    },
-    {
-      "clubName": "AIKIDO at UHM",
-      "clubType": "Sports/Leisure",
-      "mainPhoto": "images/aikido_club.gif",
-      "description": "We practice Aikido.",
-      "tags": ["Sports", "Fitness"],
-      "contactName": "Timothy Halliday",
-      "contactEmail": "halliday@hawaii.edu"
-    },
-    {
-      "clubName": "Alpha Gamma Delta Delta Sigma",
-      "clubType": "Fraternity/Sorority",
-      "mainPhoto": "https://static.wixstatic.com/media/2468d8_9213049cdd0f4cb187b8abd5672bdfe8~mv2.png/v1/fill/w_286,h_323,al_c,lg_1,q_85,enc_auto/Alpha_Gamma_Delta_crest.png",
-      "description": "Alpha Gamma Delta is an international women's fraternity that promotes academic excellence, philanthropic giving, ongoing leadership and personal development and above all, a spirit of loving sisterhood.",
-      "tags": ["Sorority", "Fraternity"],
-      "contactName": "Ashley Terrell",
-      "contactEmail": "amterrel@hawaii.edu"
-    },
-    {
-      "clubName": "American Association of University Women at UH Manoa",
-      "clubType": "Political",
-      "mainPhoto": "https://manoa.hawaii.edu/undergrad/civic-engage/wp-content/uploads/2021/10/AAUW-at-UHM-logo-1-1024x538.png",
-      "description": "The mission of our RIO is to promote the values of AAUW on the UHM campus and in the community; we are working towards equality in society by providing the tools necessary for women to gain economic security, to pursue their education, and advocate for women's rights.",
-      "tags": ["Politics"],
-      "contactName": "Ronja Steinbach",
-      "contactEmail": "ronja36@hawaii.edu"
-    },
-    {
-      "clubName": "American Indian Science and Engineering Society at University of Hawai'i",
-      "clubType": "Academic/Professional",
-      "mainPhoto": "http://aiseshawaii.weebly.com/uploads/3/9/3/6/39362525/copy-of-aises-logo-1_orig.png",
-      "description": "The American Indian Science and Engineering Society (AISES) is a national nonprofit organization focused on substantially increasing the representation of Indigenous peoples of North America and the Pacific Islands in science, technology, engineering, and math (STEM) studies and careers.",
-      "tags": ["Science", "American Indian"],
-      "contactName": "Kahiamaikalani Walker",
-      "contactEmail": "kmmw@hawaii.edu"
-    },
-    {
-      "clubName": "American Institute of Architecture Students Hawaii Chapter",
-      "clubType": "Academic/Professional",
-      "mainPhoto": "http://images.squarespace-cdn.com/content/v1/57e48324579fb35bcfcd4bd6/1564879527999-KJRJE2DJIJC8SDNZOYPM/aias+w+white.png?format=1500w",
-      "description": "The American Institute of Architecture Students (AIAS) is an independent, nonprofit, student-run organization dedicated to providing unmatched progressive programs, information, and resources on issues critical to architecture and the experience of education. The AIAS aims to promote excellence in architectural education, training, and practice; to foster an appreciation of architecture and related disciplines; to enrich communities in a spirit of collaboration; and to organize students and combine their efforts to advance the art and science of architecture.",
-      "tags": ["Architecture"],
-      "relevantMajors": ["Architecture"],
-      "contactName": "Beau Nakamori",
-      "contactEmail": "beaus@hawaii.edu"
-    },
-    {
-      "clubName": "American Library Association Student Chapter",
-      "clubType": "Academic/Professional",
-      "mainPhoto": "https://www.ala.org/aboutala/sites/all/themes/alaV2/logo.png",
-      "description": "The American Library Association Student Chapter at the University of Hawai‘i at Mānoa Library and Information Science Program is committed to celebrating and promoting the library and information science profession. Our members plan events and activities that encourage professional development, service to the library community, fundraising, socializing, and networking. We are always looking for new members and new perspectives, and we invite all interested to bring your skills, energy and enthusiasm to our chapter!",
-      "tags": ["Library"],
-      "contactName": "Kylee Munro",
-      "contactEmail": "kjmunro@hawaii.edu"
-    },
-    {
-      "clubName": "American Marketing Association",
-      "clubType": "Academic/Professional",
-      "mainPhoto": "images/AmericanMarketingAssociation.png",
-      "description": "We are a marketing club that strives to push our members to grow socially, philanthropically, and professionally. ",
-      "tags": ["Marketing"],
-      "relevantMajors": ["Marketing"],
-      "contactName": "Aaron Goo",
-      "contactEmail": "aarong2@hawaii.edu"
-    }
-  ],
-
-  "loadAssetsFile":  false
+  "loadAssetsFile":  true
 
 }

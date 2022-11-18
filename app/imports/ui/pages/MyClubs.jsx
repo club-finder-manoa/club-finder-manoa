@@ -4,6 +4,7 @@ import { Badge, Container, Card, Image, Row, Col } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Clubs } from '../../api/clubs/Clubs';
+import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
@@ -19,7 +20,7 @@ const MakeCard = ({ club }) => (
       </Card.Header>
       <Card.Body>
         <Card.Text>
-          {club.tags.map((tag, index) => <Badge key={index} bg="info">{tag}</Badge>)}
+          {club.tags ? club.tags.map((tag, index) => <Badge key={index} bg="info">{tag}</Badge>) : ''}
         </Card.Text>
         <Card.Text>
           <a style={{ color: 'black' }} href="/TempClubPage">More Information</a>
@@ -43,10 +44,20 @@ const MyClubs = () => {
 
   const { ready, clubs } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
+    let loaded = false;
     const sub = Meteor.subscribe(Clubs.userPublicationName);
-    const clubList = Clubs.collection.find().fetch();
+    const sub2 = Meteor.subscribe(Users.userPublicationName);
+    const clubList = [];
+    if (sub.ready() && sub2.ready()) {
+      const myClubs = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].savedClubs;
+      // eslint-disable-next-line no-restricted-syntax
+      for (const club of myClubs) {
+        clubList.push(Clubs.collection.find({ clubName: club }).fetch()[0]);
+      }
+      loaded = true;
+    }
     return {
-      ready: sub.ready(),
+      ready: loaded,
       clubs: clubList,
     };
   }, []);
@@ -63,7 +74,6 @@ const MyClubs = () => {
       </Row>
       <Row xs={1} md={2} lg={4} className="g-2">
         {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
-
       </Row>
     </Container>
   ) : <LoadingSpinner />;

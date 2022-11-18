@@ -19,7 +19,7 @@ const MakeCard = ({ club }) => (
       </Card.Header>
       <Card.Body>
         <Card.Text>
-          {club.tags.map((tag, index) => <Badge key={index} bg="info">{tag}</Badge>)}
+          {club.tags ? club.tags.map((tag, index) => <Badge key={index} bg="info">{tag}</Badge>) : ''}
         </Card.Text>
         <Card.Text>
           <a style={{ color: 'black' }} href="/TempClubPage">More Information</a>
