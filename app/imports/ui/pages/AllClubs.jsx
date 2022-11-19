@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Badge, Container, Card, Image, Row, Col } from 'react-bootstrap';
+import { Badge, Container, Card, Image, Row, Col, Button } from 'react-bootstrap';
+import { List, Grid } from 'react-bootstrap-icons';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Clubs } from '../../api/clubs/Clubs';
@@ -11,23 +12,31 @@ import { PageIDs } from '../utilities/ids';
 /* Component for layout out a club Card. */
 const MakeCard = ({ club }) => (
   <Col>
-    <Card className="h-100">
-      <Card.Header>
-        <Image src={club.mainPhoto} width={50} />
-        <Card.Title><b>{club.clubName}</b></Card.Title>
-        <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
-      </Card.Header>
-      <Card.Body>
-        <Card.Text>
-          {club.tags ? club.tags.map((tag, index) => <Badge key={index} bg="info">{tag}</Badge>) : ''}
-        </Card.Text>
-        <Card.Text>
-          <a style={{ color: 'black' }} href="/TempClubPage">More Information</a>
-        </Card.Text>
-      </Card.Body>
-    </Card>
+    <a style={{ color: 'black', textDecoration: 'none' }} href="/TempClubPage">
+      <Card className="h-100">
+        <Card.Body>
+          {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
+          <Card.Title><b>{club.clubName}</b></Card.Title>
+          <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
+          {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="mt-2" bg="info">{tag}</Badge>) : ''}
+        </Card.Body>
+      </Card>
+    </a>
   </Col>
 );
+
+const viewButtonStyleSelected = {
+  backgroundColor: '#388a60',
+  borderWidth: 0,
+  borderRadius: '25px',
+  color: 'white',
+};
+
+const viewButtonStyle = {
+  backgroundColor: 'white',
+  borderWidth: 0,
+  color: 'grey',
+};
 
 MakeCard.propTypes = {
   club: PropTypes.shape({
@@ -40,6 +49,7 @@ MakeCard.propTypes = {
 
 /* Renders the Profile Collection as a set of Cards. */
 const AllClubs = () => {
+  const [cardView, setCardView] = useState(true);
 
   const { ready, clubs } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
@@ -50,23 +60,39 @@ const AllClubs = () => {
       clubs: clubList,
     };
   }, []);
-  // There is a potential race condition. We might not be ready at this point.
-  // Need to ensure that getProfileData doesn't throw an error on line 18.
-  return ready ? (
+
+  function displayClubs() {
+    if (cardView) {
+      return (
+        <Row xs={1} md={2} lg={4} className="g-2">
+          {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
+        </Row>
+      );
+    }
+    return 'hi there';
+  }
+
+  return (
     <Container id={PageIDs.profilesPage} style={pageStyle}>
       <Row className="align-middle text-center">
+        <Col />
         <Col className="d-flex flex-column justify-content-center">
           <h1>
             <b>All Clubs</b>
           </h1>
         </Col>
+        <Col className="text-end my-auto">
+          <Button style={cardView ? viewButtonStyle : viewButtonStyleSelected} onClick={() => setCardView(false)}>
+            <List /> List View
+          </Button>
+          <Button style={cardView ? viewButtonStyleSelected : viewButtonStyle} onClick={() => setCardView(true)}>
+            <Grid /> Card View
+          </Button>
+        </Col>
       </Row>
-      <Row xs={1} md={2} lg={4} className="g-2">
-        {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
-
-      </Row>
+      {ready ? displayClubs() : <LoadingSpinner />}
     </Container>
-  ) : <LoadingSpinner />;
+  );
 };
 
 export default AllClubs;
