@@ -10,21 +10,70 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
 
+const viewButtonStyleSelected = {
+  backgroundColor: '#388a60',
+  borderWidth: 0,
+  borderRadius: '25px',
+  color: 'white',
+};
+
+const viewButtonStyle = {
+  backgroundColor: 'white',
+  borderWidth: 0,
+  borderRadius: '25px',
+  color: 'grey',
+};
+
+const expandDescButtonStyle = {
+  backgroundColor: 'white',
+  borderWidth: 0,
+  color: 'grey',
+  fontSize: '16px',
+  padding: 0,
+};
+
 /* Component for club card. */
-const MakeCard = ({ club }) => (
-  <Col>
-    <a style={{ color: 'black', textDecoration: 'none' }} href="/TempClubPage">
+const MakeCard = ({ club }) => {
+  const [expandedDesc, setExpandedDesc] = useState(false);
+
+  const shortDesc = () => {
+    // eslint-disable-next-line for-direction
+    for (let i = 0; i < club.description.length; i++) {
+      if ((club.description[i] === ' ' || club.description[i] === ',') && i > 70) {
+        return `${club.description.substring(0, i)}...`;
+      }
+    }
+    return club.description;
+  };
+
+  return (
+    <Col>
       <Card className="h-100">
-        <Card.Body>
-          {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
-          <Card.Title><b>{club.clubName}</b></Card.Title>
-          <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
-          {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="mt-2" bg="info">{tag}</Badge>) : ''}
+        <a style={{ color: 'black', textDecoration: 'none' }} href="/TempClubPage">
+          <Card.Header>
+            {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
+            <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
+            <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
+            {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="mt-2" bg="info">{tag}</Badge>) : ''}
+          </Card.Header>
+        </a>
+        <Card.Body className="p-2">
+          <Row className="mx-2">
+            {expandedDesc ? club.description : shortDesc()}
+          </Row>
+          {shortDesc().length < club.description.length ? (
+            <Row className="mx-2 align-text-bottom">
+              <Button className="text-end" style={expandDescButtonStyle} onClick={() => (expandedDesc ? setExpandedDesc(false) : setExpandedDesc(true))}>
+                <b>{expandedDesc ? '-' : '+'}</b>
+              </Button>
+            </Row>
+          )
+            : ''}
         </Card.Body>
       </Card>
-    </a>
-  </Col>
-);
+    </Col>
+  );
+};
 
 MakeCard.propTypes = {
   club: PropTypes.shape({
@@ -32,6 +81,7 @@ MakeCard.propTypes = {
     clubName: PropTypes.string,
     clubType: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
   }).isRequired,
 };
 
@@ -57,20 +107,6 @@ ClubTableItem.propTypes = {
     clubType: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
-};
-
-const viewButtonStyleSelected = {
-  backgroundColor: '#388a60',
-  borderWidth: 0,
-  borderRadius: '25px',
-  color: 'white',
-};
-
-const viewButtonStyle = {
-  backgroundColor: 'white',
-  borderWidth: 0,
-  borderRadius: '25px',
-  color: 'grey',
 };
 
 /* Renders the Profile Collection as a set of Cards. */
