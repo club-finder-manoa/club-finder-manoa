@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Badge, Container, Card, Image, Row, Col, Button, Table, DropdownButton, Dropdown, Accordion } from 'react-bootstrap';
-import { List, Grid, ChevronDown, ChevronUp } from 'react-bootstrap-icons';
+import { List, Grid, ChevronDown, ChevronUp, CaretUpFill, CaretDownFill } from 'react-bootstrap-icons';
 import { useTracker } from 'meteor/react-meteor-data';
+import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Clubs } from '../../api/clubs/Clubs';
@@ -38,6 +39,14 @@ const textBoxStyle = {
   paddingTop: '4px',
   paddingBottom: '4px',
   paddingRight: '8px',
+};
+
+const sortListButtonStyle = {
+  backgroundColor: 'transparent',
+  borderWidth: 0,
+  color: 'grey',
+  fontSize: '14px',
+  padding: 0,
 };
 
 /* Component for club card. */
@@ -165,6 +174,12 @@ const AllClubs = () => {
   const [description, setDescription] = useState('');
   const [filteredClubs, setFilteredClubs] = useState([]);
 
+  // values: na = name ascending
+  //         nd = name descending
+  //         ta = type ascending
+  //         td = type descending
+  const [sortBy, setSortBy] = useState('na');
+
   const { ready, clubs } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub = Meteor.subscribe(Clubs.userPublicationName);
@@ -185,6 +200,20 @@ const AllClubs = () => {
   // for filtering
   useEffect(() => {
     let filtered = clubs;
+    switch (sortBy) {
+    case 'nd':
+      filtered = _.sortBy(filtered, 'clubName').reverse();
+      break;
+    case 'ta':
+      filtered = _.sortBy(filtered, 'clubType');
+      break;
+    case 'td':
+      filtered = _.sortBy(filtered, 'clubType').reverse();
+      break;
+    default:
+      filtered = _.sortBy(filtered, 'clubName');
+      break;
+    }
     if (clubName) {
       filtered = filtered.filter(function (obj) { return obj.clubName.toLowerCase().includes(clubName.toLowerCase()); });
     }
@@ -203,7 +232,7 @@ const AllClubs = () => {
       filtered = filtered.filter(function (obj) { return obj.clubType.includes(clubType); });
     }
     setFilteredClubs(filtered);
-  }, [clubName, description, interest, clubType]);
+  }, [clubName, description, interest, clubType, sortBy]);
 
   // displays clubs as cards or as a list
   function displayClubs() {
@@ -218,8 +247,26 @@ const AllClubs = () => {
       <Table striped bordered>
         <thead style={{ position: 'sticky', top: 0, backgroundColor: 'white' }}>
           <tr>
-            <th>Name</th>
-            <th>Type</th>
+            <th>
+              <Row className="ms-0">
+                Name
+                <Col>
+                  <Button style={sortListButtonStyle} onClick={() => (sortBy === 'na' ? setSortBy('nd') : setSortBy('na'))}>
+                    {sortBy === 'nd' ? <CaretUpFill /> : <CaretDownFill />}
+                  </Button>
+                </Col>
+              </Row>
+            </th>
+            <th>
+              <Row className="ms-0">
+                Type
+                <Col>
+                  <Button style={sortListButtonStyle} onClick={() => (sortBy === 'ta' ? setSortBy('td') : setSortBy('ta'))}>
+                    {sortBy === 'td' ? <CaretUpFill /> : <CaretDownFill />}
+                  </Button>
+                </Col>
+              </Row>
+            </th>
             <th>Tags</th>
           </tr>
         </thead>
