@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, TextField, LongTextField, SubmitField, ErrorsField, SelectField } from 'uniforms-bootstrap5';
-import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
@@ -29,7 +28,7 @@ const makeSchema = (allInterests, allParticipants) => new SimpleSchema({
 const AddProject = () => {
 
   /* On submit, insert the data. */
-  const submit = (data, formRef) => {
+  const submit = () => {
     /*
     Meteor.call(addProjectMethod, data, (error) => {
       if (error) {

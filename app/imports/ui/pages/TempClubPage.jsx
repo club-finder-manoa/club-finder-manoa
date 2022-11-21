@@ -12,7 +12,11 @@ const TempClubPage = () => (
       <Col xs={8} className="d-flex flex-column justify-content-center">
         <h1>Accounting Club</h1>
         <p>Academic/Professional</p>
-        <p>In cooperation with the School of Accountancy, we provide additional perspectives and supplemental information concerning public, private, and governmental accounting. Our main goal is to promote the professional and personal development of our members through socials, community service, professional interactions, workshops, and office tours. We continue to rank high among the largest student organizations within the Shidler College of Business and welcome students from all academic disciplines.</p>
+        <p>
+          In cooperation with the School of Accountancy, we provide additional perspectives and supplemental information concerning public, private, and governmental accounting.
+          Our main goal is to promote the professional and personal development of our members through socials, community service, professional interactions, workshops, and office
+          tours. We continue to rank high among the largest student organizations within the Shidler College of Business and welcome students from all academic disciplines.
+        </p>
       </Col>
     </Row>
 

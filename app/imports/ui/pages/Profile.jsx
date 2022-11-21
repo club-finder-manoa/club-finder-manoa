@@ -1,7 +1,6 @@
 import React from 'react';
 import { AutoForm, TextField, LongTextField, SelectField, SubmitField } from 'uniforms-bootstrap5';
 import { Container, Col, Card, Row } from 'react-bootstrap';
-import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
@@ -31,7 +30,7 @@ const makeSchema = (allInterests, allProjects) => new SimpleSchema({
 const Profile = () => {
 
   /* On submit, insert the data. */
-  const submit = (data) => {
+  const submit = () => {
     /*
     Meteor.call(updateProfileMethod, data, (error) => {
       if (error) {
