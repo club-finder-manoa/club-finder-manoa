@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Badge, Container, Card, Image, Row, Col, Button, Table, DropdownButton, Dropdown } from 'react-bootstrap';
-import { List, Grid, CaretDownFill, CaretUpFill } from 'react-bootstrap-icons';
+import { Badge, Container, Card, Image, Row, Col, Button, Table, DropdownButton, Dropdown, Accordion } from 'react-bootstrap';
+import { List, Grid, ChevronDown, ChevronUp } from 'react-bootstrap-icons';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -31,8 +31,9 @@ const expandDescButtonStyle = {
 };
 
 const textBoxStyle = {
-  borderRadius: '10px',
-  borderWidth: '1px',
+  borderRadius: '8px',
+  borderWidth: '1.5px',
+  borderColor: 'lightgrey',
   paddingLeft: '8px',
   paddingTop: '4px',
   paddingBottom: '4px',
@@ -61,7 +62,7 @@ const MakeCard = ({ club }) => {
             {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
             <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
-            {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="mt-2" bg="info">{tag}</Badge>) : ''}
+            {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="mt-2 rounded-pill" bg="info">{tag}</Badge>) : ''}
           </Card.Header>
         </a>
         <Card.Body className="p-2">
@@ -71,7 +72,7 @@ const MakeCard = ({ club }) => {
           {shortDesc().length < club.description.length ? (
             <Row className="mx-2 align-text-bottom">
               <Button className="text-end" style={expandDescButtonStyle} onClick={() => (expandedDesc ? setExpandedDesc(false) : setExpandedDesc(true))}>
-                {expandedDesc ? <CaretUpFill /> : <CaretDownFill />}
+                {expandedDesc ? <ChevronUp /> : <ChevronDown />}
               </Button>
             </Row>
           )
@@ -128,7 +129,7 @@ const ClubTableItem = ({ club }) => {
               {shortDesc().length < club.description.length ? (
                 <Col className="col-1 d-flex justify-content-end">
                   <Button style={expandDescButtonStyle} onClick={() => (expandedDesc ? setExpandedDesc(false) : setExpandedDesc(true))}>
-                    {expandedDesc ? <CaretUpFill /> : <CaretDownFill />}
+                    {expandedDesc ? <ChevronUp /> : <ChevronDown />}
                   </Button>
                 </Col>
               ) : '' }
@@ -139,7 +140,7 @@ const ClubTableItem = ({ club }) => {
       </td>
       <td>{club.clubType}</td>
       <td>
-        {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="my-auto" bg="info">{tag}</Badge>) : ''}
+        {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="my-auto rounded-pill" bg="info">{tag}</Badge>) : ''}
       </td>
     </tr>
   );
@@ -245,91 +246,98 @@ const AllClubs = () => {
           </Button>
         </Col>
       </Row>
-      <Row className="pt-2 px-3 pb-4">
-        <Col className="d-flex justify-content-center">
-          <label htmlFor="Search by name">
-            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-              Name
-            </Col>
-            <input
-              type="text"
-              className="shadow-sm"
-              style={textBoxStyle}
-              placeholder="Enter Club Name"
-              onChange={e => setClubName(e.target.value)}
-            />
-          </label>
-        </Col>
-        <Col className="d-flex justify-content-center">
-          <label htmlFor="Search by description">
-            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-              Description
-            </Col>
-            <input
-              type="text"
-              className="shadow-sm"
-              style={textBoxStyle}
-              placeholder="Enter Club Description"
-              onChange={e => setDescription(e.target.value)}
-            />
-          </label>
-        </Col>
-        <Col className="d-flex justify-content-center">
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label htmlFor="Search by type">
-            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-              Type
-            </Col>
-            <DropdownButton
-              id="filterDropdown"
-              variant="secondary"
-              title={clubType === '' ? 'Select a Club Type' : clubType}
-              onSelect={(e) => setClubType(e)}
-            >
-              <Dropdown.Item eventKey="">Any</Dropdown.Item>
-              <Dropdown.Item eventKey="Academic/Professional">Academic/Professional</Dropdown.Item>
-              <Dropdown.Item eventKey="Ethnic/Cultural">Ethnic/Cultural</Dropdown.Item>
-              <Dropdown.Item eventKey="Fraternity/Sorority">Fraternity/Sorority</Dropdown.Item>
-              <Dropdown.Item eventKey="Honorary Society">Honorary Society</Dropdown.Item>
-              <Dropdown.Item eventKey="Leisure/Recreational">Leisure/Recreational</Dropdown.Item>
-              <Dropdown.Item eventKey="Political">Political</Dropdown.Item>
-              <Dropdown.Item eventKey="Service">Service</Dropdown.Item>
-              <Dropdown.Item eventKey="Spiritual/Religious">Spiritual/Religious</Dropdown.Item>
-              <Dropdown.Item eventKey="Sports/Leisure">Sports/Leisure</Dropdown.Item>
-              <Dropdown.Item eventKey="Student Affairs">Student Affairs</Dropdown.Item>
-            </DropdownButton>
-          </label>
-        </Col>
-        <Col className="d-flex justify-content-center">
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label htmlFor="Search by interest">
-            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-              Tags
-            </Col>
-            <DropdownButton
-              id="filterDropdown"
-              variant="secondary"
-              title={interest === '' ? 'Select an Interest' : interest}
-              onSelect={(e) => setInterest(e)}
-            >
-              <Dropdown.Item eventKey="">Any</Dropdown.Item>
-              <Dropdown.Item eventKey="Accounting">Accounting</Dropdown.Item>
-              <Dropdown.Item eventKey="American Indian">American Indian</Dropdown.Item>
-              <Dropdown.Item eventKey="Architecture">Architecture</Dropdown.Item>
-              <Dropdown.Item eventKey="Business">Business</Dropdown.Item>
-              <Dropdown.Item eventKey="Fitness">Fitness</Dropdown.Item>
-              <Dropdown.Item eventKey="Fraternity">Fraternity</Dropdown.Item>
-              <Dropdown.Item eventKey="Library">Library</Dropdown.Item>
-              <Dropdown.Item eventKey="Marketing">Marketing</Dropdown.Item>
-              <Dropdown.Item eventKey="Math">Math</Dropdown.Item>
-              <Dropdown.Item eventKey="Politics">Politics</Dropdown.Item>
-              <Dropdown.Item eventKey="Science">Science</Dropdown.Item>
-              <Dropdown.Item eventKey="Sorority">Sorority</Dropdown.Item>
-              <Dropdown.Item eventKey="Sports">Sports</Dropdown.Item>
-            </DropdownButton>
-          </label>
-        </Col>
-      </Row>
+      <Accordion className="mb-3">
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>
+            Search Options
+          </Accordion.Header>
+          <Accordion.Body>
+            <Row className="px-3 pb-3">
+              <Col className="d-flex justify-content-center">
+                <label htmlFor="Search by name">
+                  <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+                    Name
+                  </Col>
+                  <input
+                    type="text"
+                    style={textBoxStyle}
+                    placeholder="Enter Club Name"
+                    onChange={e => setClubName(e.target.value)}
+                  />
+                </label>
+              </Col>
+              <Col className="d-flex justify-content-center">
+                <label htmlFor="Search by description">
+                  <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+                    Description
+                  </Col>
+                  <input
+                    type="text"
+                    style={textBoxStyle}
+                    placeholder="Enter Club Description"
+                    onChange={e => setDescription(e.target.value)}
+                  />
+                </label>
+              </Col>
+              <Col className="d-flex justify-content-center">
+                {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                <label htmlFor="Search by type">
+                  <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+                    Type
+                  </Col>
+                  <DropdownButton
+                    id="filterDropdown"
+                    variant="secondary"
+                    title={clubType === '' ? 'Select a Club Type' : clubType}
+                    onSelect={(e) => setClubType(e)}
+                  >
+                    <Dropdown.Item eventKey="">Any</Dropdown.Item>
+                    <Dropdown.Item eventKey="Academic/Professional">Academic/Professional</Dropdown.Item>
+                    <Dropdown.Item eventKey="Ethnic/Cultural">Ethnic/Cultural</Dropdown.Item>
+                    <Dropdown.Item eventKey="Fraternity/Sorority">Fraternity/Sorority</Dropdown.Item>
+                    <Dropdown.Item eventKey="Honorary Society">Honorary Society</Dropdown.Item>
+                    <Dropdown.Item eventKey="Leisure/Recreational">Leisure/Recreational</Dropdown.Item>
+                    <Dropdown.Item eventKey="Political">Political</Dropdown.Item>
+                    <Dropdown.Item eventKey="Service">Service</Dropdown.Item>
+                    <Dropdown.Item eventKey="Spiritual/Religious">Spiritual/Religious</Dropdown.Item>
+                    <Dropdown.Item eventKey="Sports/Leisure">Sports/Leisure</Dropdown.Item>
+                    <Dropdown.Item eventKey="Student Affairs">Student Affairs</Dropdown.Item>
+                  </DropdownButton>
+                </label>
+              </Col>
+              <Col className="d-flex justify-content-center">
+                {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                <label htmlFor="Search by interest">
+                  <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+                    Tags
+                  </Col>
+                  <DropdownButton
+                    id="filterDropdown"
+                    variant="secondary"
+                    title={interest === '' ? 'Select an Interest' : interest}
+                    onSelect={(e) => setInterest(e)}
+                  >
+                    <Dropdown.Item eventKey="">Any</Dropdown.Item>
+                    <Dropdown.Item eventKey="Accounting">Accounting</Dropdown.Item>
+                    <Dropdown.Item eventKey="American Indian">American Indian</Dropdown.Item>
+                    <Dropdown.Item eventKey="Architecture">Architecture</Dropdown.Item>
+                    <Dropdown.Item eventKey="Business">Business</Dropdown.Item>
+                    <Dropdown.Item eventKey="Fitness">Fitness</Dropdown.Item>
+                    <Dropdown.Item eventKey="Fraternity">Fraternity</Dropdown.Item>
+                    <Dropdown.Item eventKey="Library">Library</Dropdown.Item>
+                    <Dropdown.Item eventKey="Marketing">Marketing</Dropdown.Item>
+                    <Dropdown.Item eventKey="Math">Math</Dropdown.Item>
+                    <Dropdown.Item eventKey="Politics">Politics</Dropdown.Item>
+                    <Dropdown.Item eventKey="Science">Science</Dropdown.Item>
+                    <Dropdown.Item eventKey="Sorority">Sorority</Dropdown.Item>
+                    <Dropdown.Item eventKey="Sports">Sports</Dropdown.Item>
+                  </DropdownButton>
+                </label>
+              </Col>
+            </Row>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
       {ready ? displayClubs() : <LoadingSpinner />}
     </Container>
   );
