@@ -71,7 +71,7 @@ const SignIn = () => {
                   </Row>
                   <ErrorsField />
                   <Col className="d-flex justify-content-center">
-                    <SubmitField id={ComponentIDs.signUpFormSubmit} className="my-2" value="Sign Up" />
+                    <SubmitField id={ComponentIDs.signInFormSubmit} className="my-2" value="Sign In" />
                   </Col>
                 </Card.Body>
               </Card>
