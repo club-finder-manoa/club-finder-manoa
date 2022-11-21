@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Badge, Container, Card, Image, Row, Col, Button, Table, DropdownButton, Dropdown } from 'react-bootstrap';
-import { List, Grid } from 'react-bootstrap-icons';
+import { List, Grid, CaretDownFill, CaretUpFill } from 'react-bootstrap-icons';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -23,11 +23,11 @@ const viewButtonStyle = {
 };
 
 const expandDescButtonStyle = {
-  backgroundColor: 'white',
+  backgroundColor: 'transparent',
   borderWidth: 0,
   color: 'grey',
-  fontSize: '16px',
-  padding: 0,
+  fontSize: '18px',
+  padding: 2,
 };
 
 const textBoxStyle = {
@@ -71,7 +71,7 @@ const MakeCard = ({ club }) => {
           {shortDesc().length < club.description.length ? (
             <Row className="mx-2 align-text-bottom">
               <Button className="text-end" style={expandDescButtonStyle} onClick={() => (expandedDesc ? setExpandedDesc(false) : setExpandedDesc(true))}>
-                <b>{expandedDesc ? '-' : '+'}</b>
+                {expandedDesc ? <CaretUpFill /> : <CaretDownFill />}
               </Button>
             </Row>
           )
@@ -93,19 +93,57 @@ MakeCard.propTypes = {
 };
 
 /* Component for club table item */
-const ClubTableItem = ({ club }) => (
-  <tr>
-    <td style={{ fontWeight: 600 }}>
-      <Link to="/TempClubPage" style={{ textDecoration: 'none', color: 'black' }}>
-        {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}&nbsp;&nbsp;&nbsp;{club.clubName}
-      </Link>
-    </td>
-    <td>{club.clubType}</td>
-    <td>
-      {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="my-auto" bg="info">{tag}</Badge>) : ''}
-    </td>
-  </tr>
-);
+const ClubTableItem = ({ club }) => {
+  const [expandedDesc, setExpandedDesc] = useState(false);
+
+  const shortDesc = () => {
+    // eslint-disable-next-line for-direction
+    for (let i = 0; i < club.description.length; i++) {
+      if ((club.description[i] === ' ' || club.description[i] === ',') && i > 50) {
+        return `${club.description.substring(0, i)}...`;
+      }
+    }
+    return club.description;
+  };
+
+  return (
+    <tr>
+      <td>
+        <Row>
+          <Col className="col-1 me-2">
+            <Link to="/TempClubPage" style={{ textDecoration: 'none', color: 'black' }}>
+              {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
+            </Link>
+          </Col>
+          <Col>
+            <Row>
+              <Link to="/TempClubPage" style={{ textDecoration: 'none', color: 'black', fontWeight: 600 }}>
+                {club.clubName}
+              </Link>
+            </Row>
+            <Row>
+              <Col>
+                {expandedDesc ? club.description : shortDesc()}
+              </Col>
+              {shortDesc().length < club.description.length ? (
+                <Col className="col-1 d-flex justify-content-end">
+                  <Button style={expandDescButtonStyle} onClick={() => (expandedDesc ? setExpandedDesc(false) : setExpandedDesc(true))}>
+                    {expandedDesc ? <CaretUpFill /> : <CaretDownFill />}
+                  </Button>
+                </Col>
+              ) : '' }
+            </Row>
+
+          </Col>
+        </Row>
+      </td>
+      <td>{club.clubType}</td>
+      <td>
+        {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="my-auto" bg="info">{tag}</Badge>) : ''}
+      </td>
+    </tr>
+  );
+};
 
 ClubTableItem.propTypes = {
   club: PropTypes.shape({
@@ -113,6 +151,7 @@ ClubTableItem.propTypes = {
     clubName: PropTypes.string,
     clubType: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.string,
   }).isRequired,
 };
 
