@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Badge, Container, Card, Image, Row, Col, Button, Table } from 'react-bootstrap';
+import { Badge, Container, Card, Image, Row, Col, Button, Table, DropdownButton, Dropdown } from 'react-bootstrap';
 import { List, Grid } from 'react-bootstrap-icons';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -11,16 +11,14 @@ import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
 
 const viewButtonStyleSelected = {
-  backgroundColor: '#388a60',
+  backgroundColor: '#2d8259',
   borderWidth: 0,
-  borderRadius: '25px',
   color: 'white',
 };
 
 const viewButtonStyle = {
   backgroundColor: 'white',
   borderWidth: 0,
-  borderRadius: '25px',
   color: 'grey',
 };
 
@@ -30,6 +28,15 @@ const expandDescButtonStyle = {
   color: 'grey',
   fontSize: '16px',
   padding: 0,
+};
+
+const textBoxStyle = {
+  borderRadius: '10px',
+  borderWidth: '1px',
+  paddingLeft: '8px',
+  paddingTop: '4px',
+  paddingBottom: '4px',
+  paddingRight: '8px',
 };
 
 /* Component for club card. */
@@ -112,6 +119,11 @@ ClubTableItem.propTypes = {
 /* Renders the Profile Collection as a set of Cards. */
 const AllClubs = () => {
   const [cardView, setCardView] = useState(true);
+  const [interest, setInterest] = useState('');
+  const [clubType, setClubType] = useState('');
+  const [clubName, setClubName] = useState('');
+  const [description, setDescription] = useState('');
+  const [filteredClubs, setFilteredClubs] = useState([]);
 
   const { ready, clubs } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
@@ -123,11 +135,42 @@ const AllClubs = () => {
     };
   }, []);
 
+  // set clubs in filteredClubs when finished loading
+  useEffect(() => {
+    if (ready) {
+      setFilteredClubs(clubs);
+    }
+  }, [ready]);
+
+  // for filtering
+  useEffect(() => {
+    let filtered = clubs;
+    if (clubName) {
+      filtered = filtered.filter(function (obj) { return obj.clubName.toLowerCase().includes(clubName.toLowerCase()); });
+    }
+    if (description) {
+      filtered = filtered.filter(function (obj) { return obj.description.toLowerCase().includes(description.toLowerCase()); });
+    }
+    if (interest) {
+      filtered = filtered.filter(function (obj) {
+        if (obj.tags) {
+          return obj.tags.some(tag => tag.includes(interest));
+        }
+        return obj.tags != null;
+      });
+    }
+    if (clubType) {
+      filtered = filtered.filter(function (obj) { return obj.clubType.includes(clubType); });
+    }
+    setFilteredClubs(filtered);
+  }, [clubName, description, interest, clubType]);
+
+  // displays clubs as cards or as a list
   function displayClubs() {
     if (cardView) {
       return (
         <Row xs={1} md={2} lg={4} className="g-2">
-          {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
+          {filteredClubs.map((club, index) => <MakeCard key={index} club={club} />)}
         </Row>
       );
     }
@@ -141,7 +184,7 @@ const AllClubs = () => {
           </tr>
         </thead>
         <tbody>
-          {clubs.map((club) => <ClubTableItem key={club._id} club={club} />)}
+          {filteredClubs.map((club) => <ClubTableItem key={club._id} club={club} />)}
         </tbody>
       </Table>
     );
@@ -152,9 +195,7 @@ const AllClubs = () => {
       <Row className="align-middle text-center">
         <Col />
         <Col className="d-flex flex-column justify-content-center">
-          <h1>
-            <b>All Clubs</b>
-          </h1>
+          <h1><b>All Clubs</b></h1>
         </Col>
         <Col className="text-end my-auto">
           <Button style={cardView ? viewButtonStyleSelected : viewButtonStyle} onClick={() => setCardView(true)}>
@@ -163,6 +204,91 @@ const AllClubs = () => {
           <Button style={cardView ? viewButtonStyle : viewButtonStyleSelected} onClick={() => setCardView(false)}>
             <List /> List View
           </Button>
+        </Col>
+      </Row>
+      <Row className="pt-2 px-3 pb-4">
+        <Col className="d-flex justify-content-center">
+          <label htmlFor="Search by name">
+            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+              Name
+            </Col>
+            <input
+              type="text"
+              className="shadow-sm"
+              style={textBoxStyle}
+              placeholder="Enter Club Name"
+              onChange={e => setClubName(e.target.value)}
+            />
+          </label>
+        </Col>
+        <Col className="d-flex justify-content-center">
+          <label htmlFor="Search by description">
+            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+              Description
+            </Col>
+            <input
+              type="text"
+              className="shadow-sm"
+              style={textBoxStyle}
+              placeholder="Enter Club Description"
+              onChange={e => setDescription(e.target.value)}
+            />
+          </label>
+        </Col>
+        <Col className="d-flex justify-content-center">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label htmlFor="Search by type">
+            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+              Type
+            </Col>
+            <DropdownButton
+              id="filterDropdown"
+              variant="secondary"
+              title={clubType === '' ? 'Select a Club Type' : clubType}
+              onSelect={(e) => setClubType(e)}
+            >
+              <Dropdown.Item eventKey="">Any</Dropdown.Item>
+              <Dropdown.Item eventKey="Academic/Professional">Academic/Professional</Dropdown.Item>
+              <Dropdown.Item eventKey="Ethnic/Cultural">Ethnic/Cultural</Dropdown.Item>
+              <Dropdown.Item eventKey="Fraternity/Sorority">Fraternity/Sorority</Dropdown.Item>
+              <Dropdown.Item eventKey="Honorary Society">Honorary Society</Dropdown.Item>
+              <Dropdown.Item eventKey="Leisure/Recreational">Leisure/Recreational</Dropdown.Item>
+              <Dropdown.Item eventKey="Political">Political</Dropdown.Item>
+              <Dropdown.Item eventKey="Service">Service</Dropdown.Item>
+              <Dropdown.Item eventKey="Spiritual/Religious">Spiritual/Religious</Dropdown.Item>
+              <Dropdown.Item eventKey="Sports/Leisure">Sports/Leisure</Dropdown.Item>
+              <Dropdown.Item eventKey="Student Affairs">Student Affairs</Dropdown.Item>
+            </DropdownButton>
+          </label>
+        </Col>
+        <Col className="d-flex justify-content-center">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label htmlFor="Search by interest">
+            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+              Tags
+            </Col>
+            <DropdownButton
+              id="filterDropdown"
+              variant="secondary"
+              title={interest === '' ? 'Select an Interest' : interest}
+              onSelect={(e) => setInterest(e)}
+            >
+              <Dropdown.Item eventKey="">Any</Dropdown.Item>
+              <Dropdown.Item eventKey="Accounting">Accounting</Dropdown.Item>
+              <Dropdown.Item eventKey="American Indian">American Indian</Dropdown.Item>
+              <Dropdown.Item eventKey="Architecture">Architecture</Dropdown.Item>
+              <Dropdown.Item eventKey="Business">Business</Dropdown.Item>
+              <Dropdown.Item eventKey="Fitness">Fitness</Dropdown.Item>
+              <Dropdown.Item eventKey="Fraternity">Fraternity</Dropdown.Item>
+              <Dropdown.Item eventKey="Library">Library</Dropdown.Item>
+              <Dropdown.Item eventKey="Marketing">Marketing</Dropdown.Item>
+              <Dropdown.Item eventKey="Math">Math</Dropdown.Item>
+              <Dropdown.Item eventKey="Politics">Politics</Dropdown.Item>
+              <Dropdown.Item eventKey="Science">Science</Dropdown.Item>
+              <Dropdown.Item eventKey="Sorority">Sorority</Dropdown.Item>
+              <Dropdown.Item eventKey="Sports">Sports</Dropdown.Item>
+            </DropdownButton>
+          </label>
         </Col>
       </Row>
       {ready ? displayClubs() : <LoadingSpinner />}

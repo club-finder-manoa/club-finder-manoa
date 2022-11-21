@@ -118,3 +118,10 @@ body .btn-primary {
   background-size: 100%;
 }
 
+#filterDropdown {
+  background-color: #2d8259;
+  color: white;
+  border-width: 0;
+  --bs-btn-focus-shadow-rgb: none;
+  width: 190px;
+}
