@@ -1,210 +1,40 @@
 {
+
+  "TODO": "WHENEVER CHANGING THIS FILE, COPY AND PASTE CHANGES TO .deploy/settings.sample.json TOO, SO DEPLOYMENT DATA AND LOCAL DATA ARE THE SAME",
+
   "monti": {
     "appId": "M9ZSMoPc8qvFLo8Tw",
     "appSecret": "dc331a4b-a48b-46b2-9c25-e44143084aba"
   },
+
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "email": "admin@hawaii.edu", "password": "changeme", "role": "admin" },
+    { "email": "john@hawaii.edu", "password": "changeme" },
+    { "email": "accountingadmin@hawaii.edu", "password": "changeme" }
   ],
 
-  "defaultData": [
+  "defaultUserData": [
     {
-      "name": "Ducksu Quack",
-      "owner": "ducksu@hotmail.com",
-      "adminStatus": "Yes"
+      "email": "admin@hawaii.edu",
+      "savedClubs": ["American Marketing Association", "AIKIDO at UHM"],
+      "interests": ["Administrating Websites", "Crying"],
+      "major": "Computer Science"
     },
-      {
-        "name": "Ducksu Quack",
-        "owner": "ducksu@hotmail.com",
-        "adminStatus": "No"
-      },
-      {
-        "name": "Ducksu Quack",
-        "owner": "ducksu@hotmail.com",
-        "adminStatus": "No"
-      },
     {
-      "name": "John Foo",
-      "owner": "john@foo.com",
-      "adminStatus": "No"
+      "email": "john@hawaii.edu",
+      "savedClubs": ["American Association of University Women at UH Manoa", "American Institute of Architecture Students Hawaii Chapter"],
+      "interests": ["Architecture"],
+      "major": "Architecture"
+    },
+    {
+      "email": "accountingadmin@hawaii.edu",
+      "savedClubs": ["Accounting Club"],
+      "interests": ["Accounting", "Business"],
+      "major": "Accounting",
+      "adminForClubs": ["Accounting Club"]
     }
-],
+  ],
 
-  "defaultProfiles": [
-    {
-      "clubName": "Accounting Club",
-      "description": "In cooperation with the School of Accountancy, we provide additional perspectives and supplemental information concerning public, private, and governmental accounting. Our main goal is to promote the professional and personal development of our members through socials, community service, professional interactions, workshops, and office tours. We continue to rank high among the largest student organizations within the Shidler College of Business and welcome students from all academic disciplines.",
-      "clubType": "Academic/Professional",
-      "interests": [
-        "Math",
-        "Accounting"
-      ],
-      "projects":[
-        "RadGrad",
-        "Open Power Quality"
-      ],
-      "picture": "https://images.squarespace-cdn.com/content/v1/5f2371858296275165c4fed8/1598171416577-93L1YDJ9YHL3W7F5AMCA/New-AC-Logo-1024x1024.png?format=1500w",
-      "email": "mejesrs@hawaii.edu",
-      "contactName": "Rana Mejes",
-      "contactEmail": "mejesrs@hawaii.edu"
-    },
-    {
-      "clubName": "AIKIDO at UHM",
-      "description": "We practice Aikido.",
-      "clubType": "Sports/Leisure",
-      "interests": [
-        "Sports",
-        "Fitness"
-      ],
-      "projects":[
-        "RadGrad",
-        "Open Power Quality"
-      ],
-      "picture": "images/aikido_club.gif",
-      "email": "halliday@hawaii.edu",
-      "contactName": "Timothy Halliday",
-      "contactEmail": "halliday@hawaii.edu"
-    },
-    {
-      "clubName": "Alpha Gamma Delta Delta Sigma",
-      "description": "Alpha Gamma Delta is an international women's fraternity that promotes academic excellence, philanthropic giving, ongoing leadership and personal development and above all, a spirit of loving sisterhood.",
-      "clubType": "Fraternity/Sorority",
-      "interests": [
-        "Fraternity",
-        "Sorority"
-      ],
-      "projects":[
-        "RadGrad",
-        "Open Power Quality"
-      ],
-      "picture": "https://static.wixstatic.com/media/2468d8_9213049cdd0f4cb187b8abd5672bdfe8~mv2.png/v1/fill/w_286,h_323,al_c,lg_1,q_85,enc_auto/Alpha_Gamma_Delta_crest.png",
-      "email": "amterrel@hawaii.edu",
-      "contactName": "Ashley Terrell",
-      "contactEmail": "amterrel@hawaii.edu"
-    },
-    {
-      "clubName": "American Association of University Women at UH Manoa",
-      "description": "The mission of our RIO is to promote the values of AAUW on the UHM campus and in the community; we are working towards equality in society by providing the tools necessary for women to gain economic security, to pursue their education, and advocate for women's rights.",
-      "clubType": "Political",
-      "interests": [
-        "Politics"
-      ],
-      "projects":[
-        "RadGrad",
-        "Open Power Quality"
-      ],
-      "picture": "https://manoa.hawaii.edu/undergrad/civic-engage/wp-content/uploads/2021/10/AAUW-at-UHM-logo-1-1024x538.png",
-      "email": "ronja36@hawaii.edu",
-      "contactName": "Ronja Steinbach",
-      "contactEmail": "ronja36@hawaii.edu"
-    },
-    {
-      "clubName": "American Indian Science and Engineering Society at University of Hawai'i",
-      "description": "The American Indian Science and Engineering Society (AISES) is a national nonprofit organization focused on substantially increasing the representation of Indigenous peoples of North America and the Pacific Islands in science, technology, engineering, and math (STEM) studies and careers.",
-      "clubType": "Academic/Professional",
-      "interests": [
-        "Science",
-        "American Indian"
-      ],
-      "projects":[
-        "RadGrad",
-        "Open Power Quality"
-      ],
-      "picture": "http://aiseshawaii.weebly.com/uploads/3/9/3/6/39362525/copy-of-aises-logo-1_orig.png",
-      "email": "kmmw@hawaii.edu",
-      "contactName": "Kahiamaikalani Walker",
-      "contactEmail": "kmmw@hawaii.edu"
-    },
-    {
-      "clubName": "American Institute of Architecture Students Hawaii Chapter",
-      "description": "The American Institute of Architecture Students (AIAS) is an independent, nonprofit, student-run organization dedicated to providing unmatched progressive programs, information, and resources on issues critical to architecture and the experience of education. The AIAS aims to promote excellence in architectural education, training, and practice; to foster an appreciation of architecture and related disciplines; to enrich communities in a spirit of collaboration; and to organize students and combine their efforts to advance the art and science of architecture.",
-      "clubType": "Academic/Professional",
-      "interests": [
-        "Architecture"
-      ],
-      "projects":[
-        "RadGrad",
-        "Open Power Quality"
-      ],
-      "picture": "http://images.squarespace-cdn.com/content/v1/57e48324579fb35bcfcd4bd6/1564879527999-KJRJE2DJIJC8SDNZOYPM/aias+w+white.png?format=1500w",
-      "email": "beaus@hawaii.edu",
-      "contactName": "Beau Nakamori",
-      "contactEmail": "beaus@hawaii.edu"
-    },
-    {
-      "clubName": "American Library Association Student Chapter",
-      "description": "The American Library Association Student Chapter at the University of Hawai‘i at Mānoa Library and Information Science Program is committed to celebrating and promoting the library and information science profession. Our members plan events and activities that encourage professional development, service to the library community, fundraising, socializing, and networking. We are always looking for new members and new perspectives, and we invite all interested to bring your skills, energy and enthusiasm to our chapter!",
-      "clubType": "Academic/Professional",
-      "interests": [
-        "Library"
-      ],
-      "projects":[
-        "RadGrad",
-        "Open Power Quality"
-      ],
-      "picture": "https://www.ala.org/aboutala/sites/all/themes/alaV2/logo.png",
-      "email": "kjmunro@hawaii.edu",
-      "contactName": "Kylee Munro",
-      "contactEmail": "kjmunro@hawaii.edu"
-    },
-    {
-      "clubName": "American Marketing Association",
-      "description": "We are a marketing club that strives to push our members to grow socially, philanthropically, and professionally. ",
-      "clubType": "Academic/Professional",
-      "interests": [
-        "Marketing"
-      ],
-      "projects":[
-        "RadGrad",
-        "Open Power Quality"
-      ],
-      "picture": "images/AmericanMarketingAssociation.png",
-      "email": "aarong2@hawaii.edu",
-      "contactName": "Aaron Goo",
-      "contactEmail": "aarong2@hawaii.edu"
-    }
-  ],
-  "defaultProjects": [
-    {
-      "name": "Open Power Quality",
-      "homepage": "https://openpowerquality.org",
-      "description": "Open source hardware and software for distributed power quality data collection, analysis, and visualization.",
-      "interests": [
-        "Software Engineering",
-        "Renewable Energy"
-      ],
-      "picture": "https://avatars0.githubusercontent.com/u/4641939"
-    },
-    {
-      "name": "RadGrad",
-      "homepage": "https://radgrad.org",
-      "description": "Growing awesome computer scientists, one graduate at a time.",
-      "interests": [
-        "Educational Technology"
-      ],
-      "picture": "https://www.radgrad.org/img/radgrad_logo.png"
-    },
-    {
-      "name": "WRENCH",
-      "homepage": "https://wrench-project.org",
-      "description": "WRENCH is an open-source library for developing simulators for large-scale scientific computation",
-      "interests": [
-        "Distributed computing"
-      ],
-      "picture": "https://wrench-project.org/images/logo-vertical.png"
-    },
-    {
-      "name": "Cyber Canoe",
-      "homepage": "http://lava.manoa.hawaii.edu/blog/2014/07/11/cyber-canoe-cyber-infrastructure-enabled-collaborative-analysis-navigation-and-observation-environment/",
-      "description": "Software for Unity projects involving stereoscopic resolution driven by 9 PCs with a GeForce 980 graphics card.",
-      "interests": [
-        "Unity",
-        "Visualization"
-      ],
-      "picture": "https://www.hawaii.edu/its/wp-content/uploads/sites/2/2019/01/LAVAlogo-300x192-300x192.png"
-    }
-  ],
-  "loadAssetsFile":  false
+  "loadAssetsFile":  true
 
 }

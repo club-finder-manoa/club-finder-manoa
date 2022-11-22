@@ -3,7 +3,7 @@ import { Col, Container, Image, Row, Card } from 'react-bootstrap';
 
 /* A simple static component to render some text for the landing page. */
 const ProfileTemp = () => (
-  <Container id="profileTempBg" fluid className="py-3">
+  <Container fluid className="py-3 backgroundImageTop">
     <Row>
       <Col className="d-flex justify-content-center">
         {/* Picture */}
@@ -20,7 +20,7 @@ const ProfileTemp = () => (
           {/* Bio */}
           <p>I am a Professor and like to paddle outrigger canoes.</p>
           <hr />
-          {/* Interests */}
+          {/* Users */}
           <p>Interests: Software Engineering, Climate Change</p>
           <hr />
           {/* Major */}

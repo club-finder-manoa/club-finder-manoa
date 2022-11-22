@@ -4,20 +4,20 @@ import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
-import { Interests } from '../../api/interests/Interests';
-import { Profiles } from '../../api/profiles/Profiles';
-import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
+import { Users } from '../../api/users/Users';
+import { Clubs } from '../../api/clubs/Clubs';
+import { ProfilesInterests } from '../../api/clubs/ProfilesInterests';
+import { ProfilesProjects } from '../../api/clubs/ProfilesProjects';
 import { Projects } from '../../api/projects/Projects';
 import { ProjectsInterests } from '../../api/projects/ProjectsInterests';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
 
-/* Returns the Profiles and Projects associated with the passed Interest. */
+/* Returns the Clubs and Projects associated with the passed Interest. */
 function getInterestData(name) {
   const profiles = _.pluck(ProfilesInterests.collection.find({ interest: name }).fetch(), 'profile');
-  const profilePictures = profiles.map(profile => Profiles.collection.findOne({ email: profile }).picture);
+  const profilePictures = profiles.map(profile => Clubs.collection.findOne({ email: profile }).picture);
   const projects = _.pluck(ProjectsInterests.collection.find({ interest: name }).fetch(), 'project');
   const projectPictures = projects.map(project => Projects.collection.findOne({ name: project })?.picture);
   // console.log(_.extend({ }, data, { interests, projects: projectPictures }));
@@ -45,7 +45,7 @@ MakeCard.propTypes = {
   }).isRequired,
 };
 
-/* Renders the Interests as a set of Cards. */
+/* Renders the Users as a set of Cards. */
 const InterestsPage = () => {
 
   /* If the subscription(s) have been received, render the page, otherwise show a loading icon. */
@@ -54,14 +54,14 @@ const InterestsPage = () => {
     const sub1 = Meteor.subscribe(ProfilesProjects.userPublicationName);
     const sub2 = Meteor.subscribe(Projects.userPublicationName);
     const sub3 = Meteor.subscribe(ProjectsInterests.userPublicationName);
-    const sub4 = Meteor.subscribe(Profiles.userPublicationName);
-    const sub5 = Meteor.subscribe(Interests.userPublicationName);
+    const sub4 = Meteor.subscribe(Clubs.userPublicationName);
+    const sub5 = Meteor.subscribe(Users.userPublicationName);
     const sub6 = Meteor.subscribe(ProfilesInterests.userPublicationName);
     return {
       ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready(),
     };
   }, []);
-  const interests = _.pluck(Interests.collection.find().fetch(), 'name');
+  const interests = _.pluck(Users.collection.find().fetch(), 'name');
   const interestData = interests.map(interest => getInterestData(interest));
   return ready ? (
     <Container id={PageIDs.interestsPage} style={pageStyle}>

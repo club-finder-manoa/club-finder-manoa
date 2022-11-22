@@ -23,13 +23,12 @@ const NavBar = () => {
         <Navbar.Collapse id={ComponentIDs.basicNavbarNav}>
           <Nav className="me-auto justify-content-start">
             {currentUser ? (
-              [<Nav.Link as={NavLink} id={ComponentIDs.profilesMenuItem} className="ms-4" to="/account" key="filter"><b>Profile</b></Nav.Link>,
-                <Nav.Link as={NavLink} id={ComponentIDs.addProjectMenuItem} className="ms-4" to="/all-clubs" key="addP"><b>All Clubs</b></Nav.Link>,
-                <Nav.Link as={NavLink} id={ComponentIDs.filterMenuItem} className="ms-4" to="/my-clubs" key="filter"><b>My Clubs</b></Nav.Link>,
-                <Nav.Link id="adminPage" as={NavLink} className="ms-4" to="/admin" key="admin"><b>Admin</b></Nav.Link>]
+              [<Nav.Link as={NavLink} id={ComponentIDs.profilesMenuItem} className="ms-4" style={{ fontWeight: 600 }} to="/account" key="account">Profile</Nav.Link>,
+                <Nav.Link as={NavLink} id={ComponentIDs.addProjectMenuItem} className="ms-4" style={{ fontWeight: 600 }} to="/all-clubs" key="allClubs">All Clubs</Nav.Link>,
+                <Nav.Link as={NavLink} id={ComponentIDs.filterMenuItem} className="ms-4" style={{ fontWeight: 600 }} to="/my-clubs" key="myClubs">My Clubs</Nav.Link>]
             ) : ''}
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-              <Nav.Link id="admin-page" as={NavLink} className="ms-4" to="/admin" key="admin">Admin</Nav.Link>
+              <Nav.Link as={NavLink} id="admin-page" className="ms-4" to="/admin" key="admin"><b>Admin</b></Nav.Link>
             ) : ''}
           </Nav>
           {!currentUser ? (

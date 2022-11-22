@@ -1,18 +1,13 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, TextField, LongTextField, SubmitField, ErrorsField, SelectField } from 'uniforms-bootstrap5';
-import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
-import { addProjectMethod } from '../../startup/both/Methods';
-import { Interests } from '../../api/interests/Interests';
-import { Profiles } from '../../api/profiles/Profiles';
-import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
-import { Projects } from '../../api/projects/Projects';
+import { Users } from '../../api/users/Users';
+import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
@@ -33,7 +28,8 @@ const makeSchema = (allInterests, allParticipants) => new SimpleSchema({
 const AddProject = () => {
 
   /* On submit, insert the data. */
-  const submit = (data, formRef) => {
+  const submit = () => {
+    /*
     Meteor.call(addProjectMethod, data, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
@@ -41,19 +37,18 @@ const AddProject = () => {
         swal('Success', 'Project added successfully', 'success').then(() => formRef.reset());
       }
     });
+
+     */
   };
 
   const { ready, interests, profiles } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
-    const sub1 = Meteor.subscribe(Interests.userPublicationName);
-    const sub2 = Meteor.subscribe(Profiles.userPublicationName);
-    const sub3 = Meteor.subscribe(ProfilesInterests.userPublicationName);
-    const sub4 = Meteor.subscribe(ProfilesProjects.userPublicationName);
-    const sub5 = Meteor.subscribe(Projects.userPublicationName);
+    const sub1 = Meteor.subscribe(Users.userPublicationName);
+    const sub2 = Meteor.subscribe(Clubs.userPublicationName);
     return {
-      ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready(),
-      interests: Interests.collection.find().fetch(),
-      profiles: Profiles.collection.find().fetch(),
+      ready: sub1.ready() && sub2.ready(),
+      interests: Users.collection.find().fetch(),
+      profiles: Clubs.collection.find().fetch(),
     };
   }, []);
 
@@ -80,7 +75,7 @@ const AddProject = () => {
                 <LongTextField id={ComponentIDs.addProjectFormDescription} name="description" placeholder="Describe the project here" />
                 <Row>
                   <Col xs={6} id={ComponentIDs.addProjectFormInterests}>
-                    <SelectField name="interests" showInlineError placeholder="Interests" multiple checkboxes transform={transform} />
+                    <SelectField name="interests" showInlineError placeholder="Users" multiple checkboxes transform={transform} />
                   </Col>
                   <Col xs={6} id={ComponentIDs.addProjectFormParticipants}>
                     <SelectField name="participants" showInlineError placeholder="Participants" multiple checkboxes transform={transform} />

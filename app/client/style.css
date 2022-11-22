@@ -70,6 +70,11 @@ body .btn-primary {
   color: #2d8259;
 }
 
+.backgroundImageTop {
+  background: url("images/landing-top.png") no-repeat;
+  background-size: 100%;
+}
+
 #landingPage {
   background: url("images/landing-top.png") no-repeat;
   background-size: 100%;
@@ -81,23 +86,10 @@ body .btn-primary {
   height: 65vh;
 }
 
-#signUpPage {
-  background: url("images/landing-bottom.png") no-repeat bottom;
-  background-size: 100%;
-  height: calc(100vh - 160px);
-}
-
-#signInPage {
-  background: url("images/landing-bottom.png") no-repeat bottom;
-  background-size: 100%;
-  height: calc(100vh - 160px);
-}
-
 /* Profile Template Page */
 
 #imgProfile{
   position: relative;
-  top: 80px;
   z-index: 1;
 }
 #profileName{
@@ -108,13 +100,34 @@ body .btn-primary {
   padding-top: 150px;
   height: 440px;
   width: 600px;
-  margin-top: -70px;
+  margin-top: -150px;
   margin-left: auto;
   margin-right: auto;
 }
 
-#profileTempBg{
-  background: url("images/landing-top.png") no-repeat;
-  background-size: 100%;
+#filterDropdown {
+  background-color: #2d8259;
+  color: white;
+  border-width: 0;
+  --bs-btn-focus-shadow-rgb: none;
+  width: 190px;
+}
+
+#filter-border {
+  border-style: none;
+  background-color: white;
+  border-radius: 8px;
+}
+
+#filter-border .accordion-button:not(.collapsed), .accordion-item:not(.collapsed)  {
+  --bs-accordion-active-bg: #2d8259;
+  --bs-accordion-active-color: white;
+  --bs-accordion-border-color: #7d828a;
+  --bs-accordion-border-width: 2px;
+  --bs-accordion-border-radius: 8px;
+  --bs-accordion-btn-active-icon: white;
+  --bs-btn-active-color: white;
+  --bs-accordion-btn-focus-border-color: transparent;
+  --bs-accordion-btn-focus-box-shadow: transparent;
 }
 
