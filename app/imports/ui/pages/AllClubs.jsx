@@ -45,7 +45,7 @@ const MakeCard = ({ profile }) => (
           {profile.contactEmail}
         </Card.Text>
         <Card.Text>
-          <a style={{ color: 'black' }} href="/ClubPage">Click Here For More Information</a>
+          <a style={{ color: 'black' }} href="/TempClubPage">Click Here For More Information</a>
         </Card.Text>
       </Card.Body>
     </Card>
