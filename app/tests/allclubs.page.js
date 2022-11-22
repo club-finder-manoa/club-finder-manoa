@@ -12,6 +12,11 @@ class AllClubsPage {
     // Will add more tests later on
     await testController.wait(10000).expect(this.pageSelector.exists).ok();
   }
+
+  async hasDefaultAllClubs(testController) {
+    const cardCount = Selector('.card').count;
+    await testController.expect(cardCount).gte(146);
+  }
 }
 
 export const allClubsPage = new AllClubsPage();
