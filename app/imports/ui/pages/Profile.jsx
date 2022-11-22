@@ -64,7 +64,7 @@ const Profile = () => {
   const model = _.extend({}, profile, { interests, projects });
   return ready ? (
     <Container id={PageIDs.homePage} className="justify-content-center" style={pageStyle}>
-      <Col>
+      <Col id="user-page">
         <Col className="justify-content-center text-center"><h2>Your Profile</h2></Col>
         <AutoForm model={model} schema={bridge} onSubmit={data => submit(data)}>
           <Card>

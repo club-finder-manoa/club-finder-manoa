@@ -4,7 +4,8 @@ import { signOutPage } from './signout.page';
 import { navBar } from './navbar.component';
 import { myClubsPage } from './myclubs.page';
 import { allClubsPage } from './allclubs.page';
-
+import { userPage } from './user.page';
+import { signupPage } from './signup.page';
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
@@ -15,6 +16,17 @@ fixture('Club Finder Manoa localhost test with default db')
 
 test('Test that landing page shows up', async (testController) => {
   await landingPage.isDisplayed(testController);
+});
+
+test('Test that signup page, then logout works', async (testController) => {
+  // Create a new user email address that's guaranteed to be unique.
+  const newUser = `user-${new Date().getTime()}@hawaii.edu`;
+  await navBar.gotoSignUpPage(testController);
+  await signupPage.isDisplayed(testController);
+  await signupPage.signupUser(testController, newUser, credentials.password);
+  // New user has successfully logged in, so now let's logout.
+  await navBar.logout(testController);
+  await signOutPage.isDisplayed(testController);
 });
 
 test('Test that signin and signout work', async (testController) => {
@@ -37,6 +49,13 @@ test('Test the My Club page', async (testController) => {
   await signInPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoMyClubsPage(testController);
   await myClubsPage.isDisplayed(testController);
+});
+
+test('Test the User page', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signInPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoUserPage(testController);
+  await userPage.isDisplayed(testController);
 });
 
 /** OLD BOWFOLIOS TESTS - left as reference, remove after implementing our own */
