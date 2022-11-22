@@ -19,6 +19,7 @@ import AddProject from '../pages/AddProject';
 import ProfileTemp from '../pages/ProfileTemp';
 import TempClubPage from '../pages/TempClubPage';
 import Admin from '../pages/Admin';
+import ClubPage from '../pages/ClubPage';
 
 /* Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (

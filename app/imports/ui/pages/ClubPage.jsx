@@ -7,7 +7,6 @@ import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
-import PropTypes from 'prop-types';
 
 const MakePage = ({ club }) => (
   <Container id="landing-page" fluid className="py-3">
