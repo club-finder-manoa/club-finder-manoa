@@ -47,8 +47,8 @@ const ClubPage = () => {
         <tbody>
         <tr>
           <td>{club.meetingInfo}</td>
-          <td>{club.meetingInfo}</td>
-          <td>{club.meetingInfo}</td>
+          <td></td>
+          <td></td>
         </tr>
         </tbody>
       </Table>
