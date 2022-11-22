@@ -23,7 +23,7 @@ const NavBar = () => {
         <Navbar.Collapse id={ComponentIDs.basicNavbarNav}>
           <Nav className="me-auto justify-content-start">
             {currentUser ? (
-              [<Nav.Link as={NavLink} id={ComponentIDs.profilesMenuItem} className="ms-4" style={{ fontWeight: 600 }} to="/account" key="account">Profile</Nav.Link>,
+              [/* <Nav.Link as={NavLink} id={ComponentIDs.profilesMenuItem} className="ms-4" style={{ fontWeight: 600 }} to="/account" key="account">EditProfile</Nav.Link>, */
                 <Nav.Link as={NavLink} id={ComponentIDs.addProjectMenuItem} className="ms-4" style={{ fontWeight: 600 }} to="/all-clubs" key="allClubs">All Clubs</Nav.Link>,
                 <Nav.Link as={NavLink} id={ComponentIDs.filterMenuItem} className="ms-4" style={{ fontWeight: 600 }} to="/my-clubs" key="myClubs">My Clubs</Nav.Link>]
             ) : ''}
@@ -49,7 +49,7 @@ const NavBar = () => {
               </NavDropdown>
             ) : (
               <NavDropdown align="end" id={ComponentIDs.currentUserDropdown} title={currentUser}>
-                <NavDropdown.Item id={ComponentIDs.currentUserDropdownProfile} as={NavLink} to="/profile">
+                <NavDropdown.Item id={ComponentIDs.currentUserDropdownProfile} as={NavLink} to="/account">
                   <PersonFill className="me-2 mb-1" />Profile
                 </NavDropdown.Item>
                 <NavDropdown.Item id={ComponentIDs.currentUserDropdownSignOut} as={NavLink} to="/signout">

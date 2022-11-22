@@ -20,7 +20,7 @@ const makeSchema = (allInterests) => new SimpleSchema({
   'interests.$': { type: String, allowedValues: allInterests },
 });
 
-/* Component for layout out a Profile Card. */
+/* Component for layout out a EditProfile Card. */
 const MakeCard = ({ profile }) => (
   <Col>
     <Card className="h-100">
@@ -54,7 +54,7 @@ MakeCard.propTypes = {
   }).isRequired,
 };
 
-/* Renders the Profile Collection as a set of Cards. */
+/* Renders the EditProfile Collection as a set of Cards. */
 const Filter = () => {
   const [interests, setInterests] = useStickyState('interests', []);
 

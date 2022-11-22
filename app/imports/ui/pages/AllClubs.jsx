@@ -67,6 +67,8 @@ const MakeCard = ({ club }) => {
     <Col>
       <Card className="h-100">
         <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
+      <Card className="h-100" id="all-clubs-page">
+        <a style={{ color: 'black', textDecoration: 'none' }} href="/TempClubPage">
           <Card.Header>
             {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
@@ -102,7 +104,7 @@ MakeCard.propTypes = {
   }).isRequired,
 };
 
-/* Component for club table item */
+//* Component for club table item *//
 const ClubTableItem = ({ club }) => {
   const [expandedDesc, setExpandedDesc] = useState(false);
 
@@ -166,7 +168,7 @@ ClubTableItem.propTypes = {
   }).isRequired,
 };
 
-/* Renders the Profile Collection as a set of Cards. */
+/* Renders the EditProfile Collection as a set of Cards. */
 const AllClubs = () => {
   const [cardView, setCardView] = useState(true);
   const [interest, setInterest] = useState('');
