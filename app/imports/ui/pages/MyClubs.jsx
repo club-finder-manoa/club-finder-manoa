@@ -34,7 +34,7 @@ const MakeCard = ({ club }) => {
 
   return (
     <Col>
-      <Card className="h-100">
+      <Card className="h-100" id="my-clubs-page">
         <a style={{ color: 'black', textDecoration: 'none' }} href="/TempClubPage">
           <Card.Header>
             {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}

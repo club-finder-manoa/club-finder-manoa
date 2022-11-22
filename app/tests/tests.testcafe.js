@@ -2,6 +2,7 @@ import { landingPage } from './landing.page';
 import { signInPage } from './signin.page';
 import { signOutPage } from './signout.page';
 import { navBar } from './navbar.component';
+import { myClubsPage } from './myclubs.page';
 
 /* global fixture:false, test:false */
 
@@ -18,8 +19,16 @@ test('Test that landing page shows up', async (testController) => {
 test('Test that signin and signout work', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signInPage.signin(testController, credentials.username, credentials.password);
+  await navBar.isLoggedIn(testController, credentials.username);
   await navBar.logout(testController);
   await signOutPage.isDisplayed(testController);
+});
+
+test('Test the My Club page', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signInPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoMyClubsPage(testController);
+  await myClubsPage.isDisplayed(testController);
 });
 
 /** OLD BOWFOLIOS TESTS - left as reference, remove after implementing our own */

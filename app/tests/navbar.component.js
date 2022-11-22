@@ -34,6 +34,10 @@ class NavBar {
     await testController.click(`#${ComponentIDs.profilesMenuItem}`);
   }
 
+  async gotoMyClubsPage(testController) {
+    await testController.click(`#${ComponentIDs.filterMenuItem}`);
+  }
+
   async gotoInterestsPage(testController) {
     const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
     if (!visible) {
