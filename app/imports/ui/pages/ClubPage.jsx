@@ -8,6 +8,11 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
 
+function getClubInfo(clubs) {
+  const data = Clubs.collection.findOne({ clubs });
+  return _.extend({}, data );
+}
+
 const MakePage = ({ club }) => (
   <Container id="landing-page" fluid className="py-3">
     <Row className="align-middle text-center">
@@ -48,21 +53,23 @@ const MakePage = ({ club }) => (
 const ClubPage = () => {
   const { ready } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
-    const sub1 = Meteor.subscribe(Clubs.userPublicationName);
+    const sub = Meteor.subscribe(Clubs.userPublicationName);
+    const clubList = Clubs.collection.find().fetch();
     return {
-      ready: sub1.ready()
+      ready: sub.ready(),
+      clubs: clubList,
     };
   }, []);
-  const emails = _.pluck(Profiles.collection.find().fetch(), 'email');
+
+  const emails = _.pluck(Clubs.collection.find().fetch(), 'email');
 // There is a potential race condition. We might not be ready at this point.
 // Need to ensure that getProfileData doesn't throw an error on line 18.
-  const profileInfo = emails.map(email => getProfileInfo(email));
+  const clubInfo = emails.map(email => getClubInfo(email));
   return ready ? (
     <Container id={PageIDs.profilesPage} style={pageStyle}>
-      {profileInfo.map((profile, index) => <MakePage key={index} profile={profile} />)}
+      {clubInfo.map((club, index) => <MakePage key={index} profile={club} />)}
     </Container>
   ) : <LoadingSpinner />;
 };
 
 export default ClubPage;
-
