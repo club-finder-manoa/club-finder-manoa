@@ -70,6 +70,11 @@ body .btn-primary {
   color: #2d8259;
 }
 
+.backgroundImageTop {
+  background: url("images/landing-top.png") no-repeat;
+  background-size: 100%;
+}
+
 #landingPage {
   background: url("images/landing-top.png") no-repeat;
   background-size: 100%;
@@ -81,23 +86,10 @@ body .btn-primary {
   height: 65vh;
 }
 
-#signUpPage {
-  background: url("images/landing-bottom.png") no-repeat bottom;
-  background-size: 100%;
-  height: calc(100vh - 160px);
-}
-
-#signInPage {
-  background: url("images/landing-bottom.png") no-repeat bottom;
-  background-size: 100%;
-  height: calc(100vh - 160px);
-}
-
 /* Profile Template Page */
 
 #imgProfile{
   position: relative;
-  top: 80px;
   z-index: 1;
 }
 #profileName{
@@ -108,14 +100,9 @@ body .btn-primary {
   padding-top: 150px;
   height: 440px;
   width: 600px;
-  margin-top: -70px;
+  margin-top: -150px;
   margin-left: auto;
   margin-right: auto;
-}
-
-#profileTempBg{
-  background: url("images/landing-top.png") no-repeat;
-  background-size: 100%;
 }
 
 #filterDropdown {

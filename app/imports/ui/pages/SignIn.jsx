@@ -43,7 +43,7 @@ const SignIn = () => {
   }
   // Otherwise return the Login form.
   return (
-    <div id={PageIDs.signInPage}>
+    <div id={PageIDs.signInPage} className="backgroundImageTop">
       <Container>
         <Row className="justify-content-center mb-3">
           <Col xs={5}>
