@@ -66,7 +66,7 @@ const MakeCard = ({ club }) => {
   return (
     <Col>
       <Card className="h-100">
-        <a style={{ color: 'black', textDecoration: 'none' }} href="/TempClubPage">
+        <a style={{ color: 'black', textDecoration: 'none' }} href="/ClubPage">
           <Card.Header>
             {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
@@ -121,13 +121,13 @@ const ClubTableItem = ({ club }) => {
       <td>
         <Row>
           <Col className="col-1 me-2">
-            <Link to="/TempClubPage" style={{ textDecoration: 'none', color: 'black' }}>
+            <Link to="/ClubPage" style={{ textDecoration: 'none', color: 'black' }}>
               {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
             </Link>
           </Col>
           <Col>
             <Row>
-              <Link to="/TempClubPage" style={{ textDecoration: 'none', color: 'black', fontWeight: 600 }}>
+              <Link to="/ClubPage" style={{ textDecoration: 'none', color: 'black', fontWeight: 600 }}>
                 {club.clubName}
               </Link>
             </Row>
