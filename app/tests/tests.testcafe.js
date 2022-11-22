@@ -3,6 +3,7 @@ import { signInPage } from './signin.page';
 import { signOutPage } from './signout.page';
 import { navBar } from './navbar.component';
 import { myClubsPage } from './myclubs.page';
+import { allClubsPage } from './allclubs.page';
 
 /* global fixture:false, test:false */
 
@@ -22,6 +23,13 @@ test('Test that signin and signout work', async (testController) => {
   await navBar.isLoggedIn(testController, credentials.username);
   await navBar.logout(testController);
   await signOutPage.isDisplayed(testController);
+});
+
+test('Test the All Clubs page', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signInPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoAllClubsPage(testController);
+  await allClubsPage.isDisplayed(testController);
 });
 
 test('Test the My Club page', async (testController) => {
