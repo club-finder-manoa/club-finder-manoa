@@ -25,7 +25,7 @@ const ClubPage = () => {
     <Container id="landing-page" fluid className="py-3">
       <Row className="align-middle text-center">
         <Col xs={4}>
-          <Image src={club.mainPhoto} width={50} />
+          <Image src={club.mainPhoto} width={200} />
         </Col>
 
         <Col xs={8} className="d-flex flex-column justify-content-center">
@@ -36,7 +36,22 @@ const ClubPage = () => {
       </Row>
 
       <h3>Meeting Times and Location</h3>
-      <p>{club.meetingInfo}</p>
+      <Table striped bordered hover size="sm">
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Location</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{club.meetingInfo}</td>
+          <td>{club.meetingInfo}</td>
+          <td>{club.meetingInfo}</td>
+        </tr>
+        </tbody>
+      </Table>
 
       <h3>Contact Us!</h3>
       <Table striped bordered hover size="sm">
