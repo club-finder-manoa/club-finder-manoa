@@ -165,7 +165,7 @@ ClubTableItem.propTypes = {
   }).isRequired,
 };
 
-/* Renders the Profile Collection as a set of Cards. */
+/* Renders the EditProfile Collection as a set of Cards. */
 const AllClubs = () => {
   const [cardView, setCardView] = useState(true);
   const [interest, setInterest] = useState('');
