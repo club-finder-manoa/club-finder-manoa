@@ -6,7 +6,9 @@ import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { MortarboardFill, KeyFill, EnvelopeFill } from 'react-bootstrap-icons';
+import { Meteor } from 'meteor/meteor';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
+import { Users } from '../../api/users/Users';
 
 /*
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -17,6 +19,8 @@ const SignUp = () => {
   const [invalidEmail, setInvalidEmail] = useState(false);
   const majors = ['Accounting', 'Art', 'Business', 'Chemistry', 'Computer Science', 'Computer Engineering', 'Economics', 'Engineering', 'Finance',
     'Marketing', 'Mathematics', 'Music', 'Nursing', 'Philosophy', 'Physics', 'Political Science', 'Psychology', 'Social Work', 'Other']; // TODO add more later?
+
+  const sub = Meteor.subscribe(Users.userPublicationName);
 
   const schema = new SimpleSchema({
     email: String,
@@ -37,6 +41,7 @@ const SignUp = () => {
           setError(err.reason);
         } else {
           setError('');
+
           setRedirectToRef(true);
         }
       });
