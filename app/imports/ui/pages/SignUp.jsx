@@ -42,7 +42,7 @@ const SignUp = () => {
     return (<Navigate to="/profile" />);
   }
   return (
-    <div id={PageIDs.signUpPage}>
+    <div id={PageIDs.signUpPage} className="backgroundImageTop">
       <Container>
         <Row className="justify-content-center mb-3">
           <Col xs={5}>

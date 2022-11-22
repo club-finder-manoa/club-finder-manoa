@@ -96,18 +96,20 @@ const MyClubs = () => {
   // There is a potential race condition. We might not be ready at this point.
   // Need to ensure that getProfileData doesn't throw an error on line 18.
   return ready ? (
-    <Container id={PageIDs.profilesPage} style={pageStyle}>
-      <Row className="align-middle text-center">
-        <Col className="d-flex flex-column justify-content-center">
-          <h1>
-            <b>My Clubs</b>
-          </h1>
-        </Col>
-      </Row>
-      <Row xs={1} md={2} lg={4} className="g-2">
-        {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
-      </Row>
-    </Container>
+    <div className="backgroundImageTop">
+      <Container id={PageIDs.profilesPage} style={pageStyle}>
+        <Row className="align-middle text-center">
+          <Col className="d-flex flex-column justify-content-center">
+            <h1>
+              <b>My Clubs</b>
+            </h1>
+          </Col>
+        </Row>
+        <Row xs={1} md={2} lg={4} className="g-2">
+          {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
+        </Row>
+      </Container>
+    </div>
   ) : <LoadingSpinner />;
 };
 
