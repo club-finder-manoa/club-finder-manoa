@@ -21,6 +21,55 @@ const TempClubPage = () => (
         </Col>
       </Row>
 
+
+    <h3>Meeting Times and Location</h3>
+    <Table striped bordered hover size="sm">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Location</th>
+        <th>Meeting Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Monday, November 21, 2022</td>
+        <td>6:00 PM to 7:00 PM</td>
+        <td>HL 003F</td>
+        <td>General Meeting</td>
+      </tr>
+      <tr>
+        <td>Monday, November 28, 2022</td>
+        <td>6:00 PM to 7:00 PM</td>
+        <td>HL 003F</td>
+        <td>General meeting</td>
+      </tr>
+      <tr>
+        <td>Monday, December 5, 2022</td>
+        <td>6:00 PM to 7:00 PM</td>
+        <td>HL 003F</td>
+        <td>General meeting</td>
+      </tr>
+      </tbody>
+    </Table>
+
+    <h3>Contact Us!</h3>
+    <Table striped bordered hover size="sm">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Rana Mejes</td>
+        <td>mejesrs@hawaii.edu</td>
+      </tr>
+      </tbody>
+    </Table>
+
       <h3>Meeting Times and Location</h3>
       <Table striped bordered hover size="sm">
         <thead>
@@ -68,6 +117,7 @@ const TempClubPage = () => (
           </tr>
         </tbody>
       </Table>
+
 
     </Container>
   </div>
