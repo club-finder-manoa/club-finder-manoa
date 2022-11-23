@@ -49,7 +49,7 @@ const NavBar = () => {
               </NavDropdown>
             ) : (
               <NavDropdown align="end" id={ComponentIDs.currentUserDropdown} title={currentUser}>
-                <NavDropdown.Item id={ComponentIDs.currentUserDropdownProfile} as={NavLink} to="/account">
+                <NavDropdown.Item id={ComponentIDs.currentUserDropdownProfile} as={NavLink} to="/profile">
                   <PersonFill className="me-2 mb-1" />Profile
                 </NavDropdown.Item>
                 <NavDropdown.Item id={ComponentIDs.currentUserDropdownSignOut} as={NavLink} to="/signout">

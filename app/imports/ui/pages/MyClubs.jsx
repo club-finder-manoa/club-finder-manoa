@@ -81,10 +81,12 @@ const MyClubs = () => {
     const sub2 = Meteor.subscribe(Users.userPublicationName);
     const clubList = [];
     if (sub.ready() && sub2.ready()) {
-      const myClubs = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].savedClubs;
-      // eslint-disable-next-line no-restricted-syntax
-      for (const club of myClubs) {
-        clubList.push(Clubs.collection.find({ clubName: club }).fetch()[0]);
+      if ((Users.collection.find({ email: Meteor.user().username }).fetch())[0].savedClubs) {
+        const myClubs = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].savedClubs;
+        // eslint-disable-next-line no-restricted-syntax
+        for (const club of myClubs) {
+          clubList.push(Clubs.collection.find({ clubName: club }).fetch()[0]);
+        }
       }
       loaded = true;
     }
@@ -93,11 +95,10 @@ const MyClubs = () => {
       clubs: clubList,
     };
   }, []);
-  // There is a potential race condition. We might not be ready at this point.
-  // Need to ensure that getProfileData doesn't throw an error on line 18.
+
   return ready ? (
     <div className="backgroundImageTop">
-      <Container id={PageIDs.profilesPage} style={pageStyle}>
+      <Container id={PageIDs.myClubsPage} style={pageStyle}>
         <Row className="align-middle text-center">
           <Col className="d-flex flex-column justify-content-center">
             <h1>
@@ -105,9 +106,13 @@ const MyClubs = () => {
             </h1>
           </Col>
         </Row>
-        <Row xs={1} md={2} lg={4} className="g-2">
-          {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
-        </Row>
+        {clubs.length > 0 ? (
+          <Row xs={1} md={2} lg={4} className="g-2">
+            {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
+          </Row>
+        )
+          :
+          <Col className="d-flex justify-content-center mt-4"><h3>No clubs saved!</h3></Col>}
       </Container>
     </div>
   ) : <LoadingSpinner />;

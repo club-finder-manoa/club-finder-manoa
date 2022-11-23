@@ -8,7 +8,6 @@ import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'unif
 import { MortarboardFill, KeyFill, EnvelopeFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
-import { Users } from '../../api/users/Users';
 
 /*
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -20,8 +19,6 @@ const SignUp = () => {
   const majors = ['Accounting', 'Art', 'Business', 'Chemistry', 'Computer Science', 'Computer Engineering', 'Economics', 'Engineering', 'Finance',
     'Marketing', 'Mathematics', 'Music', 'Nursing', 'Philosophy', 'Physics', 'Political Science', 'Psychology', 'Social Work', 'Other']; // TODO add more later?
 
-  const sub = Meteor.subscribe(Users.userPublicationName);
-
   const schema = new SimpleSchema({
     email: String,
     password: String,
@@ -31,7 +28,7 @@ const SignUp = () => {
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const { email, password } = doc;
+    const { email, password, major } = doc;
     if (email.substring(email.length - 11, email.length) !== '@hawaii.edu') {
       setError('Please enter a valid UH email.');
       setInvalidEmail(true);
@@ -41,7 +38,7 @@ const SignUp = () => {
           setError(err.reason);
         } else {
           setError('');
-
+          Meteor.call('insertUser', { email, major });
           setRedirectToRef(true);
         }
       });

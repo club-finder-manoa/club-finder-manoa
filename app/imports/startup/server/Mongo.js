@@ -4,6 +4,12 @@ import { Users } from '../../api/users/Users';
 
 /* eslint-disable no-console */
 
+Meteor.methods({
+  insertUser: function ({ email, major }) {
+    return Users.collection.insert({ email, major });
+  },
+});
+
 function addClub({ clubName, clubType, mainPhoto, description, tags, relevantMajors, meetingInfo, contactName, contactEmail, photos, admins }) {
   Clubs.collection.insert({ clubName, clubType, mainPhoto, description, tags, relevantMajors, meetingInfo, contactName, contactEmail, photos, admins });
 }

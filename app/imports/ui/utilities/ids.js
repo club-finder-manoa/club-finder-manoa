@@ -43,7 +43,7 @@ export const PageIDs = {
   landingPage: 'landingPage',
   notAuthorizedPage: 'notAuthorizedPage',
   notFoundPage: 'notFoundPage',
-  profilesPage: 'profilesPage',
+  myClubsPage: 'profilesPage',
   projectsPage: 'projectsPage',
   signInPage: 'signInPage',
   signOutPage: 'signOutPage',

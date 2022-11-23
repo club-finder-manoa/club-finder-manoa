@@ -2,8 +2,6 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Image, Row, Col, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { _ } from 'meteor/underscore';
-import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -38,18 +36,18 @@ const ClubPage = () => {
       <h3>Meeting Times and Location</h3>
       <Table striped bordered hover size="sm">
         <thead>
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Location</th>
-        </tr>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Location</th>
+          </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>{club.meetingInfo}</td>
-          <td></td>
-          <td></td>
-        </tr>
+          <tr>
+            <td>{club.meetingInfo}</td>
+            <td />
+            <td />
+          </tr>
         </tbody>
       </Table>
 
