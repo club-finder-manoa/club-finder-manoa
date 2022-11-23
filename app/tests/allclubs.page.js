@@ -1,4 +1,5 @@
 import { Selector } from 'testcafe';
+import { ComponentIDs } from '../imports/ui/utilities/ids';
 
 class AllClubsPage {
   constructor() {
@@ -16,6 +17,11 @@ class AllClubsPage {
   async hasDefaultAllClubs(testController) {
     const cardCount = Selector('.card').count;
     await testController.expect(cardCount).gte(146);
+  }
+
+  async testListCardView(testController) {
+    await testController.click('#list-view-btn');
+    await testController.click('#card-view-btn');
   }
 }
 

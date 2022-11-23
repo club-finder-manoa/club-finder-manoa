@@ -65,7 +65,7 @@ const MakeCard = ({ club }) => {
 
   return (
     <Col>
-      <Card className="h-100">
+      <Card className="h-100" id="all-clubs-page">
         <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`} >
           <Card.Header>
             {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
@@ -287,10 +287,10 @@ const AllClubs = () => {
             <h1><b>All Clubs</b></h1>
           </Col>
           <Col className="text-end my-auto">
-            <Button style={cardView ? viewButtonStyleSelected : viewButtonStyle} onClick={() => setCardView(true)}>
+            <Button style={cardView ? viewButtonStyleSelected : viewButtonStyle} onClick={() => setCardView(true)} id="card-view-btn">
               <Grid /> Card View
             </Button>
-            <Button style={cardView ? viewButtonStyle : viewButtonStyleSelected} onClick={() => setCardView(false)}>
+            <Button style={cardView ? viewButtonStyle : viewButtonStyleSelected} onClick={() => setCardView(false)} id="list-view-btn">
               <List /> List View
             </Button>
           </Col>
