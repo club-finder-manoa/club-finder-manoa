@@ -1,22 +1,58 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import LoadingSpinner from '../components/LoadingSpinner';
-import UserListItem from '../components/UserListItem';
+import { Link } from 'react-router-dom';
+import { Trash, PencilSquare } from 'react-bootstrap-icons';
+import PropTypes from 'prop-types';
 import { Users } from '../../api/users/Users';
+import LoadingSpinner from '../components/LoadingSpinner';
 
-/* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
+/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+const UserListItem = ({ user }) => {
+
+  /* eslint-disable no-console */
+  const removeItem = (email) => {
+    Meteor.call('removeUser', { email });
+    console.log(`${email} removed from Users collection`);
+    Meteor.call('removeAccount', { email });
+    console.log(`${email} removed from Accounts collection`);
+  };
+  return (
+    <tr>
+      <td>{user.email}</td>
+      <td>
+        {user.email !== 'admin@hawaii.edu' ? (
+          <Col>
+            <Link className="me-2" to={`/edit/${user.email}`}><PencilSquare /></Link>
+            {user.adminForClubs ? user.adminForClubs : 'None'}
+          </Col>
+        ) : ''}
+      </td>
+      <td>
+        <Link to={`/edit/${user.email}`}>Reset</Link>
+      </td>
+      <td>
+        {user.email !== 'admin@hawaii.edu' ?
+          <Button variant="danger" onClick={() => removeItem(user.email)}><Trash className="me-2" />Delete</Button>
+          : '' }
+      </td>
+    </tr>
+  );
+};
+
+// Require a document to be passed to this component.
+UserListItem.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    adminForClubs: PropTypes.arrayOf(String),
+  }).isRequired,
+};
+
 const Admin = () => {
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, users } = useTracker(() => {
-    // Note that this subscription will get cleaned up
-    // when your component is unmounted or deps change.
-    // Get access to Stuff documents.
     const subscription = Meteor.subscribe(Users.userPublicationName);
-    // Determine if the subscription is ready
     const rdy = subscription.ready();
-    // Get the Stuff documents
     const user = Users.collection.find({}).fetch();
     return {
       users: user,
@@ -26,18 +62,17 @@ const Admin = () => {
   return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col md={7}>
+        <Col>
           <Col className="text-center">
-            <h2>User List</h2>
+            <h2>Users</h2>
           </Col>
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Club Admin</th>
-                <th>Change Password</th>
+                <th>Email</th>
+                <th>Admin Permissions</th>
+                <th>Reset Password</th>
                 <th>Delete Account</th>
-                <th>Change Admin Status</th>
               </tr>
             </thead>
             <tbody>

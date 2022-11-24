@@ -8,6 +8,14 @@ Meteor.methods({
   insertUser: function ({ email, major }) {
     return Users.collection.insert({ email, major });
   },
+
+  removeUser: function ({ email }) {
+    return Users.collection.remove({ email });
+  },
+
+  removeAccount: function ({ email }) {
+    return Meteor.users.remove({ username: email });
+  },
 });
 
 function addClub({ clubName, clubType, mainPhoto, description, tags, relevantMajors, meetingInfo, contactName, contactEmail, photos, admins }) {

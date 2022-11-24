@@ -96,7 +96,15 @@ const MyClubs = () => {
     };
   }, []);
 
-  return ready ? (
+  const getClubs = () => (clubs.length > 0 ? (
+    <Row xs={1} md={2} lg={4} className="g-2">
+      {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
+    </Row>
+  )
+    :
+    <Col className="d-flex justify-content-center mt-4"><h3>No clubs saved!</h3></Col>);
+
+  return (
     <div className="backgroundImageTop">
       <Container id={PageIDs.myClubsPage} style={pageStyle}>
         <Row className="align-middle text-center">
@@ -106,16 +114,10 @@ const MyClubs = () => {
             </h1>
           </Col>
         </Row>
-        {clubs.length > 0 ? (
-          <Row xs={1} md={2} lg={4} className="g-2">
-            {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
-          </Row>
-        )
-          :
-          <Col className="d-flex justify-content-center mt-4"><h3>No clubs saved!</h3></Col>}
+        {ready ? getClubs() : <LoadingSpinner />}
       </Container>
     </div>
-  ) : <LoadingSpinner />;
+  );
 };
 
 export default MyClubs;
