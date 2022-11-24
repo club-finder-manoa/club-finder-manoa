@@ -204,8 +204,8 @@ DeleteUserModal.propTypes = {
 
 const UserListItem = ({ user }) => {
   const resetPw = () => {
-    // TODO, maybe...
-    console.log('Password reset! (not really)');
+    // eslint-disable-next-line no-alert
+    alert('Password reset! (not really, still need to figure this out)');
   };
 
   const badgeStyle = {
@@ -224,6 +224,15 @@ const UserListItem = ({ user }) => {
     color: '#0878A9',
   };
 
+  function clubNameShortened(club) {
+    for (let i = 0; i < club.length; i++) {
+      if ((club[i] === ' ' || club[i] === ',') && i > 40) {
+        return `${club.substring(0, i)}...`;
+      }
+    }
+    return club;
+  }
+
   return (
     <tr>
       <td>{user.email}</td>
@@ -234,7 +243,7 @@ const UserListItem = ({ user }) => {
               <Row className="mb-1">
                 <Col>
                   <Badge id="adminClubBadge" key={index} bg="secondary" className="me-2" style={badgeStyle}>
-                    {club}&nbsp;<RemoveAdminStatusModal user={user} clubToRemove={club} />
+                    {clubNameShortened(club)}&nbsp;<RemoveAdminStatusModal user={user} clubToRemove={club} />
                   </Badge>
                 </Col>
               </Row>
