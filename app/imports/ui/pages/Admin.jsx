@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Badge, Button, Col, Container, Row, Table, Modal } from 'react-bootstrap';
+import { Badge, Button, Col, Container, Row, Table, Modal, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Link } from 'react-router-dom';
 import { Trash, PlusCircleFill, XCircleFill } from 'react-bootstrap-icons';
 import PropTypes from 'prop-types';
 import { Users } from '../../api/users/Users';
+import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
@@ -40,7 +40,7 @@ const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            Are you sure you want to remove {email}&apos;s admin permissions for &quot;{clubToRemove}&quot;?
+            Are you sure you want to remove <b>{email}</b>&apos;s admin permissions for <b>{clubToRemove}</b>?
           </Modal.Body>
           <Modal.Footer className="text-center">
             <Button variant="light" onClick={handleClose}>
@@ -64,6 +64,75 @@ RemoveAdminStatusModal.propTypes = {
   clubToRemove: PropTypes.string.isRequired,
 };
 
+const AddAdminStatusModal = ({ user }) => {
+  const [show, setShow] = useState(false);
+  const [adminClub, setAdminClub] = useState('');
+  const email = user.email;
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const clubs = Clubs.collection.find().fetch();
+
+  const addEm = () => {
+    const adminArray = Users.collection.find({ email }).fetch()[0].adminForClubs;
+    Meteor.call('updatePermissions', { email, adminArray });
+  };
+
+  const plusButtonStyle = {
+    backgroundColor: 'lightsteelblue',
+    borderWidth: 0,
+    fontSize: '15px',
+    fontWeight: 500,
+    borderRadius: '10px',
+    paddingTop: '5px',
+    paddingBottom: '5px',
+    paddingLeft: '15px',
+  };
+
+  return (
+    <>
+      <Button style={plusButtonStyle} onClick={handleShow}>
+        Add&nbsp;<PlusCircleFill style={{ paddingBottom: '4px', fontSize: '18px' }} />
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Add Permissions</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="pb-4">
+            <Form.Group controlId="selectClub">
+              <Form.Label>Select a club</Form.Label>
+              <Form.Control as="select" value={adminClub} onChange={e => setAdminClub(e.target.value)}>
+                {clubs.map((club) => <option>{club.clubName}</option>)}
+              </Form.Control>
+            </Form.Group>
+            <br />
+            {adminClub !== '' ? <span>Assign <b>{email}</b> admin permissions for <b>{adminClub}</b>?</span> : ''}
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button variant="success" onClick={() => addEm()}>
+              Confirm
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+AddAdminStatusModal.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    adminForClubs: PropTypes.arrayOf(String),
+  }).isRequired,
+};
+
 const UserListItem = ({ user }) => {
 
   /* eslint-disable no-console */
@@ -80,7 +149,7 @@ const UserListItem = ({ user }) => {
   };
 
   const badgeStyle = {
-    fontSize: '14px',
+    fontSize: '15px',
     fontWeight: 500,
     paddingTop: '5px',
     paddingBottom: '3px',
@@ -95,11 +164,11 @@ const UserListItem = ({ user }) => {
         {user.email !== 'admin@hawaii.edu' ? (
           <Col>
             {user.adminForClubs && user.adminForClubs.length > 0 ? user.adminForClubs.map((club, index) => (
-              <Badge key={index} bg="secondary" className="me-2" style={badgeStyle}>
+              <Badge key={index} bg="warning" className="me-2" style={badgeStyle}>
                 {club}&nbsp;<RemoveAdminStatusModal user={user} clubToRemove={club} />
               </Badge>
-            )) : <span className="me-2">None</span>}
-            <Link className="me-2" to={`/edit/${user.email}`}><PlusCircleFill /></Link>
+            )) : ''}
+            <AddAdminStatusModal user={user} />
           </Col>
         ) : 'All'}
       </td>
@@ -126,6 +195,7 @@ UserListItem.propTypes = {
 const Admin = () => {
   const { ready, users } = useTracker(() => {
     const subscription = Meteor.subscribe(Users.userPublicationName);
+    Meteor.subscribe(Clubs.userPublicationName);
     const rdy = subscription.ready();
     const user = Users.collection.find({}).fetch();
     return {
