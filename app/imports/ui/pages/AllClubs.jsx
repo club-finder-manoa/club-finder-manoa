@@ -18,7 +18,7 @@ const viewButtonStyleSelected = {
 };
 
 const viewButtonStyle = {
-  backgroundColor: 'white',
+  backgroundColor: 'transparent',
   borderWidth: 0,
   color: 'grey',
 };

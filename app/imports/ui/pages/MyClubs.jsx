@@ -102,8 +102,12 @@ const MyClubs = () => {
       {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
     </Row>
   )
-    :
-    <Col className="d-flex justify-content-center mt-4"><h3>No clubs saved!</h3></Col>);
+    : (
+      <Col className="mt-4 text-center">
+        <h4>No clubs saved!</h4><br />
+        Go to the &quot;All Clubs&quot; page to find clubs
+      </Col>
+    ));
 
   return (
     <div className="backgroundImageTop">

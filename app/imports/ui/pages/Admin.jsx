@@ -1,14 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import { Badge, Button, Col, Container, Row, Table, Modal } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Link } from 'react-router-dom';
-import { Trash, PencilSquare } from 'react-bootstrap-icons';
+import { Trash, PlusCircleFill, XCircleFill } from 'react-bootstrap-icons';
 import PropTypes from 'prop-types';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const xButtonStyle = {
+    padding: 0,
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+  };
+
+  return (
+    <>
+      <Button style={xButtonStyle} onClick={handleShow}>
+        <XCircleFill style={{ paddingBottom: '6px', fontSize: '20px' }} />
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Remove Permissions</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to remove {user}&apos;s admin permissions for &quot;{clubToRemove}&quot;?
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button variant="danger">
+              Remove
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+RemoveAdminStatusModal.propTypes = {
+  user: PropTypes.string.isRequired,
+  clubToRemove: PropTypes.string.isRequired,
+};
+
 const UserListItem = ({ user }) => {
 
   /* eslint-disable no-console */
@@ -18,19 +63,38 @@ const UserListItem = ({ user }) => {
     Meteor.call('removeAccount', { email });
     console.log(`${email} removed from users`);
   };
+
+  const resetPw = () => {
+    // TODO, maybe...
+    console.log('Password reset! (not really)');
+  };
+
+  const badgeStyle = {
+    fontSize: '14px',
+    fontWeight: 500,
+    paddingTop: '5px',
+    paddingBottom: '3px',
+    paddingLeft: '15px',
+    borderRadius: '10px',
+  };
+
   return (
     <tr>
       <td>{user.email}</td>
       <td>
         {user.email !== 'admin@hawaii.edu' ? (
           <Col>
-            <Link className="me-2" to={`/edit/${user.email}`}><PencilSquare /></Link>
-            {user.adminForClubs ? user.adminForClubs : 'None'}
+            {user.adminForClubs ? user.adminForClubs.map((club, index) => (
+              <Badge key={index} bg="dark" className="me-2" style={badgeStyle}>
+                {club}&nbsp;<RemoveAdminStatusModal user={user.email} clubToRemove={club} />
+              </Badge>
+            )) : <span className="me-2">None</span>}
+            <Link className="me-2" to={`/edit/${user.email}`}><PlusCircleFill /></Link>
           </Col>
-        ) : ''}
+        ) : 'All'}
       </td>
       <td>
-        <Link to={`/edit/${user.email}`}>Reset</Link>
+        <Button onClick={() => resetPw(user.email)}>Reset</Button>
       </td>
       <td>
         {user.email !== 'admin@hawaii.edu' ?
@@ -41,9 +105,9 @@ const UserListItem = ({ user }) => {
   );
 };
 
-// Require a document to be passed to this component.
 UserListItem.propTypes = {
   user: PropTypes.shape({
+    _id: PropTypes.string,
     email: PropTypes.string,
     adminForClubs: PropTypes.arrayOf(String),
   }).isRequired,
@@ -64,7 +128,7 @@ const Admin = () => {
       <Row className="justify-content-center">
         <Col>
           <Col className="text-center">
-            <h2>Users</h2>
+            <h2><b>Users</b></h2>
           </Col>
           <Table striped bordered hover>
             <thead>
