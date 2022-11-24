@@ -14,6 +14,7 @@
 body {
   --bs-dark: var(--cfm-navbar-bg);
   --bs-dark-rgb: var(--cfm-navbar-bg-rgb);
+  --bs-secondary-rgb: 45, 130, 89;
 }
 
 /* Color the light Brand and links with dark color */
@@ -130,4 +131,3 @@ body .btn-primary {
   --bs-accordion-btn-focus-border-color: transparent;
   --bs-accordion-btn-focus-box-shadow: transparent;
 }
-

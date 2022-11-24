@@ -19,6 +19,7 @@ const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
     const adminArray = Users.collection.find({ email }).fetch()[0].adminForClubs;
     adminArray.pop(clubToRemove);
     Meteor.call('updatePermissions', { email, adminArray });
+    handleClose();
   };
 
   const xButtonStyle = {
@@ -75,12 +76,22 @@ const AddAdminStatusModal = ({ user }) => {
   const clubs = Clubs.collection.find().fetch();
 
   const addEm = () => {
-    const adminArray = Users.collection.find({ email }).fetch()[0].adminForClubs;
-    Meteor.call('updatePermissions', { email, adminArray });
+    let adminArray = Users.collection.find({ email }).fetch()[0].adminForClubs;
+    if (adminArray && adminArray.includes(adminClub)) {
+      // eslint-disable-next-line no-alert
+      alert(`User ${email} is already an admin for "${adminClub}".`);
+    } else if (adminArray) {
+      adminArray.push(adminClub);
+      Meteor.call('updatePermissions', { email, adminArray });
+      handleClose();
+    } else {
+      adminArray = [adminClub];
+      Meteor.call('updatePermissions', { email, adminArray });
+      handleClose();
+    }
   };
 
   const plusButtonStyle = {
-    backgroundColor: 'lightsteelblue',
     borderWidth: 0,
     fontSize: '15px',
     fontWeight: 500,
@@ -164,9 +175,13 @@ const UserListItem = ({ user }) => {
         {user.email !== 'admin@hawaii.edu' ? (
           <Col>
             {user.adminForClubs && user.adminForClubs.length > 0 ? user.adminForClubs.map((club, index) => (
-              <Badge key={index} bg="warning" className="me-2" style={badgeStyle}>
-                {club}&nbsp;<RemoveAdminStatusModal user={user} clubToRemove={club} />
-              </Badge>
+              <Row className="mb-1">
+                <Col>
+                  <Badge id="adminClubBadge" key={index} bg="secondary" className="me-2" style={badgeStyle}>
+                    {club}&nbsp;<RemoveAdminStatusModal user={user} clubToRemove={club} />
+                  </Badge>
+                </Col>
+              </Row>
             )) : ''}
             <AddAdminStatusModal user={user} />
           </Col>
