@@ -16,6 +16,10 @@ Meteor.methods({
   removeAccount: function ({ email }) {
     return Meteor.users.remove({ username: email });
   },
+
+  updatePermissions: function ({ email, adminArray }) {
+    return Users.collection.update({ email: email }, { $set: { adminForClubs: adminArray } });
+  },
 });
 
 function addClub({ clubName, clubType, mainPhoto, description, tags, relevantMajors, meetingInfo, contactName, contactEmail, photos, admins }) {

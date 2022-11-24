@@ -10,9 +10,16 @@ import LoadingSpinner from '../components/LoadingSpinner';
 
 const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
   const [show, setShow] = useState(false);
+  const email = user.email;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const removeEm = () => {
+    const adminArray = Users.collection.find({ email }).fetch()[0].adminForClubs;
+    adminArray.pop(clubToRemove);
+    Meteor.call('updatePermissions', { email, adminArray });
+  };
 
   const xButtonStyle = {
     padding: 0,
@@ -33,13 +40,13 @@ const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            Are you sure you want to remove {user}&apos;s admin permissions for &quot;{clubToRemove}&quot;?
+            Are you sure you want to remove {email}&apos;s admin permissions for &quot;{clubToRemove}&quot;?
           </Modal.Body>
           <Modal.Footer className="text-center">
             <Button variant="light" onClick={handleClose}>
               Back
             </Button>
-            <Button variant="danger">
+            <Button variant="danger" onClick={() => removeEm()}>
               Remove
             </Button>
           </Modal.Footer>
@@ -50,7 +57,10 @@ const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
 };
 
 RemoveAdminStatusModal.propTypes = {
-  user: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    adminForClubs: PropTypes.arrayOf(String),
+  }).isRequired,
   clubToRemove: PropTypes.string.isRequired,
 };
 
@@ -84,9 +94,9 @@ const UserListItem = ({ user }) => {
       <td>
         {user.email !== 'admin@hawaii.edu' ? (
           <Col>
-            {user.adminForClubs ? user.adminForClubs.map((club, index) => (
-              <Badge key={index} bg="dark" className="me-2" style={badgeStyle}>
-                {club}&nbsp;<RemoveAdminStatusModal user={user.email} clubToRemove={club} />
+            {user.adminForClubs && user.adminForClubs.length > 0 ? user.adminForClubs.map((club, index) => (
+              <Badge key={index} bg="secondary" className="me-2" style={badgeStyle}>
+                {club}&nbsp;<RemoveAdminStatusModal user={user} clubToRemove={club} />
               </Badge>
             )) : <span className="me-2">None</span>}
             <Link className="me-2" to={`/edit/${user.email}`}><PlusCircleFill /></Link>
