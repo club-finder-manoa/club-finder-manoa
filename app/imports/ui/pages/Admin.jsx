@@ -16,7 +16,7 @@ const UserListItem = ({ user }) => {
     Meteor.call('removeUser', { email });
     console.log(`${email} removed from Users collection`);
     Meteor.call('removeAccount', { email });
-    console.log(`${email} removed from Accounts collection`);
+    console.log(`${email} removed from users`);
   };
   return (
     <tr>
