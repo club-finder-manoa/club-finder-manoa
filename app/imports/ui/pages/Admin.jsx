@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Badge, Button, Col, Container, Row, Table, Modal, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Trash, PlusCircleFill, XCircleFill } from 'react-bootstrap-icons';
+import { PlusCircleFill, XCircleFill } from 'react-bootstrap-icons';
 import PropTypes from 'prop-types';
 import { Users } from '../../api/users/Users';
 import { Clubs } from '../../api/clubs/Clubs';
@@ -83,10 +83,12 @@ const AddAdminStatusModal = ({ user }) => {
     } else if (adminArray) {
       adminArray.push(adminClub);
       Meteor.call('updatePermissions', { email, adminArray });
+      setAdminClub('');
       handleClose();
     } else {
       adminArray = [adminClub];
       Meteor.call('updatePermissions', { email, adminArray });
+      setAdminClub('');
       handleClose();
     }
   };
@@ -144,16 +146,63 @@ AddAdminStatusModal.propTypes = {
   }).isRequired,
 };
 
-const UserListItem = ({ user }) => {
+const DeleteUserModal = ({ email }) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   /* eslint-disable no-console */
-  const removeItem = (email) => {
+  const deleteUser = () => {
     Meteor.call('removeUser', { email });
     console.log(`${email} removed from Users collection`);
     Meteor.call('removeAccount', { email });
     console.log(`${email} removed from users`);
+    handleClose();
   };
 
+  const deleteStyle = {
+    borderWidth: 0,
+    padding: 0,
+    backgroundColor: 'transparent',
+    color: 'red',
+  };
+
+  return (
+    <>
+      <Button style={deleteStyle} onClick={handleShow}>
+        <u>Delete</u>
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Delete Account</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="pb-4">
+            Are you sure you want to delete the user <b>{email}</b>?<br /><br />
+            This action cannot be undone.
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button variant="danger" onClick={() => deleteUser()}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+DeleteUserModal.propTypes = {
+  email: PropTypes.string.isRequired,
+};
+
+const UserListItem = ({ user }) => {
   const resetPw = () => {
     // TODO, maybe...
     console.log('Password reset! (not really)');
@@ -166,6 +215,13 @@ const UserListItem = ({ user }) => {
     paddingBottom: '3px',
     paddingLeft: '15px',
     borderRadius: '10px',
+  };
+
+  const resetStyle = {
+    borderWidth: 0,
+    padding: 0,
+    backgroundColor: 'transparent',
+    color: '#0878A9',
   };
 
   return (
@@ -188,11 +244,11 @@ const UserListItem = ({ user }) => {
         ) : 'All'}
       </td>
       <td>
-        <Button onClick={() => resetPw(user.email)}>Reset</Button>
+        <Button style={resetStyle} onClick={() => resetPw(user.email)}><u>Reset</u></Button>
       </td>
       <td>
         {user.email !== 'admin@hawaii.edu' ?
-          <Button variant="danger" onClick={() => removeItem(user.email)}><Trash className="me-2" />Delete</Button>
+          <DeleteUserModal email={user.email} />
           : '' }
       </td>
     </tr>
