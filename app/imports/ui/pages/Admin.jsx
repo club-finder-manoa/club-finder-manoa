@@ -119,7 +119,7 @@ const AddAdminStatusModal = ({ user }) => {
             <Form.Group controlId="selectClub">
               <Form.Label>Select a club</Form.Label>
               <Form.Control as="select" value={adminClub} onChange={e => setAdminClub(e.target.value)}>
-                {clubs.map((club) => <option>{club.clubName}</option>)}
+                {clubs.map((club) => <option key={club.clubName}>{club.clubName}</option>)}
               </Form.Control>
             </Form.Group>
             <br />
@@ -240,7 +240,7 @@ const UserListItem = ({ user }) => {
         {user.email !== 'admin@hawaii.edu' ? (
           <Col>
             {user.adminForClubs && user.adminForClubs.length > 0 ? user.adminForClubs.map((club, index) => (
-              <Row className="mb-1">
+              <Row className="mb-1" key={index}>
                 <Col>
                   <Badge id="adminClubBadge" key={index} bg="secondary" className="me-2" style={badgeStyle}>
                     {clubNameShortened(club)}&nbsp;<RemoveAdminStatusModal user={user} clubToRemove={club} />
@@ -248,7 +248,7 @@ const UserListItem = ({ user }) => {
                 </Col>
               </Row>
             )) : ''}
-            <AddAdminStatusModal user={user} />
+            <AddAdminStatusModal key={user._id} user={user} />
           </Col>
         ) : 'All'}
       </td>
