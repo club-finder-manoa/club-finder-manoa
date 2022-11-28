@@ -1,6 +1,7 @@
 import React from 'react';
 import { AutoForm, TextField, LongTextField, SelectField, SubmitField } from 'uniforms-bootstrap5';
 import { Container, Col, Card, Row } from 'react-bootstrap';
+import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
@@ -11,6 +12,7 @@ import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
+
 
 /* Create a schema to specify the structure of the data to appear in the form. */
 const makeSchema = (allInterests, allProjects) => new SimpleSchema({
@@ -28,20 +30,7 @@ const makeSchema = (allInterests, allProjects) => new SimpleSchema({
 
 /* Renders the EditProfile Page: what appears after the user logs in. */
 const EditProfile = () => {
-
   /* On submit, insert the data. */
-  const submit = () => {
-    /*
-    Meteor.call(updateProfileMethod, data, (error) => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        swal('Success', 'EditProfile updated successfully', 'success');
-      }
-    });
-
-     */
-  };
 
   const { ready, email } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
@@ -52,6 +41,24 @@ const EditProfile = () => {
       email: Meteor.user()?.username,
     };
   }, []);
+
+  const submit = (data) => {
+    let updateError;
+    const userId = email._id;
+    const { firstName, lastName, bio, title, picture } = data;
+    Users.update(userId,
+      { $set: { firstName, lastName, bio, title, picture } },
+      (error) => {
+        updateError = error;
+      }
+        if (updateError) {
+          swal('Error', updateError.message, 'error');
+        } else {
+          swal('Success', 'The student record was updated.', 'success');
+        }
+    });
+
+  };
   // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
   const allInterests = _.pluck(Users.collection.find().fetch(), 'name');
   const allProjects = '';
