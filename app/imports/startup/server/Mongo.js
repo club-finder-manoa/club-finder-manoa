@@ -4,6 +4,24 @@ import { Users } from '../../api/users/Users';
 
 /* eslint-disable no-console */
 
+Meteor.methods({
+  insertUser: function ({ email, major }) {
+    return Users.collection.insert({ email, major });
+  },
+
+  removeUser: function ({ email }) {
+    return Users.collection.remove({ email });
+  },
+
+  removeAccount: function ({ email }) {
+    return Meteor.users.remove({ username: email });
+  },
+
+  updatePermissions: function ({ email, adminArray }) {
+    return Users.collection.update({ email: email }, { $set: { adminForClubs: adminArray } });
+  },
+});
+
 function addClub({ clubName, clubType, mainPhoto, description, tags, relevantMajors, meetingInfo, contactName, contactEmail, photos, admins }) {
   Clubs.collection.insert({ clubName, clubType, mainPhoto, description, tags, relevantMajors, meetingInfo, contactName, contactEmail, photos, admins });
 }

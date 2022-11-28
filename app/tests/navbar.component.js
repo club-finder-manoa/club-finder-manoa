@@ -34,6 +34,26 @@ class NavBar {
     await testController.click(`#${ComponentIDs.profilesMenuItem}`);
   }
 
+  async gotoMyClubsPage(testController) {
+    await testController.click(`#${ComponentIDs.filterMenuItem}`);
+  }
+
+  async gotoAllClubsPage(testController) {
+    await testController.click(`#${ComponentIDs.addProjectMenuItem}`);
+  }
+
+  async gotoUserPage(testController) {
+    const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    const loggedInUser = await Selector(`#${ComponentIDs.currentUserDropdown}`).exists;
+    if (loggedInUser) {
+      await testController.click(`#${ComponentIDs.currentUserDropdown}`);
+      await testController.click(`#${ComponentIDs.currentUserDropdownProfile}`);
+    }
+  }
+
   async gotoInterestsPage(testController) {
     const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
     if (!visible) {

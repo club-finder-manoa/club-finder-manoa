@@ -34,8 +34,8 @@ const MakeCard = ({ club }) => {
 
   return (
     <Col>
-      <Card className="h-100">
-        <a style={{ color: 'black', textDecoration: 'none' }} href="/TempClubPage">
+      <Card className="h-100" id="my-clubs-page">
+        <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
           <Card.Header>
             {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
@@ -63,6 +63,7 @@ const MakeCard = ({ club }) => {
 
 MakeCard.propTypes = {
   club: PropTypes.shape({
+    _id: PropTypes.string,
     mainPhoto: PropTypes.string,
     clubName: PropTypes.string,
     clubType: PropTypes.string,
@@ -81,10 +82,12 @@ const MyClubs = () => {
     const sub2 = Meteor.subscribe(Users.userPublicationName);
     const clubList = [];
     if (sub.ready() && sub2.ready()) {
-      const myClubs = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].savedClubs;
-      // eslint-disable-next-line no-restricted-syntax
-      for (const club of myClubs) {
-        clubList.push(Clubs.collection.find({ clubName: club }).fetch()[0]);
+      if ((Users.collection.find({ email: Meteor.user().username }).fetch())[0].savedClubs) {
+        const myClubs = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].savedClubs;
+        // eslint-disable-next-line no-restricted-syntax
+        for (const club of myClubs) {
+          clubList.push(Clubs.collection.find({ clubName: club }).fetch()[0]);
+        }
       }
       loaded = true;
     }
@@ -93,22 +96,33 @@ const MyClubs = () => {
       clubs: clubList,
     };
   }, []);
-  // There is a potential race condition. We might not be ready at this point.
-  // Need to ensure that getProfileData doesn't throw an error on line 18.
-  return ready ? (
-    <Container id={PageIDs.profilesPage} style={pageStyle}>
-      <Row className="align-middle text-center">
-        <Col className="d-flex flex-column justify-content-center">
-          <h1>
-            <b>My Clubs</b>
-          </h1>
-        </Col>
-      </Row>
-      <Row xs={1} md={2} lg={4} className="g-2">
-        {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
-      </Row>
-    </Container>
-  ) : <LoadingSpinner />;
+
+  const getClubs = () => (clubs.length > 0 ? (
+    <Row xs={1} md={2} lg={4} className="g-2">
+      {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
+    </Row>
+  )
+    : (
+      <Col className="mt-4 text-center">
+        <h4>No clubs saved!</h4><br />
+        Go to the &quot;All Clubs&quot; page to find clubs
+      </Col>
+    ));
+
+  return (
+    <div className="backgroundImageTop">
+      <Container id={PageIDs.myClubsPage} style={pageStyle}>
+        <Row className="align-middle text-center">
+          <Col className="d-flex flex-column justify-content-center">
+            <h1>
+              <b>My Clubs</b>
+            </h1>
+          </Col>
+        </Row>
+        {ready ? getClubs() : <LoadingSpinner />}
+      </Container>
+    </div>
+  );
 };
 
 export default MyClubs;
