@@ -114,7 +114,7 @@ const MyClubs = () => {
       <Container id={PageIDs.myClubsPage} style={pageStyle}>
         <Row className="align-middle text-center">
           <Col className="d-flex flex-column justify-content-center">
-            <h1>
+            <h1 style={{ color: '#16211b' }} className="my-2 mb-3">
               <b>My Clubs</b>
             </h1>
           </Col>

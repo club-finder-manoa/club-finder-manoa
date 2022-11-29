@@ -284,8 +284,9 @@ const AllClubs = () => {
       <Container id={PageIDs.allClubsPage} style={pageStyle}>
         <Row className="align-middle text-center">
           <Col />
-          <Col className="d-flex flex-column justify-content-center">
-            <h1><b>All Clubs</b></h1>
+          <Col className="d-flex flex-column justify-content-center mb-3">
+            <h1 style={{ color: '#16211b' }} className="my-2"><b>All Clubs</b></h1>
+            {`${filteredClubs.length} club`}{filteredClubs.length === 1 ? '' : 's'}
           </Col>
           <Col className="text-end my-auto">
             <Button style={cardView ? viewButtonStyleSelected : viewButtonStyle} onClick={() => setCardView(true)} id="card-view-btn">

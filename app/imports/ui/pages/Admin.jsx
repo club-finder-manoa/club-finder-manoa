@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Badge, Button, Col, Container, Row, Table, Modal, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { PlusCircleFill, XCircleFill } from 'react-bootstrap-icons';
+import { Plus, X } from 'react-bootstrap-icons';
 import PropTypes from 'prop-types';
 import { Users } from '../../api/users/Users';
 import { Clubs } from '../../api/clubs/Clubs';
@@ -32,7 +32,7 @@ const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
   return (
     <>
       <Button style={xButtonStyle} onClick={handleShow}>
-        <XCircleFill style={{ paddingBottom: '6px', fontSize: '20px' }} />
+        <X style={{ paddingBottom: '4px', fontSize: '24px' }} />
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Container className="mt-2">
@@ -99,15 +99,16 @@ const AddAdminStatusModal = ({ user }) => {
     fontSize: '15px',
     fontWeight: 500,
     borderRadius: '10px',
-    paddingTop: '5px',
-    paddingBottom: '5px',
-    paddingLeft: '15px',
+    paddingTop: '4px',
+    paddingBottom: '4px',
+    paddingLeft: '6px',
+    paddingRight: '6px',
   };
 
   return (
     <>
       <Button style={plusButtonStyle} onClick={handleShow}>
-        Add&nbsp;<PlusCircleFill style={{ paddingBottom: '4px', fontSize: '18px' }} />
+        &nbsp;&nbsp;Add<Plus style={{ paddingBottom: '2px', fontSize: '24px', fontWeight: 900 }} />
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Container className="mt-2">
@@ -183,7 +184,7 @@ const DeleteUserModal = ({ email }) => {
           </Modal.Header>
           <Modal.Body className="pb-4">
             Are you sure you want to delete the user <b>{email}</b>?<br /><br />
-            This action cannot be undone.
+            <b style={{ color: 'red' }}>This action is permanent and cannot be undone.</b>
           </Modal.Body>
           <Modal.Footer className="text-center">
             <Button variant="light" onClick={handleClose}>
@@ -289,7 +290,7 @@ const Admin = () => {
       <Row className="justify-content-center">
         <Col>
           <Col className="text-center">
-            <h2><b>Users</b></h2>
+            <h2><b>Edit Users</b></h2>
           </Col>
           <Table striped bordered hover>
             <thead>
