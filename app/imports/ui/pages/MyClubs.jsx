@@ -36,7 +36,7 @@ const MakeCard = ({ club }) => {
     <Col>
       <Card className="h-100" id="my-clubs-page">
         <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
-          <Card.Header>
+          <Card.Header id="myclubs-club-header">
             {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
             <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
@@ -114,7 +114,7 @@ const MyClubs = () => {
       <Container id={PageIDs.myClubsPage} style={pageStyle}>
         <Row className="align-middle text-center">
           <Col className="d-flex flex-column justify-content-center">
-            <h1>
+            <h1 style={{ color: '#16211b' }} className="my-2 mb-3">
               <b>My Clubs</b>
             </h1>
           </Col>

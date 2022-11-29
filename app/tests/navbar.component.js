@@ -35,11 +35,27 @@ class NavBar {
   }
 
   async gotoMyClubsPage(testController) {
-    await testController.click(`#${ComponentIDs.filterMenuItem}`);
+    const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click(`#${ComponentIDs.myClubsMenuItem}`);
   }
 
   async gotoAllClubsPage(testController) {
-    await testController.click(`#${ComponentIDs.addProjectMenuItem}`);
+    const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click(`#${ComponentIDs.allClubsMenuItem}`);
+  }
+
+  async gotoAdminPage(testController) {
+    const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click(`#${ComponentIDs.adminMenuItem}`);
   }
 
   async gotoUserPage(testController) {
