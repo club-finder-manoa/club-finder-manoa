@@ -17,12 +17,6 @@ class UsersCollection {
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
 
-    this.collection.allow({
-      update: function (userId, doc, [email, firstName, lastName, aboutMe, major, picture, interests], { $set }) {
-        return doc.owner === userId;
-      },
-    });
-
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       firstName: { type: String, optional: true },

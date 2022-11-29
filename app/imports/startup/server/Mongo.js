@@ -9,6 +9,10 @@ Meteor.methods({
     return Users.collection.insert({ email, major });
   },
 
+  updateUser: function ({ email, firstName, lastName, aboutMe, major, picture, interests }) {
+    return Users.collection.update({ email: email }, { $set: { firstName, lastName, aboutMe, major, picture, interests } });
+  },
+
   removeUser: function ({ email }) {
     return Users.collection.remove({ email });
   },

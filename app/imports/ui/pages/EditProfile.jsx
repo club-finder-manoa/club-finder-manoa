@@ -1,10 +1,8 @@
 import React from 'react';
-import swal from 'sweetalert';
 import { AutoForm, TextField, LongTextField, SelectField, SubmitField, ErrorsField, HiddenField } from 'uniforms-bootstrap5';
 import { Container, Col, Card, Row } from 'react-bootstrap';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Meteor } from 'meteor/meteor';
-import { _ } from 'meteor/underscore';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
 import { Users } from '../../api/users/Users';
@@ -63,9 +61,7 @@ const EditProfile = () => {
   /* On submit, insert the data. */
   const submit = (data) => {
     const { email, firstName, lastName, aboutMe, major, picture, interests } = data;
-    Users.collection.update(_id, { $set: { email, firstName, lastName, aboutMe, major, picture, interests } }, (error) => (error ?
-      swal('Error', error.message, 'error') :
-      swal('Success', 'EditProfile updated successfully', 'success')));
+    Meteor.call('updateUser', { email, firstName, lastName, aboutMe, major, picture, interests });
   };
   // Now create the model with all the user information.
   return ready ? (
