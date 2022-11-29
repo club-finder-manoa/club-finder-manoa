@@ -1,4 +1,9 @@
 export const ComponentIDs = {
+  allClubsMenuItem: 'allClubsMenuItem',
+  myClubsMenuItem: 'myClubsMenuItem',
+  adminMenuItem: 'adminMenuItem',
+  addAdminPermsBtn: 'addAdminPermsBtn',
+
   addProjectMenuItem: 'addProjectMenuItem',
   addProjectFormName: 'addProjectFormName',
   addProjectFormPicture: 'addProjectFormPicture',
@@ -43,8 +48,9 @@ export const PageIDs = {
   landingPage: 'landingPage',
   notAuthorizedPage: 'notAuthorizedPage',
   notFoundPage: 'notFoundPage',
-  myClubsPage: 'profilesPage',
+  myClubsPage: 'myClubsPage',
   projectsPage: 'projectsPage',
+  allClubsPage: 'allClubsPage',
   signInPage: 'signInPage',
   signOutPage: 'signOutPage',
   signUpPage: 'signUpPage',

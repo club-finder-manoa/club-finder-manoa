@@ -1,15 +1,16 @@
 import { Selector } from 'testcafe';
+import { PageIDs } from '../imports/ui/utilities/ids';
 
 class MyClubsPage {
   constructor() {
-    this.pageId = '#my-clubs-page';
+    this.pageId = `#${PageIDs.myClubsPage}`;
     this.pageSelector = Selector(this.pageId);
   }
 
   /** Asserts that this page is currently displayed. */
   async isDisplayed(testController) {
     // This is first test to be run. Wait 20 seconds to avoid timeouts with GitHub Actions.
-    await testController.wait(10000).expect(this.pageSelector.exists).ok();
+    await testController.expect(this.pageSelector.exists).ok();
   }
 
   /** Checks that the current page has at least 2 clubs on it.  */
