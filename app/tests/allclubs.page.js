@@ -23,6 +23,17 @@ class AllClubsPage {
     await testController.click('#list-view-btn');
     await testController.click('#card-view-btn');
   }
+
+  async testSearchOptionsName(testController) {
+    const clubName = 'Engineer';
+    await testController.click('#search-option-drpdwn');
+    await testController.click('#search-by-name');
+    await testController.typeText('#search-by-name', clubName);
+  }
+
+  async testClubView(testController) {
+    await testController.click('#club-header');
+  }
 }
 
 export const allClubsPage = new AllClubsPage();
