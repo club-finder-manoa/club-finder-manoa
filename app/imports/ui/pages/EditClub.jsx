@@ -47,13 +47,13 @@ const EditClub = () => {
                 </Row>
                 <LongTextField name="description" placeholder="This is a description" />
                 <Row>
-                  <Col><SelectField name="tags" placeholder="tags" /></Col>
-                  <Col><SelectField name="relevantMajors" placeholder="Relavent Majors" /> </Col>
+                  <Col xs={6}><SelectField name="tags" placeholder="tags" /></Col>
+                  <Col xs={6}><SelectField name="relevantMajors" placeholder="Relavent Majors" /> </Col>
                 </Row>
                 <Row>
-                  <Col><TextField name="contactName" showInlineError placeholder="Contact Name" /> </Col>
-                  <Col><TextField name="contactEmail" showInlineError placeholder="Contact Email" /> </Col>
-                  <Col><TextField name="photos" showInlineError placeholder="Extra Photos" /> </Col>
+                  <Col xs={4}><TextField name="contactName" showInlineError placeholder="Contact Name" /> </Col>
+                  <Col xs={4}><TextField name="contactEmail" showInlineError placeholder="Contact Email" /> </Col>
+                  <Col xs={4}><TextField name="photos" showInlineError placeholder="Extra Photos" /> </Col>
                 </Row>
                 <SubmitField value="Update" />
                 <ErrorsField />
