@@ -65,9 +65,9 @@ const MakeCard = ({ club }) => {
 
   return (
     <Col>
-      <Card className="h-100">
-        <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
-          <Card.Header>
+      <Card className="h-100" id="all-clubs-page">
+        <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`} >
+          <Card.Header id="club-header">
             {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
             <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
@@ -288,17 +288,17 @@ const AllClubs = () => {
             <h1><b>All Clubs</b></h1>
           </Col>
           <Col className="text-end my-auto">
-            <Button style={cardView ? viewButtonStyleSelected : viewButtonStyle} onClick={() => setCardView(true)}>
+            <Button style={cardView ? viewButtonStyleSelected : viewButtonStyle} onClick={() => setCardView(true)} id="card-view-btn">
               <Grid /> Card View
             </Button>
-            <Button style={cardView ? viewButtonStyle : viewButtonStyleSelected} onClick={() => setCardView(false)}>
+            <Button style={cardView ? viewButtonStyle : viewButtonStyleSelected} onClick={() => setCardView(false)} id="list-view-btn">
               <List /> List View
             </Button>
           </Col>
         </Row>
         <Accordion className="mb-3">
           <Accordion.Item eventKey="0">
-            <Accordion.Header>
+            <Accordion.Header id="search-option-drpdwn">
               Search Options
             </Accordion.Header>
             <Accordion.Body>
@@ -308,12 +308,14 @@ const AllClubs = () => {
                     <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
                       Name
                     </Col>
-                    <input
-                      type="text"
-                      style={textBoxStyle}
-                      placeholder="Enter Club Name"
-                      onChange={e => setClubName(e.target.value)}
-                    />
+                    <div id="search-by-name">
+                      <input
+                        type="text"
+                        style={textBoxStyle}
+                        placeholder="Enter Club Name"
+                        onChange={e => setClubName(e.target.value)}
+                      />
+                    </div>
                   </label>
                 </Col>
                 <Col className="d-flex justify-content-center">

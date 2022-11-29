@@ -43,6 +43,9 @@ test('Test the All Clubs page', async (testController) => {
   await navBar.gotoAllClubsPage(testController);
   await allClubsPage.isDisplayed(testController);
   await allClubsPage.hasDefaultAllClubs(testController);
+  await allClubsPage.testListCardView(testController);
+  await allClubsPage.testSearchOptionsName(testController);
+  await allClubsPage.testClubView(testController);
 });
 
 test('Test the My Club page', async (testController) => {
@@ -51,14 +54,17 @@ test('Test the My Club page', async (testController) => {
   await navBar.gotoMyClubsPage(testController);
   await myClubsPage.isDisplayed(testController);
   await myClubsPage.hasDefaultMyClubs(testController);
+  await myClubsPage.testMyClubsView(testController);
 });
 
+/*
 test('Test the User page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signInPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoUserPage(testController);
   await userPage.isDisplayed(testController);
 });
+*/
 
 /** OLD BOWFOLIOS TESTS - left as reference, remove after implementing our own */
 /*
