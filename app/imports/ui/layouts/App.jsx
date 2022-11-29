@@ -16,7 +16,7 @@ import MyClubs from '../pages/MyClubs';
 import EditProfile from '../pages/EditProfile';
 import Filter from '../pages/Filter';
 import AddProject from '../pages/AddProject';
-import ProfileTesting from '../pages/ProfileTesting';
+import Profile from '../pages/Profile';
 // import Profile from '../pages/Profile';
 import TempClubPage from '../pages/TempClubPage';
 import Admin from '../pages/Admin';
@@ -35,7 +35,7 @@ const App = () => (
         <Route path="/all-clubs" element={<ProtectedRoute><AllClubs /></ProtectedRoute>} />
         <Route path="/my-clubs" element={<ProtectedRoute><MyClubs /></ProtectedRoute>} />
         <Route path="/edit-profile/:_id" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
-        <Route path="/profile" element={<ProtectedRoute><ProfileTesting /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/filter" element={<ProtectedRoute><Filter /></ProtectedRoute>} />
         <Route path="/addproject" element={<ProtectedRoute><AddProject /></ProtectedRoute>} />
         <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
