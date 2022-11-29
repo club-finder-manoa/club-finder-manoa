@@ -19,13 +19,12 @@ const EditProfile = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = useParams();
 
-  const { doc, ready, email2, firstName2, lastName2, aboutMe2, major2, picture2, interests2 } = useTracker(() => {
+  const { doc, ready, firstName2, lastName2, aboutMe2, major2, picture2, interests2 } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(Users.userPublicationName);
     const sub2 = Meteor.subscribe(Clubs.userPublicationName);
     const document = Users.collection.findOne(_id);
     let loaded = false;
-    let emailTemp;
     let firstNameTemp;
     let lastNameTemp;
     let aboutMeTemp;
@@ -33,7 +32,6 @@ const EditProfile = () => {
     let pictureTemp;
     let interestsTemp;
     if (sub1.ready() && sub2.ready()) {
-      emailTemp = Meteor.user()?.username;
       if (Users.collection.find({ email: Meteor.user().username })) {
         firstNameTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].firstName;
         lastNameTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].lastName;
@@ -48,7 +46,6 @@ const EditProfile = () => {
     return {
       doc: document,
       ready: loaded,
-      email2: emailTemp,
       firstName2: firstNameTemp,
       lastName2: lastNameTemp,
       aboutMe2: aboutMeTemp,
@@ -73,9 +70,8 @@ const EditProfile = () => {
             <Card>
               <Card.Body>
                 <Row>
-                  <Col xs={4}><TextField id={ComponentIDs.homeFormFirstName} name="firstName" showInlineError placeholder={firstName2} /></Col>
-                  <Col xs={4}><TextField id={ComponentIDs.homeFormLastName} name="lastName" showInlineError placeholder={lastName2} /></Col>
-                  <Col xs={4}><TextField name="email" showInlineError placeholder={email2} /></Col>
+                  <Col xs={6}><TextField id={ComponentIDs.homeFormFirstName} name="firstName" showInlineError placeholder={firstName2} /></Col>
+                  <Col xs={6}><TextField id={ComponentIDs.homeFormLastName} name="lastName" showInlineError placeholder={lastName2} /></Col>
                 </Row>
                 <LongTextField id={ComponentIDs.homeFormBio} name="aboutMe" placeholder={aboutMe2} />
                 <Row>
@@ -85,15 +81,11 @@ const EditProfile = () => {
                 <Row>
                   <Col xs={6}><SelectField name="interests" showInlineError multiple placeholder={interests2} /></Col>
                 </Row>
-                <Row>
-                  <Col>
-                    {_id}
-                  </Col>
-                </Row>
                 <SubmitField value="Update" />
                 <ErrorsField />
                 <HiddenField name="savedClubs" />
                 <HiddenField name="adminForClubs" />
+                <HiddenField name="email" />
               </Card.Body>
             </Card>
           </AutoForm>

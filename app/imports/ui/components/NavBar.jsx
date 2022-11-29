@@ -6,13 +6,23 @@ import { NavLink } from 'react-router-dom';
 import { Col, Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { BoxArrowRight, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
 import { ComponentIDs } from '../utilities/ids';
+import { Users } from '../../api/users/Users';
 
 const NavBar = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { currentUser } = useTracker(() => ({
-    currentUser: Meteor.user() ? Meteor.user().username : '',
-  }), []);
+  const { currentUser, userProfilePic, ready } = useTracker(() => {
+    const sub1 = Meteor.subscribe(Users.userPublicationName);
+    const rdy = sub1.ready();
+    const userData = Users.collection.find({ email: Meteor.user()?.username }).fetch()[0];
+    const pic = userData ? userData.picture : '';
+    return {
+      currentUser: Meteor.user() ? Meteor.user().username : '',
+      userProfilePic: pic,
+      ready: rdy,
+    };
+  }, []);
   const menuStyle = { marginBottom: '0px' };
+
   return (
     <Navbar expand="lg" style={menuStyle} className="bg-dark">
       <Container>
@@ -57,6 +67,7 @@ const NavBar = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             )}
+            {currentUser ? <Image roundedCircle width="40px" src={ready ? userProfilePic : ''} className="ms-2" /> : ''}
           </Nav>
         </Navbar.Collapse>
       </Container>
