@@ -15,19 +15,31 @@
 
   "defaultUserData": [
     {
+      "firstName": "Boss",
+      "lastName": "Person",
       "email": "admin@hawaii.edu",
+      "aboutMe": "I am the boss.",
+      "picture": "https://github.com/philipmjohnson.png",
       "savedClubs": ["American Marketing Association", "AIKIDO at UHM"],
       "interests": ["Administrating Websites", "Crying"],
       "major": "Computer Science"
     },
     {
+      "firstName": "John",
+      "lastName": "Doe",
       "email": "john@hawaii.edu",
+      "aboutMe": "I like stuff.",
+      "picture": "https://github.com/philipmjohnson.png",
       "savedClubs": ["American Association of University Women at UH Manoa", "American Institute of Architecture Students Hawaii Chapter"],
       "interests": ["Architecture"],
       "major": "Architecture"
     },
     {
+      "firstName": "Accounting",
+      "lastName": "Club",
       "email": "accountingadmin@hawaii.edu",
+      "aboutMe": "Accounting is fun.",
+      "picture": "https://github.com/philipmjohnson.png",
       "savedClubs": ["Accounting Club"],
       "interests": ["Accounting", "Business"],
       "major": "Accounting",

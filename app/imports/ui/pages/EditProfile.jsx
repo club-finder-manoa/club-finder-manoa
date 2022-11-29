@@ -1,11 +1,12 @@
 import React from 'react';
-import { AutoForm, TextField, LongTextField, SelectField, SubmitField } from 'uniforms-bootstrap5';
+import swal from 'sweetalert';
+import { AutoForm, TextField, LongTextField, SelectField, SubmitField, ErrorsField, HiddenField } from 'uniforms-bootstrap5';
 import { Container, Col, Card, Row } from 'react-bootstrap';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { useTracker } from 'meteor/react-meteor-data';
+import { useParams } from 'react-router';
 import { Users } from '../../api/users/Users';
 import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -13,78 +14,90 @@ import { pageStyle } from './pageStyles';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
 
 /* Create a schema to specify the structure of the data to appear in the form. */
-const makeSchema = (allInterests, allProjects) => new SimpleSchema({
-  email: { type: String, label: 'Email', optional: true },
-  firstName: { type: String, label: 'First', optional: true },
-  lastName: { type: String, label: 'Last', optional: true },
-  bio: { type: String, label: 'Biographical statement', optional: true },
-  title: { type: String, label: 'Title', optional: true },
-  picture: { type: String, label: 'Picture URL', optional: true },
-  interests: { type: Array, label: 'Interests', optional: true },
-  'interests.$': { type: String, allowedValues: allInterests },
-  projects: { type: Array, label: 'Projects', optional: true },
-  'projects.$': { type: String, allowedValues: allProjects },
-});
+const bridge = new SimpleSchema2Bridge(Users.schema);
 
 /* Renders the EditProfile Page: what appears after the user logs in. */
 const EditProfile = () => {
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  const { _id } = useParams();
 
-  /* On submit, insert the data. */
-  const submit = () => {
-    /*
-    Meteor.call(updateProfileMethod, data, (error) => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        swal('Success', 'EditProfile updated successfully', 'success');
-      }
-    });
-
-     */
-  };
-
-  const { ready, email } = useTracker(() => {
+  const { doc, ready, email2, firstName2, lastName2, aboutMe2, major2, picture2, interests2 } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(Users.userPublicationName);
     const sub2 = Meteor.subscribe(Clubs.userPublicationName);
+    const document = Users.collection.findOne(_id);
+    let loaded = false;
+    let emailTemp;
+    let firstNameTemp;
+    let lastNameTemp;
+    let aboutMeTemp;
+    let majorTemp;
+    let pictureTemp;
+    let interestsTemp;
+    if (sub1.ready() && sub2.ready()) {
+      emailTemp = Meteor.user()?.username;
+      if (Users.collection.find({ email: Meteor.user().username })) {
+        firstNameTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].firstName;
+        lastNameTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].lastName;
+        aboutMeTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].aboutMe;
+        majorTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].major;
+        pictureTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].picture;
+        interestsTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].interests;
+      }
+      loaded = true;
+    }
+
     return {
-      ready: sub1.ready() && sub2.ready(),
-      email: Meteor.user()?.username,
+      doc: document,
+      ready: loaded,
+      email2: emailTemp,
+      firstName2: firstNameTemp,
+      lastName2: lastNameTemp,
+      aboutMe2: aboutMeTemp,
+      major2: majorTemp,
+      picture2: pictureTemp,
+      interests2: interestsTemp,
     };
-  }, []);
-  // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
-  const allInterests = _.pluck(Users.collection.find().fetch(), 'name');
-  const allProjects = '';
-  const formSchema = makeSchema(allInterests, allProjects);
-  const bridge = new SimpleSchema2Bridge(formSchema);
+  }, [_id]);
+
+  /* On submit, insert the data. */
+  const submit = (data) => {
+    const { email, firstName, lastName, aboutMe, major, picture, interests } = data;
+    Users.collection.update(_id, { $set: { email, firstName, lastName, aboutMe, major, picture, interests } }, (error) => (error ?
+      swal('Error', error.message, 'error') :
+      swal('Success', 'EditProfile updated successfully', 'success')));
+  };
   // Now create the model with all the user information.
-  const projects = '';
-  const interests = '';
-  const profile = Clubs.collection.findOne({ email });
-  const model = _.extend({}, profile, { interests, projects });
   return ready ? (
     <div className="backgroundImageTop">
       <Container id={PageIDs.homePage} className="justify-content-center" style={pageStyle}>
         <Col>
           <Col className="justify-content-center text-center"><h2>Your Profile</h2></Col>
-          <AutoForm model={model} schema={bridge} onSubmit={data => submit(data)}>
+          <AutoForm model={doc} schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
                 <Row>
-                  <Col xs={4}><TextField id={ComponentIDs.homeFormFirstName} name="firstName" showInlineError placeholder="First Name" /></Col>
-                  <Col xs={4}><TextField id={ComponentIDs.homeFormLastName} name="lastName" showInlineError placeholder="Last Name" /></Col>
-                  <Col xs={4}><TextField name="email" showInlineError placeholder="email" disabled /></Col>
+                  <Col xs={4}><TextField id={ComponentIDs.homeFormFirstName} name="firstName" showInlineError placeholder={firstName2} /></Col>
+                  <Col xs={4}><TextField id={ComponentIDs.homeFormLastName} name="lastName" showInlineError placeholder={lastName2} /></Col>
+                  <Col xs={4}><TextField name="email" showInlineError placeholder={email2} /></Col>
                 </Row>
-                <LongTextField id={ComponentIDs.homeFormBio} name="bio" placeholder="Write a little bit about yourself." />
+                <LongTextField id={ComponentIDs.homeFormBio} name="aboutMe" placeholder={aboutMe2} />
                 <Row>
-                  <Col xs={6}><TextField name="title" showInlineError placeholder="Title" /></Col>
-                  <Col xs={6}><TextField name="picture" showInlineError placeholder="URL to picture" /></Col>
+                  <Col xs={6}><SelectField id={ComponentIDs.signUpFormMajor} name="major" placeholder={major2} /></Col>
+                  <Col xs={6}><TextField name="picture" showInlineError placeholder={picture2} /></Col>
                 </Row>
                 <Row>
-                  <Col xs={6}><SelectField name="interests" showInlineError multiple /></Col>
-                  <Col xs={6}><SelectField name="projects" showInlineError multiple /></Col>
+                  <Col xs={6}><SelectField name="interests" showInlineError multiple placeholder={interests2} /></Col>
                 </Row>
-                <SubmitField id={ComponentIDs.homeFormSubmit} value="Update" />
+                <Row>
+                  <Col>
+                    {_id}
+                  </Col>
+                </Row>
+                <SubmitField value="Update" />
+                <ErrorsField />
+                <HiddenField name="savedClubs" />
+                <HiddenField name="adminForClubs" />
               </Card.Body>
             </Card>
           </AutoForm>
