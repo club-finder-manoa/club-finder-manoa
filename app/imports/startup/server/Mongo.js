@@ -26,9 +26,9 @@ function addClub({ clubName, clubType, mainPhoto, description, tags, relevantMaj
   Clubs.collection.insert({ clubName, clubType, mainPhoto, description, tags, relevantMajors, meetingInfo, contactName, contactEmail, photos, admins });
 }
 
-function addUserToCollection({ email, savedClubs, interests, major, adminForClubs }) {
+function addUserToCollection({ firstName, lastName, email, aboutMe, picture, savedClubs, interests, major, adminForClubs }) {
   console.log(`  Defining user data: ${email}`);
-  Users.collection.insert({ email, savedClubs, interests, major, adminForClubs });
+  Users.collection.insert({ firstName, lastName, email, aboutMe, picture, savedClubs, interests, major, adminForClubs });
 }
 
 /** Initialize users in DB */
