@@ -5,6 +5,8 @@ import { Tracker } from 'meteor/tracker';
 const majors = ['Accounting', 'Architecture', 'Art', 'Business', 'Chemistry', 'Computer Science', 'Computer Engineering', 'Economics', 'Engineering', 'Finance',
   'Marketing', 'Mathematics', 'Music', 'Nursing', 'Philosophy', 'Physics', 'Political Science', 'Psychology', 'Social Work', 'Other']; // TODO add more later?
 
+const interests = ['First Interest', 'Second Interest'];
+
 // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
 /* const allInterests = _.pluck(UsersCollection.collection.find().fetch(), 'name');
 const allInterests = ''; */
@@ -33,7 +35,7 @@ class UsersCollection {
       picture: { type: String, optional: true },
       savedClubs: { type: Array, optional: true },
       'savedClubs.$': { type: String },
-      interests: { type: Array, label: 'Interests', optional: true },
+      interests: { type: Array, label: 'Interests', optional: true, allowedValues: majors},
       'interests.$': { type: String },
       adminForClubs: { type: Array, optional: true }, // list of clubs that the user is an admin for
       'adminForClubs.$': { type: String },

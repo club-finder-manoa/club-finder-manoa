@@ -4,7 +4,6 @@ import { AutoForm, TextField, LongTextField, SelectField, SubmitField, ErrorsFie
 import { Container, Col, Card, Row } from 'react-bootstrap';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Meteor } from 'meteor/meteor';
-import { _ } from 'meteor/underscore';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
 import { Users } from '../../api/users/Users';
