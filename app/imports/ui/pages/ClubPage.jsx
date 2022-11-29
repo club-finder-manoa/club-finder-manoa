@@ -2,7 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Image, Row, Col, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -66,6 +66,10 @@ const ClubPage = () => {
           </tr>
         </tbody>
       </Table>
+
+      <Col className="d-flex justify-content-center py-3">
+        <Link to="/edit-club" className="btn btn-primary">Edit Club</Link>
+      </Col>
 
     </Container>
   ) : <LoadingSpinner />;
