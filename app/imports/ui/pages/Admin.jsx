@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { Users } from '../../api/users/Users';
 import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { PageIDs, ComponentIDs } from '../utilities/ids';
 
 const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
   const [show, setShow] = useState(false);
@@ -248,7 +249,7 @@ const UserListItem = ({ user }) => {
                 </Col>
               </Row>
             )) : ''}
-            <AddAdminStatusModal key={user._id} user={user} />
+            <AddAdminStatusModal id={ComponentIDs.addAdminPermsBtn} key={user._id} user={user} />
           </Col>
         ) : 'All'}
       </td>
@@ -284,7 +285,7 @@ const Admin = () => {
     };
   }, []);
   return (ready ? (
-    <Container className="py-3">
+    <Container id={PageIDs.adminPage} className="py-3">
       <Row className="justify-content-center">
         <Col>
           <Col className="text-center">

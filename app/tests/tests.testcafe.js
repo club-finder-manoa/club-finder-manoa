@@ -4,12 +4,13 @@ import { signOutPage } from './signout.page';
 import { navBar } from './navbar.component';
 import { myClubsPage } from './myclubs.page';
 import { allClubsPage } from './allclubs.page';
-import { userPage } from './user.page';
 import { signupPage } from './signup.page';
+import { adminPage } from './admin.page';
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const credentials = { username: 'john@hawaii.edu', password: 'changeme' };
+const adminCredentials = { username: 'admin@hawaii.edu', password: 'changeme' };
 
 fixture('Club Finder Manoa localhost test with default db')
   .page('http://localhost:3000');
@@ -55,6 +56,15 @@ test('Test the My Club page', async (testController) => {
   await myClubsPage.isDisplayed(testController);
   await myClubsPage.hasDefaultMyClubs(testController);
   await myClubsPage.testMyClubsView(testController);
+});
+
+test('Test the Admin page', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signInPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await navBar.gotoAdminPage(testController);
+  await adminPage.isDisplayed(testController);
+  await adminPage.hasDefaultUsers(testController);
+  // await adminPage.testAddAdminPermissions(testController);
 });
 
 /*

@@ -1,10 +1,12 @@
 import { Selector } from 'testcafe';
-import { PageIDs } from '../imports/ui/utilities/ids';
+import { ComponentIDs, PageIDs } from '../imports/ui/utilities/ids';
 
-class AllClubsPage {
+class AdminPage {
   constructor() {
-    this.pageId = `#${PageIDs.allClubsPage}`;
+    this.pageId = `#${PageIDs.adminPage}`;
     this.pageSelector = Selector(this.pageId);
+    this.wrongId = '#poop';
+    this.wrongSelector = Selector(this.wrongId);
   }
 
   /** Asserts that this page is currently displayed. */
@@ -13,14 +15,14 @@ class AllClubsPage {
     await testController.expect(this.pageSelector.exists).ok();
   }
 
-  async hasDefaultAllClubs(testController) {
-    const cardCount = Selector('.card').count;
-    await testController.expect(cardCount).gte(146);
+  async hasDefaultUsers(testController) {
+    const userCount = Selector('tr').count;
+    await testController.expect(userCount).gte(5); // 5 including header and the user that was just created earlier
   }
 
-  async testListCardView(testController) {
-    await testController.click('#list-view-btn');
-    await testController.click('#card-view-btn');
+  async testAddAdminPermissions(testController) {
+    // need to figure out how to select a specific button from the table
+    await testController.click(`#${ComponentIDs.addAdminPermsBtn}`);
   }
 
   async testSearchOptionsName(testController) {
@@ -35,4 +37,4 @@ class AllClubsPage {
   }
 }
 
-export const allClubsPage = new AllClubsPage();
+export const adminPage = new AdminPage();

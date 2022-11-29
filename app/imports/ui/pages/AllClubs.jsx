@@ -65,8 +65,8 @@ const MakeCard = ({ club }) => {
 
   return (
     <Col>
-      <Card className="h-100" id="all-clubs-page">
-        <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`} >
+      <Card className="h-100">
+        <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
           <Card.Header id="club-header">
             {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
@@ -281,7 +281,7 @@ const AllClubs = () => {
 
   return (
     <div className="backgroundImageTop">
-      <Container id={PageIDs.profilesPage} style={pageStyle}>
+      <Container id={PageIDs.allClubsPage} style={pageStyle}>
         <Row className="align-middle text-center">
           <Col />
           <Col className="d-flex flex-column justify-content-center">
