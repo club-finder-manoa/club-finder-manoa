@@ -19,8 +19,9 @@ const EditClub = () => {
 
   const { ready, doc } = useTracker(() => {
     const sub1 = Meteor.subscribe(Clubs.userPublicationName);
+    const club1 = Clubs.collection.find({ _id: _id }).fetch();
     return {
-      doc: Clubs.collection.findOne({ _id }),
+      doc: club1[0],
       ready: sub1.ready(),
     };
   }, []);
