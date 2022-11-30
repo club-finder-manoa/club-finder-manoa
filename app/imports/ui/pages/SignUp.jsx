@@ -38,7 +38,8 @@ const SignUp = () => {
           setError(err.reason);
         } else {
           setError('');
-          Meteor.call('insertUser', { email, major });
+          const accountID = Meteor.users.find().fetch()[0]._id;
+          Meteor.call('insertUser', { accountID, email, major });
           setRedirectToRef(true);
         }
       });

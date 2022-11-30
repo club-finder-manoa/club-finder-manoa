@@ -5,8 +5,9 @@ import { Users } from '../../api/users/Users';
 /* eslint-disable no-console */
 
 Meteor.methods({
-  insertUser: function ({ email, major }) {
-    return Users.collection.insert({ email, major, picture: 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg' });
+  insertUser: function ({ accountID, email, major }) {
+    const picture = 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
+    return Users.collection.insert({ accountID, email, major, picture });
   },
 
   updateUser: function ({ email, firstName, lastName, aboutMe, major, picture, interests }) {
@@ -23,6 +24,10 @@ Meteor.methods({
 
   updatePermissions: function ({ email, adminArray }) {
     return Users.collection.update({ email: email }, { $set: { adminForClubs: adminArray } });
+  },
+
+  resetPw: function ({ userId }) {
+    return Meteor.users.setPassword(userId, 'changeme');
   },
 });
 
