@@ -9,6 +9,7 @@ import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PageIDs, ComponentIDs } from '../utilities/ids';
 
+// Popup modal to confirm removal of admin status
 const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
   const [show, setShow] = useState(false);
   const email = user.email;
@@ -66,6 +67,7 @@ RemoveAdminStatusModal.propTypes = {
   clubToRemove: PropTypes.string.isRequired,
 };
 
+// Popup modal to confirm adding admin status for user
 const AddAdminStatusModal = ({ user }) => {
   const [show, setShow] = useState(false);
   const [adminClub, setAdminClub] = useState('');
@@ -148,6 +150,7 @@ AddAdminStatusModal.propTypes = {
   }).isRequired,
 };
 
+// Popup modal to confirm deletion of user account
 const DeleteUserModal = ({ email }) => {
   const [show, setShow] = useState(false);
 
@@ -203,6 +206,7 @@ DeleteUserModal.propTypes = {
   email: PropTypes.string.isRequired,
 };
 
+// Popup modal to confirm reset password
 const ResetPwModal = ({ userId, email }) => {
   const [show, setShow] = useState(false);
 
@@ -213,7 +217,7 @@ const ResetPwModal = ({ userId, email }) => {
     Meteor.call('resetPw', { userId });
     handleClose();
     // eslint-disable-next-line no-alert
-    alert('User\'s password reset to \n\nchangeme\n\nAlert user of password reset.');
+    alert('User\'s password reset to:\n\nchangeme\n\nPlease alert user of password reset.');
   };
 
   const resetStyle = {
@@ -258,6 +262,7 @@ ResetPwModal.propTypes = {
   email: PropTypes.string.isRequired,
 };
 
+// User item for table. Includes email, admin status, reset pw button, and delete account button
 const UserListItem = ({ user }) => {
   const badgeStyle = {
     fontSize: '15px',
@@ -317,6 +322,7 @@ UserListItem.propTypes = {
   }).isRequired,
 };
 
+// Admin page
 const Admin = () => {
   const { ready, users } = useTracker(() => {
     const subscription = Meteor.subscribe(Users.userPublicationName);
