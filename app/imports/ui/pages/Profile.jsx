@@ -4,11 +4,22 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Users } from '../../api/users/Users';
+import SimpleSchema from 'simpl-schema';
+import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { Users } from '../../api/users/Users';
+import { ComponentIDs } from '../utilities/ids';
 
 // Popup modal to confirm reset password
 const ChangePwModal = ({ userId }) => {
+  const schema = new SimpleSchema({
+    oldPassword: String, // TODO: is this check even possible?
+    newPassword: String,
+    confirmNewPassword: String,
+  });
+  const bridge = new SimpleSchema2Bridge(schema);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -34,26 +45,45 @@ const ChangePwModal = ({ userId }) => {
         <u>Change Password</u>
       </Button>
       <Modal show={show} onHide={handleClose}>
-        <Container className="mt-2">
-          <Modal.Header closeButton>
-            <Modal.Title>
-              <h3><b>Change Password</b></h3>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="pb-4">
-            Old password:
-            New password:
-            Confirm new password:
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <h3><b>Change Password</b></h3>
+          </Modal.Title>
+        </Modal.Header>
+        <AutoForm schema={bridge} onSubmit={data => changePw(data)}>
+          <Modal.Body>
+            <TextField
+              id={ComponentIDs.signUpFormEmail}
+              name="oldPassword"
+              placeholder="Current Password"
+              label="Current Password"
+              type="password"
+            />
+            <TextField
+              id={ComponentIDs.signUpFormEmail}
+              name="newPassword"
+              placeholder="New Password"
+              label="New Password"
+              type="password"
+              // onBlur={(e) => checkEmail(e.target.value)} TODO: check minimum password requirements
+            />
+            <TextField
+              id={ComponentIDs.signUpFormEmail}
+              name="confirmNewPassword"
+              placeholder="Confirm New Password"
+              label="Confirm New Password"
+              type="password"
+              // onBlur={(e) => checkEmail(e.target.value)} TODO: check that passwords match
+            />
           </Modal.Body>
+          <ErrorsField />
           <Modal.Footer className="text-center">
             <Button variant="light" onClick={handleClose}>
               Back
             </Button>
-            <Button variant="info" onClick={() => changePw()}>
-              Save
-            </Button>
+            <SubmitField className="my-2" value="Update" />
           </Modal.Footer>
-        </Container>
+        </AutoForm>
       </Modal>
     </>
   );
