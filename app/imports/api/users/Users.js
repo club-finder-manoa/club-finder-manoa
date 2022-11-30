@@ -19,6 +19,7 @@ class UsersCollection {
 
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
+      accountID: String,
       firstName: { type: String, optional: true },
       lastName: { type: String, optional: true },
       email: { type: String, unique: 1, optional: true },

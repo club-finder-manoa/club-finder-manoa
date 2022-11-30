@@ -30,21 +30,6 @@ function addClub({ clubName, clubType, mainPhoto, description, tags, relevantMaj
   Clubs.collection.insert({ clubName, clubType, mainPhoto, description, tags, relevantMajors, meetingInfo, contactName, contactEmail, photos, admins });
 }
 
-function addUserToCollection({ firstName, lastName, email, aboutMe, picture, savedClubs, interests, major, adminForClubs }) {
-  console.log(`  Defining user data: ${email}`);
-  Users.collection.insert({ firstName, lastName, email, aboutMe, picture, savedClubs, interests, major, adminForClubs });
-}
-
-/** Initialize users in DB */
-if (Users.collection.find().count() === 0) {
-  if (Meteor.settings.defaultUserData) {
-    console.log('Loading user data...');
-    Meteor.settings.defaultUserData.map(profile => addUserToCollection(profile));
-  } else {
-    console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
-  }
-}
-
 /** Init clubs in DB */
 if (Clubs.collection.find().count() === 0) {
   if (Meteor.settings.loadAssetsFile) {

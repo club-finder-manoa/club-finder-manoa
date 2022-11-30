@@ -14,19 +14,31 @@
 
   "defaultUserData": [
     {
+      "firstName": "Boss",
+      "lastName": "Person",
       "email": "admin@hawaii.edu",
+      "aboutMe": "I am the boss.",
+      "picture": "https://img.freepik.com/premium-vector/cool-cartoon-banana-with-sunglasses_14588-379.jpg?w=2000",
       "savedClubs": ["American Marketing Association", "AIKIDO at UHM"],
       "interests": ["Administrating Websites", "Crying"],
       "major": "Computer Science"
     },
     {
+      "firstName": "John",
+      "lastName": "Doe",
       "email": "john@hawaii.edu",
+      "aboutMe": "I like stuff.",
+      "picture": "https://thumbs.dreamstime.com/b/cool-cartoon-character-sunglasses-creative-design-cool-cartoon-character-sunglasses-153501584.jpg",
       "savedClubs": ["American Association of University Women at UH Manoa", "American Institute of Architecture Students Hawaii Chapter"],
       "interests": ["Architecture"],
       "major": "Architecture"
     },
     {
+      "firstName": "Accounting",
+      "lastName": "Club",
       "email": "accountingadmin@hawaii.edu",
+      "aboutMe": "Accounting is fun.",
+      "picture": "https://thumbs.dreamstime.com/b/cool-calculator-cartoon-vector-illustration-64675808.jpg",
       "savedClubs": ["Accounting Club"],
       "interests": ["Accounting", "Business"],
       "major": "Accounting",
