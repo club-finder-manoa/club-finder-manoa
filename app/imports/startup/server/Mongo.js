@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Users } from '../../api/users/Users';
 
@@ -27,7 +28,8 @@ Meteor.methods({
   },
 
   resetPw: function ({ userId }) {
-    return Meteor.users.setPassword(userId, 'changeme');
+    const newPassword = 'changeme';
+    return Accounts.setPassword(userId, newPassword);
   },
 });
 

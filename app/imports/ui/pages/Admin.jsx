@@ -154,13 +154,12 @@ const DeleteUserModal = ({ email }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  /* eslint-disable no-console */
   const deleteUser = () => {
     Meteor.call('removeUser', { email });
-    console.log(`${email} removed from Users collection`);
     Meteor.call('removeAccount', { email });
-    console.log(`${email} removed from users`);
     handleClose();
+    // eslint-disable-next-line no-alert
+    alert('User successfully deleted.');
   };
 
   const deleteStyle = {
@@ -204,19 +203,17 @@ DeleteUserModal.propTypes = {
   email: PropTypes.string.isRequired,
 };
 
-const UserListItem = ({ user }) => {
-  const resetPw = () => {
-    // eslint-disable-next-line no-alert
-    alert('Password reset! (not really, still need to figure this out)');
-  };
+const ResetPwModal = ({ userId, email }) => {
+  const [show, setShow] = useState(false);
 
-  const badgeStyle = {
-    fontSize: '15px',
-    fontWeight: 500,
-    paddingTop: '5px',
-    paddingBottom: '3px',
-    paddingLeft: '15px',
-    borderRadius: '10px',
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const resetPw = () => {
+    Meteor.call('resetPw', { userId });
+    handleClose();
+    // eslint-disable-next-line no-alert
+    alert('User\'s password reset to \n\nchangeme\n\nAlert user of password reset.');
   };
 
   const resetStyle = {
@@ -224,6 +221,51 @@ const UserListItem = ({ user }) => {
     padding: 0,
     backgroundColor: 'transparent',
     color: '#0878A9',
+  };
+
+  return (
+    <>
+      <Button style={resetStyle} onClick={handleShow}>
+        <u>Reset</u>
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Reset Password</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="pb-4">
+            Are you sure you want to reset the password for <b>{email}</b>?<br /><br />
+            The user&apos;s old password will be lost. The new password will be set to <b>changeme</b>
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button variant="danger" onClick={() => resetPw()}>
+              Reset
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+ResetPwModal.propTypes = {
+  userId: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+};
+
+const UserListItem = ({ user }) => {
+  const badgeStyle = {
+    fontSize: '15px',
+    fontWeight: 500,
+    paddingTop: '5px',
+    paddingBottom: '3px',
+    paddingLeft: '15px',
+    borderRadius: '10px',
   };
 
   function clubNameShortened(club) {
@@ -255,7 +297,7 @@ const UserListItem = ({ user }) => {
         ) : 'All'}
       </td>
       <td>
-        <Button style={resetStyle} onClick={() => resetPw(user.email)}><u>Reset</u></Button>
+        <ResetPwModal userId={user.accountID} email={user.email} />
       </td>
       <td>
         {user.email !== 'admin@hawaii.edu' ?
@@ -269,6 +311,7 @@ const UserListItem = ({ user }) => {
 UserListItem.propTypes = {
   user: PropTypes.shape({
     _id: PropTypes.string,
+    accountID: PropTypes.string,
     email: PropTypes.string,
     adminForClubs: PropTypes.arrayOf(String),
   }).isRequired,

@@ -5,7 +5,7 @@ import { Users } from '../../api/users/Users';
 
 /* eslint-disable no-console */
 const createUser = (email, password, role) => {
-  console.log(`  Creating user ${email}.`);
+  console.log(`  Creating user ${email}`);
   const userID = Accounts.createUser({
     username: email,
     email: email,
@@ -18,7 +18,7 @@ const createUser = (email, password, role) => {
 };
 
 function addUserToCollection({ firstName, lastName, email, aboutMe, picture, savedClubs, interests, major, adminForClubs }, accountID) {
-  console.log(`  Defining user data: ${email}`);
+  console.log(`  Defining user data for ${email}`);
   Users.collection.insert({ accountID, firstName, lastName, email, aboutMe, picture, savedClubs, interests, major, adminForClubs });
 }
 
