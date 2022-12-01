@@ -3,7 +3,10 @@ export const ComponentIDs = {
   myClubsMenuItem: 'myClubsMenuItem',
   adminMenuItem: 'adminMenuItem',
   addAdminPermsBtn: 'addAdminPermsBtn',
-
+  changePwOldPw: 'changePwOldPw',
+  changePwNewPw: 'changePwNewPw',
+  changePwConfirmPw: 'changePwConfirmPw',
+  changePwSubmit: 'changePwSubmit',
   addProjectMenuItem: 'addProjectMenuItem',
   addProjectFormName: 'addProjectFormName',
   addProjectFormPicture: 'addProjectFormPicture',

@@ -3,19 +3,20 @@ import { Button, Card, Col, Container, Image, Modal, Row } from 'react-bootstrap
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { Check, X } from 'react-bootstrap-icons';
+import { Accounts } from 'meteor/accounts-base';
+import swal from 'sweetalert';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Users } from '../../api/users/Users';
 import { ComponentIDs } from '../utilities/ids';
 
 // Popup modal to confirm reset password
-const ChangePwModal = ({ userId }) => {
+const ChangePwModal = () => {
   const schema = new SimpleSchema({
-    oldPassword: String, // TODO: is this check even possible?
+    oldPassword: String,
     newPassword: String,
     confirmNewPassword: String,
   });
@@ -24,6 +25,7 @@ const ChangePwModal = ({ userId }) => {
   const [show, setShow] = useState(false);
   const [minReqs, setMinReqs] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(false);
+  const [oldPw, setOldPw] = useState('');
   const [newPw, setNewPw] = useState('');
   const [confirmNewPw, setConfirmNewPw] = useState('');
 
@@ -31,10 +33,19 @@ const ChangePwModal = ({ userId }) => {
   const handleShow = () => setShow(true);
 
   const changePw = () => {
-    Meteor.call('changePw', { userId, newPw });
-    handleClose();
-    // eslint-disable-next-line no-alert
-    alert('Password successfully updated.');
+    const success = true; // TODO figure out how to get errors
+    Accounts.changePassword(oldPw, newPw);
+    if (success) {
+      handleClose();
+      swal('Success', 'Password successfully updated', 'success');
+      setOldPw('');
+      setNewPw('');
+      setConfirmNewPw('');
+      setMinReqs(false);
+      setPasswordsMatch(false);
+    } else {
+      swal('Error', 'hehehe', 'error');
+    }
   };
 
   const handleFormChange = (key, value) => {
@@ -46,6 +57,9 @@ const ChangePwModal = ({ userId }) => {
     if (key === 'confirmNewPassword') {
       setConfirmNewPw(value);
       setPasswordsMatch(value === newPw);
+    }
+    if (key === 'oldPassword') {
+      setOldPw(value);
     }
   };
 
@@ -76,24 +90,24 @@ const ChangePwModal = ({ userId }) => {
               <h3><b>Change Password</b></h3>
             </Modal.Title>
           </Modal.Header>
-          <AutoForm schema={bridge} onSubmit={data => changePw(data)} onChange={(key, value) => handleFormChange(key, value)}>
+          <AutoForm schema={bridge} onSubmit={changePw} onChange={(key, value) => handleFormChange(key, value)}>
             <Modal.Body>
               <TextField
-                // TODO id={ComponentIDs.signUpFormEmail}
+                id={ComponentIDs.changePwOldPw}
                 name="oldPassword"
                 placeholder="Current Password"
                 label="Current Password"
                 type="password"
               />
               <TextField
-                id="ayyyooo" // TODO change
+                id={ComponentIDs.changePwNewPw}
                 name="newPassword"
                 placeholder="New Password"
                 label="New Password"
                 type="password"
               />
               <TextField
-                id="ayy" // TODO change
+                id={ComponentIDs.changePwConfirmPw}
                 name="confirmNewPassword"
                 placeholder="Confirm New Password"
                 label="Confirm New Password"
@@ -111,17 +125,13 @@ const ChangePwModal = ({ userId }) => {
               <Button variant="light" onClick={handleClose}>
                 Back
               </Button>
-              <SubmitField className="my-2" value="Update" />  {/* TODO add element id */ }
+              <SubmitField id={ComponentIDs.changePwSubmit} className="my-2" value="Update" disabled={!(passwordsMatch && minReqs)} />
             </Modal.Footer>
           </AutoForm>
         </Container>
       </Modal>
     </>
   );
-};
-
-ChangePwModal.propTypes = {
-  userId: PropTypes.string.isRequired,
 };
 
 const Profile = () => {
