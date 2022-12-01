@@ -2,6 +2,8 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
 
+const acceptedTags = ['Sports', 'Fitness', 'Political', 'Leisure/Social', 'Academic', 'Professional', 'Student Services', 'Religious', 'Community Service', 'Fraternity', 'Sorority', 'Women', 'Honor Society'];
+
 /** Encapsulates state and variable values for this collection. */
 class ClubsCollection {
   constructor() {
@@ -12,10 +14,9 @@ class ClubsCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       clubName: { type: String, index: true, unique: true },
-      clubType: { type: String, optional: true },
       mainPhoto: { type: String, optional: true },
       description: { type: String, optional: true },
-      tags: { type: Array, optional: true },
+      tags: { type: Array, optional: true, allowedValues: acceptedTags },
       'tags.$': { type: String },
       meetingInfo: { type: Array, optional: true },
       'meetingInfo.$': { type: String },

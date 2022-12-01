@@ -2,16 +2,14 @@
   "clubs": [
     {
       "clubName": "Accounting Club",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://images.squarespace-cdn.com/content/v1/5f2371858296275165c4fed8/1598171416577-93L1YDJ9YHL3W7F5AMCA/New-AC-Logo-1024x1024.png?format=1500w",
-      "tags": ["Math", "Accounting", "Business"],
+      "tags": ["Academic", "Professional"],
       "contactName": "Rana Mejes",
       "contactEmail": "mejesrs@hawaii.edu",
       "description": "In cooperation with the School of Accountancy, we provide additional perspectives and supplemental information concerning public, private, and governmental accounting. Our main goal is to promote the professional and personal development of our members through socials, community service, professional interactions, workshops, and office tours. We continue to rank high among the largest student organizations within the Shidler College of Business and welcome students from all academic disciplines."
     },
     {
       "clubName": "AIKIDO at UHM",
-      "clubType": "Sports/Leisure",
       "mainPhoto": "images/aikido_club.gif",
       "tags": ["Sports", "Fitness"],
       "contactName": "Timothy Halliday",
@@ -20,135 +18,120 @@
     },
     {
       "clubName": "Alpha Gamma Delta Delta Sigma",
-      "clubType": "Fraternity/Sorority",
       "mainPhoto": "https://static.wixstatic.com/media/2468d8_9213049cdd0f4cb187b8abd5672bdfe8~mv2.png/v1/fill/w_286,h_323,al_c,lg_1,q_85,enc_auto/Alpha_Gamma_Delta_crest.png",
-      "tags": ["Sorority", "Fraternity"],
+      "tags": ["Sorority"],
       "contactName": "Ashley Terrell",
       "contactEmail": "amterrel@hawaii.edu",
       "description": "Alpha Gamma Delta is an international women's fraternity that promotes academic excellence, philanthropic giving, ongoing leadership and personal development and above all, a spirit of loving sisterhood."
     },
     {
       "clubName": "American Association of University Women at UH Manoa",
-      "clubType": "Political",
       "mainPhoto": "https://manoa.hawaii.edu/undergrad/civic-engage/wp-content/uploads/2021/10/AAUW-at-UHM-logo-1-1024x538.png",
-      "tags": ["Politics"],
+      "tags": ["Political", "Women"],
       "contactName": "Ronja Steinbach",
       "contactEmail": "ronja36@hawaii.edu",
       "description": "The mission of our RIO is to promote the values of AAUW on the UHM campus and in the community; we are working towards equality in society by providing the tools necessary for women to gain economic security, to pursue their education, and advocate for women's rights."
     },
     {
       "clubName": "American Indian Science and Engineering Society at University of Hawaiʻi",
-      "clubType": "Academic/Professional",
       "mainPhoto": "http://aiseshawaii.weebly.com/uploads/3/9/3/6/39362525/copy-of-aises-logo-1_orig.png",
-      "tags": ["Science", "American Indian"],
+      "tags": ["Academic", "Professional"],
       "contactName": "Kahiamaikalani Walker",
       "contactEmail": "kmmw@hawaii.edu",
       "description": "The American Indian Science and Engineering Society (AISES) is a national nonprofit organization focused on substantially increasing the representation of Indigenous peoples of North America and the Pacific Islands in science, technology, engineering, and math (STEM) studies and careers."
     },
     {
       "clubName": "American Institute of Architecture Students Hawaii Chapter",
-      "clubType": "Academic/Professional",
       "mainPhoto": "http://images.squarespace-cdn.com/content/v1/57e48324579fb35bcfcd4bd6/1564879527999-KJRJE2DJIJC8SDNZOYPM/aias+w+white.png?format=1500w",
-      "tags": ["Architecture"],
+      "tags": ["Academic", "Professional"],
       "contactName": "Beau Nakamori",
       "contactEmail": "beaus@hawaii.edu",
       "description": "The American Institute of Architecture Students (AIAS) is an independent, nonprofit, student-run organization dedicated to providing unmatched progressive programs, information, and resources on issues critical to architecture and the experience of education. The AIAS aims to promote excellence in architectural education, training, and practice; to foster an appreciation of architecture and related disciplines; to enrich communities in a spirit of collaboration; and to organize students and combine their efforts to advance the art and science of architecture."
     },
     {
       "clubName": "American Library Association Student Chapter",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://www.ala.org/aboutala/sites/all/themes/alaV2/logo.png",
-      "tags": ["Library"],
+      "tags": ["Academic", "Professional"],
       "contactName": "Kylee Munro",
       "contactEmail": "kjmunro@hawaii.edu",
       "description": "The American Library Association Student Chapter at the University of Hawai‘i at Mānoa Library and Information Science Program is committed to celebrating and promoting the library and information science profession. Our members plan events and activities that encourage professional development, service to the library community, fundraising, socializing, and networking. We are always looking for new members and new perspectives, and we invite all interested to bring your skills, energy and enthusiasm to our chapter!"
     },
     {
       "clubName": "American Marketing Association",
-      "clubType": "Academic/Professional",
       "mainPhoto": "images/AmericanMarketingAssociation.png",
-      "tags": ["Marketing"],
+      "tags": ["Academic", "Professional"],
       "contactName": "Aaron Goo",
       "contactEmail": "aarong2@hawaii.edu",
       "description": "We are a marketing club that strives to push our members to grow socially, philanthropically, and professionally. "
     },
     {
       "clubName": "Advocates for Public Interest Law",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://www.topschoolsintheusa.com/wp-content/uploads/2019/03/Best-Law-Schools-in-Hawaii.jpg",
-      "tags": [],
+      "tags": ["Academic", "Professional"],
       "contactName": "Lane Mullin",
       "contactEmail": "lmullin@hawaii.edu",
       "description": "The purpose of the organization is to support and promote the commitment of the students, alumni of the William S. Richardson School of Law, and the legal community to serve the public interest and to encourage the practice of public interest law. The purpose of the organization shall be accomplished by educating students and the legal community about opportunities in public interest law and providing monetary grants to students and alumni to further justice by serving underrepresented persons addressing issues that affect the public interest. "
     },
     {
       "clubName": "American Society of Civil Engineers",
-      "clubType": "Academic/Professional",
       "mainPhoto": "http://asceuhm.weebly.com/uploads/3/7/4/1/37419027/published/asce-front-blue.png?1627000336",
-      "tags": [],
+      "tags": ["Academic", "Professional"],
       "contactName": "Kassidy Mashiyama",
       "contactEmail": "kmashi@hawaii.edu",
       "description": "The objective of the chapter shall be to develop professional consciousness, to afford an opportunity for the members to become acquainted, to promote a spirit of congeniality, and to provide contact with the civil engineering profession."
     },
     {
       "clubName": "American Society of Heating, Refrigeration, and Air-Conditioning Engineering Student Branch at UH Manoa",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://www.engineering.uga.edu/uploads/main/ASHRAE_Logo.svg.png",
-      "tags": [],
+      "tags": ["Academic", "Professional"],
       "contactName": "Precious Pangelinan",
       "contactEmail": "pap4@hawaii.edu",
       "description": "The purposes of the ASHRAE UH Manoa Student Branch include, but are not limited to: (I) the  advancement of the sciences of heating, refrigerating and air-conditioning engineering and related sciences; (II) the continuing education of the members and other interested persons in said sciences, through lectures, demonstrations and publications; (III) the rendition of career guidance to students of the sciences; and (IV) the encouragement of the  scientific research. "
     },
     {
       "clubName": "American Society of Mechanical Engineers",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/American_Society_of_Mechanical_Engineers_logo.svg/1200px-American_Society_of_Mechanical_Engineers_logo.svg.png",
-      "tags": [],
+      "tags": ["Academic", "Professional"],
       "contactName": "Linda Qu",
       "contactEmail": "lindaq@hawaii.edu",
       "description": "The ASME at the University of Hawaii is an organization dedicated to providing services tot eh UHM College of Engineering (CoE) mechanical engineering students which includes (1) professional development and networking, (2) being a conduit between the CoE and the mechanical engineering student body, and (3) facilitating interactions between mechanical engineering students, all to benefit students' growth in the mechanical engineering field."
     },
     {
       "clubName": "Anakbayan Hawaiʻi",
-      "clubType": "Political",
       "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/307691402_459232169569204_4028635364838234931_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=eZG3lpCOU-kAX_xYfz7&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfCVFzs_7KokMf4qCoZuAh3_OKSZlK75mhGWuuIenGWyLA&oe=638880C1",
-      "tags": [],
+      "tags": ["Political"],
       "contactName": "Germaine Linday Juan",
       "contactEmail": "gjuan@hawaii.edu",
       "description": "As an integral part of the national democratic movement of the Philippines the mission and purpose of Anakbayan-USA is to gather the broadest possible political, moral, material and sectoral support for Anakbayan Philippines and the national democratic struggle of the Filipino people."
     },
     {
       "clubName": "Animal Science Club",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://manoa.hawaii.edu/speakers/wp-content/uploads/logo-1.png",
-      "tags": [],
+      "tags": ["Academic", "Professional", "Community Service"],
       "contactName": "Renee Yano",
       "contactEmail": "yanor@hawaii.edu",
       "description": "The Animal Science Club at the University of Hawaii at Manoa is committed to students who share an interest and passion for animals and livestock production systems. The club accomplishes its mission by organizing events that emphasize education and hands-on experience. The club also participates in community service events."
     },
     {
       "clubName": "Anime Manga Society of Hawaiʻi @ UH Manoa",
-      "clubType": "Leisure/Recreational",
       "mainPhoto": "https://pbs.twimg.com/profile_images/1119496798874136576/3ao966FS_400x400.jpg",
-      "tags": [],
+      "tags": ["Leisure/Social"],
       "contactName": "Tyler Asato",
       "contactEmail": "tylerz@hawaii.edu",
       "description": "A place for students to watch and talk about anime."
     },
     {
       "clubName": "Anthropology Graduate Student Association",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://anthropology.manoa.hawaii.edu/wp-content/uploads/2019/07/ausa.png",
-      "tags": [],
+      "tags": ["Academic", "Professional"],
       "contactName": "Steven powell",
       "contactEmail": "sipowell@hawaii.edu",
       "description": "AGSA, a volunteer organization comprised of graduate students in the Department of Anthropology, has 2 primary goals:\n\n1. To support graduate student research, projects, and outreach activities. \n2. To assist in the facilitation of faculty-graduate student communication and student retention, and act as an interface between department administration and the graduate student body. \n3. To support the overall graduate student experience through social and group activities.\n\nAGSA also interfaces with the Graduate Student Organization (GSO), which represents the interests of graduate students across campus. Additionally, AGSA organizes a number of events including occasional professional development workshop series, an annual graduate student research symposium, and occasional community service projects."
     },
     {
       "clubName": "Anthropology Undergraduate Student Association",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://anthropology.manoa.hawaii.edu/wp-content/uploads/2019/07/ausa-2.png",
-      "tags": [],
+      "tags": ["Academic", "Professional"],
       "contactName": "Katherine Babcock",
       "contactEmail": "babcockk@hawaii.edu",
       "description": "(1) The creation of an accessible means for all students interested in anthropology to gain familiarity with the diverse areas of study within the discipline, and to utilize the resources that are available to them through the University of Hawaiʻi at Manoa, the College of Social Sciences, & the Department of Anthropology.\n(2) A forum for students to network through discussion of current events, topics, and debates relevant to anthropology and related disciplines. \n(3) Provide interested students with guidance, support and practical experience to adequately prepare them for a career and/or graduate/post-baccalaureate studies in anthropology.\n(4) Offer opportunities for students to practice their kuleana (responsibility) within the community and learn invaluable skills through a variety of volunteer and learning opportunities."
@@ -157,214 +140,191 @@
       "clubName": "Asian Field Study Alumni Association",
       "clubType": "Academic/Professional",
       "mainPhoto": "https://educationusa.state.gov/sites/default/files/field_hei_logo/shidler_uh_cob_logo2_2c.jpg",
-      "tags": [],
+      "tags": ["Professional"],
       "contactName": "Deran Yamada",
       "contactEmail": "deran@hawaii.edu",
       "description": "The purpose of the Asian Field Study Alumni Association (AFSAA) is to establish, nurture, and maintain international relationships with an emphasis on international business. We aim to share knowledge with the goals of stimulating economic growth, learning, remaining up to date on trends, and networking with the executives of the future."
     },
     {
       "clubName": "Asian-Pacific Law & Policy Journal",
-      "clubType": "Academic/Professional",
       "mainPhoto": "http://blog.hawaii.edu/aplpj/files/2022/05/APLPJ_seal_Colored-300x300.png",
-      "tags": [],
+      "tags": ["Professional"],
       "contactName": "Keoni Williams",
       "contactEmail": "keoniwil@hawaii.edu",
       "description": "The Asian-Pacific Law and Policy Journal (APLPJ) is a web-based, American legal journal covering issues in Asia and the Pacific Rim. Our objectives are to disseminate legal research by law professors, legal practitioners, social scientists, economists, and students; to increase awareness of legal issues impacting the region and to provide a forum to discuss legal topics that fall within the JournalÕs geographic scope. APLPJ publishes articles, translations, book reviews, essays, case notes, and comments on current topics in comparative and transnational law focused on one or more countries or geographic entities in the Asia-Pacific region."
     },
     {
       "clubName": "Associated Students of the John A. Burns School of Medicine (JABSOM)",
-      "clubType": "Student Affairs",
       "mainPhoto": "https://jabsom.hawaii.edu/wp-content/themes/jabsom/images/jabsom-logo-mark.jpg",
-      "tags": [],
+      "tags": ["Student Services"],
       "contactName": "Eduardo Biala, Jr.",
       "contactEmail": "bialae@hawaii.edu",
       "description": "The purpose of Associated Students of JABSOM (ASJABSOM) and the JABSOM Classes is to serve as the official body representing the medical students of JABSOM. To that end, purposes include, but are not limited to:\n(1) advocating on behalf of the medical students of JABSOM;\n(2) promoting the welfare of JABSOM and its students;\n(3) fostering student morale;\n(4) providing a forum for the expression of student interests and concerns to the faculty,\nadministration, and staff;\n(5) promoting collaboration between the JABSOM Classes;\n(6) supporting academic and social interaction among the students, faculty, administration, and the greater community;\n(7) encouraging service in JABSOM and the community;\n(8) providing services and activities beneficial to ASJABSOM members, JABSOM, and the\ncommunity;\n(9) selecting student delegates to JABSOM committees and other bodies with campus-wide\nrepresentation; and\n(10) directing and regulating the activities of ASJABSOM and the JABSOM Classes.\nNotwithstanding any provision of this Constitution, the purposes of ASJABSOM and the JABSOM Classes are limited exclusively to non-profit purposes."
     },
     {
       "clubName": "Association for Computing Machinery at the University of Hawaii at Manoa",
-      "clubType": "Service",
       "mainPhoto": "https://media-exp1.licdn.com/dms/image/C560BAQExPZPGKkMYNA/company-logo_200_200/0/1526714012835?e=2147483647&v=beta&t=IqzmzpOfseyUTt1AsTj237QI_6PIYS-YBJxd1-5LQOE",
-      "tags": [],
+      "tags": ["Academic", "Professional"],
       "contactName": "Kana'i Gooding",
       "contactEmail": "kgooding@hawaii.edu",
       "description": "ACM is a global scientific and educational organization dedicated to advancing the art, science, engineering, and application of computing, serving both professional and public interests by fostering the open exchange of information and by promoting the highest professional and ethical standards. The main goals of the organization is to promote professional and technical development, facilitate networking, and enrich the lives of the organization members."
     },
     {
       "clubName": "Association for Women in Math - University of Hawaiʻi at Mānoa chapter",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://awm-math.org/wp-content/uploads/2022/07/awmlogo3b.png",
-      "tags": [],
+      "tags": ["Academic", "Professional", "Women"],
       "contactName": "Swarnalakshmi Lakshmanan",
       "contactEmail": "slaks@hawaii.edu",
       "description": "Since its founding in 1971 by a small but passionate group of women mathematicians, the Association for Women in Mathematics (AWM) has grown into a leading society for women in the mathematical sciences, and is one of the societies comprising the Conference Board of the Mathematical Sciences. AWMÕs programs not only support those who participate in them directly, but also help influence the mathematics culture more generally, so that young women entering the field today encounter an environment that is more nurturing than that of the 1970Õs and 1980Õs. Throughout its 50 year History, the AWM has played a critical role in increasing the presence and visibility of women in the mathematical sciences."
     },
     {
       "clubName": "Ballroom Dance Club at UH",
-      "clubType": "Leisure/Recreational",
       "mainPhoto": "https://manoa.hawaii.edu/speakers/wp-content/uploads/logo-1.png",
-      "tags": [],
+      "tags": ["Leisure/Social", "Fitness", "Sport"],
       "contactName": "Ravi Narayan",
       "contactEmail": "rnarayan@hawaii.edu",
       "description": "Promote both social and competitive ballroom dance "
     },
     {
       "clubName": "Baptist Collegiate Ministries O'ahu",
-      "clubType": "Spiritual/Religious",
       "mainPhoto": "https://images.squarespace-cdn.com/content/58814db51e5b6c1419a11dd7/1579217103937-PP1BENWN9K70YIV5BBPP/BCM_Logo_1.png?format=1500w&content-type=image%2Fpng",
-      "tags": [],
+      "tags": ["Religious"],
       "contactName": "Nathaniel Atwell",
       "contactEmail": "natwell@hawaii.edu",
       "description": "We are a College ministry setting out to bring students together in deep friendship and community, to grow in their faith, and leadership throughout their college career."
     },
     {
       "clubName": "Bedroom Artists and Musicians at the University of Hawaii at Manoa",
-      "clubType": "Leisure/Recreational",
       "mainPhoto": "https://manoa.hawaii.edu/speakers/wp-content/uploads/logo-1.png",
-      "tags": [],
+      "tags": ["Leisure/Social"],
       "contactName": "Nikolaus Kang",
       "contactEmail": "nrbkang@hawaii.edu",
       "description": "The Bedroom Artist and Musicians at The University of Hawaii at Manoa (BAMTUHM) was founded to create a network of individuals who either partake in the creation of music in all its genres and formats or those who wish to learn to do so. The purpose of BAMTUHM is to create a strong community of thriving artists, facilitate a safe space for creativity and growth for our members and provide guidance and support to our members who wish to learn how to create music as well as continue to provide help to our veteran artists. More importantly we would like to make sure members enjoy being part of this community and that they have fun."
     },
     {
       "clubName": "Beta Alpha Psi - Delta Theta Chapter",
-      "clubType": "Honorary Society",
       "mainPhoto": "https://www.bap.org/images/footer_logo-243x184.png",
-      "tags": [],
+      "tags": ["Honor Society"],
       "contactName": "Emily Quach",
       "contactEmail": "Quache@hawaii.edu",
       "description": "Beta Alpha Psi is the international honor organization for financial information students and professionals. The purpose of this organization shall be to instill in its members a desire for self-improvement, foster high moral and ethical standards in its members, encourage and give recognition to scholastic and professional excellence, cultivate a sense of responsibility and services in its members, promote the collegiate study of accounting, and provide opportunities for association among its members."
     },
     {
       "clubName": "Beta Beta Gamma ",
-      "clubType": "Fraternity/Sorority",
       "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/306601574_760349352460949_7505106179548097591_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=A49n9RJ8Pa4AX8nqc6l&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfA9Oc5qMP9GJntCAB6rPE2-4OxorpSBEmngrX3Kf0C5sw&oe=6389B2F9",
-      "tags": [],
+      "tags": ["Sorority"],
       "contactName": "Jordan Humphrey",
       "contactEmail": "jah821@hawaii.edu",
       "description": "To bring together a group of strong, caring women to create a sisterhood of leadership, community, and diversity. To give back to our community and raise a group of strong intelligent women "
     },
     {
       "clubName": "Black Student Association ",
-      "clubType": "Leisure/Recreational",
       "mainPhoto": "https://pbs.twimg.com/profile_images/847655018052239360/682n_K65_400x400.jpg",
-      "tags": [],
+      "tags": ["Leisure/Social"],
       "contactName": "Breena Thompson",
       "contactEmail": "breenajt@hawaii.edu",
       "description": "To create a safe space for Black folk to come together and talk story."
     },
     {
       "clubName": "Botanical Society of America Hawaiʻi Chapter at University of Hawaiʻi at Manoa",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t1.6435-9/52432313_2027778330609263_6965782255067201536_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=y1OxTHYmSEUAX_f0nTu&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfAS4VyOylWBcpWsLe54x8LBbRgtuwGugZ61TrDxtb8mdw&oe=63AAA7B3",
-      "tags": [],
+      "tags": ["Academic", "Professional"],
       "contactName": "Pierson Nitz Caldwell",
       "contactEmail": "nitz@hawaii.edu",
       "description": "The Botanical Society of America (\"BSA\") Hawaiʻi Chapter (\"Chapter\") shall be operated for scientific and educational purposes. Its mission is to promote botany, the field of basic science dealing with the study and inquiry into the form, function, development, diversity, reproduction, evolution, and uses of plants and their interactions within the biosphere. To accomplish this mission, the objectives of the Chapter are to: sustain and provide improved formal and informal education about plants; encourage basic plant research; provide expertise, direction, and position statements concerning plants and ecosystems; and foster communication within the professional botanical community, and between the rest of the local community through meetings, activities, and community outreach."
     },
     {
       "clubName": "Business Executive Society of Tomorrow",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://images.squarespace-cdn.com/content/v1/5d37c623ac033d0001fd45d5/1595901147227-WAHC43L4OHEVSDWNJGQE/bestlogo+%28Transparent_NoWords%29+-+Copy.png?format=1500w",
-      "tags": [],
+      "tags": ["Professional"],
       "contactName": "Rachel Lu",
       "contactEmail": "secretary.bestuhm@gmail.com",
       "description": "The Business Executive Society of Tomorrow is a general business club at the University of Hawaii at ManoaÕs Shidler College of Business. Founded by students in 1998, BEST has a proud history of maintaining and perpetuating excellence in its members. Through the years, we have developed a culture of diligence and dedication to personal and professional growth. Through a combination of tours, workshops, networking events, alumni events, community services, and socials, we strive to mold our members into well-rounded individuals. We pride ourselves in producing the business leaders of tomorrow, and we provide our members with ample opportunities to continually advance toward that goal."
     },
     {
       "clubName": "C.O.P. Alaka'ina",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://static.wixstatic.com/media/d6fa0d_03aaeecd14094974a7035dcb91bcd917~mv2.png/v1/fill/w_444,h_109,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/FOCs_BR_Primary-Logotype-Web_20160907.png",
-      "tags": [],
+      "tags": ["Student Services", "Community Service"],
       "contactName": "Ilikea Silva",
       "contactEmail": "ilikea.silva@hawaii.edu",
       "description": "Our purpose is to promote college success and post-secondary opportunities for our College Opportunities Program (COP) students. COP Alaka'ina serves our COP freshmen and alumni throughout the academic year by providing guidance, information, and workshops about academic and college life at UH Manoa. Our areas of focus are the following: professional development, community service, socials, and fundraising. \nAs COP primarily serves those who are economically disadvantaged, academically underprepared, and those who come from underrepresented communities, every bit of support counts"
     },
     {
       "clubName": "Chemistry Club at the University of Hawaii at Manoa",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://www2.hawaii.edu/~chemclub/randommolecules.jpg",
-      "tags": [],
+      "tags": ["Academic", "Professional"],
       "contactName": "Michaela Kop",
       "contactEmail": "mkop@hawaii.edu",
       "description": "The purpose of this club is to assist students currently enrolled in chemistry classes by providing tutors and hosting group study sessions. The club will also provide members with opportunities to volunteer in STEM outreach in the community. "
     },
     {
       "clubName": "Chi Epsilon",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://upload.wikimedia.org/wikipedia/en/f/f0/The_crest_of_Chi_Epsilon.jpg",
-      "tags": [],
+      "tags": ["Honor Society"],
       "contactName": "Kyle Maki",
       "contactEmail": "makikyle@hawaii.edu",
       "description": "Chi Epsilon is the National Civil Engineering Honor Society. We are dedicated to maintaining and promoting the status of civil engineering as an ideal profession here on the UHM campus. To contribute to the improvement of the profession, Chi Epsilon fosters the development and exercise of sound traits of character and technical ability among civil engineers, and its members, by precept and example, toward an ever higher standard of professional service. We provide tutoring in lower-level CEE courses, commit ourselves frequently to community service events, offer career development opportunities for our members, and host social events."
     },
     {
       "clubName": "Circle K International",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://upload.wikimedia.org/wikipedia/en/e/e1/Circlek.png",
-      "tags": [],
+      "tags": ["Professional"],
       "contactName": "Gianna Young",
       "contactEmail": "younggi@hawaii.edu",
       "description": "To build character, to build leaders, and to serve the community. "
     },
     {
       "clubName": "Class of 2023 at JABSOM",
-      "clubType": "Student Affairs",
       "mainPhoto": "https://jabsom.hawaii.edu/wp-content/themes/jabsom/images/jabsom-logo-mark.jpg",
-      "tags": [],
+      "tags": ["Academic", "Student Services"],
       "contactName": "Eliott Koshi",
       "contactEmail": "ekoshi@hawaii.edu",
       "description": "The purpose of this organization is to (1) bring students together outside of class in order to share and exchange experiences, (2) serve as coordinators of recurring student-led events held at the John A. Burns School of Medicine (referred to as JABSOM from this point on), and (3) fundraise/oversee/dispense funds for the purpose of class activities, academic opportunities, and graduation celebrations."
     },
     {
       "clubName": "Class of 2024 at JABSOM",
-      "clubType": "Student Affairs",
       "mainPhoto": "https://jabsom.hawaii.edu/wp-content/themes/jabsom/images/jabsom-logo-mark.jpg",
-      "tags": [],
+      "tags": ["Academic", "Student Services"],
       "contactName": "Collin Liang",
       "contactEmail": "collinl@hawaii.edu",
       "description": "Serve as liaisons between the larger student body and JABSOM faculty (e.g. Office of Medical Education and Office of Student Affairs). Consult, deliberate, and make decisions for student-led events held at the John A. Burns School of Medicine (referred to as JABSOM from here on). Fundraise and dispense funds for the purpose of class activities, academic opportunities, and other celebrations (ie. graduation)"
     },
     {
       "clubName": "Class of 2025 at JABSOM",
-      "clubType": "Student Affairs",
       "mainPhoto": "https://jabsom.hawaii.edu/wp-content/themes/jabsom/images/jabsom-logo-mark.jpg",
-      "tags": [],
+      "tags": ["Academic", "Student Services"],
       "contactName": "Eduardo Biala, Jr.",
       "contactEmail": "bialae@hawaii.edu",
       "description": "\"The purpose of this organization is to gather a group of students to:\n1. Serve as liaisons between the larger student body and JABSOM faculty (e.g. Office of Medical Education and Office of Student Affairs).\n2. Consult, deliberate, and make decisions for student-led events held at the John A. Burns School of Medicine (referred to as JABSOM from here on).\n3. Fundraise and dispense funds for the purpose of class activities, academic opportunities, and other celebrations (i.e., graduation and senior lūʻau).\""
     },
     {
       "clubName": "Class of 2026 at JABSOM",
-      "clubType": "Student Affairs",
       "mainPhoto": "https://jabsom.hawaii.edu/wp-content/themes/jabsom/images/jabsom-logo-mark.jpg",
-      "tags": [],
+      "tags": ["Academic", "Student Services"],
       "contactName": "D-DrŽ Wright",
       "contactEmail": "ddre@hawaii.edu",
       "description": "The purpose of this organization is to gather a group of students to: \n\n1. Serve as liaisons between the larger student body and JABSOM faculty (e.g. Office of Medical Education and Office of Student Affairs).\n2. Consult, deliberate, and make decisions for student-led events held at the John A. Burns School of Medicine (referred to as JABSOM from here on).\n3. Fundraise and dispense funds for the purpose of class activities, academic opportunities, and other celebrations (i.e., graduation and senior lūʻau).\n\nThe organization was founded with the intention to allow students the opportunity to, when elected by the student body, represent and serve the class. The group will abide by all established University of Hawaii (and JABSOM) rules, regulations, and policies, as well as all local, state, and federal laws."
     },
     {
       "clubName": "Climbing Club at UHM",
-      "clubType": "Sports/Leisure",
       "mainPhoto": "https://manoa.hawaii.edu/speakers/wp-content/uploads/logo-1.png",
-      "tags": [],
+      "tags": ["Sports", "Fitness"],
       "contactName": "Henry Korver",
       "contactEmail": "hkorver@hawaii.edu",
       "description": "Educating students on how to climb safely and well. "
     },
     {
       "clubName": "Collegiate Association for the Research of Principle Hawaiʻi",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://images.squarespace-cdn.com/content/5aea18b9ec4eb72fa0676189/1538664737759-LK8XIFFHK1AVGUIDKNK3/Untitled-1.png?content-type=image%2Fpng",
-      "tags": [],
+      "tags": ["Academic", "Professional"],
       "contactName": "Rena Saito",
       "contactEmail": "saito22@hawaii.edu",
       "description": "In CARP, Collegiate Association for the Research of Principles, student leaders engage in thoughtful and meaningful discussion as well as deep and long-lasting relationships for peace and growth. CARP works to create the ideal by studying and practicing principles taught by great role models and teachers in every field throughout history. "
     },
     {
       "clubName": "CTAHR Student Ambassadors",
-      "clubType": "Academic/Professional",
       "mainPhoto": "https://manoa.hawaii.edu/speakers/wp-content/uploads/logo-1.png",
-      "tags": [],
+      "tags": ["Academic", "Professional"],
       "contactName": "Michelle Au",
       "contactEmail": "aumi@hawaii.edu",
       "description": "To recruit prospective members to the College of Tropical Agriculture and Human Resources (CTAHR), to encourage student interest and participation in CTAHR, and to positively portray CTAHR to the university and outside communities. "
