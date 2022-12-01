@@ -6,6 +6,7 @@ import { myClubsPage } from './myclubs.page';
 import { allClubsPage } from './allclubs.page';
 import { signupPage } from './signup.page';
 import { adminPage } from './admin.page';
+import { userPage } from './user.page';
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
@@ -67,14 +68,14 @@ test('Test the Admin page', async (testController) => {
   // TODO add other admin tests
 });
 
-/*
-test('Test the User page', async (testController) => {
+test.only('Test the User page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signInPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoUserPage(testController);
   await userPage.isDisplayed(testController);
+  await userPage.gotoEditProfile(testController);
+  await userPage.testEditProfileInput(testController);
 });
-*/
 
 /** OLD BOWFOLIOS TESTS - left as reference, remove after implementing our own */
 /*

@@ -76,7 +76,7 @@ const EditProfile = () => {
                 <LongTextField id={ComponentIDs.homeFormBio} name="aboutMe" placeholder={aboutMe2} />
                 <Row>
                   <Col xs={6}><SelectField id={ComponentIDs.signUpFormMajor} name="major" placeholder={major2} /></Col>
-                  <Col xs={6}><TextField name="picture" showInlineError placeholder={picture2} /></Col>
+                  <Col xs={6}><TextField id="pic-field" name="picture" showInlineError placeholder={picture2} /></Col>
                 </Row>
                 <Row>
                   <Col xs={6}><SelectField name="interests" showInlineError multiple placeholder={interests2} /></Col>

@@ -152,7 +152,7 @@ const Profile = () => {
   };
 
   return (ready ? (
-    <Container fluid className="py-3 backgroundImageTop">
+    <Container fluid className="py-3 backgroundImageTop" id="user-page">
       <Row>
         <Col className="d-flex justify-content-center">
           {/* Picture */}
@@ -174,7 +174,7 @@ const Profile = () => {
       </Row>
       <Row>
         <Col className="d-flex justify-content-center py-3">
-          <Link to={`/edit-profile/${userProfile._id}`} className="btn btn-primary">Edit Profile</Link>
+          <Link to={`/edit-profile/${userProfile._id}`} className="btn btn-primary" id="edit-profile-btn">Edit Profile</Link>
         </Col>
       </Row>
       <Row>
