@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { Check, X } from 'react-bootstrap-icons';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Users } from '../../api/users/Users';
 import { ComponentIDs } from '../utilities/ids';
@@ -21,15 +22,39 @@ const ChangePwModal = ({ userId }) => {
   const bridge = new SimpleSchema2Bridge(schema);
 
   const [show, setShow] = useState(false);
+  const [minReqs, setMinReqs] = useState(false);
+  const [passwordsMatch, setPasswordsMatch] = useState(false);
+  const [newPw, setNewPw] = useState('');
+  const [confirmNewPw, setConfirmNewPw] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const changePw = (newPw) => {
+  const changePw = () => {
     Meteor.call('changePw', { userId, newPw });
     handleClose();
     // eslint-disable-next-line no-alert
     alert('Password successfully updated.');
+  };
+
+  const handleFormChange = (key, value) => {
+    if (key === 'newPassword') {
+      setMinReqs(value.length >= 6);
+      setNewPw(value);
+      setPasswordsMatch(value === confirmNewPw);
+    }
+    if (key === 'confirmNewPassword') {
+      setConfirmNewPw(value);
+      setPasswordsMatch(value === newPw);
+    }
+  };
+
+  const passwordOkayStyle = {
+    color: 'green',
+  };
+
+  const passwordNotOkayStyle = {
+    color: 'red',
   };
 
   const changeStyle = {
@@ -45,45 +70,51 @@ const ChangePwModal = ({ userId }) => {
         <u>Change Password</u>
       </Button>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            <h3><b>Change Password</b></h3>
-          </Modal.Title>
-        </Modal.Header>
-        <AutoForm schema={bridge} onSubmit={data => changePw(data)}>
-          <Modal.Body>
-            <TextField
-              id={ComponentIDs.signUpFormEmail}
-              name="oldPassword"
-              placeholder="Current Password"
-              label="Current Password"
-              type="password"
-            />
-            <TextField
-              id={ComponentIDs.signUpFormEmail}
-              name="newPassword"
-              placeholder="New Password"
-              label="New Password"
-              type="password"
-              // onBlur={(e) => checkEmail(e.target.value)} TODO: check minimum password requirements
-            />
-            <TextField
-              id={ComponentIDs.signUpFormEmail}
-              name="confirmNewPassword"
-              placeholder="Confirm New Password"
-              label="Confirm New Password"
-              type="password"
-              // onBlur={(e) => checkEmail(e.target.value)} TODO: check that passwords match
-            />
-          </Modal.Body>
-          <ErrorsField />
-          <Modal.Footer className="text-center">
-            <Button variant="light" onClick={handleClose}>
-              Back
-            </Button>
-            <SubmitField className="my-2" value="Update" />
-          </Modal.Footer>
-        </AutoForm>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Change Password</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <AutoForm schema={bridge} onSubmit={data => changePw(data)} onChange={(key, value) => handleFormChange(key, value)}>
+            <Modal.Body>
+              <TextField
+                // TODO id={ComponentIDs.signUpFormEmail}
+                name="oldPassword"
+                placeholder="Current Password"
+                label="Current Password"
+                type="password"
+              />
+              <TextField
+                id="ayyyooo" // TODO change
+                name="newPassword"
+                placeholder="New Password"
+                label="New Password"
+                type="password"
+              />
+              <TextField
+                id="ayy" // TODO change
+                name="confirmNewPassword"
+                placeholder="Confirm New Password"
+                label="Confirm New Password"
+                type="password"
+              />
+              <div style={minReqs ? passwordOkayStyle : passwordNotOkayStyle}>
+                {minReqs ? <Check /> : <X />} Password must be at least 6 characters long
+              </div>
+              <div style={passwordsMatch ? passwordOkayStyle : passwordNotOkayStyle}>
+                {passwordsMatch ? <Check /> : <X />} Passwords match
+              </div>
+            </Modal.Body>
+            <ErrorsField />
+            <Modal.Footer className="text-center">
+              <Button variant="light" onClick={handleClose}>
+                Back
+              </Button>
+              <SubmitField className="my-2" value="Update" />  {/* TODO add element id */ }
+            </Modal.Footer>
+          </AutoForm>
+        </Container>
       </Modal>
     </>
   );
