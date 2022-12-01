@@ -33,23 +33,19 @@ const ChangePwModal = () => {
   const handleShow = () => setShow(true);
 
   const changePw = () => {
-    let success = true; // TODO figure out how to get errors
-    try {
-      Accounts.changePassword(oldPw, newPw);
-    } catch (e) {
-      success = false;
-      console.log(e);
-      swal('Error', e, 'error');
-    }
-    if (success) {
-      handleClose();
-      swal('Success', 'Password successfully updated', 'success');
-      setOldPw('');
-      setNewPw('');
-      setConfirmNewPw('');
-      setMinReqs(false);
-      setPasswordsMatch(false);
-    }
+    Accounts.changePassword(oldPw, newPw, (error) => {
+      if (error) {
+        swal('Error', 'Current password incorrect', 'error');
+      } else {
+        handleClose();
+        swal('Success', 'Password successfully updated', 'success');
+        setOldPw('');
+        setNewPw('');
+        setConfirmNewPw('');
+        setMinReqs(false);
+        setPasswordsMatch(false);
+      }
+    });
   };
 
   const handleFormChange = (key, value) => {
