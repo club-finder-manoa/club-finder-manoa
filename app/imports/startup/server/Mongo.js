@@ -11,6 +11,12 @@ Meteor.methods({
     return Users.collection.insert({ accountID, email, picture });
   },
 
+  saveClub: function ({ email, clubName }) {
+    const clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
+    clubArray.push(clubName);
+    return Users.collection.update({ email: email }, { $set: { savedClubs: clubArray } });
+  },
+
   updateUser: function ({ email, firstName, lastName, aboutMe, picture, interests }) {
     return Users.collection.update({ email: email }, { $set: { firstName, lastName, aboutMe, picture, interests } });
   },

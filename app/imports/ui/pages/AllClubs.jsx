@@ -49,14 +49,14 @@ const sortListButtonStyle = {
   padding: 0,
 };
 
-const SaveClubModal = ({ clubName }) => {
+const SaveClubModal = ({ clubName, email }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const saveClub = () => {
-    // todo
+    Meteor.call('saveClub', { email, clubName });
   };
 
   const saveStyle = {
@@ -96,6 +96,7 @@ const SaveClubModal = ({ clubName }) => {
 };
 
 SaveClubModal.propTypes = {
+  email: PropTypes.string.isRequired,
   clubName: PropTypes.string.isRequired,
 };
 
@@ -125,7 +126,7 @@ const MakeCard = ({ club }) => {
           </a>
           <Row className="mt-2">
             <Col>
-              <SaveClubModal clubName={club.clubName} />
+              <SaveClubModal clubName={club.clubName} email={Meteor.user().username} />
             </Col>
             <Col className="text-end">
               <a style={{ textDecoration: 'none' }} href={`/${club._id}`}>
