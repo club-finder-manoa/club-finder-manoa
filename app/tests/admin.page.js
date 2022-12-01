@@ -1,5 +1,5 @@
 import { Selector } from 'testcafe';
-import { ComponentIDs, PageIDs } from '../imports/ui/utilities/ids';
+import { PageIDs } from '../imports/ui/utilities/ids';
 
 class AdminPage {
   constructor() {
@@ -20,21 +20,24 @@ class AdminPage {
     await testController.expect(userCount).gte(5); // 5 including header and the user that was just created earlier
   }
 
+/*
   async testAddAdminPermissions(testController) {
-    // need to figure out how to select a specific button from the table
+    // TODO
     await testController.click(`#${ComponentIDs.addAdminPermsBtn}`);
   }
 
-  async testSearchOptionsName(testController) {
-    const clubName = 'Engineer';
-    await testController.click('#search-option-drpdwn');
-    await testController.click('#search-by-name');
-    await testController.typeText('#search-by-name', clubName);
+  async testRemoveAdminPermissions(testController) {
+    // TODO
   }
 
-  async testClubView(testController) {
-    await testController.click('#club-header');
+  async testResetPassword(testController) {
+    // TODO
   }
+
+  async testDeleteUser(testController) {
+    // TODO
+  }
+*/
 }
 
 export const adminPage = new AdminPage();

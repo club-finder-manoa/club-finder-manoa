@@ -18,6 +18,7 @@ class SignupPage {
     await this.isDisplayed(testController);
     await testController.typeText(`#${ComponentIDs.signUpFormEmail}`, username);
     await testController.typeText(`#${ComponentIDs.signUpFormPassword}`, password);
+    await testController.typeText(`#${ComponentIDs.signUpFormConfirmPassword}`, password);
     await testController.click(`#${ComponentIDs.signUpFormSubmit} input.btn.btn-primary`);
     await navBar.isLoggedIn(testController, username);
   }

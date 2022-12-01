@@ -64,7 +64,7 @@ test('Test the Admin page', async (testController) => {
   await navBar.gotoAdminPage(testController);
   await adminPage.isDisplayed(testController);
   await adminPage.hasDefaultUsers(testController);
-  // await adminPage.testAddAdminPermissions(testController);
+  // TODO add other admin tests
 });
 
 /*
