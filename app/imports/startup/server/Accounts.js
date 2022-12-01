@@ -17,9 +17,9 @@ const createUser = (email, password, role) => {
   }
 };
 
-function addUserToCollection({ firstName, lastName, email, aboutMe, picture, savedClubs, interests, major, adminForClubs }, accountID) {
+function addUserToCollection({ firstName, lastName, email, aboutMe, picture, savedClubs, interests, adminForClubs }, accountID) {
   console.log(`  Defining user data for ${email}`);
-  Users.collection.insert({ accountID, firstName, lastName, email, aboutMe, picture, savedClubs, interests, major, adminForClubs });
+  Users.collection.insert({ accountID, firstName, lastName, email, aboutMe, picture, savedClubs, interests, adminForClubs });
 }
 
 // When running app for first time, pass a settings file to set up a default user account.

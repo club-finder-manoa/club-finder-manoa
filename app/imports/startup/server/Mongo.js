@@ -11,8 +11,8 @@ Meteor.methods({
     return Users.collection.insert({ accountID, email, picture });
   },
 
-  updateUser: function ({ email, firstName, lastName, aboutMe, major, picture, interests }) {
-    return Users.collection.update({ email: email }, { $set: { firstName, lastName, aboutMe, major, picture, interests } });
+  updateUser: function ({ email, firstName, lastName, aboutMe, picture, interests }) {
+    return Users.collection.update({ email: email }, { $set: { firstName, lastName, aboutMe, picture, interests } });
   },
 
   removeUser: function ({ email }) {
@@ -33,8 +33,8 @@ Meteor.methods({
   },
 });
 
-function addClub({ clubName, clubType, mainPhoto, description, tags, relevantMajors, meetingInfo, contactName, contactEmail, photos, admins }) {
-  Clubs.collection.insert({ clubName, clubType, mainPhoto, description, tags, relevantMajors, meetingInfo, contactName, contactEmail, photos, admins });
+function addClub({ clubName, clubType, mainPhoto, description, tags, meetingInfo, contactName, contactEmail, photos, admins }) {
+  Clubs.collection.insert({ clubName, clubType, mainPhoto, description, tags, meetingInfo, contactName, contactEmail, photos, admins });
 }
 
 /** Init clubs in DB */

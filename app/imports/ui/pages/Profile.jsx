@@ -163,7 +163,6 @@ const Profile = () => {
         <Card id="cardProfile">
           <Col className="text-center pt-3">
             <h1 id="profileName">{userProfile.firstName} {userProfile.lastName}</h1>
-            <h5>{userProfile.major}</h5>
             <p>{userProfile.email}</p>
             <hr />
             <p>{userProfile.aboutMe}</p>

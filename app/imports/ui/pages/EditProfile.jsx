@@ -19,7 +19,7 @@ const EditProfile = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = useParams();
 
-  const { doc, ready, firstName2, lastName2, aboutMe2, major2, picture2, interests2 } = useTracker(() => {
+  const { doc, ready, firstName2, lastName2, aboutMe2, picture2, interests2 } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(Users.userPublicationName);
     const sub2 = Meteor.subscribe(Clubs.userPublicationName);
@@ -28,7 +28,6 @@ const EditProfile = () => {
     let firstNameTemp;
     let lastNameTemp;
     let aboutMeTemp;
-    let majorTemp;
     let pictureTemp;
     let interestsTemp;
     if (sub1.ready() && sub2.ready()) {
@@ -36,7 +35,6 @@ const EditProfile = () => {
         firstNameTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].firstName;
         lastNameTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].lastName;
         aboutMeTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].aboutMe;
-        majorTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].major;
         pictureTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].picture;
         interestsTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].interests;
       }
@@ -49,7 +47,6 @@ const EditProfile = () => {
       firstName2: firstNameTemp,
       lastName2: lastNameTemp,
       aboutMe2: aboutMeTemp,
-      major2: majorTemp,
       picture2: pictureTemp,
       interests2: interestsTemp,
     };
@@ -57,8 +54,8 @@ const EditProfile = () => {
 
   /* On submit, insert the data. */
   const submit = (data) => {
-    const { email, firstName, lastName, aboutMe, major, picture, interests } = data;
-    Meteor.call('updateUser', { email, firstName, lastName, aboutMe, major, picture, interests });
+    const { email, firstName, lastName, aboutMe, picture, interests } = data;
+    Meteor.call('updateUser', { email, firstName, lastName, aboutMe, picture, interests });
   };
   // Now create the model with all the user information.
   return ready ? (
@@ -75,7 +72,6 @@ const EditProfile = () => {
                 </Row>
                 <LongTextField id={ComponentIDs.homeFormBio} name="aboutMe" placeholder={aboutMe2} />
                 <Row>
-                  <Col xs={6}><SelectField id={ComponentIDs.signUpFormMajor} name="major" placeholder={major2} /></Col>
                   <Col xs={6}><TextField name="picture" showInlineError placeholder={picture2} /></Col>
                 </Row>
                 <Row>

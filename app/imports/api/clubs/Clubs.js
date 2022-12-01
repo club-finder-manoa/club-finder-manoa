@@ -17,8 +17,6 @@ class ClubsCollection {
       description: { type: String, optional: true },
       tags: { type: Array, optional: true },
       'tags.$': { type: String },
-      relevantMajors: { type: Array, optional: true },
-      'relevantMajors.$': { type: String },
       meetingInfo: { type: Array, optional: true },
       'meetingInfo.$': { type: String },
       contactName: { type: String, optional: true },
