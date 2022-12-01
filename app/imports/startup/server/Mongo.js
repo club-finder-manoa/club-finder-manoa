@@ -6,9 +6,9 @@ import { Users } from '../../api/users/Users';
 /* eslint-disable no-console */
 
 Meteor.methods({
-  insertUser: function ({ accountID, email, major }) {
+  insertUser: function ({ accountID, email }) {
     const picture = 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
-    return Users.collection.insert({ accountID, email, major, picture });
+    return Users.collection.insert({ accountID, email, picture });
   },
 
   updateUser: function ({ email, firstName, lastName, aboutMe, major, picture, interests }) {

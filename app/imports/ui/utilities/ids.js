@@ -38,7 +38,7 @@ export const ComponentIDs = {
   signInFormSubmit: 'signInFormSubmit',
   signUpFormEmail: 'signUpFormEmail',
   signUpFormPassword: 'signUpFormPassword',
-  signUpFormMajor: 'signUpFormMajor',
+  signUpFormConfirmPassword: 'signUpFormConfirmPassword',
   signUpFormSubmit: 'signUpFormSubmit',
   adminEditor: 'adminEditor',
 };

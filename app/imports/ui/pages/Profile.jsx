@@ -33,8 +33,14 @@ const ChangePwModal = () => {
   const handleShow = () => setShow(true);
 
   const changePw = () => {
-    const success = true; // TODO figure out how to get errors
-    Accounts.changePassword(oldPw, newPw);
+    let success = true; // TODO figure out how to get errors
+    try {
+      Accounts.changePassword(oldPw, newPw);
+    } catch (e) {
+      success = false;
+      console.log(e);
+      swal('Error', e, 'error');
+    }
     if (success) {
       handleClose();
       swal('Success', 'Password successfully updated', 'success');
@@ -43,8 +49,6 @@ const ChangePwModal = () => {
       setConfirmNewPw('');
       setMinReqs(false);
       setPasswordsMatch(false);
-    } else {
-      swal('Error', 'hehehe', 'error');
     }
   };
 
@@ -61,14 +65,6 @@ const ChangePwModal = () => {
     if (key === 'oldPassword') {
       setOldPw(value);
     }
-  };
-
-  const passwordOkayStyle = {
-    color: 'green',
-  };
-
-  const passwordNotOkayStyle = {
-    color: 'red',
   };
 
   const changeStyle = {
@@ -113,11 +109,11 @@ const ChangePwModal = () => {
                 label="Confirm New Password"
                 type="password"
               />
-              <div style={minReqs ? passwordOkayStyle : passwordNotOkayStyle}>
+              <div className="small" style={minReqs ? { color: 'green' } : { color: 'red' }}>
                 {minReqs ? <Check /> : <X />} Password must be at least 6 characters long
               </div>
-              <div style={passwordsMatch ? passwordOkayStyle : passwordNotOkayStyle}>
-                {passwordsMatch ? <Check /> : <X />} Passwords match
+              <div className="small" style={passwordsMatch ? { color: 'green' } : { color: 'red' }}>
+                {passwordsMatch ? <Check /> : <X />} Passwords must match
               </div>
             </Modal.Body>
             <ErrorsField />

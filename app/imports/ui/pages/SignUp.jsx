@@ -4,8 +4,8 @@ import { Accounts } from 'meteor/accounts-base';
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
-import { MortarboardFill, KeyFill, EnvelopeFill } from 'react-bootstrap-icons';
+import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { KeyFill, EnvelopeFill, Check, X } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
 
@@ -16,19 +16,22 @@ const SignUp = () => {
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToRef] = useState(false);
   const [invalidEmail, setInvalidEmail] = useState(false);
-  const majors = ['Accounting', 'Art', 'Business', 'Chemistry', 'Computer Science', 'Computer Engineering', 'Economics', 'Engineering', 'Finance',
-    'Marketing', 'Mathematics', 'Music', 'Nursing', 'Philosophy', 'Physics', 'Political Science', 'Psychology', 'Social Work', 'Other']; // TODO add more later?
+  const [minReqs, setMinReqs] = useState(false);
+  const [passwordsMatch, setPasswordsMatch] = useState(false);
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [inputPassword, setInputPassword] = useState(false); // to only display password warnings after changed pw
 
   const schema = new SimpleSchema({
     email: String,
     password: String,
-    major: { type: String, optional: true, allowedValues: majors },
+    confirmPassword: String,
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const { email, password, major } = doc;
+    const { email } = doc;
     if (email.substring(email.length - 11, email.length) !== '@hawaii.edu') {
       setError('Please enter a valid UH email.');
       setInvalidEmail(true);
@@ -39,10 +42,22 @@ const SignUp = () => {
         } else {
           setError('');
           const accountID = Meteor.users.find().fetch()[0]._id;
-          Meteor.call('insertUser', { accountID, email, major });
+          Meteor.call('insertUser', { accountID, email });
           setRedirectToRef(true);
         }
       });
+    }
+  };
+
+  const handleFormChange = (key, value) => {
+    if (key === 'password') {
+      setMinReqs(value.length >= 6);
+      setPassword(value);
+      setPasswordsMatch(value === confirmPassword);
+    }
+    if (key === 'confirmPassword') {
+      setConfirmPassword(value);
+      setPasswordsMatch(value === password);
     }
   };
 
@@ -63,7 +78,7 @@ const SignUp = () => {
       <Container>
         <Row className="justify-content-center mb-3">
           <Col xs={5}>
-            <AutoForm schema={bridge} onSubmit={data => submit(data)}>
+            <AutoForm schema={bridge} onSubmit={data => submit(data)} onChange={(key, value) => handleFormChange(key, value)}>
               <Card className="mt-4" style={{ backgroundColor: '#256546', color: 'white' }}>
                 <Card.Body>
                   <Col className="text-center mb-3">
@@ -97,20 +112,36 @@ const SignUp = () => {
                       <KeyFill style={{ fontSize: '25px', color: 'gold' }} />
                     </Col>
                     <Col className="mx-2">
-                      <TextField id={ComponentIDs.signUpFormPassword} name="password" placeholder="Password" type="password" label="" />
+                      <TextField id={ComponentIDs.signUpFormPassword} name="password" placeholder="Password" type="password" label="" onBlur={() => setInputPassword(true)} />
                     </Col>
                   </Row>
                   <Row>
-                    <Col className="col-1 mt-1 ms-1">
-                      <MortarboardFill style={{ fontSize: '25px', color: 'limegreen' }} />
-                    </Col>
+                    <Col className="col-1 mt-1 ms-1" />
                     <Col className="mx-2">
-                      <SelectField id={ComponentIDs.signUpFormMajor} name="major" placeholder="Major (Optional)" label="" />
+                      <TextField id={ComponentIDs.signUpFormConfirmPassword} name="confirmPassword" placeholder="Confirm Password" type="password" label="" />
                     </Col>
                   </Row>
-                  <ErrorsField />
+                  {inputPassword ? (
+                    <Row>
+                      <Col className="col-1 mt-1 ms-1" />
+                      <Col className="small" style={minReqs ? { color: 'white' } : { color: 'yellow' }}>
+                        {minReqs ? <Check /> : <X />} Password must be at least 6 characters long
+                      </Col>
+                    </Row>
+                  )
+                    : '' }
+                  {inputPassword ? (
+                    <Row className="mb-2">
+                      <Col className="col-1 mt-1 ms-1" />
+                      <Col className="small" style={passwordsMatch ? { color: 'white' } : { color: 'yellow' }}>
+                        {passwordsMatch ? <Check /> : <X />} Passwords must match
+                      </Col>
+                    </Row>
+                  )
+                    : '' }
+                  <ErrorsField className="mt-2" />
                   <Col className="d-flex justify-content-center">
-                    <SubmitField id={ComponentIDs.signUpFormSubmit} className="my-2" value="Sign Up" />
+                    <SubmitField id={ComponentIDs.signUpFormSubmit} className="my-2" value="Sign Up" disabled={!(passwordsMatch && minReqs)} />
                   </Col>
                 </Card.Body>
               </Card>
