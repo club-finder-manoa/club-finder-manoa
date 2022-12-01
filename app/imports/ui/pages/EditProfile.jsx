@@ -5,6 +5,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
+import swal from 'sweetalert';
 import { Users } from '../../api/users/Users';
 import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -55,7 +56,11 @@ const EditProfile = () => {
   /* On submit, insert the data. */
   const submit = (data) => {
     const { email, firstName, lastName, aboutMe, picture, interests } = data;
-    Meteor.call('updateUser', { email, firstName, lastName, aboutMe, picture, interests });
+    if (Meteor.call('updateUser', { email, firstName, lastName, aboutMe, picture, interests })) {
+      swal('Error', 'Something went wrong.', 'error');
+    } else {
+      swal('Success', 'Profile updated successfully', 'success');
+    }
   };
   // Now create the model with all the user information.
   return ready ? (
