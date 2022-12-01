@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Badge, Container, Card, Image, Row, Col, Button, Table, DropdownButton, Dropdown, Accordion } from 'react-bootstrap';
-import { List, Grid, ChevronDown, ChevronUp, CaretUpFill, CaretDownFill } from 'react-bootstrap-icons';
+import { Badge, Container, Card, Image, Row, Col, Button, Table, DropdownButton, Dropdown, Accordion, Modal } from 'react-bootstrap';
+import { List, Grid, ChevronDown, ChevronUp, CaretUpFill, CaretDownFill, Plus, InfoCircle } from 'react-bootstrap-icons';
 import { useTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
@@ -49,6 +49,56 @@ const sortListButtonStyle = {
   padding: 0,
 };
 
+const SaveClubModal = ({ clubName }) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const saveClub = () => {
+    // todo
+  };
+
+  const saveStyle = {
+    borderWidth: 0,
+    padding: 0,
+    backgroundColor: 'transparent',
+    color: 'blue',
+  };
+
+  return (
+    <>
+      <Button style={saveStyle} onClick={handleShow}>
+        <Plus style={{ paddingBottom: '2px', fontSize: '24px' }} />Save Club
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Save Club</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="pb-4">
+            Add <b>{clubName}</b> to your saved clubs?
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button onClick={() => saveClub()}>
+              Save
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+SaveClubModal.propTypes = {
+  clubName: PropTypes.string.isRequired,
+};
+
 /* Component for club card. */
 const MakeCard = ({ club }) => {
   const [expandedDesc, setExpandedDesc] = useState(false);
@@ -66,14 +116,25 @@ const MakeCard = ({ club }) => {
   return (
     <Col>
       <Card className="h-100">
-        <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
-          <Card.Header id="club-header">
+        <Card.Header id="club-header">
+          <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
             {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
             <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
             {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="mt-2 rounded-pill" bg="info">{tag}</Badge>) : ''}
-          </Card.Header>
-        </a>
+          </a>
+          <Row className="mt-2">
+            <Col>
+              <SaveClubModal clubName={club.clubName} />
+            </Col>
+            <Col className="text-end">
+              <a style={{ textDecoration: 'none' }} href={`/${club._id}`}>
+                <InfoCircle style={{ paddingBottom: '2px' }} /> More info
+              </a>
+            </Col>
+          </Row>
+        </Card.Header>
+
         <Card.Body className="p-2">
           <Row className="mx-2">
             {expandedDesc ? club.description : shortDesc()}
