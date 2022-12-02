@@ -15,6 +15,7 @@ body {
   --bs-dark: var(--cfm-navbar-bg);
   --bs-dark-rgb: var(--cfm-navbar-bg-rgb);
   --bs-secondary-rgb: 45, 130, 89;
+  --bs-link-color: #18678F;
 }
 
 /* Color the light Brand and links with dark color */

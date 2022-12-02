@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Badge, Container, Card, Image, Row, Col, Button, Table, DropdownButton, Dropdown, Accordion, Modal } from 'react-bootstrap';
-import { List, Grid, ChevronDown, ChevronUp, CaretUpFill, CaretDownFill, Plus, InfoCircle } from 'react-bootstrap-icons';
+import { List, Grid, ChevronDown, ChevronUp, CaretUpFill, CaretDownFill, Plus, Check } from 'react-bootstrap-icons';
 import { useTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 import { Clubs } from '../../api/clubs/Clubs';
+import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
@@ -57,19 +59,22 @@ const SaveClubModal = ({ clubName, email }) => {
 
   const saveClub = () => {
     Meteor.call('saveClub', { email, clubName });
+    swal('Saved', `${clubName} saved to "My Clubs"`, 'success');
+    handleClose();
   };
 
-  const saveStyle = {
-    borderWidth: 0,
+  const saveButtonStyle = {
     padding: 0,
-    backgroundColor: 'transparent',
-    color: 'blue',
+    background: 'transparent',
+    color: '#18678F',
+    borderWidth: 0,
+    fontWeight: 600,
   };
 
   return (
     <>
-      <Button style={saveStyle} onClick={handleShow}>
-        <Plus style={{ paddingBottom: '2px', fontSize: '24px' }} />Save Club
+      <Button style={saveButtonStyle} onClick={handleShow}>
+        <Plus style={{ paddingBottom: '2px', fontSize: '24px' }} />Save
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Container className="mt-2">
@@ -101,7 +106,7 @@ SaveClubModal.propTypes = {
 };
 
 /* Component for club card. */
-const MakeCard = ({ club }) => {
+const MakeCard = ({ club, user }) => {
   const [expandedDesc, setExpandedDesc] = useState(false);
 
   const shortDesc = () => {
@@ -118,24 +123,24 @@ const MakeCard = ({ club }) => {
     <Col>
       <Card className="h-100">
         <Card.Header id="club-header">
+          <Row>
+            <Col>
+              <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
+                {club.mainPhoto ? <Image src={club.mainPhoto} width="70%" /> : ''}
+              </a>
+            </Col>
+            <Col className="text-end my-1">
+              {user.savedClubs.includes(club.clubName) ?
+                <span style={{ color: '#256546' }}><Check /> Saved</span> :
+                <SaveClubModal clubName={club.clubName} email={user.email} />}
+            </Col>
+          </Row>
           <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
-            {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
             <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
             {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="mt-2 rounded-pill" bg="info">{tag}</Badge>) : ''}
           </a>
-          <Row className="mt-2">
-            <Col>
-              <SaveClubModal clubName={club.clubName} email={Meteor.user().username} />
-            </Col>
-            <Col className="text-end">
-              <a style={{ textDecoration: 'none' }} href={`/${club._id}`}>
-                <InfoCircle style={{ paddingBottom: '2px' }} /> More info
-              </a>
-            </Col>
-          </Row>
         </Card.Header>
-
         <Card.Body className="p-2">
           <Row className="mx-2">
             {expandedDesc ? club.description : shortDesc()}
@@ -148,6 +153,7 @@ const MakeCard = ({ club }) => {
             </Row>
           )
             : ''}
+          {expandedDesc ? <a className="mx-2 mb-5" style={{ textDecoration: 'none', fontWeight: 600 }} href={`/${club._id}`}>More info</a> : ''}
         </Card.Body>
       </Card>
     </Col>
@@ -163,10 +169,14 @@ MakeCard.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string),
     description: PropTypes.string,
   }).isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    savedClubs: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 };
 
 /* Component for club table item */
-const ClubTableItem = ({ club }) => {
+const ClubTableItem = ({ club, user }) => {
   const [expandedDesc, setExpandedDesc] = useState(false);
 
   const shortDesc = () => {
@@ -190,9 +200,16 @@ const ClubTableItem = ({ club }) => {
           </Col>
           <Col>
             <Row>
-              <Link to={`/${club._id}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 600 }}>
-                {club.clubName}
-              </Link>
+              <Col>
+                <Link to={`/${club._id}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 600 }}>
+                  {club.clubName}
+                </Link>
+              </Col>
+              <Col className="text-end col-2">
+                {user.savedClubs.includes(club.clubName) ?
+                  <span style={{ color: '#256546' }}><Check /> Saved</span> :
+                  <SaveClubModal clubName={club.clubName} email={user.email} />}
+              </Col>
             </Row>
             <Row>
               <Col>
@@ -205,8 +222,8 @@ const ClubTableItem = ({ club }) => {
                   </Button>
                 </Col>
               ) : '' }
+              {expandedDesc ? <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/${club._id}`}>More info</a> : ''}
             </Row>
-
           </Col>
         </Row>
       </td>
@@ -227,6 +244,10 @@ ClubTableItem.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string),
     description: PropTypes.string,
   }).isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    savedClubs: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 };
 
 /* Renders the EditProfile Collection as a set of Cards. */
@@ -244,13 +265,16 @@ const AllClubs = () => {
   //         td = type descending
   const [sortBy, setSortBy] = useState('na');
 
-  const { ready, clubs } = useTracker(() => {
+  const { ready, clubs, user } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
-    const sub = Meteor.subscribe(Clubs.userPublicationName);
+    const sub1 = Meteor.subscribe(Clubs.userPublicationName);
+    const sub2 = Meteor.subscribe(Users.userPublicationName);
     const clubList = Clubs.collection.find().fetch();
+    const usr = Users.collection.find({ email: Meteor.user().username }).fetch()[0];
     return {
-      ready: sub.ready(),
+      ready: sub1.ready() && sub2.ready(),
       clubs: clubList,
+      user: usr,
     };
   }, []);
 
@@ -303,7 +327,7 @@ const AllClubs = () => {
     if (cardView) {
       return (
         <Row xs={1} md={2} lg={4} className="g-2">
-          {filteredClubs.map((club, index) => <MakeCard key={index} club={club} />)}
+          {filteredClubs.map((club, index) => <MakeCard key={index} club={club} user={user} />)}
         </Row>
       );
     }
@@ -335,7 +359,7 @@ const AllClubs = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredClubs.map((club) => <ClubTableItem key={club._id} club={club} />)}
+          {filteredClubs.map((club) => <ClubTableItem key={club._id} club={club} user={user} />)}
         </tbody>
       </Table>
     );
