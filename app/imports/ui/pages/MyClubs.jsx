@@ -1,16 +1,71 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Badge, Container, Card, Image, Row, Col, Button } from 'react-bootstrap';
+import { Badge, Container, Card, Image, Row, Col, Button, Modal } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { ChevronDown, ChevronUp } from 'react-bootstrap-icons';
+import { X, ChevronDown, ChevronUp } from 'react-bootstrap-icons';
+import swal from 'sweetalert';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
 
-/* Component for club card. */
+const RemoveClubModal = ({ clubName, email }) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const removeClub = () => {
+    Meteor.call('removeClub', { email, clubName });
+    swal('Removed', `${clubName} removed from "My Clubs"`, 'success');
+    handleClose();
+  };
+
+  const removeClubStyle = {
+    padding: 0,
+    background: 'transparent',
+    color: '#C6C6C6',
+    borderWidth: 0,
+    fontSize: '20px',
+    fontWeight: 600,
+  };
+
+  return (
+    <>
+      <Button style={removeClubStyle} onClick={handleShow}>
+        <X />
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Remove Club</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="pb-4">
+            Remove <b>{clubName}</b> from your saved clubs?
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button variant="danger" onClick={() => removeClub()}>
+              Remove
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+RemoveClubModal.propTypes = {
+  email: PropTypes.string.isRequired,
+  clubName: PropTypes.string.isRequired,
+};
+
 const MakeCard = ({ club }) => {
   const expandDescButtonStyle = {
     backgroundColor: 'transparent',
@@ -34,16 +89,26 @@ const MakeCard = ({ club }) => {
 
   return (
     <Col>
-      <Card className="h-100" id="my-clubs-page">
-        <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
-          <Card.Header id="myclubs-club-header">
-            {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
+      <Card className="h-100">
+        <Card.Header id="club-header" style={{ backgroundColor: 'white' }}>
+          <Col className="d-flex justify-content-end">
+            <RemoveClubModal clubName={club.clubName} email={Meteor.user().username} />
+          </Col>
+          <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
+            <Col style={{ height: '130px' }} className="d-flex justify-content-center my-2">
+              {club.mainPhoto ? <Image style={{ maxWidth: '90%', maxHeight: '100%' }} className="my-auto" src={club.mainPhoto} /> : ''}
+            </Col>
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
             <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
-            {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="mt-2 rounded-pill" bg="info">{tag}</Badge>) : ''}
-          </Card.Header>
-        </a>
-        <Card.Body className="p-2">
+            {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="rounded-pill mt-2" bg="secondary">{tag}</Badge>) : ''}
+          </a>
+          <Row className="mt-2">
+            <Col>
+              <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/${club._id}`}>More info</a>
+            </Col>
+          </Row>
+        </Card.Header>
+        <Card.Body className="p-2" style={{ backgroundColor: '#F6F6F6' }}>
           <Row className="mx-2">
             {expandedDesc ? club.description : shortDesc()}
           </Row>
@@ -98,7 +163,7 @@ const MyClubs = () => {
   }, []);
 
   const getClubs = () => (clubs.length > 0 ? (
-    <Row xs={1} md={2} lg={4} className="g-2">
+    <Row xs={1} md={2} lg={3} className="g-2">
       {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
     </Row>
   )

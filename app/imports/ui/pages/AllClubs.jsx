@@ -122,26 +122,27 @@ const MakeCard = ({ club, user }) => {
   return (
     <Col>
       <Card className="h-100">
-        <Card.Header id="club-header">
-          <Row>
-            <Col>
-              <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
-                {club.mainPhoto ? <Image src={club.mainPhoto} width="70%" /> : ''}
-              </a>
+        <Card.Header id="club-header" style={{ backgroundColor: 'white' }}>
+          <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
+            <Col style={{ height: '100px' }} className="d-flex justify-content-center my-2">
+              {club.mainPhoto ? <Image style={{ maxWidth: '90%', maxHeight: '100%' }} className="my-auto" src={club.mainPhoto} /> : ''}
             </Col>
-            <Col className="text-end my-1">
+            <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
+          </a>
+          <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
+          {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="rounded-pill mt-2" bg="secondary">{tag}</Badge>) : ''}
+          <Row className="mt-2 mb-1">
+            <Col>
+              <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/${club._id}`}>More info</a>
+            </Col>
+            <Col className="text-end">
               {user.savedClubs.includes(club.clubName) ?
                 <span style={{ color: '#256546' }}><Check /> Saved</span> :
                 <SaveClubModal clubName={club.clubName} email={user.email} />}
             </Col>
           </Row>
-          <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
-            <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
-            <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
-            {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="mt-2 rounded-pill" bg="info">{tag}</Badge>) : ''}
-          </a>
         </Card.Header>
-        <Card.Body className="p-2">
+        <Card.Body className="p-2" style={{ backgroundColor: '#F6F6F6' }}>
           <Row className="mx-2">
             {expandedDesc ? club.description : shortDesc()}
           </Row>
@@ -153,7 +154,6 @@ const MakeCard = ({ club, user }) => {
             </Row>
           )
             : ''}
-          {expandedDesc ? <a className="mx-2 mb-5" style={{ textDecoration: 'none', fontWeight: 600 }} href={`/${club._id}`}>More info</a> : ''}
         </Card.Body>
       </Card>
     </Col>
@@ -192,12 +192,14 @@ const ClubTableItem = ({ club, user }) => {
   return (
     <tr>
       <td>
+        <Col className="d-flex justify-content-center">
+          <Link to={`/${club._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+            {club.mainPhoto ? <Image src={club.mainPhoto} width="75px" /> : ''}
+          </Link>
+        </Col>
+      </td>
+      <td>
         <Row>
-          <Col className="col-1 me-2">
-            <Link to={`/${club._id}`} style={{ textDecoration: 'none', color: 'black' }}>
-              {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
-            </Link>
-          </Col>
           <Col>
             <Row>
               <Col>
@@ -229,7 +231,7 @@ const ClubTableItem = ({ club, user }) => {
       </td>
       <td>{club.clubType}</td>
       <td>
-        {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="my-auto rounded-pill" bg="info">{tag}</Badge>) : ''}
+        {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="my-auto rounded-pill" bg="secondary">{tag}</Badge>) : ''}
       </td>
     </tr>
   );
@@ -332,10 +334,13 @@ const AllClubs = () => {
       );
     }
     return (
-      <Table striped bordered>
+      <Table striped bordered style={{ tableLayout: 'fixed' }}>
         <thead style={{ position: 'sticky', top: 0, backgroundColor: 'white' }}>
           <tr>
-            <th>
+            <th style={{ width: '100px' }}>
+              Image
+            </th>
+            <th style={{ width: '55%' }}>
               <Row className="ms-0">
                 Name
                 <Col>
