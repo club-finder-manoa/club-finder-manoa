@@ -15,8 +15,7 @@
 
   "defaultUserData": [
     {
-      "firstName": "Boss",
-      "lastName": "Person",
+      "displayName": "Admin",
       "email": "admin@hawaii.edu",
       "aboutMe": "I am the boss.",
       "picture": "https://img.freepik.com/premium-vector/cool-cartoon-banana-with-sunglasses_14588-379.jpg?w=2000",
@@ -24,8 +23,7 @@
       "interests": ["Administrating Websites", "Crying"]
     },
     {
-      "firstName": "John",
-      "lastName": "Doe",
+      "displayName": "John",
       "email": "john@hawaii.edu",
       "aboutMe": "I like stuff.",
       "picture": "https://thumbs.dreamstime.com/b/cool-cartoon-character-sunglasses-creative-design-cool-cartoon-character-sunglasses-153501584.jpg",
@@ -33,8 +31,7 @@
       "interests": ["Architecture"]
     },
     {
-      "firstName": "Accounting",
-      "lastName": "Club",
+      "displayName": "Accounting Admin",
       "email": "accountingadmin@hawaii.edu",
       "aboutMe": "Accounting is fun.",
       "picture": "https://thumbs.dreamstime.com/b/cool-calculator-cartoon-vector-illustration-64675808.jpg",

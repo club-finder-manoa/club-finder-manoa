@@ -164,7 +164,7 @@ const Profile = () => {
       <Row>
         <Card id="cardProfile">
           <Col className="text-center pt-3">
-            <h1 id="profileName">{userProfile.firstName} {userProfile.lastName}</h1>
+            <h1 id="profileName">{userProfile.displayName}</h1>
             <p>{userProfile.email}</p>
             <hr />
             <p>{userProfile.aboutMe}</p>

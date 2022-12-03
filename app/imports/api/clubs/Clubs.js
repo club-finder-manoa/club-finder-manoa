@@ -15,6 +15,7 @@ class ClubsCollection {
       clubType: { type: String, optional: true },
       mainPhoto: { type: String, optional: true },
       description: { type: String, optional: true },
+      website: { type: String, optional: true },
       tags: { type: Array, optional: true },
       'tags.$': { type: String },
       meetingInfo: { type: Array, optional: true },

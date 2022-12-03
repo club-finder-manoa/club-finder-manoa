@@ -32,8 +32,8 @@ Meteor.methods({
     return Users.collection.update({ email: email }, { $set: { savedClubs: clubArray } });
   },
 
-  updateUser: function ({ email, firstName, lastName, aboutMe, picture, interests }) {
-    return Users.collection.update({ email: email }, { $set: { firstName, lastName, aboutMe, picture, interests } });
+  updateUser: function ({ email, displayName, aboutMe, picture, interests }) {
+    return Users.collection.update({ email: email }, { $set: { displayName, aboutMe, picture, interests } });
   },
 
   removeUser: function ({ email }) {
