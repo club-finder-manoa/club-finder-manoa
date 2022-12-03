@@ -77,6 +77,18 @@ body .btn-primary {
   background-size: 100%;
 }
 
+#backButton {
+  --bs-btn-bg: #a6a6a6;
+  --bs-btn-hover-bg: #b2b2b2;
+  --bs-btn-active-bg: #818181;
+  --bs-btn-border-color: #9f9e9e;
+  --bs-btn-hover-border-color: #9b9b9b;
+  --bs-btn-active-border-color: #595959;
+  --bs-btn-disabled-bg: #afafaf;
+  --bs-btn-disabled-border-color: #919191;
+  border-width: 2px;
+}
+
 #landingPage {
   background: url("images/landing-top.png") no-repeat;
   background-size: 100%;
@@ -100,8 +112,7 @@ body .btn-primary {
 
 #cardProfile{
   padding-top: 150px;
-  height: 440px;
-  width: 600px;
+  width: 60%;
   margin-top: -150px;
   margin-left: auto;
   margin-right: auto;

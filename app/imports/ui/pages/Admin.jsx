@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Badge, Button, Col, Container, Row, Table, Modal, Form } from 'react-bootstrap';
+import { Badge, Button, Col, Container, Row, Table, Modal, Form, Image } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { X } from 'react-bootstrap-icons';
 import PropTypes from 'prop-types';
@@ -280,7 +280,20 @@ const UserListItem = ({ user }) => {
 
   return (
     <tr>
-      <td><a href={`/profile/${user._id}`}>{user.email}</a></td>
+      <td>
+        <a href={`/profile/${user._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+          <Row>
+            <Col className="col-3 d-flex justify-content-center">
+              <Image roundedCircle src={user.picture} height="60px" />
+            </Col>
+            <Col>
+              <b>{user.displayName}</b>
+              <br />
+              {user.email}
+            </Col>
+          </Row>
+        </a>
+      </td>
       <td>
         {user.email !== 'admin@hawaii.edu' ? (
           <Col>
@@ -314,6 +327,8 @@ UserListItem.propTypes = {
     _id: PropTypes.string,
     accountID: PropTypes.string,
     email: PropTypes.string,
+    displayName: PropTypes.string,
+    picture: PropTypes.string,
     adminForClubs: PropTypes.arrayOf(String),
   }).isRequired,
 };
@@ -343,7 +358,7 @@ const Admin = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Email</th>
+                <th>Name/Email</th>
                 <th>Admin Permissions</th>
                 <th>Reset Password</th>
                 <th>Delete Account</th>

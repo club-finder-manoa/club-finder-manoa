@@ -44,8 +44,8 @@ const MakeCard = ({ club }) => {
               {club.mainPhoto ? <Image style={{ maxWidth: '90%', maxHeight: '100%' }} className="my-auto" src={club.mainPhoto} /> : ''}
             </Col>
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
-            <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
-            {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="rounded-pill mt-2" bg="secondary">{tag}</Badge>) : ''}
+            <Card.Subtitle className="mb-1"><span className="date">{club.clubType}</span></Card.Subtitle>
+            {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="rounded-pill" bg="secondary">{tag}</Badge>) : ''}
           </a>
           <Row className="mt-2">
             <Col>

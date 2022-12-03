@@ -75,8 +75,8 @@ const MakeCard = ({ club, user }) => {
             </Col>
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
           </a>
-          <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
-          {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="rounded-pill mt-2" bg="secondary">{tag}</Badge>) : ''}
+          <Card.Subtitle className="mb-1"><span className="date">{club.clubType}</span></Card.Subtitle>
+          {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="rounded-pill" bg="secondary">{tag}</Badge>) : ''}
           <Row className="mt-2 mb-1">
             <Col>
               <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/club/${club._id}`}>More info</a>
