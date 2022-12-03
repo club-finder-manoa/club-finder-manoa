@@ -110,7 +110,7 @@ const AddAdminStatusModal = ({ user }) => {
   return (
     <>
       <Button style={plusButtonStyle} onClick={handleShow}>
-        &nbsp;&nbsp;Add<Plus style={{ paddingBottom: '2px', fontSize: '24px', fontWeight: 900 }} />
+        &nbsp;&nbsp;Add<Plus style={{ paddingBottom: '2px', fontSize: '24px' }} />
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Container className="mt-2">

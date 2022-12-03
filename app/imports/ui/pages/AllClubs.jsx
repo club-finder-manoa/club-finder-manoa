@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Badge, Container, Card, Image, Row, Col, Button, Table, DropdownButton, Dropdown, Accordion } from 'react-bootstrap';
-import { List, Grid, ChevronDown, ChevronUp, CaretUpFill, CaretDownFill } from 'react-bootstrap-icons';
+import { List, Grid, ChevronDown, ChevronUp, CaretUpFill, CaretDownFill, Check } from 'react-bootstrap-icons';
 import { useTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Clubs } from '../../api/clubs/Clubs';
+import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
+import SaveClubModal from '../components/SaveClubModal';
 
 const viewButtonStyleSelected = {
   backgroundColor: '#2d8259',
@@ -50,7 +52,7 @@ const sortListButtonStyle = {
 };
 
 /* Component for club card. */
-const MakeCard = ({ club }) => {
+const MakeCard = ({ club, user }) => {
   const [expandedDesc, setExpandedDesc] = useState(false);
 
   const shortDesc = () => {
@@ -66,15 +68,27 @@ const MakeCard = ({ club }) => {
   return (
     <Col>
       <Card className="h-100">
-        <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
-          <Card.Header id="club-header">
-            {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
+        <Card.Header id="club-header" style={{ backgroundColor: 'white' }}>
+          <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
+            <Col style={{ height: '100px' }} className="d-flex justify-content-center my-2">
+              {club.mainPhoto ? <Image style={{ maxWidth: '90%', maxHeight: '100%' }} className="my-auto" src={club.mainPhoto} /> : ''}
+            </Col>
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
-            <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
-            {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="mt-2 rounded-pill" bg="info">{tag}</Badge>) : ''}
-          </Card.Header>
-        </a>
-        <Card.Body className="p-2">
+          </a>
+          <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
+          {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="rounded-pill mt-2" bg="secondary">{tag}</Badge>) : ''}
+          <Row className="mt-2 mb-1">
+            <Col>
+              <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/${club._id}`}>More info</a>
+            </Col>
+            <Col className="text-end">
+              {user.savedClubs?.includes(club.clubName) ?
+                <span style={{ color: '#256546' }}><Check /> Saved</span> :
+                <SaveClubModal clubName={club.clubName} email={user.email} />}
+            </Col>
+          </Row>
+        </Card.Header>
+        <Card.Body className="p-2" style={{ backgroundColor: '#F6F6F6' }}>
           <Row className="mx-2">
             {expandedDesc ? club.description : shortDesc()}
           </Row>
@@ -101,10 +115,14 @@ MakeCard.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string),
     description: PropTypes.string,
   }).isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    savedClubs: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 };
 
 /* Component for club table item */
-const ClubTableItem = ({ club }) => {
+const ClubTableItem = ({ club, user }) => {
   const [expandedDesc, setExpandedDesc] = useState(false);
 
   const shortDesc = () => {
@@ -120,17 +138,26 @@ const ClubTableItem = ({ club }) => {
   return (
     <tr>
       <td>
+        <Col className="d-flex justify-content-center">
+          <Link to={`/${club._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+            {club.mainPhoto ? <Image src={club.mainPhoto} width="75px" /> : ''}
+          </Link>
+        </Col>
+      </td>
+      <td>
         <Row>
-          <Col className="col-1 me-2">
-            <Link to={`/${club._id}`} style={{ textDecoration: 'none', color: 'black' }}>
-              {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
-            </Link>
-          </Col>
           <Col>
             <Row>
-              <Link to={`/${club._id}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 600 }}>
-                {club.clubName}
-              </Link>
+              <Col>
+                <Link to={`/${club._id}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 600 }}>
+                  {club.clubName}
+                </Link>
+              </Col>
+              <Col className="text-end col-2">
+                {user.savedClubs.includes(club.clubName) ?
+                  <span style={{ color: '#256546' }}><Check /> Saved</span> :
+                  <SaveClubModal clubName={club.clubName} email={user.email} />}
+              </Col>
             </Row>
             <Row>
               <Col>
@@ -143,14 +170,14 @@ const ClubTableItem = ({ club }) => {
                   </Button>
                 </Col>
               ) : '' }
+              {expandedDesc ? <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/${club._id}`}>More info</a> : ''}
             </Row>
-
           </Col>
         </Row>
       </td>
       <td>{club.clubType}</td>
       <td>
-        {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="my-auto rounded-pill" bg="info">{tag}</Badge>) : ''}
+        {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="my-auto rounded-pill" bg="secondary">{tag}</Badge>) : ''}
       </td>
     </tr>
   );
@@ -164,6 +191,10 @@ ClubTableItem.propTypes = {
     clubType: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
     description: PropTypes.string,
+  }).isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    savedClubs: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };
 
@@ -182,13 +213,16 @@ const AllClubs = () => {
   //         td = type descending
   const [sortBy, setSortBy] = useState('na');
 
-  const { ready, clubs } = useTracker(() => {
+  const { ready, clubs, user } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
-    const sub = Meteor.subscribe(Clubs.userPublicationName);
+    const sub1 = Meteor.subscribe(Clubs.userPublicationName);
+    const sub2 = Meteor.subscribe(Users.userPublicationName);
     const clubList = Clubs.collection.find().fetch();
+    const usr = Users.collection.find({ email: Meteor.user()?.username }).fetch()[0];
     return {
-      ready: sub.ready(),
+      ready: sub1.ready() && sub2.ready(),
       clubs: clubList,
+      user: usr,
     };
   }, []);
 
@@ -241,15 +275,18 @@ const AllClubs = () => {
     if (cardView) {
       return (
         <Row xs={1} md={2} lg={4} className="g-2">
-          {filteredClubs.map((club, index) => <MakeCard key={index} club={club} />)}
+          {filteredClubs.map((club, index) => <MakeCard key={index} club={club} user={user} />)}
         </Row>
       );
     }
     return (
-      <Table striped bordered>
+      <Table striped bordered style={{ tableLayout: 'fixed' }}>
         <thead style={{ position: 'sticky', top: 0, backgroundColor: 'white' }}>
           <tr>
-            <th>
+            <th style={{ width: '100px' }}>
+              Image
+            </th>
+            <th style={{ width: '55%' }}>
               <Row className="ms-0">
                 Name
                 <Col>
@@ -273,7 +310,7 @@ const AllClubs = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredClubs.map((club) => <ClubTableItem key={club._id} club={club} />)}
+          {filteredClubs.map((club) => <ClubTableItem key={club._id} club={club} user={user} />)}
         </tbody>
       </Table>
     );
