@@ -319,120 +319,118 @@ const AllClubs = () => {
   }
 
   return (
-    <div className="backgroundImageTop">
-      <Container id={PageIDs.allClubsPage} style={pageStyle}>
-        <Row className="align-middle text-center">
-          <Col />
-          <Col className="d-flex flex-column justify-content-center mb-3">
-            <h1 style={{ color: '#16211b' }} className="my-2"><b>All Clubs</b></h1>
-            {`${filteredClubs.length} club`}{filteredClubs.length === 1 ? '' : 's'}
-          </Col>
-          <Col className="text-end my-auto">
-            <Button style={cardView ? viewButtonStyleSelected : viewButtonStyle} onClick={() => setCardView(true)} id="card-view-btn">
-              <Grid /> Card View
-            </Button>
-            <Button style={cardView ? viewButtonStyle : viewButtonStyleSelected} onClick={() => setCardView(false)} id="list-view-btn">
-              <List /> List View
-            </Button>
-          </Col>
-        </Row>
-        <Accordion className="mb-3">
-          <Accordion.Item eventKey="0">
-            <Accordion.Header id="search-option-drpdwn">
-              Search Options
-            </Accordion.Header>
-            <Accordion.Body>
-              <Row className="px-3 pb-3">
-                <Col className="d-flex justify-content-center">
-                  <label htmlFor="Search by name">
-                    <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                      Name
-                    </Col>
-                    <div id="search-by-name">
-                      <input
-                        type="text"
-                        style={textBoxStyle}
-                        placeholder="Enter Club Name"
-                        onChange={e => setClubName(e.target.value)}
-                      />
-                    </div>
-                  </label>
-                </Col>
-                <Col className="d-flex justify-content-center">
-                  <label htmlFor="Search by description">
-                    <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                      Description
-                    </Col>
+    <Container id={PageIDs.allClubsPage} style={pageStyle}>
+      <Row className="align-middle text-center">
+        <Col />
+        <Col className="d-flex flex-column justify-content-center mb-3">
+          <h1 style={{ color: '#16211b' }} className="my-2"><b>All Clubs</b></h1>
+          {`${filteredClubs.length} club`}{filteredClubs.length === 1 ? '' : 's'}
+        </Col>
+        <Col className="text-end my-auto">
+          <Button style={cardView ? viewButtonStyleSelected : viewButtonStyle} onClick={() => setCardView(true)} id="card-view-btn">
+            <Grid /> Card View
+          </Button>
+          <Button style={cardView ? viewButtonStyle : viewButtonStyleSelected} onClick={() => setCardView(false)} id="list-view-btn">
+            <List /> List View
+          </Button>
+        </Col>
+      </Row>
+      <Accordion className="mb-3">
+        <Accordion.Item eventKey="0">
+          <Accordion.Header id="search-option-drpdwn">
+            Search Options
+          </Accordion.Header>
+          <Accordion.Body>
+            <Row className="px-3 pb-3">
+              <Col className="d-flex justify-content-center">
+                <label htmlFor="Search by name">
+                  <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+                    Name
+                  </Col>
+                  <div id="search-by-name">
                     <input
                       type="text"
                       style={textBoxStyle}
-                      placeholder="Enter Club Description"
-                      onChange={e => setDescription(e.target.value)}
+                      placeholder="Enter Club Name"
+                      onChange={e => setClubName(e.target.value)}
                     />
-                  </label>
-                </Col>
-                <Col className="d-flex justify-content-center">
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label htmlFor="Search by type">
-                    <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                      Type
-                    </Col>
-                    <DropdownButton
-                      id="filterDropdown"
-                      variant="secondary"
-                      title={clubType === '' ? 'Select a Club Type' : clubType}
-                      onSelect={(e) => setClubType(e)}
-                    >
-                      <Dropdown.Item eventKey="">Any</Dropdown.Item>
-                      <Dropdown.Item eventKey="Academic/Professional">Academic/Professional</Dropdown.Item>
-                      <Dropdown.Item eventKey="Ethnic/Cultural">Ethnic/Cultural</Dropdown.Item>
-                      <Dropdown.Item eventKey="Fraternity/Sorority">Fraternity/Sorority</Dropdown.Item>
-                      <Dropdown.Item eventKey="Honorary Society">Honorary Society</Dropdown.Item>
-                      <Dropdown.Item eventKey="Leisure/Recreational">Leisure/Recreational</Dropdown.Item>
-                      <Dropdown.Item eventKey="Political">Political</Dropdown.Item>
-                      <Dropdown.Item eventKey="Service">Service</Dropdown.Item>
-                      <Dropdown.Item eventKey="Spiritual/Religious">Spiritual/Religious</Dropdown.Item>
-                      <Dropdown.Item eventKey="Sports/Leisure">Sports/Leisure</Dropdown.Item>
-                      <Dropdown.Item eventKey="Student Affairs">Student Affairs</Dropdown.Item>
-                    </DropdownButton>
-                  </label>
-                </Col>
-                <Col className="d-flex justify-content-center">
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label htmlFor="Search by interest">
-                    <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                      Tags
-                    </Col>
-                    <DropdownButton
-                      id="filterDropdown"
-                      variant="secondary"
-                      title={interest === '' ? 'Select an Interest' : interest}
-                      onSelect={(e) => setInterest(e)}
-                    >
-                      <Dropdown.Item eventKey="">Any</Dropdown.Item>
-                      <Dropdown.Item eventKey="Accounting">Accounting</Dropdown.Item>
-                      <Dropdown.Item eventKey="American Indian">American Indian</Dropdown.Item>
-                      <Dropdown.Item eventKey="Architecture">Architecture</Dropdown.Item>
-                      <Dropdown.Item eventKey="Business">Business</Dropdown.Item>
-                      <Dropdown.Item eventKey="Fitness">Fitness</Dropdown.Item>
-                      <Dropdown.Item eventKey="Fraternity">Fraternity</Dropdown.Item>
-                      <Dropdown.Item eventKey="Library">Library</Dropdown.Item>
-                      <Dropdown.Item eventKey="Marketing">Marketing</Dropdown.Item>
-                      <Dropdown.Item eventKey="Math">Math</Dropdown.Item>
-                      <Dropdown.Item eventKey="Politics">Politics</Dropdown.Item>
-                      <Dropdown.Item eventKey="Science">Science</Dropdown.Item>
-                      <Dropdown.Item eventKey="Sorority">Sorority</Dropdown.Item>
-                      <Dropdown.Item eventKey="Sports">Sports</Dropdown.Item>
-                    </DropdownButton>
-                  </label>
-                </Col>
-              </Row>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-        {ready ? displayClubs() : <LoadingSpinner />}
-      </Container>
-    </div>
+                  </div>
+                </label>
+              </Col>
+              <Col className="d-flex justify-content-center">
+                <label htmlFor="Search by description">
+                  <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+                    Description
+                  </Col>
+                  <input
+                    type="text"
+                    style={textBoxStyle}
+                    placeholder="Enter Club Description"
+                    onChange={e => setDescription(e.target.value)}
+                  />
+                </label>
+              </Col>
+              <Col className="d-flex justify-content-center">
+                {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                <label htmlFor="Search by type">
+                  <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+                    Type
+                  </Col>
+                  <DropdownButton
+                    id="filterDropdown"
+                    variant="secondary"
+                    title={clubType === '' ? 'Select a Club Type' : clubType}
+                    onSelect={(e) => setClubType(e)}
+                  >
+                    <Dropdown.Item eventKey="">Any</Dropdown.Item>
+                    <Dropdown.Item eventKey="Academic/Professional">Academic/Professional</Dropdown.Item>
+                    <Dropdown.Item eventKey="Ethnic/Cultural">Ethnic/Cultural</Dropdown.Item>
+                    <Dropdown.Item eventKey="Fraternity/Sorority">Fraternity/Sorority</Dropdown.Item>
+                    <Dropdown.Item eventKey="Honorary Society">Honorary Society</Dropdown.Item>
+                    <Dropdown.Item eventKey="Leisure/Recreational">Leisure/Recreational</Dropdown.Item>
+                    <Dropdown.Item eventKey="Political">Political</Dropdown.Item>
+                    <Dropdown.Item eventKey="Service">Service</Dropdown.Item>
+                    <Dropdown.Item eventKey="Spiritual/Religious">Spiritual/Religious</Dropdown.Item>
+                    <Dropdown.Item eventKey="Sports/Leisure">Sports/Leisure</Dropdown.Item>
+                    <Dropdown.Item eventKey="Student Affairs">Student Affairs</Dropdown.Item>
+                  </DropdownButton>
+                </label>
+              </Col>
+              <Col className="d-flex justify-content-center">
+                {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                <label htmlFor="Search by interest">
+                  <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+                    Tags
+                  </Col>
+                  <DropdownButton
+                    id="filterDropdown"
+                    variant="secondary"
+                    title={interest === '' ? 'Select an Interest' : interest}
+                    onSelect={(e) => setInterest(e)}
+                  >
+                    <Dropdown.Item eventKey="">Any</Dropdown.Item>
+                    <Dropdown.Item eventKey="Accounting">Accounting</Dropdown.Item>
+                    <Dropdown.Item eventKey="American Indian">American Indian</Dropdown.Item>
+                    <Dropdown.Item eventKey="Architecture">Architecture</Dropdown.Item>
+                    <Dropdown.Item eventKey="Business">Business</Dropdown.Item>
+                    <Dropdown.Item eventKey="Fitness">Fitness</Dropdown.Item>
+                    <Dropdown.Item eventKey="Fraternity">Fraternity</Dropdown.Item>
+                    <Dropdown.Item eventKey="Library">Library</Dropdown.Item>
+                    <Dropdown.Item eventKey="Marketing">Marketing</Dropdown.Item>
+                    <Dropdown.Item eventKey="Math">Math</Dropdown.Item>
+                    <Dropdown.Item eventKey="Politics">Politics</Dropdown.Item>
+                    <Dropdown.Item eventKey="Science">Science</Dropdown.Item>
+                    <Dropdown.Item eventKey="Sorority">Sorority</Dropdown.Item>
+                    <Dropdown.Item eventKey="Sports">Sports</Dropdown.Item>
+                  </DropdownButton>
+                </label>
+              </Col>
+            </Row>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+      {ready ? displayClubs() : <LoadingSpinner />}
+    </Container>
   );
 };
 

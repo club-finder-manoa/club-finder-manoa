@@ -63,8 +63,6 @@ const ChangePwModal = () => {
     }
   };
 
-  document.title = 'Club Finder Mānoa - Profile';
-
   const changeStyle = {
     borderWidth: 0,
     padding: 0,
@@ -152,6 +150,8 @@ const Profile = () => {
     }
     return interestsFormatted;
   };
+
+  document.title = 'Club Finder Mānoa - Profile';
 
   return (ready ? (
     <Container fluid className="py-3 backgroundImageTop">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Badge, Button, Col, Container, Row, Table, Modal, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Plus, X } from 'react-bootstrap-icons';
+import { X } from 'react-bootstrap-icons';
 import PropTypes from 'prop-types';
 import { Users } from '../../api/users/Users';
 import { Clubs } from '../../api/clubs/Clubs';
@@ -98,19 +98,15 @@ const AddAdminStatusModal = ({ user }) => {
 
   const plusButtonStyle = {
     borderWidth: 0,
-    fontSize: '15px',
-    fontWeight: 500,
-    borderRadius: '10px',
-    paddingTop: '4px',
-    paddingBottom: '4px',
-    paddingLeft: '6px',
-    paddingRight: '6px',
+    padding: 0,
+    backgroundColor: 'transparent',
+    color: '#0878A9',
   };
 
   return (
     <>
       <Button style={plusButtonStyle} onClick={handleShow}>
-        &nbsp;&nbsp;Add<Plus style={{ paddingBottom: '2px', fontSize: '24px' }} />
+        <u>Add</u>
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Container className="mt-2">
@@ -284,7 +280,7 @@ const UserListItem = ({ user }) => {
 
   return (
     <tr>
-      <td>{user.email}</td>
+      <td><a href={`/profile/${user._id}`}>{user.email}</a></td>
       <td>
         {user.email !== 'admin@hawaii.edu' ? (
           <Col>
