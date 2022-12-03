@@ -17,6 +17,17 @@ Meteor.methods({
     return Users.collection.update({ email: email }, { $set: { savedClubs: clubArray } });
   },
 
+  removeClub: function ({ email, clubName }) {
+    const clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const i in clubArray) {
+      if (clubArray[i] === clubName) {
+        clubArray.splice(i, 1);
+      }
+    }
+    return Users.collection.update({ email: email }, { $set: { savedClubs: clubArray } });
+  },
+
   updateUser: function ({ email, firstName, lastName, aboutMe, picture, interests }) {
     return Users.collection.update({ email: email }, { $set: { firstName, lastName, aboutMe, picture, interests } });
   },
