@@ -334,6 +334,9 @@ const Admin = () => {
       ready: rdy,
     };
   }, []);
+
+  document.title = 'Club Finder Mānoa - Admin Dashboard';
+
   return (ready ? (
     <Container id={PageIDs.adminPage} className="py-3">
       <Row className="justify-content-center">

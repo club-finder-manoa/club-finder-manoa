@@ -39,7 +39,7 @@ const MakeCard = ({ club }) => {
           <Col className="d-flex justify-content-end">
             <RemoveClubModal clubName={club.clubName} email={Meteor.user().username} buttonText="" />
           </Col>
-          <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
+          <a style={{ color: 'black', textDecoration: 'none' }} href={`/club/${club._id}`}>
             <Col style={{ height: '130px' }} className="d-flex justify-content-center my-2">
               {club.mainPhoto ? <Image style={{ maxWidth: '90%', maxHeight: '100%' }} className="my-auto" src={club.mainPhoto} /> : ''}
             </Col>
@@ -49,7 +49,7 @@ const MakeCard = ({ club }) => {
           </a>
           <Row className="mt-2">
             <Col>
-              <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/${club._id}`}>More info</a>
+              <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/club/${club._id}`}>More info</a>
             </Col>
           </Row>
         </Card.Header>
@@ -84,7 +84,6 @@ MakeCard.propTypes = {
 
 /* Renders the Clubs Collection as a set of Cards. */
 const MyClubs = () => {
-
   const { ready, clubs } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     let loaded = false;
@@ -106,6 +105,8 @@ const MyClubs = () => {
       clubs: clubList,
     };
   }, []);
+
+  document.title = 'Club Finder Mānoa - My Clubs';
 
   const getClubs = () => (clubs.length > 0 ? (
     <Row xs={1} md={2} lg={3} className="g-2">

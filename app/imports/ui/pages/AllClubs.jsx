@@ -69,7 +69,7 @@ const MakeCard = ({ club, user }) => {
     <Col>
       <Card className="h-100">
         <Card.Header id="club-header" style={{ backgroundColor: 'white' }}>
-          <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
+          <a style={{ color: 'black', textDecoration: 'none' }} href={`/club/${club._id}`}>
             <Col style={{ height: '100px' }} className="d-flex justify-content-center my-2">
               {club.mainPhoto ? <Image style={{ maxWidth: '90%', maxHeight: '100%' }} className="my-auto" src={club.mainPhoto} /> : ''}
             </Col>
@@ -79,7 +79,7 @@ const MakeCard = ({ club, user }) => {
           {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="rounded-pill mt-2" bg="secondary">{tag}</Badge>) : ''}
           <Row className="mt-2 mb-1">
             <Col>
-              <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/${club._id}`}>More info</a>
+              <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/club/${club._id}`}>More info</a>
             </Col>
             <Col className="text-end">
               {user.savedClubs?.includes(club.clubName) ?
@@ -139,7 +139,7 @@ const ClubTableItem = ({ club, user }) => {
     <tr>
       <td>
         <Col className="d-flex justify-content-center">
-          <Link to={`/${club._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+          <Link to={`/club/${club._id}`} style={{ textDecoration: 'none', color: 'black' }}>
             {club.mainPhoto ? <Image src={club.mainPhoto} width="75px" /> : ''}
           </Link>
         </Col>
@@ -149,7 +149,7 @@ const ClubTableItem = ({ club, user }) => {
           <Col>
             <Row>
               <Col>
-                <Link to={`/${club._id}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 600 }}>
+                <Link to={`/club/${club._id}`} style={{ textDecoration: 'none', color: 'black', fontWeight: 600 }}>
                   {club.clubName}
                 </Link>
               </Col>
@@ -170,7 +170,7 @@ const ClubTableItem = ({ club, user }) => {
                   </Button>
                 </Col>
               ) : '' }
-              {expandedDesc ? <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/${club._id}`}>More info</a> : ''}
+              {expandedDesc ? <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/club/${club._id}`}>More info</a> : ''}
             </Row>
           </Col>
         </Row>
@@ -226,7 +226,7 @@ const AllClubs = () => {
     };
   }, []);
 
-  // set clubs in filteredClubs when finished loading
+  // set clubs in filteredClubs when finished loading, set page title
   useEffect(() => {
     if (ready) {
       setFilteredClubs(clubs);
@@ -269,6 +269,8 @@ const AllClubs = () => {
     }
     setFilteredClubs(filtered);
   }, [clubName, description, interest, clubType, sortBy]);
+
+  document.title = 'Club Finder Mānoa - All Clubs';
 
   // displays clubs as cards or as a list
   function displayClubs() {

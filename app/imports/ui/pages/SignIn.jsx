@@ -41,6 +41,9 @@ const SignIn = () => {
   if (redirect) {
     return (<Navigate to="/my-clubs" />);
   }
+
+  document.title = 'Club Finder Mānoa - Sign In';
+
   // Otherwise return the Login form.
   return (
     <div id={PageIDs.signInPage} className="backgroundImageTop">
@@ -78,7 +81,7 @@ const SignIn = () => {
             </AutoForm>
             <Alert variant="secondary">
               Not a member?&nbsp;
-              <Link to="/signup">Click here to Register</Link>
+              <Link to="/sign-up">Click here to Register</Link>
             </Alert>
             {error === '' ? (
               ''

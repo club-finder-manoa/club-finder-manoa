@@ -20,6 +20,8 @@ const EditProfile = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = useParams();
 
+  document.title = 'Club Finder Mānoa - Edit Profile';
+
   const { doc, ready, firstName2, lastName2, aboutMe2, picture2, interests2 } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(Users.userPublicationName);

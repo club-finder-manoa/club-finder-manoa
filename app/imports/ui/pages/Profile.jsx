@@ -63,6 +63,8 @@ const ChangePwModal = () => {
     }
   };
 
+  document.title = 'Club Finder Mānoa - Profile';
+
   const changeStyle = {
     borderWidth: 0,
     padding: 0,

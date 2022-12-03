@@ -27,7 +27,7 @@ const Landing = () => {
       {!currentUser ? (
         <Row className="px-0 m-0 my-4">
           <Col className="d-flex justify-content-center">
-            <Button className="mt-4 py-2 px-5" as={NavLink} to="/signup">
+            <Button className="mt-4 py-2 px-5" as={NavLink} to="/sign-up">
               <span style={{ fontSize: '22px', fontWeight: '600' }}>Sign Up</span>
             </Button>
           </Col>
