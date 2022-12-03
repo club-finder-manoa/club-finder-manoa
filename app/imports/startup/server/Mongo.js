@@ -12,8 +12,12 @@ Meteor.methods({
   },
 
   saveClub: function ({ email, clubName }) {
-    const clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
-    clubArray.push(clubName);
+    let clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
+    if (clubArray) {
+      clubArray.push(clubName);
+    } else {
+      clubArray = [clubName];
+    }
     return Users.collection.update({ email: email }, { $set: { savedClubs: clubArray } });
   },
 

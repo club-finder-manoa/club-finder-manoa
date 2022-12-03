@@ -1,70 +1,15 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Badge, Container, Card, Image, Row, Col, Button, Modal } from 'react-bootstrap';
+import { Badge, Container, Card, Image, Row, Col, Button } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { X, ChevronDown, ChevronUp } from 'react-bootstrap-icons';
-import swal from 'sweetalert';
+import { ChevronDown, ChevronUp } from 'react-bootstrap-icons';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
-
-const RemoveClubModal = ({ clubName, email }) => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const removeClub = () => {
-    Meteor.call('removeClub', { email, clubName });
-    swal('Removed', `${clubName} removed from "My Clubs"`, 'success');
-    handleClose();
-  };
-
-  const removeClubStyle = {
-    padding: 0,
-    background: 'transparent',
-    color: '#C6C6C6',
-    borderWidth: 0,
-    fontSize: '20px',
-    fontWeight: 600,
-  };
-
-  return (
-    <>
-      <Button style={removeClubStyle} onClick={handleShow}>
-        <X />
-      </Button>
-      <Modal show={show} onHide={handleClose}>
-        <Container className="mt-2">
-          <Modal.Header closeButton>
-            <Modal.Title>
-              <h3><b>Remove Club</b></h3>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="pb-4">
-            Remove <b>{clubName}</b> from your saved clubs?
-          </Modal.Body>
-          <Modal.Footer className="text-center">
-            <Button variant="light" onClick={handleClose}>
-              Back
-            </Button>
-            <Button variant="danger" onClick={() => removeClub()}>
-              Remove
-            </Button>
-          </Modal.Footer>
-        </Container>
-      </Modal>
-    </>
-  );
-};
-
-RemoveClubModal.propTypes = {
-  email: PropTypes.string.isRequired,
-  clubName: PropTypes.string.isRequired,
-};
+import RemoveClubModal from '../components/RemoveClubModal';
 
 const MakeCard = ({ club }) => {
   const expandDescButtonStyle = {
@@ -90,9 +35,9 @@ const MakeCard = ({ club }) => {
   return (
     <Col>
       <Card className="h-100">
-        <Card.Header id="club-header" style={{ backgroundColor: 'white' }}>
+        <Card.Header id="myclubs-club-header" style={{ backgroundColor: 'white' }}>
           <Col className="d-flex justify-content-end">
-            <RemoveClubModal clubName={club.clubName} email={Meteor.user().username} />
+            <RemoveClubModal clubName={club.clubName} email={Meteor.user().username} buttonText="" />
           </Col>
           <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
             <Col style={{ height: '130px' }} className="d-flex justify-content-center my-2">

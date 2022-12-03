@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Badge, Container, Card, Image, Row, Col, Button, Table, DropdownButton, Dropdown, Accordion, Modal } from 'react-bootstrap';
-import { List, Grid, ChevronDown, ChevronUp, CaretUpFill, CaretDownFill, Plus, Check } from 'react-bootstrap-icons';
+import { Badge, Container, Card, Image, Row, Col, Button, Table, DropdownButton, Dropdown, Accordion } from 'react-bootstrap';
+import { List, Grid, ChevronDown, ChevronUp, CaretUpFill, CaretDownFill, Check } from 'react-bootstrap-icons';
 import { useTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import swal from 'sweetalert';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
+import SaveClubModal from '../components/SaveClubModal';
 
 const viewButtonStyleSelected = {
   backgroundColor: '#2d8259',
@@ -51,60 +51,6 @@ const sortListButtonStyle = {
   padding: 0,
 };
 
-const SaveClubModal = ({ clubName, email }) => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const saveClub = () => {
-    Meteor.call('saveClub', { email, clubName });
-    swal('Saved', `${clubName} saved to "My Clubs"`, 'success');
-    handleClose();
-  };
-
-  const saveButtonStyle = {
-    padding: 0,
-    background: 'transparent',
-    color: '#18678F',
-    borderWidth: 0,
-    fontWeight: 600,
-  };
-
-  return (
-    <>
-      <Button style={saveButtonStyle} onClick={handleShow}>
-        <Plus style={{ paddingBottom: '2px', fontSize: '24px' }} />Save
-      </Button>
-      <Modal show={show} onHide={handleClose}>
-        <Container className="mt-2">
-          <Modal.Header closeButton>
-            <Modal.Title>
-              <h3><b>Save Club</b></h3>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="pb-4">
-            Add <b>{clubName}</b> to your saved clubs?
-          </Modal.Body>
-          <Modal.Footer className="text-center">
-            <Button variant="light" onClick={handleClose}>
-              Back
-            </Button>
-            <Button onClick={() => saveClub()}>
-              Save
-            </Button>
-          </Modal.Footer>
-        </Container>
-      </Modal>
-    </>
-  );
-};
-
-SaveClubModal.propTypes = {
-  email: PropTypes.string.isRequired,
-  clubName: PropTypes.string.isRequired,
-};
-
 /* Component for club card. */
 const MakeCard = ({ club, user }) => {
   const [expandedDesc, setExpandedDesc] = useState(false);
@@ -136,7 +82,7 @@ const MakeCard = ({ club, user }) => {
               <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/${club._id}`}>More info</a>
             </Col>
             <Col className="text-end">
-              {user.savedClubs.includes(club.clubName) ?
+              {user.savedClubs?.includes(club.clubName) ?
                 <span style={{ color: '#256546' }}><Check /> Saved</span> :
                 <SaveClubModal clubName={club.clubName} email={user.email} />}
             </Col>
@@ -272,7 +218,7 @@ const AllClubs = () => {
     const sub1 = Meteor.subscribe(Clubs.userPublicationName);
     const sub2 = Meteor.subscribe(Users.userPublicationName);
     const clubList = Clubs.collection.find().fetch();
-    const usr = Users.collection.find({ email: Meteor.user().username }).fetch()[0];
+    const usr = Users.collection.find({ email: Meteor.user()?.username }).fetch()[0];
     return {
       ready: sub1.ready() && sub2.ready(),
       clubs: clubList,

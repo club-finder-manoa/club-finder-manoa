@@ -13,8 +13,8 @@ import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import AllClubs from '../pages/AllClubs';
 import MyClubs from '../pages/MyClubs';
+import Profile from '../pages/Profile';
 import EditProfile from '../pages/EditProfile';
-import AddProject from '../pages/AddProject';
 import Admin from '../pages/Admin';
 import ClubPage from '../pages/ClubPage';
 
@@ -30,8 +30,8 @@ const App = () => (
         <Route path="/signout" element={<SignOut />} />
         <Route path="/all-clubs" element={<ProtectedRoute><AllClubs /></ProtectedRoute>} />
         <Route path="/my-clubs" element={<ProtectedRoute><MyClubs /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/edit-profile/:_id" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
-        <Route path="/addproject" element={<ProtectedRoute><AddProject /></ProtectedRoute>} />
         <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="/:_id" element={<ProtectedRoute><ClubPage /></ProtectedRoute>} />
