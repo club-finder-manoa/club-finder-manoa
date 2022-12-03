@@ -14,11 +14,7 @@ import NotAuthorized from '../pages/NotAuthorized';
 import AllClubs from '../pages/AllClubs';
 import MyClubs from '../pages/MyClubs';
 import EditProfile from '../pages/EditProfile';
-import Filter from '../pages/Filter';
 import AddProject from '../pages/AddProject';
-import Profile from '../pages/Profile';
-// import Profile from '../pages/Profile';
-import TempClubPage from '../pages/TempClubPage';
 import Admin from '../pages/Admin';
 import ClubPage from '../pages/ClubPage';
 
@@ -35,12 +31,9 @@ const App = () => (
         <Route path="/all-clubs" element={<ProtectedRoute><AllClubs /></ProtectedRoute>} />
         <Route path="/my-clubs" element={<ProtectedRoute><MyClubs /></ProtectedRoute>} />
         <Route path="/edit-profile/:_id" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
-        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/filter" element={<ProtectedRoute><Filter /></ProtectedRoute>} />
         <Route path="/addproject" element={<ProtectedRoute><AddProject /></ProtectedRoute>} />
         <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
-        <Route path="/tempclubpage" element={<TempClubPage />} />
         <Route path="/:_id" element={<ProtectedRoute><ClubPage /></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
