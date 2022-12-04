@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Container, Image, Row } from 'react-bootstrap';
+import { Badge, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Link } from 'react-router-dom';
@@ -20,19 +20,6 @@ const Profile = () => {
     };
   }, []);
 
-  const interestsString = (interests) => {
-    let interestsFormatted = 'None Saved';
-    if (interests) {
-      interestsFormatted = '';
-      // eslint-disable-next-line no-restricted-syntax
-      for (const interest of interests) {
-        interestsFormatted += `${interest}, `;
-      }
-      interestsFormatted = interestsFormatted.substring(0, interestsFormatted.length - 2);
-    }
-    return interestsFormatted;
-  };
-
   document.title = 'Club Finder Mānoa - Profile';
 
   return (ready ? (
@@ -44,14 +31,33 @@ const Profile = () => {
         </Col>
       </Row>
       <Row>
-        <Card id="cardProfile">
+        <Card id="cardProfile" className="pb-3">
           <Col className="text-center pt-3">
             <h1 id="profileName">{userProfile.displayName}</h1>
             <p>{userProfile.email}</p>
             <hr />
-            <p>{userProfile.aboutMe}</p>
+            <span className="small">About Me:</span>
+            <Row className="my-2">
+              <p>{userProfile.aboutMe}</p>
+            </Row>
             <hr />
-            <p>Interests: {interestsString(userProfile.interests)}</p>
+            <span className="small">Interests:</span>
+            <br />
+            <Row className="mt-2 mb-4">
+              <Col>
+                {userProfile.interests ?
+                  userProfile.interests.map((interest, index) => (
+                    <Badge
+                      key={index}
+                      className="rounded-pill"
+                      style={{ fontSize: '15px', fontWeight: 600, paddingTop: '6px', paddingBottom: '6px' }}
+                      bg="secondary"
+                    >{interest}
+                    </Badge>
+                  ))
+                  : ''}
+              </Col>
+            </Row>
           </Col>
         </Card>
       </Row>
