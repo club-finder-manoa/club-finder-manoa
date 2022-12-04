@@ -37,7 +37,7 @@ const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
 
   return (
     <>
-      <Button style={xButtonStyle} onClick={handleShow}>
+      <Button id="remove-admin-btn" style={xButtonStyle} onClick={handleShow}>
         <X style={{ paddingBottom: '4px', fontSize: '24px' }} />
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -54,7 +54,7 @@ const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
             <Button variant="light" onClick={handleClose}>
               Back
             </Button>
-            <Button variant="danger" onClick={() => removeEm()}>
+            <Button id="confirm-remove-admin" variant="danger" onClick={() => removeEm()}>
               Remove
             </Button>
           </Modal.Footer>
@@ -110,7 +110,7 @@ const AddAdminStatusModal = ({ user }) => {
 
   return (
     <>
-      <Button style={plusButtonStyle} onClick={handleShow}>
+      <Button id="admin-add-club" style={plusButtonStyle} onClick={handleShow}>
         <u>Add</u>
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -123,7 +123,7 @@ const AddAdminStatusModal = ({ user }) => {
           <Modal.Body className="pb-4">
             <Form.Group controlId="selectClub">
               <Form.Label>Select a club</Form.Label>
-              <Form.Control as="select" value={adminClub} onChange={e => setAdminClub(e.target.value)}>
+              <Form.Control id="admin-form-select" as="select" value={adminClub} onChange={e => setAdminClub(e.target.value)}>
                 {clubs.map((club) => <option key={club.clubName}>{club.clubName}</option>)}
               </Form.Control>
             </Form.Group>
@@ -134,7 +134,7 @@ const AddAdminStatusModal = ({ user }) => {
             <Button variant="light" onClick={handleClose}>
               Back
             </Button>
-            <Button variant="success" onClick={() => addEm()}>
+            <Button id="confirm-add-club" variant="success" onClick={() => addEm()}>
               Confirm
             </Button>
           </Modal.Footer>
@@ -175,7 +175,7 @@ const DeleteUserModal = ({ email }) => {
 
   return (
     <>
-      <Button style={deleteStyle} onClick={handleShow}>
+      <Button id="delete-user-btn" style={deleteStyle} onClick={handleShow}>
         <u>Delete</u>
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -193,7 +193,7 @@ const DeleteUserModal = ({ email }) => {
             <Button variant="light" onClick={handleClose}>
               Back
             </Button>
-            <Button variant="danger" onClick={() => deleteUser()}>
+            <Button id="confirm-user-delete" variant="danger" onClick={() => deleteUser()}>
               Delete
             </Button>
           </Modal.Footer>
@@ -230,7 +230,7 @@ const ResetPwModal = ({ userId, email }) => {
 
   return (
     <>
-      <Button style={resetStyle} onClick={handleShow}>
+      <Button id="reset-password-btn" style={resetStyle} onClick={handleShow}>
         <u>Reset</u>
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -248,7 +248,7 @@ const ResetPwModal = ({ userId, email }) => {
             <Button variant="light" onClick={handleClose}>
               Back
             </Button>
-            <Button variant="danger" onClick={() => resetPw()}>
+            <Button id="confirm-reset-password" variant="danger" onClick={() => resetPw()}>
               Reset
             </Button>
           </Modal.Footer>

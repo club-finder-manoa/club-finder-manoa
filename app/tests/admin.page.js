@@ -17,27 +17,33 @@ class AdminPage {
 
   async hasDefaultUsers(testController) {
     const userCount = Selector('tr').count;
-    await testController.expect(userCount).gte(5); // 5 including header and the user that was just created earlier
+    await testController.expect(userCount).gte(3); // 3 default accs
   }
 
-/*
   async testAddAdminPermissions(testController) {
-    // TODO
-    await testController.click(`#${ComponentIDs.addAdminPermsBtn}`);
+    await testController.click('#admin-add-club');
+    await testController.click('#admin-form-select').pressKey('down').pressKey('enter');
+    await testController.click('#confirm-add-club');
   }
 
   async testRemoveAdminPermissions(testController) {
-    // TODO
+    await testController.click('#remove-admin-btn');
+    await testController.click('#confirm-remove-admin');
+  }
+  /*
+    async testDeleteUser(testController) {
+      await testController.click('#delete-user-btn');
+      await testController.click('#confirm-user-delete').pressKey('enter');
+      // [ERROR]A native alert dialog was invoked on page "http://localhost:3000/admin", but no handler was set for it.
+      // Use the "setNativeDialogHandler" function to introduce a handler function for native dialogs.
+
   }
 
-  async testResetPassword(testController) {
-    // TODO
-  }
-
-  async testDeleteUser(testController) {
-    // TODO
-  }
-*/
+    async testResetPassword(testController) {
+      await testController.click('#reset-password-btn');
+      await testController.click('#confirm-reset-password');
+      // TODO
+    } */
 }
 
 export const adminPage = new AdminPage();

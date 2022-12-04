@@ -92,6 +92,10 @@ test('Test the Admin page', async (testController) => {
   await navBar.gotoAdminPage(testController);
   await adminPage.isDisplayed(testController);
   await adminPage.hasDefaultUsers(testController);
+  await adminPage.testAddAdminPermissions(testController);
+  await adminPage.testRemoveAdminPermissions(testController);
+  // await adminPage.testDeleteUser(testController);
+  // await adminPage.resetPassword(testController);
   // TODO add other admin tests
 });
 
