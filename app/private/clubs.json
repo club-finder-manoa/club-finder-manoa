@@ -1,4 +1,15 @@
 {
+  "interests": ["Accounting", "African American", "Agriculture", "Animals", "Animation", "Anime", "Anthropology", "Architecture",
+    "Archives", "Automotive", "Biology", "Botany", "Business", "Cheerleading", "Chemistry", "Civil Engineering", "Climbing",
+    "College Opportunities Program", "Communication", "Community", "Computer Engineering", "Computer Science", "Current Events",
+    "Cybersecurity", "Dance", "Electrical Engineering", "Engineering", "Entomology", "Environment", "Finance", "Fitness", "Fraternity",
+    "Gaming", "HVAC", "Health", "History", "Honor Society", "Hospitality", "Human Resources", "Human Rights", "Indigenous", "International",
+    "Japan", "Korea", "Law", "Leadership", "Libraries", "Linguistics", "Marketing", "Martial Arts", "Math", "Mechanical Engineering",
+    "Medicine", "Mentorship", "Military", "Music", "Nursing", "Pharmacy", "Philippines", "Politics", "Psychology", "Public Administration",
+    "Public Relations", "Real Estate", "Religion", "Science", "Social Science", "Social Work", "Sorority", "Study Abroad", "Tea", "Travel",
+    "Veterinary", "Women"],
+
+
   "clubs": [
     {
       "clubName": "Accounting Club",
@@ -55,7 +66,7 @@
       "clubType": "Academic/Professional",
       "mainPhoto": "http://images.squarespace-cdn.com/content/v1/57e48324579fb35bcfcd4bd6/1564879527999-KJRJE2DJIJC8SDNZOYPM/aias+w+white.png?format=1500w",
       "website": "http://aiashawaii.com/",
-      "tags": ["Architecture", "Art"],
+      "tags": ["Architecture"],
       "contactName": "Beau Nakamori",
       "contactEmail": "beaus@hawaii.edu",
       "description": "The American Institute of Architecture Students (AIAS) is an independent, nonprofit, student-run organization dedicated to providing unmatched progressive programs, information, and resources on issues critical to architecture and the experience of education. The AIAS aims to promote excellence in architectural education, training, and practice; to foster an appreciation of architecture and related disciplines; to enrich communities in a spirit of collaboration; and to organize students and combine their efforts to advance the art and science of architecture."
@@ -122,7 +133,7 @@
       "clubName": "Anakbayan Hawaiʻi",
       "clubType": "Political",
       "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/307691402_459232169569204_4028635364838234931_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=eZG3lpCOU-kAX_xYfz7&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfCVFzs_7KokMf4qCoZuAh3_OKSZlK75mhGWuuIenGWyLA&oe=638880C1",
-      "tags": ["Philippines","Political"],
+      "tags": ["Philippines","Politics"],
       "contactName": "Germaine Linday Juan",
       "contactEmail": "gjuan@hawaii.edu",
       "description": "As an integral part of the national democratic movement of the Philippines the mission and purpose of Anakbayan-USA is to gather the broadest possible political, moral, material and sectoral support for Anakbayan Philippines and the national democratic struggle of the Filipino people."
@@ -392,7 +403,7 @@
       "clubName": "Dermatology Interest Group at the John A. Burns School of Medicine at the University of Hawaii at Manoa",
       "clubType": "Academic/Professional",
       "mainPhoto": "https://jabsom.hawaii.edu/wp-content/themes/jabsom/images/jabsom-logo-mark.jpg",
-      "tags": ["Dermatology", "Medicine"],
+      "tags": ["Medicine"],
       "contactName": "Alyssa Roberts",
       "contactEmail": "amrobert@hawaii.edu",
       "description": "To connect medical students interested in dermatology with mentors,\nworkshops, and extracurricular activities that will expand their dermatological\nknowledge and (hopefully) help them match into this highly competitive specialty."
@@ -770,7 +781,7 @@
       "clubName": "Moku o Loʻe Student Association",
       "clubType": "Academic/Professional",
       "mainPhoto": "https://manoa.hawaii.edu/speakers/wp-content/uploads/logo-1.png",
-      "tags": [],
+      "tags": ["Mentorship"],
       "contactName": "Katherine Grellman",
       "contactEmail": "kgrell@hawaii.edu",
       "description": "The mission of Moku o Loʻe Student Association is to generate a strong student community that enhances professional development, interdisciplinary collaborations, and academic growth."
