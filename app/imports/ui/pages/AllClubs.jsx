@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Badge, Container, Card, Image, Row, Col, Button, Table, DropdownButton, Dropdown, Accordion } from 'react-bootstrap';
+import { Badge, Container, Card, Image, Row, Col, Button, Table, Accordion, FormSelect } from 'react-bootstrap';
 import { List, Grid, ChevronDown, ChevronUp, CaretUpFill, CaretDownFill, Check } from 'react-bootstrap-icons';
 import { useTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
@@ -226,6 +226,19 @@ const AllClubs = () => {
     };
   }, []);
 
+  const interests = ['Any', 'Accounting', 'African American', 'Agriculture', 'Animals', 'Animation', 'Anime', 'Anthropology', 'Architecture',
+    'Archives', 'Automotive', 'Biology', 'Botany', 'Business', 'Cheerleading', 'Chemistry', 'Civil Engineering', 'Climbing',
+    'College Opportunities Program', 'Communication', 'Community', 'Computer Engineering', 'Computer Science', 'Current Events',
+    'Cybersecurity', 'Dance', 'Electrical Engineering', 'Engineering', 'Entomology', 'Environment', 'Finance', 'Fitness', 'Fraternity',
+    'Gaming', 'HVAC', 'Health', 'History', 'Honor Society', 'Hospitality', 'Human Resources', 'Human Rights', 'Indigenous', 'International',
+    'Japan', 'Korea', 'Law', 'Leadership', 'Libraries', 'Linguistics', 'Marketing', 'Martial Arts', 'Math', 'Mechanical Engineering',
+    'Medicine', 'Mentorship', 'Military', 'Music', 'Nursing', 'Pharmacy', 'Philippines', 'Politics', 'Psychology', 'Public Administration',
+    'Public Relations', 'Real Estate', 'Religion', 'Science', 'Social Science', 'Social Work', 'Sorority', 'Study Abroad', 'Tea', 'Travel',
+    'Veterinary', 'Women'];
+
+  const clubTypes = ['Any', 'Academic/Professional', 'Ethnic/Cultural', 'Fraternity/Sorority', 'Honorary Society', 'Leisure/Recreational',
+    'Political', 'Service', 'Spiritual/Religious', 'Sports/Leisure', 'Student Affairs'];
+
   // set clubs in filteredClubs when finished loading, set page title
   useEffect(() => {
     if (ready) {
@@ -256,7 +269,7 @@ const AllClubs = () => {
     if (description) {
       filtered = filtered.filter(function (obj) { return obj.description.toLowerCase().includes(description.toLowerCase()); });
     }
-    if (interest) {
+    if (interest && interest !== 'Any') {
       filtered = filtered.filter(function (obj) {
         if (obj.tags) {
           return obj.tags.some(tag => tag.includes(interest));
@@ -264,7 +277,7 @@ const AllClubs = () => {
         return obj.tags != null;
       });
     }
-    if (clubType) {
+    if (clubType && clubType !== 'Any') {
       filtered = filtered.filter(function (obj) { return obj.clubType.includes(clubType); });
     }
     setFilteredClubs(filtered);
@@ -282,7 +295,7 @@ const AllClubs = () => {
       );
     }
     return (
-      <Table striped bordered style={{ tableLayout: 'fixed' }} >
+      <Table striped bordered style={{ tableLayout: 'fixed' }}>
         <thead style={{ position: 'sticky', top: 0, backgroundColor: 'white' }}>
           <tr>
             <th style={{ width: '100px' }}>
@@ -376,53 +389,32 @@ const AllClubs = () => {
                   <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
                     Type
                   </Col>
-                  <DropdownButton
+                  <FormSelect
                     id="filterDropdown"
+                    className="px-2"
                     variant="secondary"
                     title={clubType === '' ? 'Select a Club Type' : clubType}
-                    onSelect={(e) => setClubType(e)}
+                    onChange={(e) => setClubType(e.target.value)}
                   >
-                    <Dropdown.Item eventKey="">Any</Dropdown.Item>
-                    <Dropdown.Item eventKey="Academic/Professional">Academic/Professional</Dropdown.Item>
-                    <Dropdown.Item eventKey="Ethnic/Cultural">Ethnic/Cultural</Dropdown.Item>
-                    <Dropdown.Item eventKey="Fraternity/Sorority">Fraternity/Sorority</Dropdown.Item>
-                    <Dropdown.Item eventKey="Honorary Society">Honorary Society</Dropdown.Item>
-                    <Dropdown.Item eventKey="Leisure/Recreational">Leisure/Recreational</Dropdown.Item>
-                    <Dropdown.Item eventKey="Political">Political</Dropdown.Item>
-                    <Dropdown.Item eventKey="Service">Service</Dropdown.Item>
-                    <Dropdown.Item eventKey="Spiritual/Religious">Spiritual/Religious</Dropdown.Item>
-                    <Dropdown.Item eventKey="Sports/Leisure">Sports/Leisure</Dropdown.Item>
-                    <Dropdown.Item eventKey="Student Affairs">Student Affairs</Dropdown.Item>
-                  </DropdownButton>
+                    {clubTypes.map((type) => <option value={type}>{type}</option>)}
+                  </FormSelect>
                 </label>
               </Col>
               <Col className="d-flex justify-content-center">
                 {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                 <label htmlFor="Search by interest">
                   <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                    Tags
+                    Interests
                   </Col>
-                  <DropdownButton
+                  <FormSelect
                     id="filterDropdown"
+                    className="px-2"
                     variant="secondary"
                     title={interest === '' ? 'Select an Interest' : interest}
-                    onSelect={(e) => setInterest(e)}
+                    onChange={(e) => setInterest(e.target.value)}
                   >
-                    <Dropdown.Item eventKey="">Any</Dropdown.Item>
-                    <Dropdown.Item eventKey="Accounting">Accounting</Dropdown.Item>
-                    <Dropdown.Item eventKey="American Indian">American Indian</Dropdown.Item>
-                    <Dropdown.Item eventKey="Architecture">Architecture</Dropdown.Item>
-                    <Dropdown.Item eventKey="Business">Business</Dropdown.Item>
-                    <Dropdown.Item eventKey="Fitness">Fitness</Dropdown.Item>
-                    <Dropdown.Item eventKey="Fraternity">Fraternity</Dropdown.Item>
-                    <Dropdown.Item eventKey="Library">Library</Dropdown.Item>
-                    <Dropdown.Item eventKey="Marketing">Marketing</Dropdown.Item>
-                    <Dropdown.Item eventKey="Math">Math</Dropdown.Item>
-                    <Dropdown.Item eventKey="Politics">Politics</Dropdown.Item>
-                    <Dropdown.Item eventKey="Science">Science</Dropdown.Item>
-                    <Dropdown.Item eventKey="Sorority">Sorority</Dropdown.Item>
-                    <Dropdown.Item eventKey="Sports">Sports</Dropdown.Item>
-                  </DropdownButton>
+                    {interests.map((inter) => <option value={inter}>{inter}</option>)}
+                  </FormSelect>
                 </label>
               </Col>
             </Row>
