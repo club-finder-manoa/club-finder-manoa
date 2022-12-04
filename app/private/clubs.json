@@ -1,15 +1,4 @@
 {
-  "interests": ["Accounting", "African American", "Agriculture", "Animals", "Animation", "Anime", "Anthropology", "Architecture",
-    "Archives", "Automotive", "Biology", "Botany", "Business", "Cheerleading", "Chemistry", "Civil Engineering", "Climbing",
-    "College Opportunities Program", "Communication", "Community", "Computer Engineering", "Computer Science", "Current Events",
-    "Cybersecurity", "Dance", "Electrical Engineering", "Engineering", "Entomology", "Environment", "Finance", "Fitness", "Fraternity",
-    "Gaming", "HVAC", "Health", "History", "Honor Society", "Hospitality", "Human Resources", "Human Rights", "Indigenous", "International",
-    "Japan", "Korea", "Law", "Leadership", "Libraries", "Linguistics", "Marketing", "Martial Arts", "Math", "Mechanical Engineering",
-    "Medicine", "Mentorship", "Military", "Music", "Nursing", "Pharmacy", "Philippines", "Politics", "Psychology", "Public Administration",
-    "Public Relations", "Real Estate", "Religion", "Science", "Social Science", "Social Work", "Sorority", "Study Abroad", "Tea", "Travel",
-    "Veterinary", "Women"],
-
-
   "clubs": [
     {
       "clubName": "Accounting Club",
@@ -33,7 +22,7 @@
     },
     {
       "clubName": "Alpha Gamma Delta Delta Sigma",
-      "clubType": "Sorority",
+      "clubType": "Fraternity/Sorority",
       "mainPhoto": "https://static.wixstatic.com/media/2468d8_9213049cdd0f4cb187b8abd5672bdfe8~mv2.png/v1/fill/w_286,h_323,al_c,lg_1,q_85,enc_auto/Alpha_Gamma_Delta_crest.png",
       "website": "https://www.uhmpanhel.com/alpha-gamma-delta",
       "tags": ["Sorority", "Women"],
@@ -257,7 +246,7 @@
     },
     {
       "clubName": "Beta Beta Gamma",
-      "clubType": "Sorority",
+      "clubType": "Fraternity/Sorority",
       "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/306601574_760349352460949_7505106179548097591_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=A49n9RJ8Pa4AX8nqc6l&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfA9Oc5qMP9GJntCAB6rPE2-4OxorpSBEmngrX3Kf0C5sw&oe=6389B2F9",
       "tags": ["Women", "Sorority"],
       "contactName": "Jordan Humphrey",
@@ -392,7 +381,7 @@
     },
     {
       "clubName": "Delta Sigma Pi: Rho Chi",
-      "clubType": "Fraternity",
+      "clubType": "Fraternity/Sorority",
       "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/241937089_10159331280188672_8853063503612888156_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=LQcXJ0PyW9kAX8AAqVr&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfAMh5zsuZg_BFsfEFQmP6g5bnOVdJXVSpkedjIyAekZwg&oe=638AD810",
       "tags": ["Business","Fraternity"],
       "contactName": "Anthony Lee",
@@ -968,7 +957,7 @@
     },
     {
       "clubName": "Phi Mu Iota Alpha",
-      "clubType": "Sorority",
+      "clubType": "Fraternity/Sorority",
       "mainPhoto": "http://hawaii.phimu.org/r/images/logo-2.png",
       "tags": ["Sorority", "Women"],
       "contactName": "Taylor Posadas",
