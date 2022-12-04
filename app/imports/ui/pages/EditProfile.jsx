@@ -1,97 +1,265 @@
-import React from 'react';
-import { AutoForm, TextField, LongTextField, SelectField, SubmitField, ErrorsField, HiddenField } from 'uniforms-bootstrap5';
-import { Container, Col, Card, Row } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { AutoForm, TextField, LongTextField, SubmitField, ErrorsField, HiddenField } from 'uniforms-bootstrap5';
+import { Container, Col, Card, Row, Image, Button, Badge, Modal, Form } from 'react-bootstrap';
+import { X, Plus } from 'react-bootstrap-icons';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 import { Users } from '../../api/users/Users';
-import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { pageStyle } from './pageStyles';
+import ChangePwModal from '../components/ChangePwModal';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
 
 /* Create a schema to specify the structure of the data to appear in the form. */
 const bridge = new SimpleSchema2Bridge(Users.schema);
 
+const AddInterestModal = ({ user }) => {
+  const [show, setShow] = useState(false);
+  const [interest, setInterest] = useState('');
+  const email = user.email;
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const addEm = () => {
+    let interests = Users.collection.find({ email }).fetch()[0].interests;
+    if (interests && interests.includes(interest)) {
+      // eslint-disable-next-line no-alert
+      swal(`Already saved "${interest}" as an interest.`);
+    } else if (interests) {
+      interests.push(interest);
+    } else {
+      interests = [interest];
+    }
+    Meteor.call('updateInterests', { email, interests });
+    setInterest('');
+    handleClose();
+  };
+
+  const interests = ['Accounting', 'Finance', 'Math', 'Computer Science', 'Business', 'Fitness', 'Martial Arts']; // TODO add more to match club tags once complete
+
+  const plusButtonStyle = {
+    borderWidth: 0,
+    fontSize: '15px',
+    fontWeight: 500,
+    borderRadius: '20px',
+    paddingTop: '4px',
+    paddingBottom: '4px',
+    paddingLeft: '6px',
+    paddingRight: '6px',
+  };
+
+  return (
+    <>
+      <Button style={plusButtonStyle} onClick={handleShow}>
+          &nbsp;&nbsp;Add<Plus style={{ paddingBottom: '2px', fontSize: '24px' }} />
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Add New Interest</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="pb-4">
+            <Form.Group controlId="selectInterest">
+              <Form.Label>Select an interest</Form.Label>
+              <Form.Control as="select" value={interest} onChange={e => setInterest(e.target.value)}>
+                {interests.map((inter) => <option key={inter}>{inter}</option>)}
+              </Form.Control>
+            </Form.Group>
+            <br />
+            {interest !== '' ? <span>Add <b>{interest}</b> to interests?</span> : ''}
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button variant="success" onClick={() => addEm()}>
+              Confirm
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+AddInterestModal.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    adminForClubs: PropTypes.arrayOf(String),
+  }).isRequired,
+};
+
+// Popup modal to confirm removal of admin status
+const RemoveInterestModal = ({ user, interestToRemove }) => {
+  const [show, setShow] = useState(false);
+  const email = user.email;
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const removeInterest = () => {
+    const interests = Users.collection.find({ email }).fetch()[0].interests;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const i in interests) {
+      if (interests[i] === interestToRemove) {
+        interests.splice(i, 1);
+      }
+    }
+    Meteor.call('updateInterests', { email, interests });
+    handleClose();
+  };
+
+  const xButtonStyle = {
+    padding: 0,
+    fontSize: '20px',
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    paddingBottom: '5px',
+  };
+
+  return (
+    <>
+      <Button style={xButtonStyle} onClick={handleShow}>
+        <X />
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Remove Interest</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to remove <b>{interestToRemove}</b> from your interests?
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button variant="danger" onClick={() => removeInterest()}>
+              Remove
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+RemoveInterestModal.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+  }).isRequired,
+  interestToRemove: PropTypes.string.isRequired,
+};
+
 /* Renders the EditProfile Page: what appears after the user logs in. */
 const EditProfile = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = useParams();
+  const navigate = useNavigate();
 
-  const { doc, ready, firstName2, lastName2, aboutMe2, major2, picture2, interests2 } = useTracker(() => {
+  document.title = 'Club Finder Mānoa - Profile';
+
+  const { user, ready } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
-    const sub1 = Meteor.subscribe(Users.userPublicationName);
-    const sub2 = Meteor.subscribe(Clubs.userPublicationName);
-    const document = Users.collection.findOne(_id);
-    let loaded = false;
-    let firstNameTemp;
-    let lastNameTemp;
-    let aboutMeTemp;
-    let majorTemp;
-    let pictureTemp;
-    let interestsTemp;
-    if (sub1.ready() && sub2.ready()) {
-      if (Users.collection.find({ email: Meteor.user().username })) {
-        firstNameTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].firstName;
-        lastNameTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].lastName;
-        aboutMeTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].aboutMe;
-        majorTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].major;
-        pictureTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].picture;
-        interestsTemp = (Users.collection.find({ email: Meteor.user().username }).fetch())[0].interests;
-      }
-      loaded = true;
-    }
-
+    const sub = Meteor.subscribe(Users.userPublicationName);
+    const document = Users.collection.findOne({ _id });
     return {
-      doc: document,
-      ready: loaded,
-      firstName2: firstNameTemp,
-      lastName2: lastNameTemp,
-      aboutMe2: aboutMeTemp,
-      major2: majorTemp,
-      picture2: pictureTemp,
-      interests2: interestsTemp,
+      ready: sub.ready(),
+      user: document,
     };
-  }, [_id]);
+  }, []);
 
   /* On submit, insert the data. */
   const submit = (data) => {
-    const { email, firstName, lastName, aboutMe, major, picture, interests } = data;
-    Meteor.call('updateUser', { email, firstName, lastName, aboutMe, major, picture, interests });
+    const { email, displayName, aboutMe, picture } = data;
+    if (Meteor.call('updateUser', { email, displayName, aboutMe, picture })) {
+      swal('Error', 'Something went wrong.', 'error');
+    } else {
+      swal('Success', 'Profile updated successfully', 'success');
+      navigate('/profile');
+    }
   };
+
   // Now create the model with all the user information.
   return ready ? (
-    <div className="backgroundImageTop">
-      <Container id={PageIDs.homePage} className="justify-content-center" style={pageStyle}>
-        <Col>
-          <Col className="justify-content-center text-center"><h2>Your Profile</h2></Col>
-          <AutoForm model={doc} schema={bridge} onSubmit={data => submit(data)}>
-            <Card>
-              <Card.Body>
-                <Row>
-                  <Col xs={6}><TextField id={ComponentIDs.homeFormFirstName} name="firstName" showInlineError placeholder={firstName2} /></Col>
-                  <Col xs={6}><TextField id={ComponentIDs.homeFormLastName} name="lastName" showInlineError placeholder={lastName2} /></Col>
-                </Row>
-                <LongTextField id={ComponentIDs.homeFormBio} name="aboutMe" placeholder={aboutMe2} />
-                <Row>
-                  <Col xs={6}><SelectField id={ComponentIDs.signUpFormMajor} name="major" placeholder={major2} /></Col>
-                  <Col xs={6}><TextField id="pic-field" name="picture" showInlineError placeholder={picture2} /></Col>
-                </Row>
-                <Row>
-                  <Col xs={6}><SelectField name="interests" showInlineError multiple placeholder={interests2} /></Col>
-                </Row>
-                <SubmitField value="Update" />
-                <ErrorsField />
-                <HiddenField name="savedClubs" />
-                <HiddenField name="adminForClubs" />
-                <HiddenField name="email" />
-              </Card.Body>
-            </Card>
-          </AutoForm>
+    <Container id={PageIDs.editProfilePage} fluid className="py-3 backgroundImageTop">
+      <Row>
+        <Col className="d-flex justify-content-center">
+          {/* Picture */}
+          <Image id="imgProfile" roundedCircle src={user.picture} width="300px" />
         </Col>
-      </Container>
-    </div>
+      </Row>
+      <Card id="cardProfile">
+        <AutoForm model={user} schema={bridge} onSubmit={data => submit(data)}>
+          <Col className="text-center">
+
+            <Row>
+              <Col className="text-center pt-3 justify-content-center d-flex small">
+                <TextField id={ComponentIDs.homeFormFirstName} name="displayName" showInlineError placeholder={user.displayName} />
+              </Col>
+            </Row>
+            <Row>
+              <Col className="text-center d-flex justify-content-center small">
+                <TextField name="picture" showInlineError placeholder={user.picture} />
+              </Col>
+            </Row>
+            <hr />
+            <Row className="text-center mx-5 small">
+              <LongTextField id={ComponentIDs.homeFormBio} name="aboutMe" placeholder={user.aboutMe} />
+            </Row>
+            <hr />
+            <span className="small text-center">Interests:</span>
+            <br />
+            <Row className="mt-2 mb-4">
+              <Col className="justify-content-center d-flex">
+                {user.interests ?
+                  user.interests.map((interest, index) => (
+                    <Badge
+                      key={index}
+                      className="rounded-pill"
+                      style={{ fontSize: '14px', fontWeight: 600, paddingTop: '1px', paddingBottom: 0, paddingStart: '15px', paddingEnd: '8px' }}
+                      bg="secondary"
+                    >&nbsp;{interest} <RemoveInterestModal interestToRemove={interest} user={user} />
+                    </Badge>
+                  ))
+                  : ''}
+                <AddInterestModal user={user} />
+              </Col>
+            </Row>
+            <Row className="py-3">
+              <Col className="d-flex justify-content-end">
+                <Button id="backButton" onClick={() => navigate('/profile')}>
+                  Discard Changes
+                </Button>
+              </Col>
+              <Col className="d-flex justify-content-start">
+                <SubmitField value="Save Changes" />
+              </Col>
+              <ErrorsField />
+              <HiddenField name="savedClubs" />
+              <HiddenField name="adminForClubs" />
+              <HiddenField name="email" />
+            </Row>
+          </Col>
+        </AutoForm>
+
+      </Card>
+
+      <Row>
+        <Col className="d-flex justify-content-center pb-3">
+          <ChangePwModal />
+        </Col>
+      </Row>
+    </Container>
   ) : <LoadingSpinner />;
 };
 

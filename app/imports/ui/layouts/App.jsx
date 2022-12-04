@@ -13,12 +13,9 @@ import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import AllClubs from '../pages/AllClubs';
 import MyClubs from '../pages/MyClubs';
-import EditProfile from '../pages/EditProfile';
-import Filter from '../pages/Filter';
-import AddProject from '../pages/AddProject';
 import Profile from '../pages/Profile';
-// import Profile from '../pages/Profile';
-import TempClubPage from '../pages/TempClubPage';
+import ProfileAdmin from '../pages/ProfileAdmin';
+import EditProfile from '../pages/EditProfile';
 import Admin from '../pages/Admin';
 import ClubPage from '../pages/ClubPage';
 
@@ -29,19 +26,17 @@ const App = () => (
       <NavBar />
       <Routes>
         <Route exact path="/" element={<Landing />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signout" element={<SignOut />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/sign-out" element={<SignOut />} />
         <Route path="/all-clubs" element={<ProtectedRoute><AllClubs /></ProtectedRoute>} />
         <Route path="/my-clubs" element={<ProtectedRoute><MyClubs /></ProtectedRoute>} />
-        <Route path="/edit-profile/:_id" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/filter" element={<ProtectedRoute><Filter /></ProtectedRoute>} />
-        <Route path="/addproject" element={<ProtectedRoute><AddProject /></ProtectedRoute>} />
-        <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
-        <Route path="/notauthorized" element={<NotAuthorized />} />
-        <Route path="/tempclubpage" element={<TempClubPage />} />
-        <Route path="/:_id" element={<ProtectedRoute><ClubPage /></ProtectedRoute>} />
+        <Route path="/profile/:_id" element={<AdminProtectedRoute><ProfileAdmin /></AdminProtectedRoute>} />
+        <Route path="/edit-profile/:_id" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
+        <Route path="/admin" element={<AdminProtectedRoute><Admin /></AdminProtectedRoute>} />
+        <Route path="/not-authorized" element={<NotAuthorized />} />
+        <Route path="/club/:_id" element={<ProtectedRoute><ClubPage /></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
@@ -56,16 +51,16 @@ const App = () => (
  */
 const ProtectedRoute = ({ children }) => {
   const isLogged = Meteor.userId() !== null;
-  return isLogged ? children : <Navigate to="/signin" />;
+  return isLogged ? children : <Navigate to="/sign-in" />;
 };
 
 const AdminProtectedRoute = ({ children }) => {
   const isLogged = Meteor.userId() !== null;
   if (!isLogged) {
-    return <Navigate to="/signin" />;
+    return <Navigate to="/sign-in" />;
   }
   const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
-  return (isLogged && isAdmin) ? children : <Navigate to="/notauthorized" />;
+  return (isLogged && isAdmin) ? children : <Navigate to="/not-authorized" />;
 };
 
 // Require a component and location to be passed to each ProtectedRoute.

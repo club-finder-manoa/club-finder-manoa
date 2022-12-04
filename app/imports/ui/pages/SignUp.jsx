@@ -73,6 +73,9 @@ const SignUp = () => {
   if (redirectToReferer) {
     return (<Navigate to="/profile" />);
   }
+
+  document.title = 'Club Finder Mānoa - Sign Up';
+
   return (
     <div id={PageIDs.signUpPage} className="backgroundImageTop">
       <Container>
@@ -148,7 +151,7 @@ const SignUp = () => {
             </AutoForm>
             <Alert variant="secondary">
               Already have an account? Log in&nbsp;
-              <Link to="/signin">here</Link>.
+              <Link to="/sign-in">here</Link>.
             </Alert>
             {error === '' ? (
               ''

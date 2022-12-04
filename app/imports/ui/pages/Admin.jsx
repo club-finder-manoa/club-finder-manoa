@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Badge, Button, Col, Container, Row, Table, Modal, Form } from 'react-bootstrap';
+import { Badge, Button, Col, Container, Row, Table, Modal, Form, Image } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Plus, X } from 'react-bootstrap-icons';
+import { X } from 'react-bootstrap-icons';
 import PropTypes from 'prop-types';
 import { Users } from '../../api/users/Users';
 import { Clubs } from '../../api/clubs/Clubs';
@@ -19,7 +19,12 @@ const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
 
   const removeEm = () => {
     const adminArray = Users.collection.find({ email }).fetch()[0].adminForClubs;
-    adminArray.pop(clubToRemove);
+    // eslint-disable-next-line no-restricted-syntax
+    for (const i in adminArray) {
+      if (adminArray[i] === clubToRemove) {
+        adminArray.splice(i, 1);
+      }
+    }
     Meteor.call('updatePermissions', { email, adminArray });
     handleClose();
   };
@@ -98,19 +103,15 @@ const AddAdminStatusModal = ({ user }) => {
 
   const plusButtonStyle = {
     borderWidth: 0,
-    fontSize: '15px',
-    fontWeight: 500,
-    borderRadius: '10px',
-    paddingTop: '4px',
-    paddingBottom: '4px',
-    paddingLeft: '6px',
-    paddingRight: '6px',
+    padding: 0,
+    backgroundColor: 'transparent',
+    color: '#0878A9',
   };
 
   return (
     <>
       <Button style={plusButtonStyle} onClick={handleShow}>
-        &nbsp;&nbsp;Add<Plus style={{ paddingBottom: '2px', fontSize: '24px', fontWeight: 900 }} />
+        <u>Add</u>
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Container className="mt-2">
@@ -284,7 +285,20 @@ const UserListItem = ({ user }) => {
 
   return (
     <tr>
-      <td>{user.email}</td>
+      <td>
+        <a href={`/profile/${user._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+          <Row>
+            <Col className="col-3 d-flex justify-content-center">
+              <Image roundedCircle src={user.picture} height="60px" />
+            </Col>
+            <Col>
+              <b>{user.displayName}</b>
+              <br />
+              {user.email}
+            </Col>
+          </Row>
+        </a>
+      </td>
       <td>
         {user.email !== 'admin@hawaii.edu' ? (
           <Col>
@@ -318,6 +332,8 @@ UserListItem.propTypes = {
     _id: PropTypes.string,
     accountID: PropTypes.string,
     email: PropTypes.string,
+    displayName: PropTypes.string,
+    picture: PropTypes.string,
     adminForClubs: PropTypes.arrayOf(String),
   }).isRequired,
 };
@@ -334,6 +350,9 @@ const Admin = () => {
       ready: rdy,
     };
   }, []);
+
+  document.title = 'Club Finder Mānoa - Admin Dashboard';
+
   return (ready ? (
     <Container id={PageIDs.adminPage} className="py-3">
       <Row className="justify-content-center">
@@ -344,7 +363,7 @@ const Admin = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Email</th>
+                <th>Name/Email</th>
                 <th>Admin Permissions</th>
                 <th>Reset Password</th>
                 <th>Delete Account</th>

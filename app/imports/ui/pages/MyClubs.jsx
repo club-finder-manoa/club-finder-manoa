@@ -9,8 +9,8 @@ import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
+import RemoveClubModal from '../components/RemoveClubModal';
 
-/* Component for club card. */
 const MakeCard = ({ club }) => {
   const expandDescButtonStyle = {
     backgroundColor: 'transparent',
@@ -34,16 +34,26 @@ const MakeCard = ({ club }) => {
 
   return (
     <Col>
-      <Card className="h-100" id="my-clubs-page">
-        <a style={{ color: 'black', textDecoration: 'none' }} href={`/${club._id}`}>
-          <Card.Header id="myclubs-club-header">
-            {club.mainPhoto ? <Image src={club.mainPhoto} width={50} /> : ''}
+      <Card className="h-100">
+        <Card.Header id="myclubs-club-header" style={{ backgroundColor: 'white' }}>
+          <Col className="d-flex justify-content-end">
+            <RemoveClubModal clubName={club.clubName} email={Meteor.user().username} buttonText="" />
+          </Col>
+          <a style={{ color: 'black', textDecoration: 'none' }} href={`/club/${club._id}`}>
+            <Col style={{ height: '130px' }} className="d-flex justify-content-center my-2">
+              {club.mainPhoto ? <Image style={{ maxWidth: '90%', maxHeight: '100%' }} className="my-auto" src={club.mainPhoto} /> : ''}
+            </Col>
             <Card.Title className="pt-1"><b>{club.clubName}</b></Card.Title>
-            <Card.Subtitle><span className="date">{club.clubType}</span></Card.Subtitle>
-            {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="mt-2 rounded-pill" bg="info">{tag}</Badge>) : ''}
-          </Card.Header>
-        </a>
-        <Card.Body className="p-2">
+            <Card.Subtitle className="mb-1"><span className="date">{club.clubType}</span></Card.Subtitle>
+            {club.tags ? club.tags.map((tag, index) => <Badge key={index} className="rounded-pill" bg="secondary">{tag}</Badge>) : ''}
+          </a>
+          <Row className="mt-2">
+            <Col>
+              <a style={{ textDecoration: 'none', fontWeight: 600 }} href={`/club/${club._id}`}>More info</a>
+            </Col>
+          </Row>
+        </Card.Header>
+        <Card.Body className="p-2" style={{ backgroundColor: '#F6F6F6' }}>
           <Row className="mx-2">
             {expandedDesc ? club.description : shortDesc()}
           </Row>
@@ -74,7 +84,6 @@ MakeCard.propTypes = {
 
 /* Renders the Clubs Collection as a set of Cards. */
 const MyClubs = () => {
-
   const { ready, clubs } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     let loaded = false;
@@ -97,8 +106,10 @@ const MyClubs = () => {
     };
   }, []);
 
+  document.title = 'Club Finder Mānoa - My Clubs';
+
   const getClubs = () => (clubs.length > 0 ? (
-    <Row xs={1} md={2} lg={4} className="g-2">
+    <Row xs={1} md={2} lg={3} className="g-2">
       {clubs.map((club, index) => <MakeCard key={index} club={club} />)}
     </Row>
   )
@@ -110,18 +121,16 @@ const MyClubs = () => {
     ));
 
   return (
-    <div className="backgroundImageTop">
-      <Container id={PageIDs.myClubsPage} style={pageStyle}>
-        <Row className="align-middle text-center">
-          <Col className="d-flex flex-column justify-content-center">
-            <h1 style={{ color: '#16211b' }} className="my-2 mb-3">
-              <b>My Clubs</b>
-            </h1>
-          </Col>
-        </Row>
-        {ready ? getClubs() : <LoadingSpinner />}
-      </Container>
-    </div>
+    <Container id={PageIDs.myClubsPage} style={pageStyle}>
+      <Row className="align-middle text-center">
+        <Col className="d-flex flex-column justify-content-center">
+          <h1 style={{ color: '#16211b' }} className="my-2 mb-3">
+            <b>My Clubs</b>
+          </h1>
+        </Col>
+      </Row>
+      {ready ? getClubs() : <LoadingSpinner />}
+    </Container>
   );
 };
 

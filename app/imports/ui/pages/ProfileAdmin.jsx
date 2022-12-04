@@ -2,28 +2,27 @@ import React from 'react';
 import { Badge, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
-import ChangePwModal from '../components/ChangePwModal';
 import { Users } from '../../api/users/Users';
-import { PageIDs } from '../utilities/ids';
 
-const Profile = () => {
+const ProfileAdmin = () => {
+  const { _id } = useParams();
+
   const { ready, userProfile } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(Users.userPublicationName);
     const rdy = sub1.ready();
-    const userData = Users.collection.find({ email: Meteor.user()?.username }).fetch()[0];
+    const userData = Users.collection.find({ _id: _id }).fetch()[0];
     return {
       userProfile: userData,
       ready: rdy,
     };
   }, []);
-
-  document.title = 'Club Finder Mānoa - Profile';
+  document.title = 'Club Finder Mānoa - User Profile';
 
   return (ready ? (
-    <Container id={PageIDs.profilePage} fluid className="py-3 backgroundImageTop">
+    <Container fluid className="py-3 backgroundImageTop">
       <Row>
         <Col className="d-flex justify-content-center">
           {/* Picture */}
@@ -61,18 +60,8 @@ const Profile = () => {
           </Col>
         </Card>
       </Row>
-      <Row>
-        <Col className="d-flex justify-content-center py-3">
-          <Link to={`/edit-profile/${userProfile._id}`} className="btn btn-primary" id="edit-profile-btn">Edit Profile</Link>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="d-flex justify-content-center pb-3">
-          <ChangePwModal />
-        </Col>
-      </Row>
     </Container>
   ) : <LoadingSpinner />);
 };
 
-export default Profile;
+export default ProfileAdmin;

@@ -2,9 +2,6 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
 
-const majors = ['Accounting', 'Architecture', 'Art', 'Business', 'Chemistry', 'Computer Science', 'Computer Engineering', 'Economics', 'Engineering', 'Finance',
-  'Marketing', 'Mathematics', 'Music', 'Nursing', 'Philosophy', 'Physics', 'Political Science', 'Psychology', 'Social Work', 'Other']; // TODO add more later?
-
 // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
 /* const allInterests = _.pluck(UsersCollection.collection.find().fetch(), 'name');
 const allInterests = ''; */
@@ -20,11 +17,9 @@ class UsersCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       accountID: String,
-      firstName: { type: String, optional: true },
-      lastName: { type: String, optional: true },
+      displayName: { type: String, optional: true },
       email: { type: String, unique: 1, optional: true },
       aboutMe: { type: String, optional: true },
-      major: { type: String, optional: true, allowedValues: majors },
       picture: { type: String, optional: true },
       savedClubs: { type: Array, optional: true },
       'savedClubs.$': { type: String },

@@ -11,8 +11,34 @@ Meteor.methods({
     return Users.collection.insert({ accountID, email, picture });
   },
 
-  updateUser: function ({ email, firstName, lastName, aboutMe, major, picture, interests }) {
-    return Users.collection.update({ email: email }, { $set: { firstName, lastName, aboutMe, major, picture, interests } });
+  saveClub: function ({ email, clubName }) {
+    let clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
+    if (clubArray) {
+      clubArray.push(clubName);
+    } else {
+      clubArray = [clubName];
+    }
+    return Users.collection.update({ email: email }, { $set: { savedClubs: clubArray } });
+  },
+
+  removeClub: function ({ email, clubName }) {
+    const clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const i in clubArray) {
+      if (clubArray[i] === clubName) {
+        clubArray.splice(i, 1);
+      }
+    }
+    return Users.collection.update({ email: email }, { $set: { savedClubs: clubArray } });
+  },
+
+  updateUser: function ({ email, displayName, aboutMe, picture }) {
+    const pic = picture || 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
+    return Users.collection.update({ email: email }, { $set: { displayName, aboutMe, picture: pic } });
+  },
+
+  updateInterests: function ({ email, interests }) {
+    return Users.collection.update({ email: email }, { $set: { interests } });
   },
 
   removeUser: function ({ email }) {
@@ -33,8 +59,8 @@ Meteor.methods({
   },
 });
 
-function addClub({ clubName, clubType, mainPhoto, description, tags, relevantMajors, meetingInfo, contactName, contactEmail, photos, admins }) {
-  Clubs.collection.insert({ clubName, clubType, mainPhoto, description, tags, relevantMajors, meetingInfo, contactName, contactEmail, photos, admins });
+function addClub({ clubName, clubType, mainPhoto, description, tags, meetingInfo, contactName, contactEmail, photos, admins }) {
+  Clubs.collection.insert({ clubName, clubType, mainPhoto, description, tags, meetingInfo, contactName, contactEmail, photos, admins });
 }
 
 /** Init clubs in DB */

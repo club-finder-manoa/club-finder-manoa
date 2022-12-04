@@ -1,17 +1,22 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Image } from 'react-bootstrap';
 
 /* Render a Not Authorized page if the user enters a URL that doesn't match any route. */
-const NotAuthorized = () => (
-  <Container>
-    <Row className="justify-content-center">
-      <Col xs={4} className="text-center">
-        <h2>
-          <p>Not Authorized</p>
-        </h2>
-      </Col>
-    </Row>
-  </Container>
-);
+const NotAuthorized = () => {
+  document.title = 'Club Finder Mānoa - Not Authorized';
+
+  return (
+    <Container>
+      <Row className="justify-content-center mt-3">
+        <Col className="text-center">
+          <h2>
+            <b>Not Authorized</b>
+          </h2>
+          <Image className="mt-3" src="https://media.tenor.com/wDawKwVafzAAAAAC/conan-o-brien-window.gif" />
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
 export default NotAuthorized;
