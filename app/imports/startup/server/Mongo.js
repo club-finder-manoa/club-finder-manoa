@@ -32,9 +32,13 @@ Meteor.methods({
     return Users.collection.update({ email: email }, { $set: { savedClubs: clubArray } });
   },
 
-  updateUser: function ({ email, displayName, aboutMe, picture, interests }) {
+  updateUser: function ({ email, displayName, aboutMe, picture }) {
     const pic = picture || 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
-    return Users.collection.update({ email: email }, { $set: { displayName, aboutMe, picture: pic, interests } });
+    return Users.collection.update({ email: email }, { $set: { displayName, aboutMe, picture: pic } });
+  },
+
+  updateInterests: function ({ email, interests }) {
+    return Users.collection.update({ email: email }, { $set: { interests } });
   },
 
   removeUser: function ({ email }) {

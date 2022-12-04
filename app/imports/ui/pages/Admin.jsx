@@ -19,7 +19,12 @@ const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
 
   const removeEm = () => {
     const adminArray = Users.collection.find({ email }).fetch()[0].adminForClubs;
-    adminArray.pop(clubToRemove);
+    // eslint-disable-next-line no-restricted-syntax
+    for (const i in adminArray) {
+      if (adminArray[i] === clubToRemove) {
+        adminArray.splice(i, 1);
+      }
+    }
     Meteor.call('updatePermissions', { email, adminArray });
     handleClose();
   };

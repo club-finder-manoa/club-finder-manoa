@@ -26,27 +26,27 @@ const AddInterestModal = ({ user }) => {
   const handleShow = () => setShow(true);
 
   const addEm = () => {
-    let ints = Users.collection.find({ email }).fetch()[0].interests;
-    if (ints && ints.includes(interest)) {
+    let interests = Users.collection.find({ email }).fetch()[0].interests;
+    if (interests && interests.includes(interest)) {
       // eslint-disable-next-line no-alert
-      alert(`Already saved "${interest}" as an interest.`);
-    } else if (ints) {
-      ints.push(interest);
+      swal(`Already saved "${interest}" as an interest.`);
+    } else if (interests) {
+      interests.push(interest);
     } else {
-      ints = [interest];
+      interests = [interest];
     }
-    Meteor.call('updatePermissions', { email, ints });
+    Meteor.call('updateInterests', { email, interests });
     setInterest('');
     handleClose();
   };
 
-  const interests = ['Accounting', 'Finance', 'Math', 'Computer Science', 'Business', 'Fitness', 'Martial Arts'];
+  const interests = ['Accounting', 'Finance', 'Math', 'Computer Science', 'Business', 'Fitness', 'Martial Arts']; // TODO add more to match club tags once complete
 
   const plusButtonStyle = {
     borderWidth: 0,
     fontSize: '15px',
     fontWeight: 500,
-    borderRadius: '10px',
+    borderRadius: '20px',
     paddingTop: '4px',
     paddingBottom: '4px',
     paddingLeft: '6px',
@@ -96,6 +96,70 @@ AddInterestModal.propTypes = {
   }).isRequired,
 };
 
+// Popup modal to confirm removal of admin status
+const RemoveInterestModal = ({ user, interestToRemove }) => {
+  const [show, setShow] = useState(false);
+  const email = user.email;
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const removeInterest = () => {
+    const interests = Users.collection.find({ email }).fetch()[0].interests;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const i in interests) {
+      if (interests[i] === interestToRemove) {
+        interests.splice(i, 1);
+      }
+    }
+    Meteor.call('updateInterests', { email, interests });
+    handleClose();
+  };
+
+  const xButtonStyle = {
+    padding: 0,
+    fontSize: '20px',
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    paddingBottom: '5px',
+  };
+
+  return (
+    <>
+      <Button style={xButtonStyle} onClick={handleShow}>
+        <X />
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Remove Interest</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to remove <b>{interestToRemove}</b> from your interests?
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button variant="danger" onClick={() => removeInterest()}>
+              Remove
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+RemoveInterestModal.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+  }).isRequired,
+  interestToRemove: PropTypes.string.isRequired,
+};
+
 /* Renders the EditProfile Page: what appears after the user logs in. */
 const EditProfile = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
@@ -116,21 +180,13 @@ const EditProfile = () => {
 
   /* On submit, insert the data. */
   const submit = (data) => {
-    const { email, displayName, aboutMe, picture, interests } = data;
-    if (Meteor.call('updateUser', { email, displayName, aboutMe, picture, interests })) {
+    const { email, displayName, aboutMe, picture } = data;
+    if (Meteor.call('updateUser', { email, displayName, aboutMe, picture })) {
       swal('Error', 'Something went wrong.', 'error');
     } else {
       swal('Success', 'Profile updated successfully', 'success');
       navigate('/profile');
     }
-  };
-
-  const xButtonStyle = {
-    padding: 0,
-    fontSize: '20px',
-    backgroundColor: 'transparent',
-    borderWidth: 0,
-    paddingBottom: '5px',
   };
 
   // Now create the model with all the user information.
@@ -172,7 +228,7 @@ const EditProfile = () => {
                       className="rounded-pill"
                       style={{ fontSize: '14px', fontWeight: 600, paddingTop: '1px', paddingBottom: 0, paddingStart: '15px', paddingEnd: '8px' }}
                       bg="secondary"
-                    >&nbsp;{interest} <Button style={xButtonStyle}><X /></Button>
+                    >&nbsp;{interest} <RemoveInterestModal interestToRemove={interest} user={user} />
                     </Badge>
                   ))
                   : ''}
