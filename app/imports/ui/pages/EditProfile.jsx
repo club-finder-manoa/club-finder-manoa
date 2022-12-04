@@ -13,6 +13,7 @@ import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ChangePwModal from '../components/ChangePwModal';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
+import { interests } from '../utilities/interests';
 
 /* Create a schema to specify the structure of the data to appear in the form. */
 const bridge = new SimpleSchema2Bridge(Users.schema);
@@ -26,21 +27,19 @@ const AddInterestModal = ({ user }) => {
   const handleShow = () => setShow(true);
 
   const addEm = () => {
-    let interests = Users.collection.find({ email }).fetch()[0].interests;
-    if (interests && interests.includes(interest)) {
+    let ints = Users.collection.find({ email }).fetch()[0].interests;
+    if (ints && ints.includes(interest)) {
       // eslint-disable-next-line no-alert
       swal(`Already saved "${interest}" as an interest.`);
-    } else if (interests) {
-      interests.push(interest);
+    } else if (ints) {
+      ints.push(interest);
     } else {
-      interests = [interest];
+      ints = [interest];
     }
-    Meteor.call('updateInterests', { email, interests });
+    Meteor.call('updateInterests', { email, interests: ints });
     setInterest('');
     handleClose();
   };
-
-  const interests = ['Accounting', 'Finance', 'Math', 'Computer Science', 'Business', 'Fitness', 'Martial Arts']; // TODO add more to match club tags once complete
 
   const plusButtonStyle = {
     borderWidth: 0,
@@ -105,14 +104,14 @@ const RemoveInterestModal = ({ user, interestToRemove }) => {
   const handleShow = () => setShow(true);
 
   const removeInterest = () => {
-    const interests = Users.collection.find({ email }).fetch()[0].interests;
+    const ints = Users.collection.find({ email }).fetch()[0].interests;
     // eslint-disable-next-line no-restricted-syntax
-    for (const i in interests) {
-      if (interests[i] === interestToRemove) {
-        interests.splice(i, 1);
+    for (const i in ints) {
+      if (ints[i] === interestToRemove) {
+        ints.splice(i, 1);
       }
     }
-    Meteor.call('updateInterests', { email, interests });
+    Meteor.call('updateInterests', { email, interests: ints });
     handleClose();
   };
 

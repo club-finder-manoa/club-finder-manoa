@@ -7,7 +7,7 @@ import { ChevronDown, ChevronUp } from 'react-bootstrap-icons';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { pageStyle } from './pageStyles';
+import { pageStyle } from '../utilities/pageStyles';
 import { PageIDs } from '../utilities/ids';
 import RemoveClubModal from '../components/RemoveClubModal';
 
