@@ -396,7 +396,7 @@ const AllClubs = () => {
                     title={clubType === '' ? 'Select a Club Type' : clubType}
                     onChange={(e) => setClubType(e.target.value)}
                   >
-                    {clubTypes.map((type) => <option value={type}>{type}</option>)}
+                    {clubTypes.map((type, key) => <option value={type} key={key}>{type}</option>)}
                   </FormSelect>
                 </label>
               </Col>
@@ -413,7 +413,7 @@ const AllClubs = () => {
                     title={interest === '' ? 'Select an Interest' : interest}
                     onChange={(e) => setInterest(e.target.value)}
                   >
-                    {interests.map((inter) => <option value={inter}>{inter}</option>)}
+                    {interests.map((inter, key) => <option value={inter} key={key}>{inter}</option>)}
                   </FormSelect>
                 </label>
               </Col>

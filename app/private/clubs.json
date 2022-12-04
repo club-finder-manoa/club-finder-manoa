@@ -13,7 +13,7 @@
     {
       "clubName": "AIKIDO at UHM",
       "clubType": "Sports/Leisure",
-      "mainPhoto": "images/aikido_club.gif",
+      "mainPhoto": "/images/aikido_club.gif",
       "website": "https://www.aikidohawaii.org/dojo_uh_manoa.html",
       "tags": ["Fitness", "Martial Arts"],
       "contactName": "Timothy Halliday",
@@ -73,7 +73,7 @@
     {
       "clubName": "American Marketing Association",
       "clubType": "Academic/Professional",
-      "mainPhoto": "images/AmericanMarketingAssociation.png",
+      "mainPhoto": "/images/AmericanMarketingAssociation.png",
       "website": "http://amauhm.org/amauhm-1",
       "tags": ["Marketing"],
       "contactName": "Aaron Goo",
@@ -121,7 +121,7 @@
     {
       "clubName": "Anakbayan Hawaiʻi",
       "clubType": "Political",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/307691402_459232169569204_4028635364838234931_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=eZG3lpCOU-kAX_xYfz7&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfCVFzs_7KokMf4qCoZuAh3_OKSZlK75mhGWuuIenGWyLA&oe=638880C1",
+      "mainPhoto": "https://i.imgur.com/ukDlKLG.png",
       "tags": ["Philippines","Politics"],
       "contactName": "Germaine Linday Juan",
       "contactEmail": "gjuan@hawaii.edu",
@@ -130,7 +130,7 @@
     {
       "clubName": "Animal Science Club",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://manoa.hawaii.edu/speakers/wp-content/uploads/logo-1.png",
+      "mainPhoto": "https://i.imgur.com/vsRgd0x.png",
       "tags": ["Animals", "Biology", "Science"],
       "contactName": "Renee Yano",
       "contactEmail": "yanor@hawaii.edu",
@@ -247,7 +247,7 @@
     {
       "clubName": "Beta Beta Gamma",
       "clubType": "Fraternity/Sorority",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/306601574_760349352460949_7505106179548097591_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=A49n9RJ8Pa4AX8nqc6l&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfA9Oc5qMP9GJntCAB6rPE2-4OxorpSBEmngrX3Kf0C5sw&oe=6389B2F9",
+      "mainPhoto": "https://i.imgur.com/pSljWzG.png",
       "tags": ["Women", "Sorority"],
       "contactName": "Jordan Humphrey",
       "contactEmail": "jah821@hawaii.edu",
@@ -382,7 +382,7 @@
     {
       "clubName": "Delta Sigma Pi: Rho Chi",
       "clubType": "Fraternity/Sorority",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/241937089_10159331280188672_8853063503612888156_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=LQcXJ0PyW9kAX8AAqVr&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfAMh5zsuZg_BFsfEFQmP6g5bnOVdJXVSpkedjIyAekZwg&oe=638AD810",
+      "mainPhoto": "https://i.imgur.com/KXDqkwh.png",
       "tags": ["Business","Fraternity"],
       "contactName": "Anthony Lee",
       "contactEmail": "alee91@hawaii.edu",
@@ -436,7 +436,7 @@
     {
       "clubName": "Family Medicine Interest Group",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/308819495_468586951977965_9193179316188819452_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=oHb_bREquQEAX_gZqak&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfCBMAvuF8DR73p_ChaCTWvFe2j8dyGgxJnQ6yL1PmmZMA&oe=6388A91E",
+      "mainPhoto": "https://i.imgur.com/3ht50XN.png",
       "tags": ["Medicine"],
       "contactName": "Kylie Popovich",
       "contactEmail": "kpopovic@hawaii.edu",
@@ -454,7 +454,7 @@
     {
       "clubName": "Food Science and Human Nutrition Council",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/309266816_429255399332226_2336040588349172118_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=UYluer59054AX-NLsdu&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfDiecEC_jJD-5yu6GPrOb4VvEBe5qMjW7MUQPn-LdyhIQ&oe=638A1C35",
+      "mainPhoto": "https://i.imgur.com/lAT27ub.png",
       "tags": ["Health", "Science"],
       "contactName": "Micheal Yanos",
       "contactEmail": "mpyanos@hawaii.edu",
@@ -544,7 +544,7 @@
     {
       "clubName": "Hillel Hawaii",
       "clubType": "Religious/Spiritual",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/307319543_467761645394667_6129966156228962483_n.png?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=fzC8Jvdhx6kAX_Smkc5&_nc_oc=AQn1xNbRKWGew6s-_2tLse8kZdv3XJUsBarkXcoJlZzcCemWiT9cYAWFoSbXt8JWMt65XGbdkvPtrGROrx26kfnM&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfDQ5V30roGmGkkUKv-p2jisae7lycCy5f46cqkTSvPLPg&oe=6389C92C",
+      "mainPhoto": "https://i.imgur.com/FRUdcKj.png",
       "tags": ["Religion"],
       "contactName": "Mason Russo",
       "contactEmail": "russomas@hawaii.edu",
@@ -562,7 +562,7 @@
     {
       "clubName": "ICSpark",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/306961689_382662080744930_8331627867071762029_n.png?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=yK770Wc6EwQAX_DoORr&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfAEdH39FB_JyGyfHp9ngM9t1XeCONRViQmXc7GEU7KRgg&oe=63890E05",
+      "mainPhoto": "https://i.imgur.com/9ZYY1t6.png",
       "tags": ["Computer Science", "Mentorship"],
       "contactName": "Preston Garcia",
       "contactEmail": "garcia77@hawaii.edu",
@@ -589,7 +589,7 @@
     {
       "clubName": "Inter-Business Council",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-1/307020463_397031842617810_8153882194874803516_n.jpg?stp=dst-jpg_p200x200&_nc_cat=109&ccb=1-7&_nc_sid=c6021c&_nc_ohc=94qWrdSQEBMAX8-Hc98&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfDO49ifemChCYcLik_hRLgFEEMEscZaNxdyAt2P5EWmKw&oe=638AA445",
+      "mainPhoto": "https://i.imgur.com/CQcKFNa.png",
       "tags": ["Business"],
       "contactName": "Fanglin Xu",
       "contactEmail": "fanglin@hawaii.edu",
@@ -625,7 +625,7 @@
     {
       "clubName": "Ka Lama Kukui Indigenous Health Interest Group",
       "clubType": "Service",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/309262768_430377989237188_8330558037067836795_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=2-5fFkd5QzYAX8Ql3DR&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfCnZgkd6YaOooNtmzXG_PolWP1KW6zeTq34GfT5jzLrEA&oe=63882AB0",
+      "mainPhoto": "https://i.imgur.com/TzpbiDO.png",
       "tags": ["Health", "Indigenous"],
       "contactName": "Awapuhi Lee",
       "contactEmail": "awapuhil@hawaii.edu",
@@ -643,7 +643,7 @@
     {
       "clubName": "Ka Mea Kolo Entomology Club",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/307757933_404802965166742_1033374969551446379_n.png?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=bG8Tm3o8KHIAX-vQjd2&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfDOC8q23S66UenVry9ONU5YhVscMOj3lypVIUO65ZPmSw&oe=63887202",
+      "mainPhoto": "https://i.imgur.com/NX3Sdkl.png",
       "tags": ["Entomology","Environment"],
       "contactName": "Michelle Au",
       "contactEmail": "aumi@hawaii.edu",
@@ -661,7 +661,7 @@
     {
       "clubName": "Katipunan Club",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/302597803_447918144026922_2556308284429403759_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=6Q5sVq9AhN4AX-kh4xY&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfBVFLXD2XX1gluvOzFaLWmYNiWPaqveLPvyQQGDXMYNJw&oe=638B37A3",
+      "mainPhoto": "https://i.imgur.com/6JmGdHR.png",
       "tags": ["Linguistics","Philippines"],
       "contactName": "Justin Gerald Ocampo",
       "contactEmail": "jpocampo@hawaii.edu",
@@ -706,7 +706,7 @@
     {
       "clubName": "Manoa Academy of Gamers",
       "clubType": "Leisure/Recreational",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/300427099_441277764690720_8796999727974481392_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=GuYO43odY4wAX-FgJW6&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfCdKTohTfjVioYrUgwYnobWtvR_exG-lgf3HM1cSEb4WA&oe=638A2F14",
+      "mainPhoto": "https://i.imgur.com/2qkjz9J.png",
       "tags": ["Gaming"],
       "contactName": "Albert Yee",
       "contactEmail": "ayee9@hawaii.edu",
@@ -814,7 +814,7 @@
     {
       "clubName": "Na Koa Lani booster Club",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/307461986_426975962893994_8592224536155596379_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=SGTtiEFDGYoAX8FRqHf&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfDPbWxtIctSPz5fdTkUjYBs_zFIj9rHREr36j5nr9NCkA&oe=6387E014",
+      "mainPhoto": "https://i.imgur.com/xEQ2N3G.png",
       "tags": ["Military", "Leadership"],
       "contactName": "Deonmark Alimaleata",
       "contactEmail": "nklbc@hawaii.edu",
@@ -823,7 +823,7 @@
     {
       "clubName": "National Society of Collegiate Scholars, Manoa Chapter",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/306930092_463276642500116_5363848820955715873_n.png?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Yrf-CHv1_jEAX-N0ELh&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfDVIEoxEUBEYaEdsUlcJy43xxv09oPqfwDyJlKokuQkUw&oe=638B7DC3",
+      "mainPhoto": "https://upload.wikimedia.org/wikipedia/en/d/d5/The_logo_of_NSCS.png",
       "tags": ["Honor Society"],
       "contactName": "Melvin Joseph Dizon",
       "contactEmail": "mdizon69@hawaii.edu",
@@ -895,7 +895,7 @@
     {
       "clubName": "Pacific Advocates Peoples Association",
       "clubType": "Ethnic/Cultural",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/307309304_196116446124228_5900327798517594986_n.png?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=oGSVWOVDhPMAX-tdshR&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfAxuqhoLpIrRlJMQ10G60TlVP_p7gKbUaOsKi4hoixEug&oe=63873B65",
+      "mainPhoto": "https://i.imgur.com/oqjltye.png",
       "tags": ["Indigenous", "Community"],
       "contactName": "Zea F.P. Nauta",
       "contactEmail": "znauta@hawaii.edu",
@@ -904,7 +904,7 @@
     {
       "clubName": "Panhellenic Association",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/307371252_468895228612305_967184595843636484_n.png?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=r-CX3RfQS44AX_kw-AT&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfAu77xylAGzJjSzydRZOUCaD1TuEQa2u94cFvsUFUXAtg&oe=6388BD20",
+      "mainPhoto": "https://i.imgur.com/7fLxnM7.png",
       "tags": ["Sorority", "Women"],
       "contactName": "Sidney Bumgarner",
       "contactEmail": "sidneybu@hawaii.edu",
@@ -940,7 +940,7 @@
     {
       "clubName": "Phi Alpha Nu Sigma",
       "clubType": "Honorary Society",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/301859293_550932033495975_8080898035385773511_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=bInKzh5imD0AX8dKqJh&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfDPxWxGLYaTPrKYaFgbq9AIqME8rW07i0cUh7nRoARJ3Q&oe=6388FE68",
+      "mainPhoto": "https://i.imgur.com/mPTcLdG.png",
       "tags": ["Honor Society", "Social Work"],
       "contactName": "Stewart Silva",
       "contactEmail": "silvas@hawaii.edu",
@@ -967,7 +967,7 @@
     {
       "clubName": "Powerlifting Club at the University of Hawaiʻi at Mānoa",
       "clubType": "Sports/Leisure",
-      "mainPhoto": "https://manoa.hawaii.edu/speakers/wp-content/uploads/logo-1.png",
+      "mainPhoto": "https://i.imgur.com/Zwbwmx1.png",
       "tags": ["Fitness"],
       "contactName": "Daniel Aguirre",
       "contactEmail": "daguirre@hawaii.edu",
@@ -985,7 +985,7 @@
     {
       "clubName": "Pre-Optometry Club",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/239441617_192501652944848_286662345056212212_n.png?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=DTUIkYmv9RkAX-wjmka&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfBOyLVXJqRipNcOq86ASDg9Vy2D6DoZD-fHZ9ZfjQe74g&oe=6387EFA9",
+      "mainPhoto": "https://i.imgur.com/8jedrQ1.png",
       "tags": ["Medicine"],
       "contactName": "Sara Kim",
       "contactEmail": "kimsara2@hawaii.edu",
@@ -1021,7 +1021,7 @@
     {
       "clubName": "PsiChi: The International Honor Society in Psychology",
       "clubType": "Honorary Society",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/279174051_354204850030405_2659149405391551803_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=xJgziSFt3cgAX_OQ2hn&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfBrKEJJPlOr5jKdFtLjJc7e8SZDzdqVpu9iFSxufcZsKQ&oe=6387D419",
+      "mainPhoto": "https://psychology.manoa.hawaii.edu/wp-content/uploads/2019/07/psi-chi.png",
       "tags": ["Honor Society", "Psychology"],
       "contactName": "Jessica Sasabe",
       "contactEmail": "jsasabe@hawaii.edu",
@@ -1030,7 +1030,7 @@
     {
       "clubName": "Public Administration Student Organization",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/263561280_303419835125444_3762140557250283908_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=foqQK_hLbGEAX_Is-8H&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfD1Fwy2r8ad-gQYYw4ptUHztRwakjcJof3qEuMAqBmVKA&oe=6387B120",
+      "mainPhoto": "https://i.imgur.com/2QTid7H.jpg",
       "tags": ["Public Administration"],
       "contactName": "Sharon Baillie",
       "contactEmail": "baillie@hawaii.edu",
@@ -1039,7 +1039,7 @@
     {
       "clubName": "Public Relations Student Society of America",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/291007528_10160060966714329_6009513199406364182_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=HERWIOM5CC8AX_ob87A&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfBfojkrWb4FTg_QQuXodHQZfZLJSpXBOjbvkzBygk3KwA&oe=6387C114",
+      "mainPhoto": "https://i.imgur.com/G15Mqqa.png",
       "tags": ["Public Relations"],
       "contactName": "Ashley Taylor",
       "contactEmail": "ashleyjt@hawaii.edu",
@@ -1057,7 +1057,7 @@
     {
       "clubName": "Rotaract Club at the University of Hawaiʻi Mānoa",
       "clubType": "Service",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/308503831_414176964176035_8324178847277118507_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=HP4zXXkqeXYAX_hy2s1&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfBJUFRIYtsUQ6zMXIgaL5xV6ptRmqaT2Tc0W8P4JsNneA&oe=63882585",
+      "mainPhoto": "https://i.imgur.com/UXCI7k5.png",
       "tags": ["Community", "Leadership"],
       "contactName": "Joyce Rosabia",
       "contactEmail": "jrosabia@hawaii.edu",
@@ -1084,7 +1084,7 @@
     {
       "clubName": "Second Language Studies Student Association",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/291993373_468011568657986_7713722817887277616_n.png?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=xCQZ_hdEr9MAX855Cjm&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfCTzmbkFutJGKf5CghxBbPWGBGdFl_WFnas6HxwmqNJew&oe=63882A97",
+      "mainPhoto": "https://i.imgur.com/uGb93sO.png",
       "tags": ["Linguistics"],
       "contactName": "Ha Nguyen",
       "contactEmail": "thuha@hawaii.edu",
@@ -1129,7 +1129,7 @@
     {
       "clubName": "Society of Women Engineers",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/279436225_362321599258766_496675064721387789_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=3XY5ASfsVc0AX_fOr-u&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfDgM7MmIKLxYG6htKrINgfxduQWStFYzNcrRgKBDWxl6g&oe=63874877",
+      "mainPhoto": "https://i.imgur.com/BxQx52j.png",
       "tags": ["Engineering", "Women"],
       "contactName": "Nyah Chamberlain",
       "contactEmail": "nkmrc@hawaii.edu",
@@ -1138,7 +1138,7 @@
     {
       "clubName": "Special Libraries Association Student Chapter",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/308096117_458705262952985_5043830085192285823_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=JmosySqeVzQAX_k7V24&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfBsR8_YZy4qV5x4-380hEzmJrsf8TNBeLJmU3lpCijhpA&oe=63877AF7",
+      "mainPhoto": "https://i.imgur.com/wVpsSaJ.png",
       "tags": ["Libraries"],
       "contactName": "Jazmin Decosmo",
       "contactEmail": "decosmoj@hawaii.edu",
@@ -1183,7 +1183,7 @@
     {
       "clubName": "Student Nurses' Association at UH Manoa",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/306159870_165990136094766_3974827741731583813_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=L_TXTC8E19AAX9TyfWc&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfABKj5lusJHUojn_GHV7S0PBkOd0fzOuNPpuUmRRkLrLQ&oe=6387B244",
+      "mainPhoto": "https://i.imgur.com/PKsnR9y.png",
       "tags": ["Nursing", "Mentorship"],
       "contactName": "Natalie Welch",
       "contactEmail": "welchne@hawaii.edu",
@@ -1219,7 +1219,7 @@
     {
       "clubName": "Tau Beta Pi",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/241657279_180765300831988_839091446006339957_n.png?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=U91-h8rUX90AX_pNQS-&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfAn9ax0BeXwPJooiCVC24aYSvsNOdH0AI1js5DiygX9LQ&oe=6388D143",
+      "mainPhoto": "https://i.imgur.com/lfsi1b9.png",
       "tags": ["Engineering", "Honor Society"],
       "contactName": "Evan Peng ",
       "contactEmail": "evanpeng@hawaii.edu",
@@ -1264,7 +1264,7 @@
     {
       "clubName": "The Pre-Veterinary Club at UH Manoa",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/308474692_601125388373249_4664602946421003691_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N7NtbWTm3ggAX9nuXH5&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfBZGHwJl7g6agrPJQsZ-cG9GEK5y1QGZDMXHMSTLOWReA&oe=638A5F13",
+      "mainPhoto": "https://i.imgur.com/sS5mJpM.png",
       "tags": ["Medicine", "Veterinary"],
       "contactName": "Dominique Wenzler-Steves",
       "contactEmail": "dwenzler@hawaii.edu",
@@ -1291,7 +1291,7 @@
     {
       "clubName": "Tropical Plant and Soil Sciences Graduate Student Organization at the University of Hawaiʻi at Mānoa",
       "clubType": "Academic/Professional",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/305451934_190218563372091_6148210639069198638_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=O53HYQjjYKwAX9lXXpx&_nc_oc=AQmpCIoOk15cZ4r1JV_5XbCuYahiF0iJXooBNGT4H59CyjSbzpZmMkNj3mFFHYe1vFdskmBVZXbWtLqFBqz3m6eI&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfAJoShGC3ePYQVLI1L3qzqNFpUAMBlJFDQF28T5MkT4gA&oe=6387E2A2",
+      "mainPhoto": "https://i.imgur.com/wz9QuCl.png",
       "tags": ["Environment","Science"],
       "contactName": "Sebastian Church",
       "contactEmail": "churchs@hawaii.edu",
@@ -1318,7 +1318,7 @@
     {
       "clubName": "Young Life College",
       "clubType": "Religious/Spiritual",
-      "mainPhoto": "https://scontent.fhnl3-1.fna.fbcdn.net/v/t39.30808-6/295956220_1134718443773237_2038497286091700712_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Qf_gUt1S12UAX-QQjYj&_nc_ht=scontent.fhnl3-1.fna&oh=00_AfCovOjwzP-yyovToSycrzU6CfOvuEQ1gNu3VSgJrcoXwA&oe=6388EEAC",
+      "mainPhoto": "https://i.imgur.com/zPj7hzM.png",
       "tags": ["Religion"],
       "contactName": "Sydney Kealanahele",
       "contactEmail": "sydneydk@hawaii.edu",
