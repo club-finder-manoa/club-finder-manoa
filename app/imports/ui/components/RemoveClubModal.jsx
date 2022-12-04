@@ -38,7 +38,7 @@ const RemoveClubModal = ({ clubName, email, buttonText }) => {
 
   return (
     <>
-      <Button style={buttonText ? removeClubStyle : removeClubStyleX} onClick={handleShow}>
+      <Button id="remove-myclub-x" style={buttonText ? removeClubStyle : removeClubStyleX} onClick={handleShow}>
         {buttonText || <X />}
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -55,7 +55,7 @@ const RemoveClubModal = ({ clubName, email, buttonText }) => {
             <Button variant="light" onClick={handleClose}>
               Back
             </Button>
-            <Button variant="danger" onClick={() => removeClub()}>
+            <Button id="remove-club-btn" variant="danger" onClick={() => removeClub()}>
               Remove
             </Button>
           </Modal.Footer>

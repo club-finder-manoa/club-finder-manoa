@@ -33,7 +33,7 @@ const SaveClubModal = ({ clubName, email }) => {
 
   return (
     <>
-      <Button style={saveButtonStyle} onClick={handleShow}>
+      <Button style={saveButtonStyle} onClick={handleShow} id="save-club-btn">
         Save
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -50,7 +50,7 @@ const SaveClubModal = ({ clubName, email }) => {
             <Button variant="light" onClick={handleClose}>
               Back
             </Button>
-            <Button onClick={() => saveClub()}>
+            <Button id="save-btn" onClick={() => saveClub()}>
               Save
             </Button>
           </Modal.Footer>

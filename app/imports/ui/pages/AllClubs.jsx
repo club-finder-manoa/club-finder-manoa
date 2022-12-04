@@ -282,7 +282,7 @@ const AllClubs = () => {
       );
     }
     return (
-      <Table striped bordered style={{ tableLayout: 'fixed' }}>
+      <Table striped bordered style={{ tableLayout: 'fixed' }} >
         <thead style={{ position: 'sticky', top: 0, backgroundColor: 'white' }}>
           <tr>
             <th style={{ width: '100px' }}>

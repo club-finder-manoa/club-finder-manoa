@@ -30,8 +30,9 @@ class AllClubsPage {
     await testController.typeText('#search-by-name', clubName);
   }
 
-  async testClubView(testController) {
-    await testController.click('#club-header');
+  async saveClub(testController) {
+    await testController.click('#save-club-btn');
+    await testController.click('#save-btn');
   }
 }
 

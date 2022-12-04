@@ -209,7 +209,7 @@ const EditProfile = () => {
             </Row>
             <Row>
               <Col className="text-center d-flex justify-content-center small">
-                <TextField name="picture" showInlineError placeholder={user.picture} />
+                <TextField id="profile-picture" name="picture" showInlineError placeholder={user.picture} />
               </Col>
             </Row>
             <hr />
@@ -242,7 +242,7 @@ const EditProfile = () => {
                 </Button>
               </Col>
               <Col className="d-flex justify-content-start">
-                <SubmitField value="Save Changes" />
+                <SubmitField id="save-changes-btn" value="Save Changes" />
               </Col>
               <ErrorsField />
               <HiddenField name="savedClubs" />

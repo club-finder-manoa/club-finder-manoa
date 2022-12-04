@@ -34,7 +34,7 @@ const ClubPage = () => {
   }
 
   return ready ? (
-    <Container className="my-3">
+    <Container className="my-3" id="club-info-page">
       {updateTitleAndCheck()}
       {club ? (
         <div>

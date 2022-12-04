@@ -1,9 +1,9 @@
 import { Selector } from 'testcafe';
-import { ComponentIDs } from '../imports/ui/utilities/ids';
+import { ComponentIDs, PageIDs } from '../imports/ui/utilities/ids';
 
 class UserPage {
   constructor() {
-    this.pageId = '#user-page';
+    this.pageId = `#${PageIDs.profilePage}`;
     this.pageSelector = Selector(this.pageId);
   }
 
@@ -17,19 +17,18 @@ class UserPage {
   }
 
   async testEditProfileInput(testController) {
-    const editFirstName = 'Cam';
-    const editLastName = 'Moore';
+    const editProfileName = 'Cam Moore';
     const editAboutMe = 'I am a teacher.';
+    const editProfilePic = 'https://cammoore.github.io/img/cam-moore.jpg';
     await testController.selectText(`#${ComponentIDs.homeFormFirstName}`).pressKey('delete');
-    await testController.click(`#${ComponentIDs.homeFormFirstName}`);
-    await testController.typeText(`#${ComponentIDs.homeFormFirstName}`, editFirstName);
-    await testController.selectText(`#${ComponentIDs.homeFormLastName}`).pressKey('delete');
-    await testController.click(`#${ComponentIDs.homeFormLastName}`);
-    await testController.typeText(`#${ComponentIDs.homeFormLastName}`, editLastName);
+    await testController.typeText(`#${ComponentIDs.homeFormFirstName}`, editProfileName);
     await testController.selectText(`#${ComponentIDs.homeFormBio}`).pressKey('delete');
-    await testController.click(`#${ComponentIDs.homeFormBio}`);
     await testController.typeText(`#${ComponentIDs.homeFormBio}`, editAboutMe);
-    await testController.click('#pic-field');
+    await testController.selectText('#profile-picture').pressKey('delete');
+    await testController.typeText('#profile-picture', editProfilePic);
+    // await testController.click('#remove-interest');
+    // await testController.click('#remove-club-btn');
+    await testController.click('#save-changes-btn');
   }
 }
 

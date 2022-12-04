@@ -7,6 +7,7 @@ import { allClubsPage } from './allclubs.page';
 import { signupPage } from './signup.page';
 import { adminPage } from './admin.page';
 import { userPage } from './user.page';
+import { clubsInfoPage } from './clubinfo.page';
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
@@ -47,9 +48,34 @@ test('Test the All Clubs page', async (testController) => {
   await allClubsPage.hasDefaultAllClubs(testController);
   await allClubsPage.testListCardView(testController);
   await allClubsPage.testSearchOptionsName(testController);
-  await allClubsPage.testClubView(testController);
+  await allClubsPage.saveClub(testController);
 });
 
+test('Test the Club Information page', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signInPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoAllClubsPage(testController);
+  await clubsInfoPage.gotoClubInfoPage(testController);
+  await clubsInfoPage.isDisplayed(testController);
+});
+
+test('Test the Club save in Club Information page', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signInPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoAllClubsPage(testController);
+  await clubsInfoPage.gotoClubInfoPage(testController);
+  await clubsInfoPage.isDisplayed(testController);
+  await clubsInfoPage.clubInfoSave(testController);
+});
+
+test('Test the Club remove in Club Information page', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signInPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoAllClubsPage(testController);
+  await clubsInfoPage.gotoClubInfoPage(testController);
+  await clubsInfoPage.isDisplayed(testController);
+  await clubsInfoPage.clubInfoRemove(testController);
+});
 test('Test the My Club page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signInPage.signin(testController, credentials.username, credentials.password);
@@ -57,6 +83,7 @@ test('Test the My Club page', async (testController) => {
   await myClubsPage.isDisplayed(testController);
   await myClubsPage.hasDefaultMyClubs(testController);
   await myClubsPage.testMyClubsView(testController);
+  await myClubsPage.testRemoveMyClub(testController);
 });
 
 test('Test the Admin page', async (testController) => {
@@ -68,7 +95,14 @@ test('Test the Admin page', async (testController) => {
   // TODO add other admin tests
 });
 
-test.only('Test the User page', async (testController) => {
+test('Test the Profile page', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signInPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoUserPage(testController);
+  await userPage.isDisplayed(testController);
+});
+
+test('Test the Profile Edit page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signInPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoUserPage(testController);

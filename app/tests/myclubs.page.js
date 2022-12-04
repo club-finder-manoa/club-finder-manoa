@@ -22,6 +22,11 @@ class MyClubsPage {
   async testMyClubsView(testController) {
     await testController.click('#myclubs-club-header');
   }
+
+  async testRemoveMyClub(testController) {
+    await testController.click('#remove-myclub-x');
+    await testController.click('#remove-club-btn');
+  }
 }
 
 export const myClubsPage = new MyClubsPage();
