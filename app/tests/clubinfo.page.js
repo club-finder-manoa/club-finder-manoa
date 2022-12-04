@@ -1,5 +1,4 @@
 import { Selector } from 'testcafe';
-import { ComponentIDs } from '../imports/ui/utilities/ids';
 
 class ClubsInfoPage {
   constructor() {
