@@ -4,11 +4,11 @@ import { Badge, Button, Col, Container, Row, Table, Modal, Form, Image } from 'r
 import { useTracker } from 'meteor/react-meteor-data';
 import { X } from 'react-bootstrap-icons';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert';
 import { Users } from '../../api/users/Users';
 import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PageIDs, ComponentIDs } from '../utilities/ids';
-import swal from 'sweetalert';
 
 // Popup modal to confirm removal of admin status
 const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
@@ -216,7 +216,7 @@ const ResetPwModal = ({ userId, email }) => {
 
   const resetPw = () => {
     Meteor.call('resetPw', { userId });
-    swal('User\'s password reset to:\n\nchangeme\n\nPlease alert user of password reset.');
+    swal('Password has been reset.', 'User\'s password reset to: changeme\n\nPlease alert user of password reset.');
     handleClose();
   };
 
