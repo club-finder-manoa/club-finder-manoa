@@ -86,7 +86,7 @@ test('Test the My Club page', async (testController) => {
   await myClubsPage.testRemoveMyClub(testController);
 });
 
-test('Test the Admin page', async (testController) => {
+test.only('Test the Admin page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signInPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoAdminPage(testController);
@@ -95,7 +95,7 @@ test('Test the Admin page', async (testController) => {
   await adminPage.testAddAdminPermissions(testController);
   await adminPage.testRemoveAdminPermissions(testController);
   // await adminPage.testDeleteUser(testController);
-  // await adminPage.resetPassword(testController);
+  await adminPage.testResetPassword(testController);
   // TODO add other admin tests
 });
 

@@ -38,12 +38,12 @@ class AdminPage {
       // Use the "setNativeDialogHandler" function to introduce a handler function for native dialogs.
 
   }
-
+*/
     async testResetPassword(testController) {
       await testController.click('#reset-password-btn');
       await testController.click('#confirm-reset-password');
       // TODO
-    } */
+    }
 }
 
 export const adminPage = new AdminPage();

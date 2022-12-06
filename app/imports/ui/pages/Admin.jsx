@@ -8,6 +8,7 @@ import { Users } from '../../api/users/Users';
 import { Clubs } from '../../api/clubs/Clubs';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PageIDs, ComponentIDs } from '../utilities/ids';
+import swal from 'sweetalert';
 
 // Popup modal to confirm removal of admin status
 const RemoveAdminStatusModal = ({ user, clubToRemove }) => {
@@ -161,9 +162,8 @@ const DeleteUserModal = ({ email }) => {
   const deleteUser = () => {
     Meteor.call('removeUser', { email });
     Meteor.call('removeAccount', { email });
+    swal('User successfully deleted.', 'Success');
     handleClose();
-    // eslint-disable-next-line no-alert
-    alert('User successfully deleted.');
   };
 
   const deleteStyle = {
@@ -216,9 +216,8 @@ const ResetPwModal = ({ userId, email }) => {
 
   const resetPw = () => {
     Meteor.call('resetPw', { userId });
+    swal('User\'s password reset to:\n\nchangeme\n\nPlease alert user of password reset.');
     handleClose();
-    // eslint-disable-next-line no-alert
-    alert('User\'s password reset to:\n\nchangeme\n\nPlease alert user of password reset.');
   };
 
   const resetStyle = {

@@ -26,8 +26,8 @@ class UserPage {
     await testController.typeText(`#${ComponentIDs.homeFormBio}`, editAboutMe);
     await testController.selectText('#profile-picture').pressKey('delete');
     await testController.typeText('#profile-picture', editProfilePic);
-    // await testController.click('#remove-interest');
-    // await testController.click('#remove-club-btn');
+    await testController.click('#add-interest-btn');
+    await testController.click('#confirm-add-interest').pressKey('down');
     await testController.click('#save-changes-btn');
   }
 }

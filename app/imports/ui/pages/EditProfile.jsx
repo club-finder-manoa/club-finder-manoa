@@ -55,7 +55,7 @@ const AddInterestModal = ({ user }) => {
 
   return (
     <>
-      <Button style={plusButtonStyle} onClick={handleShow}>
+      <Button id="add-interest-btn" style={plusButtonStyle} onClick={handleShow}>
           &nbsp;&nbsp;Add<Plus style={{ paddingBottom: '2px', fontSize: '24px' }} />
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -79,7 +79,7 @@ const AddInterestModal = ({ user }) => {
             <Button variant="light" onClick={handleClose}>
               Back
             </Button>
-            <Button variant="success" onClick={() => addEm()}>
+            <Button id="confirm-add-interest" variant="success" onClick={() => addEm()}>
               Confirm
             </Button>
           </Modal.Footer>
