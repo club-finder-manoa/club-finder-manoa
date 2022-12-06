@@ -26,14 +26,6 @@ class NavBar {
     await testController.click(`#${ComponentIDs.loginDropdownSignIn}`);
   }
 
-  async gotoProfilesPage(testController) {
-    const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
-    if (!visible) {
-      await testController.click('button.navbar-toggler');
-    }
-    await testController.click(`#${ComponentIDs.profilesMenuItem}`);
-  }
-
   async gotoMyClubsPage(testController) {
     const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
     if (!visible) {
@@ -68,38 +60,6 @@ class NavBar {
       await testController.click(`#${ComponentIDs.currentUserDropdown}`);
       await testController.click(`#${ComponentIDs.currentUserDropdownProfile}`);
     }
-  }
-
-  async gotoInterestsPage(testController) {
-    const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
-    if (!visible) {
-      await testController.click('button.navbar-toggler');
-    }
-    await testController.click(`#${ComponentIDs.interestsMenuItem}`);
-  }
-
-  async gotoProjectsPage(testController) {
-    const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
-    if (!visible) {
-      await testController.click('button.navbar-toggler');
-    }
-    await testController.click(`#${ComponentIDs.projectsMenuItem}`);
-  }
-
-  async gotoAddProjectPage(testController) {
-    const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
-    if (!visible) {
-      await testController.click('button.navbar-toggler');
-    }
-    await testController.click(`#${ComponentIDs.addProjectMenuItem}`);
-  }
-
-  async gotoFilterPage(testController) {
-    const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
-    if (!visible) {
-      await testController.click('button.navbar-toggler');
-    }
-    await testController.click(`#${ComponentIDs.filterMenuItem}`);
   }
 
   /** Check that the specified user is currently logged in. */
