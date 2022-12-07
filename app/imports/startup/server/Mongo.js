@@ -39,6 +39,10 @@ Meteor.methods({
     return Users.collection.update({ email: email }, { $set: { displayName, aboutMe, picture: pic } });
   },
 
+  updateClub: function ({ _id, mainPhoto, clubName, clubType, description, contactName, contactEmail }) {
+    return Clubs.collection.update({ _id: _id }, { $set: { mainPhoto, clubName, clubType, description, contactName, contactEmail } });
+  },
+
   updateInterests: function ({ email, interests }) {
     return Users.collection.update({ email: email }, { $set: { interests } });
   },

@@ -9,6 +9,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
+import { Roles } from 'meteor/alanning:roles';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ChangePwModal from '../components/ChangePwModal';
@@ -167,13 +168,16 @@ const EditProfile = () => {
 
   document.title = 'Club Finder Mānoa - Profile';
 
-  const { user, ready } = useTracker(() => {
+  const { user, ready, userProfileID } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub = Meteor.subscribe(Users.userPublicationName);
     const document = Users.collection.findOne({ _id });
+    const userData = Users.collection.find({ email: Meteor.user()?.username }).fetch()[0];
+    const id = userData ? userData._id : '';
     return {
       ready: sub.ready(),
       user: document,
+      userProfileID: id,
     };
   }, []);
 
@@ -184,7 +188,11 @@ const EditProfile = () => {
       swal('Error', 'Something went wrong.', 'error');
     } else {
       swal('Success', 'Profile updated successfully', 'success');
-      navigate('/profile');
+      if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
+        navigate(`/admin-profile/${userProfileID}`);
+      } else {
+        navigate(`profile/${userProfileID}`);
+      }
     }
   };
 

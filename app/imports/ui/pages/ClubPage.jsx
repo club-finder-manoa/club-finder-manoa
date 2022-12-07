@@ -2,7 +2,8 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Image, Row, Col, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { Roles } from 'meteor/alanning:roles';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -94,6 +95,13 @@ const ClubPage = () => {
               </tr>
             </tbody>
           </Table>
+          {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+            <Row>
+              <Col className="d-flex justify-content-center py-3">
+                <Link to={`/edit-club/${club._id}`} className="btn btn-primary" id="edit-profile-btn">Edit Club</Link>
+              </Col>
+            </Row>
+          ) : ''}
         </div>
       ) : (
         <Col className="text-center mt-3">
