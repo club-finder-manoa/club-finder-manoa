@@ -32,6 +32,12 @@ const ProfileAdmin = () => {
       <Row>
         <Card id="cardProfile" className="pb-3">
           <Col className="text-center pt-3">
+            <Badge
+              className="rounded-pill"
+              style={{ fontSize: '30px', fontWeight: 600, paddingTop: '6px', paddingBottom: '6px' }}
+              bg="danger"
+            >ADMINISTRATOR ACCOUNT
+            </Badge>
             <h1 id="profileName">{userProfile.displayName}</h1>
             <p>{userProfile.email}</p>
             <hr />

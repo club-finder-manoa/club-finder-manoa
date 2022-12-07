@@ -31,8 +31,8 @@ const App = () => (
         <Route path="/sign-out" element={<SignOut />} />
         <Route path="/all-clubs" element={<ProtectedRoute><AllClubs /></ProtectedRoute>} />
         <Route path="/my-clubs" element={<ProtectedRoute><MyClubs /></ProtectedRoute>} />
-        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/profile/:_id" element={<AdminProtectedRoute><ProfileAdmin /></AdminProtectedRoute>} />
+        <Route path="/profile/:_id" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/admin_profile/:_id" element={<AdminProtectedRoute><ProfileAdmin /></AdminProtectedRoute>} />
         <Route path="/edit-profile/:_id" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminProtectedRoute><Admin /></AdminProtectedRoute>} />
         <Route path="/not-authorized" element={<NotAuthorized />} />
