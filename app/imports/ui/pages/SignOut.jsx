@@ -10,7 +10,7 @@ const SignOut = () => {
   document.title = 'Club Finder Mānoa - Sign Out';
 
   return (
-    <div style={{ height: '25vh' }}>
+    <div style={{ height: '25vh' }} className="backgroundImageTop">
       <Col id={PageIDs.signOutPage} className="text-center mt-3"><h2><b>You are signed out.</b></h2></Col>
     </div>
   );

@@ -6,15 +6,17 @@ const NotFound = () => {
   document.title = 'Club Finder Mānoa - Page Not Found';
 
   return (
-    <Container>
-      <Row className="justify-content-center">
-        <Col className="text-center mt-3">
-          <h3><b>Page Not Found</b></h3>
-          <br />
-          <Image className="mt-2" src="https://i.kym-cdn.com/photos/images/newsfeed/001/042/619/4ea.jpg" />
-        </Col>
-      </Row>
-    </Container>
+    <div className="backgroundImageTop">
+      <Container>
+        <Row className="justify-content-center">
+          <Col className="text-center mt-3">
+            <h3><b>Page Not Found</b></h3>
+            <br />
+            <Image className="mt-2" src="https://i.kym-cdn.com/photos/images/newsfeed/001/042/619/4ea.jpg" />
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 

@@ -323,97 +323,99 @@ const AllClubs = () => {
   }
 
   return (
-    <Container id={PageIDs.allClubsPage} style={pageStyle}>
-      <Row className="align-middle text-center">
-        <Col />
-        <Col className="d-flex flex-column justify-content-center mb-3">
-          <h1 style={{ color: '#16211b' }} className="my-2"><b>All Clubs</b></h1>
-          {`${filteredClubs.length} club`}{filteredClubs.length === 1 ? '' : 's'}
-        </Col>
-        <Col className="text-end my-auto">
-          <Button style={cardView ? viewButtonStyleSelected : viewButtonStyle} onClick={() => setCardView(true)} id="card-view-btn">
-            <Grid /> Card View
-          </Button>
-          <Button style={cardView ? viewButtonStyle : viewButtonStyleSelected} onClick={() => setCardView(false)} id="list-view-btn">
-            <List /> List View
-          </Button>
-        </Col>
-      </Row>
-      <Accordion className="mb-3">
-        <Accordion.Item eventKey="0">
-          <Accordion.Header id="search-option-drpdwn">
-            Search Options
-          </Accordion.Header>
-          <Accordion.Body>
-            <Row className="px-3 pb-3">
-              <Col className="d-flex justify-content-center">
-                <label htmlFor="Search by name">
-                  <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                    Name
-                  </Col>
-                  <div id="search-by-name">
+    <div className="backgroundImageTop">
+      <Container id={PageIDs.allClubsPage} style={pageStyle}>
+        <Row className="align-middle text-center">
+          <Col />
+          <Col className="d-flex flex-column justify-content-center mb-3">
+            <h1 style={{ color: '#16211b' }} className="my-2"><b>All Clubs</b></h1>
+            {`${filteredClubs.length} club`}{filteredClubs.length === 1 ? '' : 's'}
+          </Col>
+          <Col className="text-end my-auto">
+            <Button style={cardView ? viewButtonStyleSelected : viewButtonStyle} onClick={() => setCardView(true)} id="card-view-btn">
+              <Grid /> Card View
+            </Button>
+            <Button style={cardView ? viewButtonStyle : viewButtonStyleSelected} onClick={() => setCardView(false)} id="list-view-btn">
+              <List /> List View
+            </Button>
+          </Col>
+        </Row>
+        <Accordion className="mb-3">
+          <Accordion.Item eventKey="0">
+            <Accordion.Header id="search-option-drpdwn">
+              Search Options
+            </Accordion.Header>
+            <Accordion.Body>
+              <Row className="px-3 pb-3">
+                <Col className="d-flex justify-content-center">
+                  <label htmlFor="Search by name">
+                    <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+                      Name
+                    </Col>
+                    <div id="search-by-name">
+                      <input
+                        type="text"
+                        style={textBoxStyle}
+                        placeholder="Enter Club Name"
+                        onChange={e => setClubName(e.target.value)}
+                      />
+                    </div>
+                  </label>
+                </Col>
+                <Col className="d-flex justify-content-center">
+                  <label htmlFor="Search by description">
+                    <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+                      Description
+                    </Col>
                     <input
                       type="text"
                       style={textBoxStyle}
-                      placeholder="Enter Club Name"
-                      onChange={e => setClubName(e.target.value)}
+                      placeholder="Enter Club Description"
+                      onChange={e => setDescription(e.target.value)}
                     />
-                  </div>
-                </label>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <label htmlFor="Search by description">
-                  <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                    Description
-                  </Col>
-                  <input
-                    type="text"
-                    style={textBoxStyle}
-                    placeholder="Enter Club Description"
-                    onChange={e => setDescription(e.target.value)}
-                  />
-                </label>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                <label htmlFor="Search by type">
-                  <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                    Type
-                  </Col>
-                  <FormSelect
-                    id="filterDropdown"
-                    className="px-2"
-                    variant="secondary"
-                    title={clubType === '' ? 'Select a Club Type' : clubType}
-                    onChange={(e) => setClubType(e.target.value)}
-                  >
-                    {clubTypes.map((type, key) => <option value={type} key={key}>{type}</option>)}
-                  </FormSelect>
-                </label>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                <label htmlFor="Search by interest">
-                  <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                    Interests
-                  </Col>
-                  <FormSelect
-                    id="filterDropdown"
-                    className="px-2"
-                    variant="secondary"
-                    title={interest === '' ? 'Select an Interest' : interest}
-                    onChange={(e) => setInterest(e.target.value)}
-                  >
-                    {interests.map((inter, key) => <option value={inter} key={key}>{inter}</option>)}
-                  </FormSelect>
-                </label>
-              </Col>
-            </Row>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-      {ready ? displayClubs() : <LoadingSpinner />}
-    </Container>
+                  </label>
+                </Col>
+                <Col className="d-flex justify-content-center">
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label htmlFor="Search by type">
+                    <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+                      Type
+                    </Col>
+                    <FormSelect
+                      id="filterDropdown"
+                      className="px-2"
+                      variant="secondary"
+                      title={clubType === '' ? 'Select a Club Type' : clubType}
+                      onChange={(e) => setClubType(e.target.value)}
+                    >
+                      {clubTypes.map((type, key) => <option value={type} key={key}>{type}</option>)}
+                    </FormSelect>
+                  </label>
+                </Col>
+                <Col className="d-flex justify-content-center">
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                  <label htmlFor="Search by interest">
+                    <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+                      Interests
+                    </Col>
+                    <FormSelect
+                      id="filterDropdown"
+                      className="px-2"
+                      variant="secondary"
+                      title={interest === '' ? 'Select an Interest' : interest}
+                      onChange={(e) => setInterest(e.target.value)}
+                    >
+                      {interests.map((inter, key) => <option value={inter} key={key}>{inter}</option>)}
+                    </FormSelect>
+                  </label>
+                </Col>
+              </Row>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+        {ready ? displayClubs() : <LoadingSpinner />}
+      </Container>
+    </div>
   );
 };
 
