@@ -61,7 +61,7 @@ const NavBar = () => {
             ) : (
               <NavDropdown align="end" id={ComponentIDs.currentUserDropdown} title={<>{currentUser}<Image roundedCircle width="40px" src={ready ? userProfilePic : ''} className="ms-2" /></>}>
                 {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-                  <NavDropdown.Item id={ComponentIDs.currentUserDropdownProfile} as={NavLink} to={`/admin_profile/${userProfileID}`}>
+                  <NavDropdown.Item id={ComponentIDs.currentUserDropdownProfile} as={NavLink} to={`/admin-profile/${userProfileID}`}>
                     <PersonFill className="me-2 mb-1" />Profile
                   </NavDropdown.Item>
                 ) : (
