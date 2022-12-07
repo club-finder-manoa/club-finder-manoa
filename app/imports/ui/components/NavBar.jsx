@@ -10,13 +10,15 @@ import { Users } from '../../api/users/Users';
 
 const NavBar = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { currentUser, userProfilePic, ready } = useTracker(() => {
+  const { currentUser, userProfileID, userProfilePic, ready } = useTracker(() => {
     const sub1 = Meteor.subscribe(Users.userPublicationName);
     const rdy = sub1.ready();
     const userData = Users.collection.find({ email: Meteor.user()?.username }).fetch()[0];
+    const id = userData ? userData._id : '';
     const pic = userData ? userData.picture : '';
     return {
       currentUser: Meteor.user() ? Meteor.user().username : '',
+      userProfileID: id,
       userProfilePic: pic,
       ready: rdy,
     };
@@ -58,9 +60,16 @@ const NavBar = () => {
               </NavDropdown>
             ) : (
               <NavDropdown align="end" id={ComponentIDs.currentUserDropdown} title={<>{currentUser}<Image roundedCircle width="40px" src={ready ? userProfilePic : ''} className="ms-2" /></>}>
-                <NavDropdown.Item id={ComponentIDs.currentUserDropdownProfile} as={NavLink} to="/profile">
-                  <PersonFill className="me-2 mb-1" />Profile
-                </NavDropdown.Item>
+                {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+                  <NavDropdown.Item id={ComponentIDs.currentUserDropdownProfile} as={NavLink} to={`/admin_profile/${userProfileID}`}>
+                    <PersonFill className="me-2 mb-1" />Profile
+                  </NavDropdown.Item>
+                ) : (
+                  <NavDropdown.Item id={ComponentIDs.currentUserDropdownProfile} as={NavLink} to={`/profile/${userProfileID}`}>
+                    <PersonFill className="me-2 mb-1" />Profile
+                  </NavDropdown.Item>
+                )}
+
                 <NavDropdown.Item id={ComponentIDs.currentUserDropdownSignOut} as={NavLink} to="/sign-out">
                   <BoxArrowRight className="me-2 mb-1" />Sign out
                 </NavDropdown.Item>
