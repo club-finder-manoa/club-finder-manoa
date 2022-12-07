@@ -20,7 +20,7 @@ const Profile = () => {
     };
   }, []);
 
-  document.title = 'Club Finder Mānoa - Profile';
+  document.title = 'Club Finder Mānoa - User Profile';
 
   return (ready ? (
     <Container id={PageIDs.profilePage} fluid className="py-3 backgroundImageTop">
