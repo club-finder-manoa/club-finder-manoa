@@ -8,7 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
 import swal from 'sweetalert';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ChangePwModal from '../components/ChangePwModal';
@@ -164,6 +164,7 @@ const EditProfile = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = useParams();
   const navigate = useNavigate();
+  const path = generatePath('/profile/:_id', { _id });
 
   document.title = 'Club Finder Mānoa - Profile';
 
@@ -184,7 +185,7 @@ const EditProfile = () => {
       swal('Error', 'Something went wrong.', 'error');
     } else {
       swal('Success', 'Profile updated successfully', 'success');
-      navigate('/profile');
+      navigate(path);
     }
   };
 
@@ -236,7 +237,7 @@ const EditProfile = () => {
             </Row>
             <Row className="py-3">
               <Col className="d-flex justify-content-end">
-                <Button id="backButton" onClick={() => navigate('/profile')}>
+                <Button id="backButton" onClick={() => navigate(path)}>
                   Discard Changes
                 </Button>
               </Col>
