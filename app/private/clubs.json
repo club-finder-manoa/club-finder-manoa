@@ -76,6 +76,8 @@
       "mainPhoto": "/images/AmericanMarketingAssociation.png",
       "website": "http://amauhm.org/amauhm-1",
       "tags": ["Marketing"],
+      "meetingTimes": ["0", "1", "2", "3", "4", "5", "6"],
+      "meetingLocations": ["0", "1", "2", "3", "4", "5", "6"],
       "contactName": "Aaron Goo",
       "contactEmail": "aarong2@hawaii.edu",
       "description": "We are a marketing club that strives to push our members to grow socially, philanthropically, and professionally. "

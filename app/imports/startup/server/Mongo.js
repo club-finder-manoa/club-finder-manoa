@@ -65,8 +65,8 @@ Meteor.methods({
   },
 });
 
-function addClub({ clubName, clubType, mainPhoto, description, tags, meetingInfo, contactName, contactEmail, photos, admins }) {
-  Clubs.collection.insert({ clubName, clubType, mainPhoto, description, tags, meetingInfo, contactName, contactEmail, photos, admins });
+function addClub({ clubName, clubType, mainPhoto, description, tags, meetingInfo, meetingTimes, meetingLocations, contactName, contactEmail, photos, admins }) {
+  Clubs.collection.insert({ clubName, clubType, mainPhoto, description, tags, meetingInfo, meetingTimes, meetingLocations, contactName, contactEmail, photos, admins });
 }
 
 /** Init clubs in DB */

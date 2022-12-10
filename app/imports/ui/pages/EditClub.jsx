@@ -65,7 +65,7 @@ const EditClub = () => {
               </Col>
               <Col xs={8} className="d-flex flex-column justify-content-center">
                 <TextField id={ComponentIDs.clubName} name="clubName" showInlineError placeholder={club.clubName} />
-                Club Type
+                Current Club Type : {club.clubType}
                 <FormSelect
                   id={ComponentIDs.clubType}
                   as="select"
@@ -89,9 +89,39 @@ const EditClub = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>{club.meetingInfo}</td>
-                  <td />
-                  <td />
+                  <td>Sunday</td>
+                  <td><TextField id={ComponentIDs.mainPhoto} name="meetingTimes[]" showInlineError placeholder={club.meetingTimes[0]} /></td>
+                  <td>{club.meetingLocations[0]}</td>
+                </tr>
+                <tr>
+                  <td>Monday</td>
+                  <td>{club.meetingTimes[1]}</td>
+                  <td>{club.meetingLocations[1]}</td>
+                </tr>
+                <tr>
+                  <td>Tuesday</td>
+                  <td>{club.meetingTimes[2]}</td>
+                  <td>{club.meetingLocations[2]}</td>
+                </tr>
+                <tr>
+                  <td>Wednesday</td>
+                  <td>{club.meetingTimes[3]}</td>
+                  <td>{club.meetingLocations[3]}</td>
+                </tr>
+                <tr>
+                  <td>Thursday</td>
+                  <td>{club.meetingTimes[4]}</td>
+                  <td>{club.meetingLocations[4]}</td>
+                </tr>
+                <tr>
+                  <td>Friday</td>
+                  <td>{club.meetingTimes[5]}</td>
+                  <td>{club.meetingLocations[5]}</td>
+                </tr>
+                <tr>
+                  <td>Saturday</td>
+                  <td>{club.meetingTimes[6]}</td>
+                  <td>{club.meetingLocations[6]}</td>
                 </tr>
               </tbody>
             </Table>
