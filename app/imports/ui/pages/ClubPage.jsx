@@ -2,7 +2,8 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Image, Row, Col, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { Roles } from 'meteor/alanning:roles';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -12,7 +13,7 @@ import RemoveClubModal from '../components/RemoveClubModal';
 const ClubPage = () => {
   const { _id } = useParams();
 
-  const { ready, club, clubSaved } = useTracker(() => {
+  const { ready, club, user, clubSaved } = useTracker(() => {
     const sub1 = Meteor.subscribe(Clubs.userPublicationName);
     const sub2 = Meteor.subscribe(Users.userPublicationName);
     const oneClub = Clubs.collection.find({ _id: _id }).fetch()[0];
@@ -21,6 +22,7 @@ const ClubPage = () => {
     return {
       ready: sub1.ready() && sub2.ready(),
       club: oneClub,
+      user: usr,
       clubSaved: saved,
     };
   }, false);
@@ -56,7 +58,9 @@ const ClubPage = () => {
 
             <Col xs={8} className="d-flex flex-column justify-content-center">
               <h2><b>{club.clubName}</b></h2>
-              <h5 className="mb-3">{club.clubType}</h5>
+              <h3 className="mb-3">{club.clubType} Club</h3>
+              <h5 className="mb-3">Visit us at {club.website}</h5>
+              <h5 className="text-start">About us:</h5>
               <p className="text-start">{club.description}</p>
             </Col>
           </Row>
@@ -72,9 +76,39 @@ const ClubPage = () => {
             </thead>
             <tbody>
               <tr>
-                <td>{club.meetingInfo}</td>
-                <td />
-                <td />
+                <td>Sunday</td>
+                <td>{club.meetingTimeSunday}</td>
+                <td>{club.meetingLocationSunday}</td>
+              </tr>
+              <tr>
+                <td>Monday</td>
+                <td>{club.meetingTimeMonday}</td>
+                <td>{club.meetingLocationMonday}</td>
+              </tr>
+              <tr>
+                <td>Tuesday</td>
+                <td>{club.meetingTimeTuesday}</td>
+                <td>{club.meetingLocationTuesday}</td>
+              </tr>
+              <tr>
+                <td>Wednesday</td>
+                <td>{club.meetingTimeWednesday}</td>
+                <td>{club.meetingLocationWednesday}</td>
+              </tr>
+              <tr>
+                <td>Thursday</td>
+                <td>{club.meetingTimeThursday}</td>
+                <td>{club.meetingLocationThursday}</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>{club.meetingTimeFriday}</td>
+                <td>{club.meetingLocationFriday}</td>
+              </tr>
+              <tr>
+                <td>Saturday</td>
+                <td>{club.meetingTimeSaturday}</td>
+                <td>{club.meetingLocationSaturday}</td>
               </tr>
             </tbody>
           </Table>
@@ -94,6 +128,13 @@ const ClubPage = () => {
               </tr>
             </tbody>
           </Table>
+          {(Roles.userIsInRole(Meteor.userId(), 'admin') || user.adminForClubs.includes(club.clubName)) ? (
+            <Row>
+              <Col className="d-flex justify-content-center py-3">
+                <Link to={`/edit-club/${club._id}`} className="btn btn-primary" id="edit-profile-btn">Edit Club</Link>
+              </Col>
+            </Row>
+          ) : ''}
         </div>
       ) : (
         <Col className="text-center mt-3">

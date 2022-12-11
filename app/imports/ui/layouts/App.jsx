@@ -18,6 +18,7 @@ import ProfileAdmin from '../pages/ProfileAdmin';
 import EditProfile from '../pages/EditProfile';
 import Admin from '../pages/Admin';
 import ClubPage from '../pages/ClubPage';
+import EditClub from '../pages/EditClub';
 
 /* Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -37,6 +38,7 @@ const App = () => (
         <Route path="/admin" element={<AdminProtectedRoute><Admin /></AdminProtectedRoute>} />
         <Route path="/not-authorized" element={<NotAuthorized />} />
         <Route path="/club/:_id" element={<ProtectedRoute><ClubPage /></ProtectedRoute>} />
+        <Route path="/edit-club/:_id" element={<ProtectedRoute><EditClub /></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
