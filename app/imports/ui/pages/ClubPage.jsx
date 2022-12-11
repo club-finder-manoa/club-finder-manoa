@@ -57,7 +57,9 @@ const ClubPage = () => {
 
             <Col xs={8} className="d-flex flex-column justify-content-center">
               <h2><b>{club.clubName}</b></h2>
-              <h5 className="mb-3">{club.clubType}</h5>
+              <h3 className="mb-3">{club.clubType} Club</h3>
+              <h5 className="mb-3">Visit us at {club.website}</h5>
+              <h5 className="text-start">About us:</h5>
               <p className="text-start">{club.description}</p>
             </Col>
           </Row>
@@ -73,9 +75,39 @@ const ClubPage = () => {
             </thead>
             <tbody>
               <tr>
-                <td>{club.meetingInfo}</td>
-                <td />
-                <td />
+                <td>Sunday</td>
+                <td>{club.meetingTimeSunday}</td>
+                <td>{club.meetingLocationSunday}</td>
+              </tr>
+              <tr>
+                <td>Monday</td>
+                <td>{club.meetingTimeMonday}</td>
+                <td>{club.meetingLocationMonday}</td>
+              </tr>
+              <tr>
+                <td>Tuesday</td>
+                <td>{club.meetingTimeTuesday}</td>
+                <td>{club.meetingLocationTuesday}</td>
+              </tr>
+              <tr>
+                <td>Wednesday</td>
+                <td>{club.meetingTimeWednesday}</td>
+                <td>{club.meetingLocationWednesday}</td>
+              </tr>
+              <tr>
+                <td>Thursday</td>
+                <td>{club.meetingTimeThursday}</td>
+                <td>{club.meetingLocationThursday}</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>{club.meetingTimeFriday}</td>
+                <td>{club.meetingLocationFriday}</td>
+              </tr>
+              <tr>
+                <td>Saturday</td>
+                <td>{club.meetingTimeSaturday}</td>
+                <td>{club.meetingLocationSaturday}</td>
               </tr>
             </tbody>
           </Table>
