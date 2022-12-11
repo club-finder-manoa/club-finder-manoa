@@ -1,17 +1,161 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Image, Row, Col, Table, FormSelect } from 'react-bootstrap';
+import { Container, Image, Row, Col, Table, FormSelect, Badge, Button, Modal, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AutoForm, ErrorsField, HiddenField, LongTextField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
+import { Plus, X } from 'react-bootstrap-icons';
+import PropTypes from 'prop-types';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
+import { interests } from '../utilities/interests';
 
 const bridge = new SimpleSchema2Bridge(Clubs.schema);
+
+const AddTagModal = ({ user }) => {
+  const [show, setShow] = useState(false);
+  const [interest, setInterest] = useState('');
+  const email = user.email;
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const addEm = () => {
+    let ints = Users.collection.find({ email }).fetch()[0].interests;
+    if (ints && ints.includes(interest)) {
+      // eslint-disable-next-line no-alert
+      swal(`Already saved "${interest}" as an interest.`);
+    } else if (ints) {
+      ints.push(interest);
+    } else {
+      ints = [interest];
+    }
+    Meteor.call('updateInterests', { email, interests: ints });
+    setInterest('');
+    handleClose();
+  };
+
+  const plusButtonStyle = {
+    borderWidth: 0,
+    fontSize: '15px',
+    fontWeight: 500,
+    borderRadius: '20px',
+    paddingTop: '4px',
+    paddingBottom: '4px',
+    paddingLeft: '6px',
+    paddingRight: '6px',
+  };
+
+  return (
+    <>
+      <Button id="add-interest-btn" style={plusButtonStyle} onClick={handleShow}>
+        &nbsp;&nbsp;Add<Plus style={{ paddingBottom: '2px', fontSize: '24px' }} />
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Add New Interest</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="pb-4">
+            <Form.Group controlId="selectInterest">
+              <Form.Label>Select an interest</Form.Label>
+              <Form.Control as="select" value={interest} onChange={e => setInterest(e.target.value)}>
+                {interests.map((inter) => <option key={inter}>{inter}</option>)}
+              </Form.Control>
+            </Form.Group>
+            <br />
+            {interest !== '' ? <span>Add <b>{interest}</b> to interests?</span> : ''}
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button id="confirm-add-interest" variant="success" onClick={() => addEm()}>
+              Confirm
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+AddTagModal.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    adminForClubs: PropTypes.arrayOf(String),
+  }).isRequired,
+};
+
+// Popup modal to confirm removal of admin status
+const RemoveTagModal = ({ user, interestToRemove }) => {
+  const [show, setShow] = useState(false);
+  const email = user.email;
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const removeInterest = () => {
+    const ints = Users.collection.find({ email }).fetch()[0].interests;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const i in ints) {
+      if (ints[i] === interestToRemove) {
+        ints.splice(i, 1);
+      }
+    }
+    Meteor.call('updateInterests', { email, interests: ints });
+    handleClose();
+  };
+
+  const xButtonStyle = {
+    padding: 0,
+    fontSize: '20px',
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    paddingBottom: '5px',
+  };
+
+  return (
+    <>
+      <Button style={xButtonStyle} onClick={handleShow}>
+        <X />
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Remove Interest</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to remove <b>{interestToRemove}</b> from your interests?
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button variant="danger" onClick={() => removeInterest()}>
+              Remove
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+RemoveTagModal.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+  }).isRequired,
+  interestToRemove: PropTypes.string.isRequired,
+};
 
 const EditClub = () => {
   const { _id } = useParams();
@@ -80,7 +224,23 @@ const EditClub = () => {
                 <LongTextField id={ComponentIDs.clubDescription} name="description" showInlineError placeholder={club.description} />
               </Col>
             </Row>
-
+            <Row className="mt-2 mb-4">
+              <p>Tags</p>
+              <Col className="d-flex">
+                {club.tags ?
+                  club.tags.map((tag, index) => (
+                    <Badge
+                      key={index}
+                      className="rounded-pill"
+                      style={{ fontSize: '14px', fontWeight: 600, paddingTop: '1px', paddingBottom: 0, paddingStart: '15px', paddingEnd: '8px' }}
+                      bg="secondary"
+                    >&nbsp;{tag} <RemoveTagModal interestToRemove={tag} user={club} />
+                    </Badge>
+                  ))
+                  : ''}
+                <AddTagModal user={club} />
+              </Col>
+            </Row>
             <h5><b>Meeting Times and Location</b></h5>
             <Table striped bordered hover size="sm">
               <thead>
