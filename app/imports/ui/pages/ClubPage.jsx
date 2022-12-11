@@ -13,7 +13,7 @@ import RemoveClubModal from '../components/RemoveClubModal';
 const ClubPage = () => {
   const { _id } = useParams();
 
-  const { ready, club, clubSaved } = useTracker(() => {
+  const { ready, club, user, clubSaved } = useTracker(() => {
     const sub1 = Meteor.subscribe(Clubs.userPublicationName);
     const sub2 = Meteor.subscribe(Users.userPublicationName);
     const oneClub = Clubs.collection.find({ _id: _id }).fetch()[0];
@@ -22,6 +22,7 @@ const ClubPage = () => {
     return {
       ready: sub1.ready() && sub2.ready(),
       club: oneClub,
+      user: usr,
       clubSaved: saved,
     };
   }, false);
@@ -127,6 +128,13 @@ const ClubPage = () => {
               </tr>
             </tbody>
           </Table>
+          {user.adminForClubs.includes(club.clubName) ? (
+            <Row>
+              <Col className="d-flex justify-content-center py-3">
+                <Link to={`/edit-club/${club._id}`} className="btn btn-primary" id="edit-profile-btn">Edit Club</Link>
+              </Col>
+            </Row>
+          ) : 'Didnt Work'}
           {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
             <Row>
               <Col className="d-flex justify-content-center py-3">
