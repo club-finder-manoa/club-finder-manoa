@@ -39,8 +39,10 @@ Meteor.methods({
     return Users.collection.update({ email: email }, { $set: { displayName, aboutMe, picture: pic } });
   },
 
-  updateClub: function ({ _id, mainPhoto, clubName, clubType, description, contactName, contactEmail }) {
-    return Clubs.collection.update({ _id: _id }, { $set: { mainPhoto, clubName, clubType, description, contactName, contactEmail } });
+  // eslint-disable-next-line max-len
+  updateClub: function ({ _id, clubName, clubType, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail }) {
+    // eslint-disable-next-line max-len
+    return Clubs.collection.update({ _id: _id }, { $set: { clubName, clubType, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail } });
   },
 
   updateInterests: function ({ email, interests }) {
@@ -65,8 +67,10 @@ Meteor.methods({
   },
 });
 
-function addClub({ clubName, clubType, mainPhoto, description, tags, meetingInfo, meetingTimes, meetingLocations, contactName, contactEmail, photos, admins }) {
-  Clubs.collection.insert({ clubName, clubType, mainPhoto, description, tags, meetingInfo, meetingTimes, meetingLocations, contactName, contactEmail, photos, admins });
+// eslint-disable-next-line max-len
+function addClubInit({ clubName, clubType, mainPhoto, description, website, tags, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail, admins }) {
+  // eslint-disable-next-line max-len
+  Clubs.collection.insert({ clubName, clubType, mainPhoto, description, website, tags, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail, admins });
 }
 
 /** Init clubs in DB */
@@ -74,7 +78,7 @@ if (Clubs.collection.find().count() === 0) {
   if (Meteor.settings.loadAssetsFile) {
     console.log('Loading clubs...');
     const clubData = JSON.parse(Assets.getText('clubs.json'));
-    clubData.clubs.map(club => addClub(club));
+    clubData.clubs.map(club => addClubInit(club));
     console.log(`Loaded ${clubData.clubs.length} clubs!`);
   } else {
     console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');

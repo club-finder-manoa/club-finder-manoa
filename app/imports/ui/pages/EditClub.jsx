@@ -39,8 +39,10 @@ const EditClub = () => {
 
   /* On submit, insert the data. */
   const submit = (data) => {
-    const { mainPhoto, clubName, description, contactName, contactEmail } = data;
-    if (Meteor.call('updateClub', { _id, mainPhoto, clubName, clubType, description, contactName, contactEmail })) {
+    // eslint-disable-next-line max-len
+    const { clubName, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail } = data;
+    // eslint-disable-next-line max-len
+    if (Meteor.call('updateClub', { _id, clubName, clubType, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail })) {
       swal('Error', 'Something went wrong.', 'error');
     } else {
       swal('Success', 'Profile updated successfully', 'success');
@@ -74,7 +76,8 @@ const EditClub = () => {
                 >
                   {clubTypes.map((type, key) => <option value={type} key={key}>{type}</option>)}
                 </FormSelect>
-                <LongTextField id={ComponentIDs.clubDescription} className="py-3" name="description" showInlineError placeholder={club.description} />
+                <TextField className="pt-3" name="website" showInlineError placeholder={club.website} />
+                <LongTextField id={ComponentIDs.clubDescription} name="description" showInlineError placeholder={club.description} />
               </Col>
             </Row>
 
@@ -90,38 +93,66 @@ const EditClub = () => {
               <tbody>
                 <tr>
                   <td>Sunday</td>
-                  <td><TextField id={ComponentIDs.mainPhoto} name="meetingTimes[]" showInlineError placeholder={club.meetingTimes[0]} /></td>
-                  <td>{club.meetingLocations[0]}</td>
+                  <td>
+                    <TextField name="meetingTimeSunday" showInlineError placeholder={club.meetingTimeSunday} />
+                  </td>
+                  <td>
+                    <TextField name="meetingLocationSunday" showInlineError placeholder={club.meetingLocationSunday} />
+                  </td>
                 </tr>
                 <tr>
                   <td>Monday</td>
-                  <td>{club.meetingTimes[1]}</td>
-                  <td>{club.meetingLocations[1]}</td>
+                  <td>
+                    <TextField name="meetingTimeMonday" showInlineError placeholder={club.meetingTimeMonday} />
+                  </td>
+                  <td>
+                    <TextField name="meetingLocationMonday" showInlineError placeholder={club.meetingLocationMonday} />
+                  </td>
                 </tr>
                 <tr>
                   <td>Tuesday</td>
-                  <td>{club.meetingTimes[2]}</td>
-                  <td>{club.meetingLocations[2]}</td>
+                  <td>
+                    <TextField name="meetingTimeTuesday" showInlineError placeholder={club.meetingTimeTuesday} />
+                  </td>
+                  <td>
+                    <TextField name="meetingLocationTuesday" showInlineError placeholder={club.meetingLocationTuesday} />
+                  </td>
                 </tr>
                 <tr>
                   <td>Wednesday</td>
-                  <td>{club.meetingTimes[3]}</td>
-                  <td>{club.meetingLocations[3]}</td>
+                  <td>
+                    <TextField name="meetingTimeWednesday" showInlineError placeholder={club.meetingTimeWednesday} />
+                  </td>
+                  <td>
+                    <TextField name="meetingLocationWednesday" showInlineError placeholder={club.meetingLocationWednesday} />
+                  </td>
                 </tr>
                 <tr>
                   <td>Thursday</td>
-                  <td>{club.meetingTimes[4]}</td>
-                  <td>{club.meetingLocations[4]}</td>
+                  <td>
+                    <TextField name="meetingTimeThursday" showInlineError placeholder={club.meetingTimeThursday} />
+                  </td>
+                  <td>
+                    <TextField name="meetingLocationThursday" showInlineError placeholder={club.meetingLocationThursday} />
+                  </td>
                 </tr>
                 <tr>
                   <td>Friday</td>
-                  <td>{club.meetingTimes[5]}</td>
-                  <td>{club.meetingLocations[5]}</td>
+                  <td>
+                    <TextField name="meetingTimeFriday" showInlineError placeholder={club.meetingTimeFriday} />
+                  </td>
+                  <td>
+                    <TextField name="meetingLocationFriday" showInlineError placeholder={club.meetingLocationFriday} />
+                  </td>
                 </tr>
                 <tr>
                   <td>Saturday</td>
-                  <td>{club.meetingTimes[6]}</td>
-                  <td>{club.meetingLocations[6]}</td>
+                  <td>
+                    <TextField name="meetingTimeSaturday" showInlineError placeholder={club.meetingTimeSaturday} />
+                  </td>
+                  <td>
+                    <TextField name="meetingLocationSaturday" showInlineError placeholder={club.meetingLocationSaturday} />
+                  </td>
                 </tr>
               </tbody>
             </Table>
