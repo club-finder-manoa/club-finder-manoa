@@ -157,7 +157,6 @@ const Profile = () => {
   const { _id } = useParams();
 
   const { ready, userProfile } = useTracker(() => {
-    // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(Users.userPublicationName);
     const rdy = sub1.ready();
     const userData = _id ? Users.collection.findOne({ _id }) : Users.collection.findOne({ email: Meteor.user()?.username });
@@ -190,36 +189,57 @@ const Profile = () => {
             <hr />
             <span className="small">Interests:</span>
             <br />
-
-            <Row className="mt-2 mb-4">
-              <Col className="justify-content-center d-flex">
-                {userProfile.interests ?
-                  userProfile.interests.map((interest, index) => (
-                    <Badge
-                      key={index}
-                      className="rounded-pill"
-                      style={{ fontSize: '14px', fontWeight: 600, paddingTop: '1px', paddingBottom: 0, paddingStart: '15px', paddingEnd: '8px' }}
-                      bg="secondary"
-                    >&nbsp;{interest} <RemoveInterestModal interestToRemove={interest} user={userProfile} />
-                    </Badge>
-                  ))
-                  : ''}
-                <AddInterestModal user={userProfile} />
-              </Col>
-            </Row>
+            {userProfile.email === Meteor.user()?.username ? (
+              <Row className="mt-2 mb-4">
+                <Col className="justify-content-center d-flex">
+                  {userProfile.interests ?
+                    userProfile.interests.map((interest, index) => (
+                      <Badge
+                        key={index}
+                        className="rounded-pill"
+                        style={{ fontSize: '14px', fontWeight: 600, paddingTop: '1px', paddingBottom: 0, paddingStart: '15px', paddingEnd: '8px' }}
+                        bg="secondary"
+                      >&nbsp;{interest} <RemoveInterestModal interestToRemove={interest} user={userProfile} />
+                      </Badge>
+                    ))
+                    : ''}
+                  <AddInterestModal user={userProfile} />
+                </Col>
+              </Row>
+            ) : (
+              <Row className="mt-2 mb-3">
+                <Col>
+                  {userProfile.interests ?
+                    userProfile.interests.map((interest, index) => (
+                      <Badge
+                        key={index}
+                        className="rounded-pill"
+                        style={{ fontSize: '16px', fontWeight: 600, paddingTop: '8px', paddingBottom: '8px' }}
+                        bg="secondary"
+                      >{interest}
+                      </Badge>
+                    ))
+                    : ''}
+                </Col>
+              </Row>
+            )}
           </Col>
         </Card>
       </Row>
-      <Row>
-        <Col className="d-flex justify-content-center py-3">
-          <Link to="/edit-profile" className="btn btn-primary" id="edit-profile-btn">Edit Profile</Link>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="d-flex justify-content-center pb-3">
-          <ChangePwModal />
-        </Col>
-      </Row>
+      {userProfile.email === Meteor.user()?.username ? (
+        <div>
+          <Row>
+            <Col className="d-flex justify-content-center py-3">
+              <Link to="/edit-profile" className="btn btn-primary" id="edit-profile-btn">Edit Profile</Link>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="d-flex justify-content-center pb-3">
+              <ChangePwModal />
+            </Col>
+          </Row>
+        </div>
+      ) : ''}
     </Container>
   ) : <LoadingSpinner />);
 };
