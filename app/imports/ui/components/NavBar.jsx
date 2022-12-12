@@ -14,10 +14,9 @@ const NavBar = () => {
     const sub1 = Meteor.subscribe(Users.userPublicationName);
     const rdy = sub1.ready();
     const userData = Users.collection.findOne({ email: Meteor.user()?.username });
-    const pic = userData ? userData.picture : '';
     return {
-      currentUser: Meteor.user() ? Meteor.user().username : '',
-      userProfilePic: pic,
+      currentUser: userData ? userData.displayName : '',
+      userProfilePic: userData ? userData.picture : '',
       ready: rdy,
     };
   }, []);
@@ -48,21 +47,26 @@ const NavBar = () => {
             : '' }
           <Nav className="justify-content-end">
             {currentUser === '' ? (
-              <NavDropdown align="end" id={ComponentIDs.loginDropdown} title="Login">
-                <NavDropdown.Item id={ComponentIDs.loginDropdownSignIn} as={NavLink} to="/sign-in">
+              <NavDropdown align="end" id={ComponentIDs.loginDropdown} style={{ fontWeight: 425 }} title="Login">
+                <NavDropdown.Item id={ComponentIDs.loginDropdownSignIn} style={{ fontWeight: 425 }} as={NavLink} to="/sign-in">
                   <PersonFill className="me-2 mb-1" />Sign in
                 </NavDropdown.Item>
-                <NavDropdown.Item id={ComponentIDs.loginDropdownSignUp} as={NavLink} to="/sign-up">
+                <NavDropdown.Item id={ComponentIDs.loginDropdownSignUp} style={{ fontWeight: 425 }} as={NavLink} to="/sign-up">
                   <PersonPlusFill className="me-2 mb-1" />Sign up
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <NavDropdown align="end" id={ComponentIDs.currentUserDropdown} title={<>{currentUser}<Image roundedCircle width="40px" src={ready ? userProfilePic : ''} className="ms-2" /></>}>
-                <NavDropdown.Item id={ComponentIDs.currentUserDropdownProfile} as={NavLink} to="/profile">
+              <NavDropdown
+                align="end"
+                id={ComponentIDs.currentUserDropdown}
+                style={{ fontWeight: 450 }}
+                title={<>{currentUser}<Image roundedCircle width="40px" src={ready ? userProfilePic : ''} className="ms-2 mb-1" /></>}
+              >
+                <NavDropdown.Item id={ComponentIDs.currentUserDropdownProfile} style={{ fontWeight: 425 }} as={NavLink} to="/profile">
                   <PersonFill className="me-2 mb-1" />Profile
                 </NavDropdown.Item>
 
-                <NavDropdown.Item id={ComponentIDs.currentUserDropdownSignOut} as={NavLink} to="/sign-out">
+                <NavDropdown.Item id={ComponentIDs.currentUserDropdownSignOut} style={{ fontWeight: 425 }} as={NavLink} to="/sign-out">
                   <BoxArrowRight className="me-2 mb-1" />Sign out
                 </NavDropdown.Item>
               </NavDropdown>
