@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Image, Row, Col, Table, FormSelect, Badge } from 'react-bootstrap';
+import { Container, Image, Row, Col, Table, Badge } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useNavigate, useParams } from 'react-router-dom';
-import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField, SelectField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
 
-const bridge = new SimpleSchema2Bridge(Clubs.schema);
-
 const EditClub = () => {
   const { _id } = useParams();
   const navigate = useNavigate();
-  const clubTypes = ['Academic/Professional', 'Ethnic/Cultural', 'Fraternity/Sorority', 'Honorary Society', 'Leisure/Recreational', 'Political', 'Service', 'Spiritual/Religious', 'Sports/Leisure', 'Student Affairs'];
-  const [clubType, setClubType] = useState('');
+  const clubTypes = ['Academic/Professional', 'Ethnic/Cultural', 'Fraternity/Sorority', 'Honorary Society', 'Leisure/Recreational',
+    'Political', 'Service', 'Spiritual/Religious', 'Sports/Leisure', 'Student Affairs'];
 
   const { ready, club, oldClubName } = useTracker(() => {
     const sub1 = Meteor.subscribe(Clubs.userPublicationName);
@@ -39,17 +38,47 @@ const EditClub = () => {
     }
   }
 
+  const schema = new SimpleSchema({
+    clubName: String,
+    clubType: { type: String, allowedValues: clubTypes },
+    mainPhoto: String,
+    description: String,
+    website: { type: String, optional: true },
+    meetingTimeSunday: { type: String, optional: true },
+    meetingLocationSunday: { type: String, optional: true },
+    meetingTimeMonday: { type: String, optional: true },
+    meetingLocationMonday: { type: String, optional: true },
+    meetingTimeTuesday: { type: String, optional: true },
+    meetingLocationTuesday: { type: String, optional: true },
+    meetingTimeWednesday: { type: String, optional: true },
+    meetingLocationWednesday: { type: String, optional: true },
+    meetingTimeThursday: { type: String, optional: true },
+    meetingLocationThursday: { type: String, optional: true },
+    meetingTimeFriday: { type: String, optional: true },
+    meetingLocationFriday: { type: String, optional: true },
+    meetingTimeSaturday: { type: String, optional: true },
+    meetingLocationSaturday: { type: String, optional: true },
+    contactName: String,
+    contactEmail: String,
+  });
+  const bridge = new SimpleSchema2Bridge(schema);
+
   /* On submit, insert the data. */
   const submit = (data) => {
     // eslint-disable-next-line max-len
-    const { clubName, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail } = data;
+    const { clubName, clubType, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday,
+      meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday,
+      meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail } = data;
 
     Object.values(club.interestedUsers).forEach(intUser => {
       Meteor.call('removeClub', { email: intUser, clubName: oldClubName });
     });
 
     // eslint-disable-next-line max-len
-    Meteor.call('updateClub', { _id, clubName, clubType, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail });
+    Meteor.call('updateClub', { _id, clubName, clubType, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday,
+      meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday,
+      meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday,
+      contactName, contactEmail });
 
     if (Object.values(club.interestedUsers).forEach(intUser => {
       Meteor.call('saveClub', { email: intUser, clubName: clubName });
@@ -78,15 +107,13 @@ const EditClub = () => {
               </Col>
               <Col xs={8} className="d-flex flex-column justify-content-center">
                 <TextField id={ComponentIDs.clubName} name="clubName" showInlineError placeholder={club.clubName} />
-                Current Club Type : {club.clubType}
-                <FormSelect
+                <SelectField
                   id={ComponentIDs.clubType}
                   as="select"
                   name="clubType"
-                  onChange={(e) => setClubType(e.target.value)}
                 >
                   {clubTypes.map((type, key) => <option value={type} key={key}>{type}</option>)}
-                </FormSelect>
+                </SelectField>
                 <TextField className="pt-3" name="website" showInlineError placeholder={club.website} />
                 <LongTextField id={ComponentIDs.clubDescription} name="description" showInlineError placeholder={club.description} />
               </Col>
