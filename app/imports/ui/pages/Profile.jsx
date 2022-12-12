@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Badge, Button, Card, Col, Container, Form, Image, Modal, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Plus, X } from 'react-bootstrap-icons';
 import PropTypes from 'prop-types';
@@ -154,11 +154,13 @@ RemoveInterestModal.propTypes = {
 };
 
 const Profile = () => {
+  const { _id } = useParams();
+
   const { ready, userProfile } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(Users.userPublicationName);
     const rdy = sub1.ready();
-    const userData = Users.collection.find({ email: Meteor.user()?.username }).fetch()[0];
+    const userData = _id ? Users.collection.findOne({ _id }) : Users.collection.findOne({ email: Meteor.user()?.username });
     return {
       userProfile: userData,
       ready: rdy,
@@ -210,7 +212,7 @@ const Profile = () => {
       </Row>
       <Row>
         <Col className="d-flex justify-content-center py-3">
-          <Link to={`/edit-profile/${userProfile._id}`} className="btn btn-primary" id="edit-profile-btn">Edit Profile</Link>
+          <Link to="/edit-profile" className="btn btn-primary" id="edit-profile-btn">Edit Profile</Link>
         </Col>
       </Row>
       <Row>

@@ -14,7 +14,6 @@ import NotAuthorized from '../pages/NotAuthorized';
 import AllClubs from '../pages/AllClubs';
 import MyClubs from '../pages/MyClubs';
 import Profile from '../pages/Profile';
-import ProfileAdmin from '../pages/ProfileAdmin';
 import EditProfile from '../pages/EditProfile';
 import Admin from '../pages/Admin';
 import ClubPage from '../pages/ClubPage';
@@ -32,9 +31,9 @@ const App = () => (
         <Route path="/sign-out" element={<SignOut />} />
         <Route path="/all-clubs" element={<ProtectedRoute><AllClubs /></ProtectedRoute>} />
         <Route path="/my-clubs" element={<ProtectedRoute><MyClubs /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/profile/:_id" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/admin-profile/:_id" element={<AdminProtectedRoute><ProfileAdmin /></AdminProtectedRoute>} />
-        <Route path="/edit-profile/:_id" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
+        <Route path="/edit-profile" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminProtectedRoute><Admin /></AdminProtectedRoute>} />
         <Route path="/not-authorized" element={<NotAuthorized />} />
         <Route path="/club/:_id" element={<ProtectedRoute><ClubPage /></ProtectedRoute>} />

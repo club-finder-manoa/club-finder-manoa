@@ -71,7 +71,7 @@ const SignUp = () => {
 
   // if correct authentication, redirect to from: page instead of signup screen
   if (redirectToReferer) {
-    return (<Navigate to="/profile" />);
+    return (<Navigate to="/edit-profile" />);
   }
 
   document.title = 'Club Finder Mānoa - Sign Up';
