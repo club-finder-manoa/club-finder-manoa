@@ -39,8 +39,8 @@ const AddTagModal = ({ club }) => {
 
   const plusButtonStyle = {
     borderWidth: 0,
-    fontSize: '15px',
-    fontWeight: 500,
+    fontSize: '16px',
+    fontWeight: 600,
     borderRadius: '20px',
     paddingTop: '4px',
     paddingBottom: '4px',
@@ -132,7 +132,7 @@ const RemoveTagModal = ({ club, tagToRemove }) => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            Are you sure you want to remove <b>{tagToRemove}</b> from your interests?
+            Are you sure you want to remove <b>{tagToRemove}</b> from tags?
           </Modal.Body>
           <Modal.Footer className="text-center">
             <Button variant="light" onClick={handleClose}>
@@ -181,12 +181,19 @@ const ClubPage = () => {
   }
 
   return ready ? (
-    <Container className="my-3" id="club-info-page">
+    <Container className="my-4" id="club-info-page">
       {updateTitleAndCheck()}
       {club ? (
-        <div>
+        <div className="my-2">
           <Row className="align-middle text-center mb-3">
-            <Col>
+            <Col className="d-flex flex-column justify-content-center">
+              <h2><b>{club.clubName}</b></h2>
+              <h3 className="mb-3">{club.clubType} Club</h3>
+              {club.website === 'None' ? '' : <h5 className="mb-3">Visit us at <a href={club.website} target="_blank" rel="noreferrer">{club.website}</a></h5>}
+              <h5 className="text-start">About us:</h5>
+              <p className="text-start">{club.description}</p>
+            </Col>
+            <Col className="col-3">
               <Row className="my-3">
                 <Col>
                   <Image src={club.mainPhoto} width={200} />
@@ -200,24 +207,16 @@ const ClubPage = () => {
                 </Col>
               </Row>
             </Col>
-
-            <Col xs={8} className="d-flex flex-column justify-content-center">
-              <h2><b>{club.clubName}</b></h2>
-              <h3 className="mb-3">{club.clubType} Club</h3>
-              <h5 className="mb-3">Visit us at {club.website}</h5>
-              <h5 className="text-start">About us:</h5>
-              <p className="text-start">{club.description}</p>
-            </Col>
           </Row>
           {(Roles.userIsInRole(Meteor.userId(), 'admin') || user.adminForClubs?.includes(club.clubName)) ? (
             <Row className="mt-2 mb-4">
-              <p>Tags</p>
+              <h5>Tags:</h5>
               <Col className="d-flex">
                 {club.tags ? club.tags.map((tag, index) => (
                   <Badge
                     key={index}
                     className="rounded-pill"
-                    style={{ fontSize: '20px', fontWeight: 600, paddingTop: '0px', paddingBottom: '0px', paddingStart: '15px', paddingEnd: '15px' }}
+                    style={{ fontSize: '16px', fontWeight: 600, paddingTop: '0px', paddingBottom: '0px', paddingStart: '15px', paddingEnd: '15px' }}
                     bg="secondary"
                   >&nbsp;{tag} <RemoveTagModal tagToRemove={tag} club={club} />
                   </Badge>
@@ -227,15 +226,15 @@ const ClubPage = () => {
             </Row>
           ) : (
             <Row className="mt-2 mb-4">
-              <h5>Club Tags</h5>
+              <h5>Tags:</h5>
               <Col className="d-flex">
                 {club.tags ? club.tags.map((tag, index) => (
                   <Badge
                     key={index}
                     className="rounded-pill"
-                    style={{ fontSize: '20px', fontWeight: 600, paddingTop: '1px', paddingBottom: '3px', paddingStart: '15px', paddingEnd: '15px' }}
+                    style={{ fontSize: '16px', fontWeight: 600, paddingTop: '8px', paddingBottom: '8px' }}
                     bg="secondary"
-                  >&nbsp;{tag}
+                  >{tag}
                   </Badge>
                 )) : ''}
               </Col>

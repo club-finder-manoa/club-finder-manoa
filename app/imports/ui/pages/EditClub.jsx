@@ -91,21 +91,13 @@ const EditClub = () => {
   };
 
   return ready ? (
-    <Container id={PageIDs.editClubPage} className="my-3">
+    <Container id={PageIDs.editClubPage} className="my-4">
       {updateTitleAndCheck()}
       {club ? (
-        <div>
+        <div className="my-2">
           <AutoForm model={club} schema={bridge} onSubmit={data => submit(data)}>
             <Row className="align-middle text-center mb-3">
-              <Col>
-                <Row className="my-3">
-                  <Col>
-                    <Image src={club.mainPhoto} width={200} />
-                    <TextField id={ComponentIDs.mainPhoto} name="mainPhoto" showInlineError placeholder={club.mainPhoto} />
-                  </Col>
-                </Row>
-              </Col>
-              <Col xs={8} className="d-flex flex-column justify-content-center">
+              <Col className="d-flex flex-column justify-content-center">
                 <TextField id={ComponentIDs.clubName} name="clubName" showInlineError placeholder={club.clubName} />
                 <SelectField
                   id={ComponentIDs.clubType}
@@ -117,6 +109,14 @@ const EditClub = () => {
                 <TextField className="pt-3" name="website" showInlineError placeholder={club.website} />
                 <LongTextField id={ComponentIDs.clubDescription} name="description" showInlineError placeholder={club.description} />
               </Col>
+              <Col className="col-3">
+                <Row className="my-3">
+                  <Col>
+                    <Image src={club.mainPhoto} width={200} />
+                    <TextField id={ComponentIDs.mainPhoto} name="mainPhoto" showInlineError placeholder={club.mainPhoto} />
+                  </Col>
+                </Row>
+              </Col>
             </Row>
             <Row className="mt-2 mb-4">
               <p>Tags</p>
@@ -125,9 +125,9 @@ const EditClub = () => {
                   <Badge
                     key={index}
                     className="rounded-pill"
-                    style={{ fontSize: '20px', fontWeight: 600, paddingTop: '1px', paddingBottom: '3px', paddingStart: '15px', paddingEnd: '15px' }}
+                    style={{ fontSize: '16px', fontWeight: 600, paddingTop: '8px', paddingBottom: '8px' }}
                     bg="secondary"
-                  >&nbsp;{tag}
+                  >{tag}
                   </Badge>
                 )) : ''}
               </Col>
@@ -145,64 +145,64 @@ const EditClub = () => {
                 <tr>
                   <td>Sunday</td>
                   <td>
-                    <TextField name="meetingTimeSunday" showInlineError placeholder={club.meetingTimeSunday} />
+                    <TextField name="meetingTimeSunday" showInlineError placeholder={club.meetingTimeSunday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationSunday" showInlineError placeholder={club.meetingLocationSunday} />
+                    <TextField name="meetingLocationSunday" showInlineError placeholder={club.meetingLocationSunday} label="" />
                   </td>
                 </tr>
                 <tr>
                   <td>Monday</td>
                   <td>
-                    <TextField name="meetingTimeMonday" showInlineError placeholder={club.meetingTimeMonday} />
+                    <TextField name="meetingTimeMonday" showInlineError placeholder={club.meetingTimeMonday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationMonday" showInlineError placeholder={club.meetingLocationMonday} />
+                    <TextField name="meetingLocationMonday" showInlineError placeholder={club.meetingLocationMonday} label="" />
                   </td>
                 </tr>
                 <tr>
                   <td>Tuesday</td>
                   <td>
-                    <TextField name="meetingTimeTuesday" showInlineError placeholder={club.meetingTimeTuesday} />
+                    <TextField name="meetingTimeTuesday" showInlineError placeholder={club.meetingTimeTuesday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationTuesday" showInlineError placeholder={club.meetingLocationTuesday} />
+                    <TextField name="meetingLocationTuesday" showInlineError placeholder={club.meetingLocationTuesday} label="" />
                   </td>
                 </tr>
                 <tr>
                   <td>Wednesday</td>
                   <td>
-                    <TextField name="meetingTimeWednesday" showInlineError placeholder={club.meetingTimeWednesday} />
+                    <TextField name="meetingTimeWednesday" showInlineError placeholder={club.meetingTimeWednesday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationWednesday" showInlineError placeholder={club.meetingLocationWednesday} />
+                    <TextField name="meetingLocationWednesday" showInlineError placeholder={club.meetingLocationWednesday} label="" />
                   </td>
                 </tr>
                 <tr>
                   <td>Thursday</td>
                   <td>
-                    <TextField name="meetingTimeThursday" showInlineError placeholder={club.meetingTimeThursday} />
+                    <TextField name="meetingTimeThursday" showInlineError placeholder={club.meetingTimeThursday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationThursday" showInlineError placeholder={club.meetingLocationThursday} />
+                    <TextField name="meetingLocationThursday" showInlineError placeholder={club.meetingLocationThursday} label="" />
                   </td>
                 </tr>
                 <tr>
                   <td>Friday</td>
                   <td>
-                    <TextField name="meetingTimeFriday" showInlineError placeholder={club.meetingTimeFriday} />
+                    <TextField name="meetingTimeFriday" showInlineError placeholder={club.meetingTimeFriday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationFriday" showInlineError placeholder={club.meetingLocationFriday} />
+                    <TextField name="meetingLocationFriday" showInlineError placeholder={club.meetingLocationFriday} label="" />
                   </td>
                 </tr>
                 <tr>
                   <td>Saturday</td>
                   <td>
-                    <TextField name="meetingTimeSaturday" showInlineError placeholder={club.meetingTimeSaturday} />
+                    <TextField name="meetingTimeSaturday" showInlineError placeholder={club.meetingTimeSaturday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationSaturday" showInlineError placeholder={club.meetingLocationSaturday} />
+                    <TextField name="meetingLocationSaturday" showInlineError placeholder={club.meetingLocationSaturday} label="" />
                   </td>
                 </tr>
               </tbody>
