@@ -1,14 +1,159 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Image, Row, Col, Table, Badge } from 'react-bootstrap';
+import { Container, Image, Row, Col, Table, Badge, Button, Modal, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Link, useParams } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
+import swal from 'sweetalert';
+import { Plus, X } from 'react-bootstrap-icons';
+import PropTypes from 'prop-types';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SaveClubModal from '../components/SaveClubModal';
 import RemoveClubModal from '../components/RemoveClubModal';
+import { interests } from '../utilities/interests';
+
+const AddTagModal = ({ club }) => {
+  const [show, setShow] = useState(false);
+  const [tag, setTag] = useState('');
+  const clubName = club.clubName;
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const addEm = () => {
+    let clubTags = Clubs.collection.find({ clubName }).fetch()[0].tags;
+    if (clubTags && clubTags.includes(tag)) {
+      // eslint-disable-next-line no-alert
+      swal(`Already saved "${tag}" as an interest.`);
+    } else if (clubTags) {
+      clubTags.push(tag);
+    } else {
+      clubTags = [tag];
+    }
+    Meteor.call('updateTags', { clubName, tags: clubTags });
+    setTag('');
+    handleClose();
+  };
+
+  const plusButtonStyle = {
+    borderWidth: 0,
+    fontSize: '15px',
+    fontWeight: 500,
+    borderRadius: '20px',
+    paddingTop: '4px',
+    paddingBottom: '4px',
+    paddingLeft: '6px',
+    paddingRight: '6px',
+  };
+
+  return (
+    <>
+      <Button id="add-interest-btn" style={plusButtonStyle} onClick={handleShow}>
+        &nbsp;&nbsp;Add<Plus style={{ paddingBottom: '2px', fontSize: '24px' }} />
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Add New Tag</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="pb-4">
+            <Form.Group controlId="selectInterest">
+              <Form.Label>Select a Tag</Form.Label>
+              <Form.Control as="select" value={tag} onChange={e => setTag(e.target.value)}>
+                {interests.map((inter) => <option key={inter}>{inter}</option>)}
+              </Form.Control>
+            </Form.Group>
+            <br />
+            {tag !== '' ? <span>Add <b>{tag}</b> to tags?</span> : ''}
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button id="confirm-add-interest" variant="success" onClick={() => addEm()}>
+              Confirm
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+AddTagModal.propTypes = {
+  club: PropTypes.shape({
+    clubName: PropTypes.string,
+    adminForClubs: PropTypes.arrayOf(String),
+  }).isRequired,
+};
+
+// Popup modal to confirm removal of admin status
+const RemoveTagModal = ({ club, tagToRemove }) => {
+  const [show, setShow] = useState(false);
+  const clubName = club.clubName;
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const removeInterest = () => {
+    const clubTags = Clubs.collection.find({ clubName }).fetch()[0].tags;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const i in clubTags) {
+      if (clubTags[i] === tagToRemove) {
+        clubTags.splice(i, 1);
+      }
+    }
+    Meteor.call('updateTags', { clubName, tags: clubTags });
+    handleClose();
+  };
+
+  const xButtonStyle = {
+    padding: 0,
+    fontSize: '20px',
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    paddingBottom: '5px',
+  };
+
+  return (
+    <>
+      <Button style={xButtonStyle} onClick={handleShow}>
+        <X />
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Container className="mt-2">
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h3><b>Remove Tag</b></h3>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to remove <b>{tagToRemove}</b> from your interests?
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <Button variant="light" onClick={handleClose}>
+              Back
+            </Button>
+            <Button variant="danger" onClick={() => removeInterest()}>
+              Remove
+            </Button>
+          </Modal.Footer>
+        </Container>
+      </Modal>
+    </>
+  );
+};
+
+RemoveTagModal.propTypes = {
+  club: PropTypes.shape({
+    clubName: PropTypes.string,
+  }).isRequired,
+  tagToRemove: PropTypes.string.isRequired,
+};
 
 const ClubPage = () => {
   const { _id } = useParams();
@@ -64,20 +209,38 @@ const ClubPage = () => {
               <p className="text-start">{club.description}</p>
             </Col>
           </Row>
-          <Row className="mt-2 mb-4">
-            <p>Tags</p>
-            <Col className="d-flex">
-              {club.tags ? club.tags.map((tag, index) => (
-                <Badge
-                  key={index}
-                  className="rounded-pill"
-                  style={{ fontSize: '16px', fontWeight: 600, paddingTop: '1px', paddingBottom: '3px', paddingStart: '15px', paddingEnd: '15px' }}
-                  bg="secondary"
-                >&nbsp;{tag}
-                </Badge>
-              )) : ''}
-            </Col>
-          </Row>
+          {(Roles.userIsInRole(Meteor.userId(), 'admin') || user.adminForClubs.includes(club.clubName)) ? (
+            <Row className="mt-2 mb-4">
+              <p>Tags</p>
+              <Col className="d-flex">
+                {club.tags ? club.tags.map((tag, index) => (
+                  <Badge
+                    key={index}
+                    className="rounded-pill"
+                    style={{ fontSize: '20px', fontWeight: 600, paddingTop: '0px', paddingBottom: '0px', paddingStart: '15px', paddingEnd: '15px' }}
+                    bg="secondary"
+                  >&nbsp;{tag} <RemoveTagModal tagToRemove={tag} club={club} />
+                  </Badge>
+                )) : ''}
+                <AddTagModal club={club} />
+              </Col>
+            </Row>
+          ) : (
+            <Row className="mt-2 mb-4">
+              <h5>Club Tags</h5>
+              <Col className="d-flex">
+                {club.tags ? club.tags.map((tag, index) => (
+                  <Badge
+                    key={index}
+                    className="rounded-pill"
+                    style={{ fontSize: '20px', fontWeight: 600, paddingTop: '1px', paddingBottom: '3px', paddingStart: '15px', paddingEnd: '15px' }}
+                    bg="secondary"
+                  >&nbsp;{tag}
+                  </Badge>
+                )) : ''}
+              </Col>
+            </Row>
+          )}
           <h5><b>Meeting Times and Location</b></h5>
           <Table striped bordered hover size="sm">
             <thead>

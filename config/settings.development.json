@@ -20,7 +20,8 @@
       "aboutMe": "I am the boss.",
       "picture": "https://img.freepik.com/premium-vector/cool-cartoon-banana-with-sunglasses_14588-379.jpg?w=2000",
       "savedClubs": ["American Marketing Association", "AIKIDO at UHM"],
-      "interests": ["Administrating Websites", "Crying"]
+      "interests": ["Administrating Websites", "Crying"],
+      "adminForClubs": [""]
     },
     {
       "displayName": "John",
@@ -28,7 +29,8 @@
       "aboutMe": "I like stuff.",
       "picture": "https://thumbs.dreamstime.com/b/cool-cartoon-character-sunglasses-creative-design-cool-cartoon-character-sunglasses-153501584.jpg",
       "savedClubs": ["American Association of University Women at UH Manoa", "American Institute of Architecture Students Hawaii Chapter"],
-      "interests": ["Architecture"]
+      "interests": ["Architecture"],
+      "adminForClubs": [""]
     },
     {
       "displayName": "Accounting Admin",
