@@ -353,28 +353,30 @@ const Admin = () => {
   document.title = 'Club Finder Mānoa - Admin Dashboard';
 
   return (ready ? (
-    <Container id={PageIDs.adminPage} className="py-3">
-      <Row className="justify-content-center">
-        <Col>
-          <Col className="text-center">
-            <h2><b>Edit Users</b></h2>
+    <div className="backgroundImageTop">
+      <Container id={PageIDs.adminPage} className="py-3">
+        <Row className="justify-content-center">
+          <Col>
+            <Col className="text-center">
+              <h2><b>Edit Users</b></h2>
+            </Col>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>Name/Email</th>
+                  <th>Admin Permissions</th>
+                  <th>Reset Password</th>
+                  <th>Delete Account</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((user) => <UserListItem key={user._id} user={user} />)}
+              </tbody>
+            </Table>
           </Col>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Name/Email</th>
-                <th>Admin Permissions</th>
-                <th>Reset Password</th>
-                <th>Delete Account</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user) => <UserListItem key={user._id} user={user} />)}
-            </tbody>
-          </Table>
-        </Col>
-      </Row>
-    </Container>
+        </Row>
+      </Container>
+    </div>
   ) : <LoadingSpinner />);
 };
 
