@@ -167,7 +167,7 @@ const Profile = () => {
     };
   }, []);
 
-  document.title = `Club Finder Mānoa - ${userProfile.displayName}`;
+  document.title = ready ? `Club Finder Mānoa - ${userProfile.displayName}` : 'Club Finder Mānoa';
 
   return (ready ? (
     <Container id={PageIDs.profilePage} fluid className="py-3 backgroundImageTop">

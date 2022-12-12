@@ -161,8 +161,8 @@ const ClubPage = () => {
   const { ready, club, user, clubSaved } = useTracker(() => {
     const sub1 = Meteor.subscribe(Clubs.userPublicationName);
     const sub2 = Meteor.subscribe(Users.userPublicationName);
-    const oneClub = Clubs.collection.find({ _id: _id }).fetch()[0];
-    const usr = Users.collection.find({ email: Meteor.user()?.username }).fetch()[0];
+    const oneClub = Clubs.collection.findOne({ _id: _id });
+    const usr = Users.collection.findOne({ email: Meteor.user()?.username });
     const saved = usr ? usr.savedClubs?.includes(oneClub?.clubName) : false;
     return {
       ready: sub1.ready() && sub2.ready(),
@@ -190,7 +190,7 @@ const ClubPage = () => {
               <h2><b>{club.clubName}</b></h2>
               <h3 className="mb-3">{club.clubType} Club</h3>
               {club.website === 'None' ? '' : <h5 className="mb-3">Visit us at <a href={club.website} target="_blank" rel="noreferrer">{club.website}</a></h5>}
-              <h5 className="text-start">About us:</h5>
+              <h5 className="text-start"><b>About us:</b></h5>
               <p className="text-start">{club.description}</p>
             </Col>
             <Col className="col-3">
@@ -210,7 +210,7 @@ const ClubPage = () => {
           </Row>
           {(Roles.userIsInRole(Meteor.userId(), 'admin') || user.adminForClubs?.includes(club.clubName)) ? (
             <Row className="mt-2 mb-4">
-              <h5>Tags:</h5>
+              <h5><b>Tags:</b></h5>
               <Col className="d-flex">
                 {club.tags ? club.tags.map((tag, index) => (
                   <Badge
@@ -226,7 +226,7 @@ const ClubPage = () => {
             </Row>
           ) : (
             <Row className="mt-2 mb-4">
-              <h5>Tags:</h5>
+              <h5><b>Tags:</b></h5>
               <Col className="d-flex">
                 {club.tags ? club.tags.map((tag, index) => (
                   <Badge
@@ -240,6 +240,14 @@ const ClubPage = () => {
               </Col>
             </Row>
           )}
+          <div className="mt-2 mb-3">
+            <h5><b>People</b></h5>
+            {club.interestedUsers.length > 0 ? club.interestedUsers.map((interestedUser, index) => (
+              <a href={`/profile/${Users.collection.findOne({ email: interestedUser })._id}`}>
+                <Image roundedCircle key={index} src={Users.collection.findOne({ email: interestedUser }).picture} height="60px" />
+              </a>
+            )) : 'No users found'}
+          </div>
           <h5><b>Meeting Times and Location</b></h5>
           <Table striped bordered hover size="sm">
             <thead>
