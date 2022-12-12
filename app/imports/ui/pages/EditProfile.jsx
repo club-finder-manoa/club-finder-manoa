@@ -1,6 +1,7 @@
 import React from 'react';
-import { AutoForm, TextField, LongTextField, SubmitField, ErrorsField, HiddenField } from 'uniforms-bootstrap5';
-import { Container, Col, Card, Row, Image, Button, Badge } from 'react-bootstrap';
+import { AutoForm, TextField, LongTextField, SubmitField, ErrorsField } from 'uniforms-bootstrap5';
+import { Container, Col, Card, Row, Image, Button } from 'react-bootstrap';
+import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -11,14 +12,18 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ChangePwModal from '../components/ChangePwModal';
 import { ComponentIDs, PageIDs } from '../utilities/ids';
 
-/* Create a schema to specify the structure of the data to appear in the form. */
-const bridge = new SimpleSchema2Bridge(Users.schema);
-
 /* Renders the EditProfile Page: what appears after the user logs in. */
 const EditProfile = () => {
   const navigate = useNavigate();
 
-  document.title = 'Club Finder Mānoa - Profile';
+  document.title = 'Club Finder Mānoa - Edit Profile';
+
+  const schema = new SimpleSchema({
+    displayName: String,
+    picture: String,
+    aboutMe: String,
+  });
+  const bridge = new SimpleSchema2Bridge(schema);
 
   const { user, ready } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
@@ -53,7 +58,6 @@ const EditProfile = () => {
       <Card id="cardProfile">
         <AutoForm model={user} schema={bridge} onSubmit={data => submit(data)}>
           <Col className="text-center">
-
             <Row>
               <Col className="text-center pt-3 justify-content-center d-flex small">
                 <TextField id={ComponentIDs.homeFormFirstName} name="displayName" showInlineError placeholder={user.displayName} />
@@ -65,28 +69,10 @@ const EditProfile = () => {
               </Col>
             </Row>
             <hr />
-            <Row className="text-center mx-5 small">
+            <Row className="text-center mx-5 mb-3 small">
               <LongTextField id={ComponentIDs.homeFormBio} name="aboutMe" placeholder={user.aboutMe} />
             </Row>
-            <hr />
-            <span className="small text-center">Interests:</span>
-            <br />
-            <Row className="mt-2 mb-4">
-              <Col>
-                {user.interests ?
-                  user.interests.map((interest, index) => (
-                    <Badge
-                      key={index}
-                      className="rounded-pill"
-                      style={{ fontSize: '15px', fontWeight: 600, paddingTop: '6px', paddingBottom: '6px' }}
-                      bg="secondary"
-                    >{interest}
-                    </Badge>
-                  ))
-                  : ''}
-              </Col>
-            </Row>
-            <Row className="py-3">
+            <Row className="mb-4">
               <Col className="d-flex justify-content-end">
                 <Button id="backButton" onClick={() => navigate('/profile')}>
                   Discard Changes
@@ -95,10 +81,7 @@ const EditProfile = () => {
               <Col className="d-flex justify-content-start">
                 <SubmitField id="save-changes-btn" value="Save Changes" />
               </Col>
-              <ErrorsField />
-              <HiddenField name="savedClubs" />
-              <HiddenField name="adminForClubs" />
-              <HiddenField name="email" />
+              <ErrorsField className="mt-3" />
             </Row>
           </Col>
         </AutoForm>
