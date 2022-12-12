@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Image, Row, Col, Table } from 'react-bootstrap';
+import { Container, Image, Row, Col, Table, Badge } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Link, useParams } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
@@ -64,7 +64,20 @@ const ClubPage = () => {
               <p className="text-start">{club.description}</p>
             </Col>
           </Row>
-
+          <Row className="mt-2 mb-4">
+            <p>Tags</p>
+            <Col className="d-flex">
+              {club.tags ? club.tags.map((tag, index) => (
+                <Badge
+                  key={index}
+                  className="rounded-pill"
+                  style={{ fontSize: '16px', fontWeight: 600, paddingTop: '1px', paddingBottom: '3px', paddingStart: '15px', paddingEnd: '15px' }}
+                  bg="secondary"
+                >&nbsp;{tag}
+                </Badge>
+              )) : ''}
+            </Col>
+          </Row>
           <h5><b>Meeting Times and Location</b></h5>
           <Table striped bordered hover size="sm">
             <thead>
