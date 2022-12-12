@@ -209,7 +209,7 @@ const ClubPage = () => {
               <p className="text-start">{club.description}</p>
             </Col>
           </Row>
-          {(Roles.userIsInRole(Meteor.userId(), 'admin') || user.adminForClubs.includes(club.clubName)) ? (
+          {(Roles.userIsInRole(Meteor.userId(), 'admin') || user.adminForClubs?.includes(club.clubName)) ? (
             <Row className="mt-2 mb-4">
               <p>Tags</p>
               <Col className="d-flex">
@@ -304,7 +304,7 @@ const ClubPage = () => {
               </tr>
             </tbody>
           </Table>
-          {(Roles.userIsInRole(Meteor.userId(), 'admin') || user.adminForClubs.includes(club.clubName)) ? (
+          {(Roles.userIsInRole(Meteor.userId(), 'admin') || user.adminForClubs?.includes(club.clubName)) ? (
             <Row>
               <Col className="d-flex justify-content-center py-3">
                 <Link to={`/edit-club/${club._id}`} className="btn btn-primary" id="edit-profile-btn">Edit Club</Link>
