@@ -203,6 +203,7 @@ ClubTableItem.propTypes = {
 const AllClubs = () => {
   const [cardView, setCardView] = useState(true);
   const [interest, setInterest] = useState('');
+  const [matchInterests, setMatchInterests] = useState(false);
   const [clubType, setClubType] = useState('');
   const [clubName, setClubName] = useState('');
   const [description, setDescription] = useState('');
@@ -268,11 +269,32 @@ const AllClubs = () => {
         return obj.tags != null;
       });
     }
+    if (matchInterests) {
+      const matchyClubs = [];
+      let tempList = filtered;
+      // eslint-disable-next-line no-restricted-syntax
+      for (const intrst of user.interests) {
+        tempList = tempList.filter(function (obj) {
+          if (obj.tags) {
+            return obj.tags.some(tag => tag.includes(intrst));
+          }
+          return obj.tags != null;
+        });
+        // eslint-disable-next-line no-restricted-syntax
+        for (const clb of tempList) {
+          if (!matchyClubs.includes(clb)) {
+            matchyClubs.push(clb);
+          }
+        }
+        tempList = filtered;
+      }
+      filtered = matchyClubs;
+    }
     if (clubType && clubType !== 'Any') {
       filtered = filtered.filter(function (obj) { return obj.clubType.includes(clubType); });
     }
     setFilteredClubs(filtered);
-  }, [clubName, description, interest, clubType, sortBy]);
+  }, [clubName, description, interest, matchInterests, clubType, sortBy]);
 
   document.title = 'Club Finder Mānoa - All Clubs';
 
@@ -343,7 +365,7 @@ const AllClubs = () => {
         <Accordion className="mb-3">
           <Accordion.Item eventKey="0">
             <Accordion.Header id="search-option-drpdwn">
-              Search Options
+              Filter Options
             </Accordion.Header>
             <Accordion.Body>
               <Row className="px-3 pb-3">
@@ -410,6 +432,11 @@ const AllClubs = () => {
                   </label>
                 </Col>
               </Row>
+              <Col className="d-flex justify-content-center my-3">
+                <Button onClick={() => setMatchInterests(!matchInterests)}>
+                  {matchInterests ? 'View All' : 'Match My Interests'}
+                </Button>
+              </Col>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
