@@ -11,8 +11,8 @@ import { clubsInfoPage } from './clubinfo.page';
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
-const credentials = { username: 'john@hawaii.edu', password: 'changeme' };
-const adminCredentials = { username: 'admin@hawaii.edu', password: 'changeme' };
+const credentials = { username: 'john@hawaii.edu', password: 'changeme', displayName: 'John' };
+const adminCredentials = { username: 'admin@hawaii.edu', password: 'changeme', displayName: 'Admin' };
 
 fixture('Club Finder Manoa localhost test with default db')
   .page('http://localhost:3000');
@@ -34,15 +34,15 @@ test('Test that signup page, then logout works', async (testController) => {
 
 test('Test that signin and signout work', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await signInPage.signin(testController, credentials.username, credentials.password);
-  await navBar.isLoggedIn(testController, credentials.username);
+  await signInPage.signin(testController, credentials.username, credentials.password, credentials.displayName);
+  await navBar.isLoggedIn(testController, credentials.displayName);
   await navBar.logout(testController);
   await signOutPage.isDisplayed(testController);
 });
 
 test('Test the All Clubs page', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await signInPage.signin(testController, credentials.username, credentials.password);
+  await signInPage.signin(testController, credentials.username, credentials.password, credentials.displayName);
   await navBar.gotoAllClubsPage(testController);
   await allClubsPage.isDisplayed(testController);
   await allClubsPage.hasDefaultAllClubs(testController);
@@ -53,7 +53,7 @@ test('Test the All Clubs page', async (testController) => {
 
 test('Test the Club Information page', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await signInPage.signin(testController, credentials.username, credentials.password);
+  await signInPage.signin(testController, credentials.username, credentials.password, credentials.displayName);
   await navBar.gotoAllClubsPage(testController);
   await clubsInfoPage.gotoClubInfoPage(testController);
   await clubsInfoPage.isDisplayed(testController);
@@ -61,7 +61,7 @@ test('Test the Club Information page', async (testController) => {
 
 test('Test the Club save in Club Information page', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await signInPage.signin(testController, credentials.username, credentials.password);
+  await signInPage.signin(testController, credentials.username, credentials.password, credentials.displayName);
   await navBar.gotoAllClubsPage(testController);
   await clubsInfoPage.gotoClubInfoPage(testController);
   await clubsInfoPage.isDisplayed(testController);
@@ -70,7 +70,7 @@ test('Test the Club save in Club Information page', async (testController) => {
 
 test('Test the Club remove in Club Information page', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await signInPage.signin(testController, credentials.username, credentials.password);
+  await signInPage.signin(testController, credentials.username, credentials.password, credentials.displayName);
   await navBar.gotoAllClubsPage(testController);
   await clubsInfoPage.gotoClubInfoPage(testController);
   await clubsInfoPage.isDisplayed(testController);
@@ -79,7 +79,7 @@ test('Test the Club remove in Club Information page', async (testController) => 
 
 test('Test the My Club page', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await signInPage.signin(testController, credentials.username, credentials.password);
+  await signInPage.signin(testController, credentials.username, credentials.password, credentials.displayName);
   await navBar.gotoMyClubsPage(testController);
   await myClubsPage.isDisplayed(testController);
   await myClubsPage.hasDefaultMyClubs(testController);
@@ -89,14 +89,15 @@ test('Test the My Club page', async (testController) => {
 
 test('Test the Profile page', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await signInPage.signin(testController, credentials.username, credentials.password);
+  await signInPage.signin(testController, credentials.username, credentials.password, credentials.displayName);
   await navBar.gotoUserPage(testController);
   await userPage.isDisplayed(testController);
+  await userPage.addInterest(testController);
 });
 
 test('Test the Profile Edit page', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await signInPage.signin(testController, credentials.username, credentials.password);
+  await signInPage.signin(testController, credentials.username, credentials.password, credentials.displayName);
   await navBar.gotoUserPage(testController);
   await userPage.isDisplayed(testController);
   await userPage.gotoEditProfile(testController);
@@ -105,7 +106,7 @@ test('Test the Profile Edit page', async (testController) => {
 
 test('Test the Admin page', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await signInPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await signInPage.signin(testController, adminCredentials.username, adminCredentials.password, adminCredentials.displayName);
   await navBar.gotoAdminPage(testController);
   await adminPage.isDisplayed(testController);
   await adminPage.hasDefaultUsers(testController);
@@ -115,7 +116,7 @@ test('Test the Admin page', async (testController) => {
 
 test('Test the Admin Password reset', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await signInPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await signInPage.signin(testController, adminCredentials.username, adminCredentials.password, adminCredentials.displayName);
   await navBar.gotoAdminPage(testController);
   await adminPage.isDisplayed(testController);
   await adminPage.testResetPassword(testController);
@@ -123,7 +124,7 @@ test('Test the Admin Password reset', async (testController) => {
 
 test('Test the Admin Delete User', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await signInPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await signInPage.signin(testController, adminCredentials.username, adminCredentials.password, adminCredentials.displayName);
   await navBar.gotoAdminPage(testController);
   await adminPage.isDisplayed(testController);
   await adminPage.testDeleteUser(testController);

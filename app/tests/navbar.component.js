@@ -63,12 +63,12 @@ class NavBar {
   }
 
   /** Check that the specified user is currently logged in. */
-  async isLoggedIn(testController, username) {
+  async isLoggedIn(testController, displayName) {
     const visible = await Selector(`#${ComponentIDs.basicNavbarNav}`).visible;
     if (!visible) {
       await testController.click('button.navbar-toggler');
     }
-    await testController.expect(Selector(`#${ComponentIDs.currentUserDropdown}`).innerText).eql(username);
+    await testController.expect(Selector(`#${ComponentIDs.currentUserDropdown}`).innerText).eql(displayName);
   }
 
   /** Check that someone is logged in, then click items to logout. */

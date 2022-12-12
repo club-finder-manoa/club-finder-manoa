@@ -8,7 +8,7 @@ import { Users } from '../../api/users/Users';
 Meteor.methods({
   insertUser: function ({ accountID, email }) {
     const picture = 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
-    const displayName = '';
+    const displayName = 'New User';
     const aboutMe = 'Write a little about yourself!';
     return Users.collection.insert({ accountID, displayName, email, picture, aboutMe });
   },

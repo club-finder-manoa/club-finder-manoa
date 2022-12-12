@@ -9,6 +9,9 @@ class UserPage {
 
   async isDisplayed(testController) {
     await testController.expect(this.pageSelector.exists).ok();
+  }
+
+  async addInterest(testController) {
     await testController.click('#add-interest-btn');
     const dropdown = await Selector('#selectInterest');
     const dropdownOption = dropdown.find('option');
