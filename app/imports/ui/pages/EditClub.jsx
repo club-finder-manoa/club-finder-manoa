@@ -188,17 +188,16 @@ const EditClub = () => {
     // eslint-disable-next-line max-len
     const { clubName, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail } = data;
 
-    // HELP
     Object.values(club.interestedUsers).forEach(intUser => {
       Meteor.call('removeClub', { email: intUser, clubName: oldClubName });
     });
-    Object.values(club.interestedUsers).forEach(intUser => {
-      Meteor.call('saveClub', { email: intUser, clubName: clubName });
-    });
-    // END HELP
 
     // eslint-disable-next-line max-len
-    if (Meteor.call('updateClub', { _id, clubName, clubType, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail })) {
+    Meteor.call('updateClub', { _id, clubName, clubType, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail });
+
+    if (Object.values(club.interestedUsers).forEach(intUser => {
+      Meteor.call('saveClub', { email: intUser, clubName: clubName });
+    })) {
       swal('Error', 'Something went wrong.', 'error');
     } else {
       swal('Success', 'Profile updated successfully', 'success');

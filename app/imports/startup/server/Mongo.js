@@ -15,28 +15,35 @@ Meteor.methods({
 
   saveClub: function ({ email, clubName }) {
     let clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
-    console.log(`save email is ${email}`);
-    console.log(`save clubName is ${clubName}`);
-    if (clubArray) {
-      clubArray.push(clubName);
-    } else {
+    let intUsersArray = Clubs.collection.find({ clubName: clubName }).fetch()[0].interestedUsers;
+    if (clubArray.includes(clubName)) {
       clubArray = [clubName];
+    } else {
+      clubArray.push(clubName);
     }
+    if (intUsersArray.includes(email)) {
+      intUsersArray = [email];
+    } else {
+      intUsersArray.push(email);
+    }
+    Clubs.collection.update({ clubName: clubName }, { $set: { interestedUsers: intUsersArray } });
     return Users.collection.update({ email: email }, { $set: { savedClubs: clubArray } });
   },
 
   removeClub: function ({ email, clubName }) {
     const clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
-    console.log(`remove email is ${email}`);
-    console.log(`remove clubName is ${clubName}`);
-    // eslint-disable-next-line no-restricted-syntax
-    for (const i in clubArray) {
-      if (clubArray[i] === clubName) {
-        console.log('Club found');
-        clubArray.splice(i, 1);
-      }
-    }
-    return Users.collection.update({ email: email }, { $set: { savedClubs: clubArray } });
+    const intUsersArray = Clubs.collection.find({ clubName: clubName }).fetch()[0].interestedUsers;
+
+    const filteredClubArray = clubArray.filter(function (value) {
+      return value !== clubName;
+    });
+
+    const filteredIntUsersArray = intUsersArray.filter(function (value) {
+      return value !== email;
+    });
+
+    Clubs.collection.update({ clubName: clubName }, { $set: { interestedUsers: filteredIntUsersArray } });
+    return Users.collection.update({ email: email }, { $set: { savedClubs: filteredClubArray } });
   },
 
   updateUser: function ({ email, displayName, aboutMe, picture }) {
