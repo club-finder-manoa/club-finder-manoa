@@ -163,13 +163,15 @@ const EditClub = () => {
   const clubTypes = ['Academic/Professional', 'Ethnic/Cultural', 'Fraternity/Sorority', 'Honorary Society', 'Leisure/Recreational', 'Political', 'Service', 'Spiritual/Religious', 'Sports/Leisure', 'Student Affairs'];
   const [clubType, setClubType] = useState('');
 
-  const { ready, club } = useTracker(() => {
+  const { ready, club, oldClubName } = useTracker(() => {
     const sub1 = Meteor.subscribe(Clubs.userPublicationName);
     const sub2 = Meteor.subscribe(Users.userPublicationName);
     const oneClub = Clubs.collection.find({ _id: _id }).fetch()[0];
+    const origClubName = oneClub.clubName;
     return {
       ready: sub1.ready() && sub2.ready(),
       club: oneClub,
+      oldClubName: origClubName,
     };
   }, false);
 
@@ -185,6 +187,13 @@ const EditClub = () => {
   const submit = (data) => {
     // eslint-disable-next-line max-len
     const { clubName, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail } = data;
+
+    // HELP
+    Object.values(club.interestedUsers).forEach(intUser => console.log(intUser));
+    Object.values(club.interestedUsers).forEach(intUser => Meteor.call('removeClub', { intUser, oldClubName }));
+    Object.values(club.interestedUsers).forEach(intUser => Meteor.call('saveClub', { intUser, clubName }));
+    // END HELP
+
     // eslint-disable-next-line max-len
     if (Meteor.call('updateClub', { _id, clubName, clubType, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail })) {
       swal('Error', 'Something went wrong.', 'error');
@@ -204,6 +213,7 @@ const EditClub = () => {
               <Col>
                 <Row className="my-3">
                   <Col>
+                    {oldClubName}
                     <Image src={club.mainPhoto} width={200} />
                     <TextField id={ComponentIDs.mainPhoto} name="mainPhoto" showInlineError placeholder={club.mainPhoto} />
                   </Col>

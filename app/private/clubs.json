@@ -188,6 +188,7 @@
       "meetingLocationFriday": "",
       "meetingTimeSaturday": "",
       "meetingLocationSaturday": "",
+      "interestedUsers": ["admin@hawaii.edu", "accountingadmin@hawaii.edu"],
       "contactName": "Aaron Goo",
       "contactEmail": "aarong2@hawaii.edu",
       "description": "We are a marketing club that strives to push our members to grow socially, philanthropically, and professionally. "

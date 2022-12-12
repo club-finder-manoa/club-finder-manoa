@@ -15,6 +15,8 @@ Meteor.methods({
 
   saveClub: function ({ email, clubName }) {
     let clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
+    console.log(`save email is ${email}`);
+    console.log(`save clubName is ${clubName}`);
     if (clubArray) {
       clubArray.push(clubName);
     } else {
@@ -25,9 +27,12 @@ Meteor.methods({
 
   removeClub: function ({ email, clubName }) {
     const clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
+    console.log(`remove email is ${email}`);
+    console.log(`remove clubName is ${clubName}`);
     // eslint-disable-next-line no-restricted-syntax
     for (const i in clubArray) {
       if (clubArray[i] === clubName) {
+        console.log('Club found');
         clubArray.splice(i, 1);
       }
     }
@@ -72,9 +77,9 @@ Meteor.methods({
 });
 
 // eslint-disable-next-line max-len
-function addClubInit({ clubName, clubType, mainPhoto, description, website, tags, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail, admins }) {
+function addClubInit({ clubName, clubType, mainPhoto, description, website, tags, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail, admins, interestedUsers }) {
   // eslint-disable-next-line max-len
-  Clubs.collection.insert({ clubName, clubType, mainPhoto, description, website, tags, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail, admins });
+  Clubs.collection.insert({ clubName, clubType, mainPhoto, description, website, tags, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail, admins, interestedUsers });
 }
 
 /** Init clubs in DB */
