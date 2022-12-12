@@ -14,16 +14,14 @@ Meteor.methods({
   },
 
   saveClub: function ({ email, clubName }) {
-    let clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
-    let intUsersArray = Clubs.collection.find({ clubName: clubName }).fetch()[0].interestedUsers;
-    if (clubArray.includes(clubName)) {
-      clubArray = [clubName];
-    } else {
+    let clubArray = Users.collection.findOne({ email: email }).savedClubs;
+    const intUsersArray = Clubs.collection.findOne({ clubName: clubName }).interestedUsers;
+    if (clubArray) {
       clubArray.push(clubName);
-    }
-    if (intUsersArray.includes(email)) {
-      intUsersArray = [email];
     } else {
+      clubArray = [clubName];
+    }
+    if (!intUsersArray.includes(email)) {
       intUsersArray.push(email);
     }
     Clubs.collection.update({ clubName: clubName }, { $set: { interestedUsers: intUsersArray } });

@@ -175,7 +175,7 @@ const DeleteUserModal = ({ email }) => {
 
   return (
     <>
-      <Button id="delete-user-btn" style={deleteStyle} onClick={handleShow}>
+      <Button id={`delete-user-btn-${email.substring(0, email.length - 11)}`} style={deleteStyle} onClick={handleShow}>
         <u>Delete</u>
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -304,7 +304,7 @@ const UserListItem = ({ user }) => {
             {user.adminForClubs && user.adminForClubs.length > 0 ? user.adminForClubs.map((club, index) => (
               <Row className="mb-1" key={index}>
                 <Col>
-                  <Badge id="adminClubBadge" key={index} bg="secondary" className="me-2" style={badgeStyle}>
+                  <Badge id={`adminClubBadge${index}`} key={index} bg="secondary" className="me-2" style={badgeStyle}>
                     {clubNameShortened(club)}&nbsp;<RemoveAdminStatusModal user={user} clubToRemove={club} />
                   </Badge>
                 </Col>

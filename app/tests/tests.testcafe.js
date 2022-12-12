@@ -22,8 +22,8 @@ test('Test that landing page shows up', async (testController) => {
 });
 
 test('Test that signup page, then logout works', async (testController) => {
-  // Create a new user email address that's guaranteed to be unique.
-  const newUser = `user-${new Date().getTime()}@hawaii.edu`;
+  // Changing this to 'testcafeusertest' so we can delete the user at the end of the tests
+  const newUser = 'testcafeuser@hawaii.edu';
   await navBar.gotoSignUpPage(testController);
   await signupPage.isDisplayed(testController);
   await signupPage.signupUser(testController, newUser, credentials.password);

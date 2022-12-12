@@ -5,7 +5,7 @@ class AdminPage {
   constructor() {
     this.pageId = `#${PageIDs.adminPage}`;
     this.pageSelector = Selector(this.pageId);
-    this.wrongId = '#poop';
+    this.wrongId = '#poop'; // lol
     this.wrongSelector = Selector(this.wrongId);
   }
 
@@ -32,7 +32,7 @@ class AdminPage {
   }
 
   async testDeleteUser(testController) {
-    await testController.click('#delete-user-btn');
+    await testController.click('#delete-user-btn-testcafeuser');
     await testController.click('#confirm-user-delete').pressKey('enter');
     // [ERROR]A native alert dialog was invoked on page "http://localhost:3000/admin", but no handler was set for it.
     // Use the "setNativeDialogHandler" function to introduce a handler function for native dialogs.
