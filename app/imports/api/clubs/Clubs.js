@@ -36,6 +36,8 @@ class ClubsCollection {
       contactEmail: { type: String, optional: true },
       admins: { type: Array, optional: true },
       'admins.$': { type: String },
+      interestedUsers: { type: Array, optional: true },
+      'interestedUsers.$': { type: String },
     }, { tracker: Tracker });
     // Ensure collection documents obey schema.
     this.collection.attachSchema(this.schema);

@@ -8,7 +8,8 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
 import swal from 'sweetalert';
-import { generatePath, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Roles } from 'meteor/alanning:roles';
 import { Users } from '../../api/users/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ChangePwModal from '../components/ChangePwModal';
@@ -164,17 +165,19 @@ const EditProfile = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = useParams();
   const navigate = useNavigate();
-  const path = generatePath('/profile/:_id', { _id });
 
   document.title = 'Club Finder Mānoa - Profile';
 
-  const { user, ready } = useTracker(() => {
+  const { user, ready, userProfileID } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub = Meteor.subscribe(Users.userPublicationName);
     const document = Users.collection.findOne({ _id });
+    const userData = Users.collection.find({ email: Meteor.user()?.username }).fetch()[0];
+    const id = userData ? userData._id : '';
     return {
       ready: sub.ready(),
       user: document,
+      userProfileID: id,
     };
   }, []);
 
@@ -185,7 +188,11 @@ const EditProfile = () => {
       swal('Error', 'Something went wrong.', 'error');
     } else {
       swal('Success', 'Profile updated successfully', 'success');
-      navigate(path);
+      if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
+        navigate(`/admin-profile/${userProfileID}`);
+      } else {
+        navigate(`profile/${userProfileID}`);
+      }
     }
   };
 
@@ -237,7 +244,7 @@ const EditProfile = () => {
             </Row>
             <Row className="py-3">
               <Col className="d-flex justify-content-end">
-                <Button id="backButton" onClick={() => navigate(path)}>
+                <Button id="backButton" onClick={() => navigate('/profile')}>
                   Discard Changes
                 </Button>
               </Col>

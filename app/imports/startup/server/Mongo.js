@@ -15,23 +15,35 @@ Meteor.methods({
 
   saveClub: function ({ email, clubName }) {
     let clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
-    if (clubArray) {
-      clubArray.push(clubName);
-    } else {
+    let intUsersArray = Clubs.collection.find({ clubName: clubName }).fetch()[0].interestedUsers;
+    if (clubArray.includes(clubName)) {
       clubArray = [clubName];
+    } else {
+      clubArray.push(clubName);
     }
+    if (intUsersArray.includes(email)) {
+      intUsersArray = [email];
+    } else {
+      intUsersArray.push(email);
+    }
+    Clubs.collection.update({ clubName: clubName }, { $set: { interestedUsers: intUsersArray } });
     return Users.collection.update({ email: email }, { $set: { savedClubs: clubArray } });
   },
 
   removeClub: function ({ email, clubName }) {
     const clubArray = Users.collection.find({ email: email }).fetch()[0].savedClubs;
-    // eslint-disable-next-line no-restricted-syntax
-    for (const i in clubArray) {
-      if (clubArray[i] === clubName) {
-        clubArray.splice(i, 1);
-      }
-    }
-    return Users.collection.update({ email: email }, { $set: { savedClubs: clubArray } });
+    const intUsersArray = Clubs.collection.find({ clubName: clubName }).fetch()[0].interestedUsers;
+
+    const filteredClubArray = clubArray.filter(function (value) {
+      return value !== clubName;
+    });
+
+    const filteredIntUsersArray = intUsersArray.filter(function (value) {
+      return value !== email;
+    });
+
+    Clubs.collection.update({ clubName: clubName }, { $set: { interestedUsers: filteredIntUsersArray } });
+    return Users.collection.update({ email: email }, { $set: { savedClubs: filteredClubArray } });
   },
 
   updateUser: function ({ email, displayName, aboutMe, picture }) {
@@ -47,6 +59,10 @@ Meteor.methods({
 
   updateInterests: function ({ email, interests }) {
     return Users.collection.update({ email: email }, { $set: { interests } });
+  },
+
+  updateTags: function ({ clubName, tags }) {
+    return Clubs.collection.update({ clubName: clubName }, { $set: { tags } });
   },
 
   removeUser: function ({ email }) {
@@ -68,9 +84,9 @@ Meteor.methods({
 });
 
 // eslint-disable-next-line max-len
-function addClubInit({ clubName, clubType, mainPhoto, description, website, tags, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail, admins }) {
+function addClubInit({ clubName, clubType, mainPhoto, description, website, tags, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail, admins, interestedUsers }) {
   // eslint-disable-next-line max-len
-  Clubs.collection.insert({ clubName, clubType, mainPhoto, description, website, tags, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail, admins });
+  Clubs.collection.insert({ clubName, clubType, mainPhoto, description, website, tags, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail, admins, interestedUsers });
 }
 
 /** Init clubs in DB */

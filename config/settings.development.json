@@ -35,7 +35,7 @@
       "email": "accountingadmin@hawaii.edu",
       "aboutMe": "Accounting is fun.",
       "picture": "https://thumbs.dreamstime.com/b/cool-calculator-cartoon-vector-illustration-64675808.jpg",
-      "savedClubs": ["Accounting Club"],
+      "savedClubs": ["Accounting Club", "American Marketing Association"],
       "interests": ["Accounting", "Business"],
       "adminForClubs": ["Accounting Club"]
     }

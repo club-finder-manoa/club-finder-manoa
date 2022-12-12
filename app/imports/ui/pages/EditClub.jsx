@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Image, Row, Col, Table, FormSelect, Badge, Button, Modal, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useNavigate, useParams } from 'react-router-dom';
-import { AutoForm, ErrorsField, HiddenField, LongTextField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
 import { Plus, X } from 'react-bootstrap-icons';
@@ -16,26 +16,26 @@ import { interests } from '../utilities/interests';
 
 const bridge = new SimpleSchema2Bridge(Clubs.schema);
 
-const AddTagModal = ({ user }) => {
+const AddTagModal = ({ club }) => {
   const [show, setShow] = useState(false);
-  const [interest, setInterest] = useState('');
-  const email = user.email;
+  const [tag, setTag] = useState('');
+  const clubName = club.clubName;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const addEm = () => {
-    let ints = Users.collection.find({ email }).fetch()[0].interests;
-    if (ints && ints.includes(interest)) {
+    let clubTags = Clubs.collection.find({ clubName }).fetch()[0].tags;
+    if (clubTags && clubTags.includes(tag)) {
       // eslint-disable-next-line no-alert
-      swal(`Already saved "${interest}" as an interest.`);
-    } else if (ints) {
-      ints.push(interest);
+      swal(`Already saved "${tag}" as an interest.`);
+    } else if (clubTags) {
+      clubTags.push(tag);
     } else {
-      ints = [interest];
+      clubTags = [tag];
     }
-    Meteor.call('updateInterests', { email, interests: ints });
-    setInterest('');
+    Meteor.call('updateTags', { clubName, tags: clubTags });
+    setTag('');
     handleClose();
   };
 
@@ -59,18 +59,18 @@ const AddTagModal = ({ user }) => {
         <Container className="mt-2">
           <Modal.Header closeButton>
             <Modal.Title>
-              <h3><b>Add New Interest</b></h3>
+              <h3><b>Add New Tag</b></h3>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body className="pb-4">
             <Form.Group controlId="selectInterest">
-              <Form.Label>Select an interest</Form.Label>
-              <Form.Control as="select" value={interest} onChange={e => setInterest(e.target.value)}>
+              <Form.Label>Select a Tag</Form.Label>
+              <Form.Control as="select" value={tag} onChange={e => setTag(e.target.value)}>
                 {interests.map((inter) => <option key={inter}>{inter}</option>)}
               </Form.Control>
             </Form.Group>
             <br />
-            {interest !== '' ? <span>Add <b>{interest}</b> to interests?</span> : ''}
+            {tag !== '' ? <span>Add <b>{tag}</b> to tags?</span> : ''}
           </Modal.Body>
           <Modal.Footer className="text-center">
             <Button variant="light" onClick={handleClose}>
@@ -87,29 +87,29 @@ const AddTagModal = ({ user }) => {
 };
 
 AddTagModal.propTypes = {
-  user: PropTypes.shape({
-    email: PropTypes.string,
+  club: PropTypes.shape({
+    clubName: PropTypes.string,
     adminForClubs: PropTypes.arrayOf(String),
   }).isRequired,
 };
 
 // Popup modal to confirm removal of admin status
-const RemoveTagModal = ({ user, interestToRemove }) => {
+const RemoveTagModal = ({ club, tagToRemove }) => {
   const [show, setShow] = useState(false);
-  const email = user.email;
+  const clubName = club.clubName;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const removeInterest = () => {
-    const ints = Users.collection.find({ email }).fetch()[0].interests;
+    const clubTags = Clubs.collection.find({ clubName }).fetch()[0].tags;
     // eslint-disable-next-line no-restricted-syntax
-    for (const i in ints) {
-      if (ints[i] === interestToRemove) {
-        ints.splice(i, 1);
+    for (const i in clubTags) {
+      if (clubTags[i] === tagToRemove) {
+        clubTags.splice(i, 1);
       }
     }
-    Meteor.call('updateInterests', { email, interests: ints });
+    Meteor.call('updateTags', { clubName, tags: clubTags });
     handleClose();
   };
 
@@ -130,11 +130,11 @@ const RemoveTagModal = ({ user, interestToRemove }) => {
         <Container className="mt-2">
           <Modal.Header closeButton>
             <Modal.Title>
-              <h3><b>Remove Interest</b></h3>
+              <h3><b>Remove Tag</b></h3>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            Are you sure you want to remove <b>{interestToRemove}</b> from your interests?
+            Are you sure you want to remove <b>{tagToRemove}</b> from your interests?
           </Modal.Body>
           <Modal.Footer className="text-center">
             <Button variant="light" onClick={handleClose}>
@@ -151,10 +151,10 @@ const RemoveTagModal = ({ user, interestToRemove }) => {
 };
 
 RemoveTagModal.propTypes = {
-  user: PropTypes.shape({
-    email: PropTypes.string,
+  club: PropTypes.shape({
+    clubName: PropTypes.string,
   }).isRequired,
-  interestToRemove: PropTypes.string.isRequired,
+  tagToRemove: PropTypes.string.isRequired,
 };
 
 const EditClub = () => {
@@ -163,13 +163,15 @@ const EditClub = () => {
   const clubTypes = ['Academic/Professional', 'Ethnic/Cultural', 'Fraternity/Sorority', 'Honorary Society', 'Leisure/Recreational', 'Political', 'Service', 'Spiritual/Religious', 'Sports/Leisure', 'Student Affairs'];
   const [clubType, setClubType] = useState('');
 
-  const { ready, club } = useTracker(() => {
+  const { ready, club, oldClubName } = useTracker(() => {
     const sub1 = Meteor.subscribe(Clubs.userPublicationName);
     const sub2 = Meteor.subscribe(Users.userPublicationName);
     const oneClub = Clubs.collection.find({ _id: _id }).fetch()[0];
+    const origClubName = oneClub.clubName;
     return {
       ready: sub1.ready() && sub2.ready(),
       club: oneClub,
+      oldClubName: origClubName,
     };
   }, false);
 
@@ -185,8 +187,17 @@ const EditClub = () => {
   const submit = (data) => {
     // eslint-disable-next-line max-len
     const { clubName, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail } = data;
+
+    Object.values(club.interestedUsers).forEach(intUser => {
+      Meteor.call('removeClub', { email: intUser, clubName: oldClubName });
+    });
+
     // eslint-disable-next-line max-len
-    if (Meteor.call('updateClub', { _id, clubName, clubType, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail })) {
+    Meteor.call('updateClub', { _id, clubName, clubType, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail });
+
+    if (Object.values(club.interestedUsers).forEach(intUser => {
+      Meteor.call('saveClub', { email: intUser, clubName: clubName });
+    })) {
       swal('Error', 'Something went wrong.', 'error');
     } else {
       swal('Success', 'Profile updated successfully', 'success');
@@ -204,6 +215,7 @@ const EditClub = () => {
               <Col>
                 <Row className="my-3">
                   <Col>
+                    {oldClubName}
                     <Image src={club.mainPhoto} width={200} />
                     <TextField id={ComponentIDs.mainPhoto} name="mainPhoto" showInlineError placeholder={club.mainPhoto} />
                   </Col>
@@ -227,18 +239,17 @@ const EditClub = () => {
             <Row className="mt-2 mb-4">
               <p>Tags</p>
               <Col className="d-flex">
-                {club.tags ?
-                  club.tags.map((tag, index) => (
-                    <Badge
-                      key={index}
-                      className="rounded-pill"
-                      style={{ fontSize: '14px', fontWeight: 600, paddingTop: '1px', paddingBottom: 0, paddingStart: '15px', paddingEnd: '8px' }}
-                      bg="secondary"
-                    >&nbsp;{tag} <RemoveTagModal interestToRemove={tag} user={club} />
-                    </Badge>
-                  ))
+                {club.tags ? club.tags.map((tag, index) => (
+                  <Badge
+                    key={index}
+                    className="rounded-pill"
+                    style={{ fontSize: '16px', fontWeight: 600, paddingTop: '1px', paddingBottom: '3px', paddingStart: '15px', paddingEnd: '15px' }}
+                    bg="secondary"
+                  >&nbsp;{tag} <RemoveTagModal tagToRemove={tag} club={club} />
+                  </Badge>
+                ))
                   : ''}
-                <AddTagModal user={club} />
+                <AddTagModal club={club} />
               </Col>
             </Row>
             <h5><b>Meeting Times and Location</b></h5>
@@ -336,7 +347,6 @@ const EditClub = () => {
               <SubmitField id="save-changes-btn" value="Save Changes" />
             </Col>
             <ErrorsField />
-            <HiddenField name="tags" />
           </AutoForm>
         </div>
       ) : (
