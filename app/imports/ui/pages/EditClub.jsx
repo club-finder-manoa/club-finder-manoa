@@ -189,9 +189,12 @@ const EditClub = () => {
     const { clubName, mainPhoto, description, website, meetingTimeSunday, meetingLocationSunday, meetingTimeMonday, meetingLocationMonday, meetingTimeTuesday, meetingLocationTuesday, meetingTimeWednesday, meetingLocationWednesday, meetingTimeThursday, meetingLocationThursday, meetingTimeFriday, meetingLocationFriday, meetingTimeSaturday, meetingLocationSaturday, contactName, contactEmail } = data;
 
     // HELP
-    Object.values(club.interestedUsers).forEach(intUser => console.log(intUser));
-    Object.values(club.interestedUsers).forEach(intUser => Meteor.call('removeClub', { intUser, oldClubName }));
-    Object.values(club.interestedUsers).forEach(intUser => Meteor.call('saveClub', { intUser, clubName }));
+    Object.values(club.interestedUsers).forEach(intUser => {
+      Meteor.call('removeClub', { email: intUser, clubName: oldClubName });
+    });
+    Object.values(club.interestedUsers).forEach(intUser => {
+      Meteor.call('saveClub', { email: intUser, clubName: clubName });
+    });
     // END HELP
 
     // eslint-disable-next-line max-len
