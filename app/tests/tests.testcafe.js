@@ -104,6 +104,16 @@ test('Test the Profile Edit page', async (testController) => {
   await userPage.testEditProfileInput(testController);
 });
 
+test('Test Editing Club', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signInPage.signin(testController, adminCredentials.username, adminCredentials.password, adminCredentials.displayName);
+  await navBar.gotoAllClubsPage(testController);
+  await allClubsPage.isDisplayed(testController);
+  await clubsInfoPage.gotoClubInfoPage(testController);
+  await clubsInfoPage.isDisplayed(testController);
+  await clubsInfoPage.testClubEdit(testController);
+});
+
 test('Test the Admin page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signInPage.signin(testController, adminCredentials.username, adminCredentials.password, adminCredentials.displayName);

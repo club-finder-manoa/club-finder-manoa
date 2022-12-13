@@ -11,7 +11,6 @@ class AdminPage {
 
   /** Asserts that this page is currently displayed. */
   async isDisplayed(testController) {
-    // Will add more tests later on
     await testController.expect(this.pageSelector.exists).ok();
   }
 
@@ -34,15 +33,11 @@ class AdminPage {
   async testDeleteUser(testController) {
     await testController.click('#delete-user-btn-testcafeuser');
     await testController.click('#confirm-user-delete').pressKey('enter');
-    // [ERROR]A native alert dialog was invoked on page "http://localhost:3000/admin", but no handler was set for it.
-    // Use the "setNativeDialogHandler" function to introduce a handler function for native dialogs.
-
   }
 
   async testResetPassword(testController) {
     await testController.click('#reset-password-btn');
     await testController.click('#confirm-reset-password');
-    // TODO
   }
 }
 

@@ -106,7 +106,7 @@ const EditClub = () => {
                 >
                   {clubTypes.map((type, key) => <option value={type} key={key}>{type}</option>)}
                 </SelectField>
-                <TextField className="pt-3" name="website" showInlineError placeholder={club.website} />
+                <TextField id={ComponentIDs.clubLink} className="pt-3" name="website" showInlineError placeholder={club.website} />
                 <LongTextField id={ComponentIDs.clubDescription} name="description" showInlineError placeholder={club.description} />
               </Col>
               <Col className="col-3">
@@ -145,64 +145,64 @@ const EditClub = () => {
                 <tr>
                   <td>Sunday</td>
                   <td>
-                    <TextField name="meetingTimeSunday" showInlineError placeholder={club.meetingTimeSunday} label="" />
+                    <TextField id="meeting-sunday-time" name="meetingTimeSunday" showInlineError placeholder={club.meetingTimeSunday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationSunday" showInlineError placeholder={club.meetingLocationSunday} label="" />
+                    <TextField id="meeting-sunday-location" name="meetingLocationSunday" showInlineError placeholder={club.meetingLocationSunday} label="" />
                   </td>
                 </tr>
                 <tr>
                   <td>Monday</td>
                   <td>
-                    <TextField name="meetingTimeMonday" showInlineError placeholder={club.meetingTimeMonday} label="" />
+                    <TextField id="meeting-monday-time" name="meetingTimeMonday" showInlineError placeholder={club.meetingTimeMonday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationMonday" showInlineError placeholder={club.meetingLocationMonday} label="" />
+                    <TextField id="meeting-monday-location" name="meetingLocationMonday" showInlineError placeholder={club.meetingLocationMonday} label="" />
                   </td>
                 </tr>
                 <tr>
                   <td>Tuesday</td>
                   <td>
-                    <TextField name="meetingTimeTuesday" showInlineError placeholder={club.meetingTimeTuesday} label="" />
+                    <TextField id="meeting-tuesday-time" name="meetingTimeTuesday" showInlineError placeholder={club.meetingTimeTuesday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationTuesday" showInlineError placeholder={club.meetingLocationTuesday} label="" />
+                    <TextField id="meeting-tuesday-location" name="meetingLocationTuesday" showInlineError placeholder={club.meetingLocationTuesday} label="" />
                   </td>
                 </tr>
                 <tr>
                   <td>Wednesday</td>
                   <td>
-                    <TextField name="meetingTimeWednesday" showInlineError placeholder={club.meetingTimeWednesday} label="" />
+                    <TextField id="meeting-wednesday-time" name="meetingTimeWednesday" showInlineError placeholder={club.meetingTimeWednesday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationWednesday" showInlineError placeholder={club.meetingLocationWednesday} label="" />
+                    <TextField id="meeting-wednesday-location" name="meetingLocationWednesday" showInlineError placeholder={club.meetingLocationWednesday} label="" />
                   </td>
                 </tr>
                 <tr>
                   <td>Thursday</td>
                   <td>
-                    <TextField name="meetingTimeThursday" showInlineError placeholder={club.meetingTimeThursday} label="" />
+                    <TextField id="meeting-thursday-time" name="meetingTimeThursday" showInlineError placeholder={club.meetingTimeThursday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationThursday" showInlineError placeholder={club.meetingLocationThursday} label="" />
+                    <TextField id="meeting-thursday-location" name="meetingLocationThursday" showInlineError placeholder={club.meetingLocationThursday} label="" />
                   </td>
                 </tr>
                 <tr>
                   <td>Friday</td>
                   <td>
-                    <TextField name="meetingTimeFriday" showInlineError placeholder={club.meetingTimeFriday} label="" />
+                    <TextField id="meeting-friday-time" name="meetingTimeFriday" showInlineError placeholder={club.meetingTimeFriday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationFriday" showInlineError placeholder={club.meetingLocationFriday} label="" />
+                    <TextField id="meeting-friday-location" name="meetingLocationFriday" showInlineError placeholder={club.meetingLocationFriday} label="" />
                   </td>
                 </tr>
                 <tr>
                   <td>Saturday</td>
                   <td>
-                    <TextField name="meetingTimeSaturday" showInlineError placeholder={club.meetingTimeSaturday} label="" />
+                    <TextField id="meeting-saturday-time" name="meetingTimeSaturday" showInlineError placeholder={club.meetingTimeSaturday} label="" />
                   </td>
                   <td>
-                    <TextField name="meetingLocationSaturday" showInlineError placeholder={club.meetingLocationSaturday} label="" />
+                    <TextField id="meeting-saturday-location" name="meetingLocationSaturday" showInlineError placeholder={club.meetingLocationSaturday} label="" />
                   </td>
                 </tr>
               </tbody>

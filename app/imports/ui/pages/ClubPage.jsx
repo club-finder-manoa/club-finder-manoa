@@ -314,7 +314,7 @@ const ClubPage = () => {
           {(Roles.userIsInRole(Meteor.userId(), 'admin') || user.adminForClubs?.includes(club.clubName)) ? (
             <Row>
               <Col className="d-flex justify-content-center py-3">
-                <Link to={`/edit-club/${club._id}`} className="btn btn-primary" id="edit-profile-btn">Edit Club</Link>
+                <Link to={`/edit-club/${club._id}`} className="btn btn-primary" id="edit-club-btn">Edit Club</Link>
               </Col>
             </Row>
           ) : ''}
